@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ block titulo }} {{ endblock }}</title>
+    <title> {% block titulo %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-   <script src="http://code.jquery.com/jquery.js"></script>
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">SGP</a>
+            <a href="#" class="navbar-btn btn btn-danger pull-right">Cerrar sesión</a>
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" class="pull-left">Administración</a></li>
+                    <li><a href="#" class="pull-left">Desarrollo</a></li>
+                    <li><a href="#" class="pull-left">Gestión de Cambio</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav nav-sidebar">
+                    <li><a href="#" class="btn btn-default">Crear Proyecto</a></li>
+                    <li><a href="#" class="btn btn-default">Administrar Usuarios</a></li>
+                    <li><a href="#" class="btn btn-default">Administrar Roles</a></li>
+                    <li><a href="#" class="btn btn-default">Administrar Fases</a></li>
+                    <li><a href="#" class="btn btn-default">Administrar Credenciales</a></li>
+
+                </ul>
+            </div>
+
+
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="page-header">
+                            <h3>{% block encabezado %} {% endblock %}</h3>
+                            {% block contenido %}{% endblock %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
 </body>
 </html>
