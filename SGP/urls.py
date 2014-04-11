@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^ingresar/$', 'administracion.views.ingresar'),
     url(r'^privado/$','administracion.views.privado'),
     url(r'^cerrar/$', 'administracion.views.cerrar'),
+    url(r'^administracion/$', 'administracion.views.administracion'),
 
 )
