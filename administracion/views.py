@@ -4,19 +4,19 @@ from administracion.forms import UsuarioForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 
 
 
 # Create your views here.
 def lista_usuarios(request):
-    usuarios = Usuario.objects.all()
+    usuarios = User.objects.all()
     return render_to_response('lista_usuario.html', {'usuarios':usuarios})
 
 def nuevo_usuario(request):
     if request.method == 'POST':
         formulario = UserCreationForm(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/')#colocar a donde se desea redireccionar
     else:
