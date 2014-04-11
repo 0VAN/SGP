@@ -9,9 +9,6 @@
     <link href="{{ STATIC_URL }}css/signin.css" rel="stylesheet">
 </head>
 <body>
-    {% if form.errors %}
-        <p class="has-error">Usuario o contraseña invalida</p>
-    {% endif %}
     <div class="container">
         <form class="form-signin" id="formulario" method="post" action="">{% csrf_token %}
             <h2>Iniciar sesión</h2>
@@ -21,20 +18,6 @@
 
             <p><input class="btn btn-lg btn-primary btn-block" type="submit" value="Ingresar"></p>
             <input type="hidden" name="next" value="{{ next|escape }}" />
-        </form>
+        </form>>
     </div>
-
-<!--
-    <h1>Ingresa</h1>
-    <form id="formulario" method="post" action="">{% csrf_token %}
-        <table>{{ formulario }}</table>
-        <p><input type="submit" value="Ingresar"></p>
-    </form>
-
-
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
 </body>
-</html>
-
---!>
