@@ -54,31 +54,21 @@
 <span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span><span class="p">,</span> <span class="n">AuthenticationForm</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">login</span><span class="p">,</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">logout</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
-
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 
 
 
 <span class="c"># Create your views here.</span>
 <div class="viewcode-block" id="lista_usuarios"><a class="viewcode-back" href="../../Administracion.html#administracion.views.lista_usuarios">[documentos]</a><span class="k">def</span> <span class="nf">lista_usuarios</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">usuarios</span> <span class="o">=</span> <span class="n">Usuario</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;lista_usuario.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuarios&#39;</span><span class="p">:</span><span class="n">usuarios</span><span class="p">})</span>
-</div>
-<div class="viewcode-block" id="nuevo_usuario2"><a class="viewcode-back" href="../../Administracion.html#administracion.views.nuevo_usuario2">[documentos]</a><span class="k">def</span> <span class="nf">nuevo_usuario2</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="c">#colocar a donde se desea redireccionar</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioForm</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuarioform.html&#39;</span><span class="p">,{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="nuevo_usuario"><a class="viewcode-back" href="../../Administracion.html#administracion.views.nuevo_usuario">[documentos]</a><span class="k">def</span> <span class="nf">nuevo_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">formulario</span> <span class="o">=</span> <span class="n">UserCreationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
             <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="c">#colocar a donde se desea redireccionar</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;administracionmensaje.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">formulario</span> <span class="o">=</span> <span class="n">UserCreationForm</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuarioform.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
@@ -86,7 +76,7 @@
 </div>
 <div class="viewcode-block" id="ingresar"><a class="viewcode-back" href="../../Administracion.html#administracion.views.ingresar">[documentos]</a><span class="k">def</span> <span class="nf">ingresar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/privado&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
@@ -96,11 +86,11 @@
             <span class="k">if</span> <span class="n">acceso</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">acceso</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
                     <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">acceso</span><span class="p">)</span>
-                    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/privado&#39;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion&#39;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;noactivo.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;nousuario.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;ingresarerror.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;ingresar.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
@@ -110,10 +100,14 @@
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;privado.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 </div>
-<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;ingreso&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/ingresar&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="cerrar"><a class="viewcode-back" href="../../Administracion.html#administracion.views.cerrar">[documentos]</a><span class="k">def</span> <span class="nf">cerrar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+</div>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/ingresar&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="administracion"><a class="viewcode-back" href="../../Administracion.html#administracion.views.administracion">[documentos]</a><span class="k">def</span> <span class="nf">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;administracion.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
