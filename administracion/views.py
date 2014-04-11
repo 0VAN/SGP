@@ -18,7 +18,7 @@ def nuevo_usuario(request):
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/')#colocar a donde se desea redireccionar
+            return render_to_response('administracionmensaje.html', context_instance=RequestContext(request))
     else:
         formulario = UserCreationForm()
     return render_to_response('usuarioform.html', {'formulario': formulario}, context_instance=RequestContext(request))
@@ -26,7 +26,7 @@ def nuevo_usuario(request):
 
 def ingresar(request):
     if not request.user.is_anonymous():
-        return HttpResponseRedirect('/privado')
+        return HttpResponseRedirect('/administracion')
     if request.method == 'POST':
         formulario = AuthenticationForm(request.POST)
         if formulario.is_valid:
@@ -36,11 +36,11 @@ def ingresar(request):
             if acceso is not None:
                 if acceso.is_active:
                     login(request, acceso)
-                    return HttpResponseRedirect('/privado')
+                    return HttpResponseRedirect('/administracion')
                 else:
                     return render_to_response('noactivo.html', context_instance=RequestContext(request))
             else:
-                return render_to_response('nousuario.html', context_instance=RequestContext(request))
+                return render_to_response('ingresarerror.html', context_instance=RequestContext(request))
     else:
         formulario = AuthenticationForm()
     return render_to_response('ingresar.html', {'formulario': formulario}, context_instance=RequestContext(request))
@@ -50,7 +50,11 @@ def privado(request):
     usuario = request.user
     return render_to_response('privado.html', {'usuario':usuario}, context_instance=RequestContext(request))
 
-@login_required(login_url='ingreso')
+@login_required(login_url='/ingresar')
 def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+@login_required(login_url='/ingresar')
+def administracion(request):
+    return render_to_response('administracion.html', context_instance=RequestContext(request))

@@ -73,7 +73,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'es-PY'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Asuncion'
 
 USE_I18N = True
 
@@ -89,4 +89,8 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
 os.path.join(BASE_DIR, 'templates'),
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
 )

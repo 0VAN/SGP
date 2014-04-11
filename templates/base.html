@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {% block titulo %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">SGP</a>
+            <a href="/cerrar" class="navbar-btn btn btn-danger pull-right">Cerrar sesión</a>
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav">
+                    <li  class="pull-left {%block activo-admin  %}{% endblock %}"><a href="/administracion#">Administración</a></li>
+                    <li  class="pull-left {%block activo-des  %}{% endblock %}"><a href="#">Desarrollo</a></li>
+                    <li  class="pull-left {%block activo-gc  %}{% endblock %}"><a href="#">Gestión de Cambio</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav nav-sidebar">
+                    {% block botones %}
+                    {% endblock %}
+                </ul>
+            </div>
+
+
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="page-header">
+                            <h3>{% block encabezado %} {% endblock %}</h3>
+                            {% block contenido %}{% endblock %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+</body>
+</html>
