@@ -11,12 +11,12 @@
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <a href="#" class="navbar-brand">SGP</a>
-            <a href="#" class="navbar-btn btn btn-danger pull-right">Cerrar sesión</a>
+            <a href="/cerrar" class="navbar-btn btn btn-danger pull-right">Cerrar sesión</a>
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#" class="pull-left {%block activo-admin  %}{% endblock %}">Administración</a></li>
-                    <li><a href="#" class="pull-left {%block activo-des  %}{% endblock %}">Desarrollo</a></li>
-                    <li><a href="#" class="pull-left {%block activo-gc  %}{% endblock %}">Gestión de Cambio</a></li>
+                    <li  class="pull-left {%block activo-admin  %}{% endblock %}"><a href="/administracion">Administración</a></li>
+                    <li  class="pull-left {%block activo-des  %}{% endblock %}"><a href="#">Desarrollo</a></li>
+                    <li  class="pull-left {%block activo-gc  %}{% endblock %}"><a href="#">Gestión de Cambio</a></li>
                 </ul>
             </div>
         </div>
@@ -28,12 +28,8 @@
         <div class="row">
             <div class="col-lg-3">
                 <ul class="nav nav-sidebar">
-                    <li><a href="#" class="btn btn-default">Crear Proyecto</a></li>
-                    <li><a href="#" class="btn btn-default">Administrar Usuarios</a></li>
-                    <li><a href="#" class="btn btn-default">Administrar Roles</a></li>
-                    <li><a href="#" class="btn btn-default">Administrar Fases</a></li>
-                    <li><a href="#" class="btn btn-default">Administrar Credenciales</a></li>
-
+                    {% block botones %}
+                    {% endblock %}
                 </ul>
             </div>
 

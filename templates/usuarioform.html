@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Crear Usuario</title>
-</head>
-<body>
-    <h1>Creacion de un nuevo usuario</h1>
+{% extends 'base.html' %}
+{% block titulo %}Crear nuevo usuario{% endblock %}
+
+{% block encabezado %}Creacion de un nuevo usuario{% endblock %}
+
+{% block botones %}
+    <li><a href="#" class="btn btn-default" disabled = "disabled">Crear Proyecto</a></li>
+    <li><a href="/nuevousuario" class="btn btn-default active">Crear Usuario</a></li>
+    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a></li>
+    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Fases</a></li>
+    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a></li>
+{% endblock %}
+
+{% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
-        <table>{{ formulario }}</table>
-        <p><input type="submit" value="Registrar"></p>
+        <table class="table"><p>{{ formulario }}</p></table>
+        <p><input class="btn btn-default" type="submit" value="Registrar"></p>
     </form>
 
-</body>
-</html>
+{% endblock %}
