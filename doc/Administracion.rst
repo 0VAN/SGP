@@ -4,7 +4,7 @@ Modulo de Administracion
 .. automodule:: administracion
 
 Módulo que permite la administración de usuarios y roles,
-además de configuraciones del sistemas
+además de configuraciones del sistemas.
 
 
 Modelos
