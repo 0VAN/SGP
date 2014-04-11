@@ -2184,6 +2184,78 @@
       <column name="viewowner" sqlType="name" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <column name="definition" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
     </table>
+    <table name="administracion_hola" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25faG9sYV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="administracion_hola_pkey" columns="id"/>
+    </table>
+    <table name="administracion_hola_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="administracion_usuario" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fdXN1YXJpb19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="administracion_usuario_pkey" columns="id"/>
+    </table>
+    <table name="administracion_usuario_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="administracion_usuarios" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fdXN1YXJpb3NfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="administracion_usuarios_pkey" columns="id"/>
+    </table>
+    <table name="administracion_usuarios_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="auth_group" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYXV0aF9ncm91cF9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="name" sqlType="varchar" length="80" precision="0" nullable="false" jdbcType="12"/>
