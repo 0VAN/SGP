@@ -18,7 +18,7 @@ def nuevo_usuario(request):
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/')#colocar a donde se desea redireccionar
+            return render_to_response('administracionmensaje.html', context_instance=RequestContext(request))
     else:
         formulario = UserCreationForm()
     return render_to_response('usuarioform.html', {'formulario': formulario}, context_instance=RequestContext(request))
@@ -40,7 +40,7 @@ def ingresar(request):
                 else:
                     return render_to_response('noactivo.html', context_instance=RequestContext(request))
             else:
-                return render_to_response('nousuario.html', context_instance=RequestContext(request))
+                return render_to_response('ingresarerror.html', context_instance=RequestContext(request))
     else:
         formulario = AuthenticationForm()
     return render_to_response('ingresar.html', {'formulario': formulario}, context_instance=RequestContext(request))

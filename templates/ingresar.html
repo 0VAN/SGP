@@ -17,7 +17,7 @@
             <input type="password" class="form-control" placeholder="Contraseña" required name="password" value="" id="password">
 
             <p><input class="btn btn-lg btn-primary btn-block" type="submit" value="Ingresar"></p>
-            <input type="hidden" name="next" value="{{ next|escape }}" />
+            {% block error %}{% endblock %}
         </form>>
     </div>
 </body>
