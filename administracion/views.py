@@ -13,16 +13,6 @@ def lista_usuarios(request):
     usuarios = Usuario.objects.all()
     return render_to_response('lista_usuario.html', {'usuarios':usuarios})
 
-def nuevo_usuario2(request):
-    if request.method == 'POST':
-        formulario = UsuarioForm(request.POST, request.FILES)
-        if formulario.is_valid:
-            formulario.save()
-            return HttpResponseRedirect('/')#colocar a donde se desea redireccionar
-    else:
-        formulario = UsuarioForm()
-    return render_to_response('usuarioform.html',{'formulario':formulario}, context_instance=RequestContext(request))
-
 def nuevo_usuario(request):
     if request.method == 'POST':
         formulario = UserCreationForm(request.POST)
