@@ -10,10 +10,10 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', 'administracion.views.lista_usuarios'),
-    url(r'^$', 'administracion.views.ingresar'),
-    url(r'^ingresar/$', 'administracion.views.ingresar'),
+    url(r'^$', 'administracion.views.iniciar_sesion'),
+    url(r'^ingresar/$', 'administracion.views.iniciar_sesion'),
     url(r'^privado/$','administracion.views.privado'),
-    url(r'^cerrar/$', 'administracion.views.cerrar'),
+    url(r'^cerrar/$', 'administracion.views.cerrar_sesion'),
     url(r'^administracion/$', 'administracion.views.administracion'),
     url(r'^nuevousuario/$', 'administracion.views.nuevo_usuario'),
 

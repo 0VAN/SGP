@@ -7,8 +7,16 @@
 
 {% block botones %}
     <li><a href="#" class="btn btn-default" disabled = "disabled">Crear Proyecto</a></li>
-    <li><a href="/nuevousuario" class="btn btn-default">Crear Usuario</a></li>
+    <li><a href="/nuevousuario" class="btn btn-default">Administrar Usuario</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Fases</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a></li>
+{% endblock %}
+
+{% block contenido %}
+    {% for usuario in lista_usuarios %}
+        <li>{{ usuario.username }}</li>
+    {% empty %}
+        <p>No hay usuarios registrados aun</p>
+    {% endfor %}
 {% endblock %}
