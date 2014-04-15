@@ -9,7 +9,8 @@ from administracion.models import Proyecto
 class UsuarioForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
+        fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
+
 
 class ProyectoForm(ModelForm):
     class Meta:

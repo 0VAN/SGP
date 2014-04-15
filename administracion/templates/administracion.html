@@ -7,7 +7,7 @@
 
 {% block botones %}
     <li><a href="/nuevoProyecto" class="btn btn-default">Crear Proyecto</a></li>
-    <li><a href="/nuevoUsuario" class="btn btn-default">Administrar Usuario</a></li>
+    <li><a href="/admUsuario" class="btn btn-default">Administrar Usuario</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Fases</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a></li>
@@ -15,7 +15,7 @@
 
 {% block contenido %}
     {% for usuario in lista_usuarios %}
-        <li>{{ usuario.username }}</li>
+        <li><a href='{% url "administracion.views.detalle_usuario" usuario.id %}'>{{ usuario.username }}</a></li>
     {% empty %}
         <p>No hay usuarios registrados aun</p>
     {% endfor %}

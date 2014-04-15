@@ -1,0 +1,9 @@
+{% extends 'administracion.html' %}
+{% block titulo %}Administrar Usuarios{% endblock %}
+
+{% block botones %}
+    <li><a href="/nuevoUsuario" class="btn btn-default">Crear Usuario</a></li>
+    <li><a href="/modificarUsuario" class="btn btn-default">Modificar Usuario</a></li>
+    <li><a href="#" class="btn btn-default" disabled = "disabled">Eliminar Usuario</a></li>
+{% endblock %}
+

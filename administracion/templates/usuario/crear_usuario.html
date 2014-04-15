@@ -1,13 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Crear nuevo usuario{% endblock %}
 
 {% block encabezado %}Creacion de un nuevo usuario{% endblock %}
-
-{% block botones %}
-    <li><a href="/nuevousuario" class="btn btn-default active">Crear Usuario</a></li>
-    <li><a href="/modificarUsuario" class="btn btn-default">Modificar Usuario</a></li>
-    <li><a href="#" class="btn btn-default" disabled = "disabled">Eliminar Usuario</a></li>
-{% endblock %}
 
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
