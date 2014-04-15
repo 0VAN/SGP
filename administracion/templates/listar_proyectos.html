@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block titulo %}Lista de proyectos{% endblock %}
+
+{% block encabezado %}Lista de proyectos{% endblock %}
+
+{% block botones %}
+    <li><a href="/nuevoProyecto" class="btn btn-default">Crear Proyecto</a></li>
+    <li><a href="/listaProyecto" class="btn btn-default active">Listar Proyectos</a></li>
+{% endblock %}
+
+{% block contenido %}
+    {% for proyecto in lista_proyectos %}
+        <li>{{ proyecto }}</li>
+    {% empty %}
+        <p>No hay proyectos registrados aun</p>
+    {% endfor %}
+{% endblock %}

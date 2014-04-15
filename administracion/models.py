@@ -20,7 +20,8 @@ User.add_to_class('observacion', models.PositiveIntegerField(null=True, blank=Tr
 
 
 class Proyecto(models.Model):
+    Lider_del_Proyecto = models.ForeignKey(User)
     Nombre_del_Proyecto = models.CharField(max_length=30, unique=True)
-    Descripcion_del_Proyecto= models.TextField
-    Fecha_de_inicio = models.DateField
-    Fecha_de_finalizacion = models.DateField
+    Descripcion_del_Proyecto = models.TextField()
+    Fecha_inicio = models.DateField('Fecha de inicio')
+    Fecha_finalizacion = models.DateField('Fecha de finalizacion')
