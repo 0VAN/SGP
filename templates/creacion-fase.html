@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block titulo %}Creacion de Fase{% endblock %}
+{% block encabezado %}Creacion de Fase{% endblock %}
+{% block usuario %}{{ usuario }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="#" class="btn btn-default"></a></li>
+{% endblock %}
+{% block contenido %}
+    <form>
+
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for fase in fases %}
+                <th>{{ fase.Nombre }}</th>
+                <th>{{ fase.Usuario }}</th>
+                <th>{{ fase.Fecha }}</th>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

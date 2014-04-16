@@ -2,6 +2,7 @@
 {% block titulo %}Administracion{% endblock %}
 
 {% block activo-admin %}active{% endblock %}
+{% block usuario %}{{ usuario }}{% endblock %}
 
 {% block encabezado %}Modulo de Administracion{% endblock %}
 
@@ -9,6 +10,6 @@
     <li><a href="#" class="btn btn-default" disabled = "disabled">Crear Proyecto</a></li>
     <li><a href="/nuevousuario" class="btn btn-default">Crear Usuario</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a></li>
-    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Fases</a></li>
+    <li><a href="/admfases" class="btn btn-default"">Administrar Fases</a></li>
     <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a></li>
 {% endblock %}

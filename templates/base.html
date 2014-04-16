@@ -12,6 +12,7 @@
         <div class="container">
             <a href="#" class="navbar-brand">SGP</a>
             <a href="/cerrar" class="navbar-btn btn btn-danger pull-right">Cerrar sesión</a>
+            <p class="navbar-text pull-right ">{% block usuario %}{% endblock %}</p>
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav">
                     <li  class="pull-left {%block activo-admin  %}{% endblock %}"><a href="/administracion#">Administración</a></li>

@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^cerrar/$', 'administracion.views.cerrar'),
     url(r'^administracion/$', 'administracion.views.administracion'),
     url(r'^nuevousuario/$', 'administracion.views.nuevo_usuario'),
+    url(r'^admfases/$', 'administracion.views.admfases'),
 
 )

@@ -16,3 +16,13 @@ class Usuario(models.Model):
     def __unicode__(self):
         return self.Nombre_de_usuario
 
+class Fases(models.Model):
+    Nombre = models.CharField(max_length=50)
+    Descripcion = models.TextField()
+    Usuario = models.ForeignKey(Usuario)
+    Fecha = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.Nombre
+
+

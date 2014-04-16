@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block titulo %}Administracion de Fases{% endblock %}
+{% block encabezado %}Administracion de Fases{% endblock %}
+{% block usuario %}{{ usuario }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="#" class="btn btn-default">Crear Fase</a></li>
+    <li><a href="" class="btn btn-default">Modificar Fase</a></li>
+    <li><a href="#" class="btn btn-default">Eliminar Fase</a></li>
+{% endblock %}
+{% block contenido %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for fase in fases %}
+                <th>{{ fase.Nombre }}</th>
+                <th>{{ fase.Usuario }}</th>
+                <th>{{ fase.Fecha }}</th>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

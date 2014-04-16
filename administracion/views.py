@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from administracion.models import Fases
 
 
 
@@ -57,4 +58,11 @@ def cerrar(request):
 
 @login_required(login_url='/ingresar')
 def administracion(request):
-    return render_to_response('administracion.html', context_instance=RequestContext(request))
+    usuario = request.user.get_full_name()
+    return render_to_response('administracion.html', {'usuario':usuario}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def admfases(request):
+    usuario = request.user.get_full_name()
+    fases = Fases.objects.all()
+    return render_to_response('adm-fases.html', {'usuario':usuario, 'fases':fases}, context_instance=RequestContext(request))
