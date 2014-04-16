@@ -1,12 +1,10 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm
+from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from administracion.models import Proyecto
-
-
 
 # Create your views here.
 
@@ -116,7 +114,7 @@ def modificar_usuario2(request, id_usuario):
     usuarios = User.objects.get(pk=id_usuario)
     usuario = request.user
     if request.method == 'POST':
-        formulario = UsuarioForm(request.POST, instance=usuarios)
+        formulario = UsuarioModForm(request.POST, instance=usuarios)
         if formulario.is_valid():
            form = formulario.save(commit=False)
            form.user = request.user
@@ -124,7 +122,7 @@ def modificar_usuario2(request, id_usuario):
            return render_to_response('usuario/crear_usuario_exito.html', context_instance=RequestContext(request))
 
     else:
-        formulario = UsuarioForm(instance=usuarios)
+        formulario = UsuarioModForm(instance=usuarios)
     return render(request, 'usuario/modificar_usuarioform.html', {'usuario': usuario, 'formulario': formulario,
                                                           'usuarios': usuarios},
                 context_instance=RequestContext(request))

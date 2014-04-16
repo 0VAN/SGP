@@ -6,7 +6,7 @@
 {% block contenido %}
     {% for usuario in lista_usuarios %}
         <li>
-            <a href='{% url "administracion.views.modificar_usuario2" usuario.id %}'>{{ usuario.username }}</a>
+            <a href="{% url "administracion.views.modificar_usuario2" usuario.id %}">{{ usuario.username }}</a>
         </li>
     {% empty %}
         <p>No hay usuarios registrados aun</p>
