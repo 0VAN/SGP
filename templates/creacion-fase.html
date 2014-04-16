@@ -8,25 +8,25 @@
     <li><a href="#" class="btn btn-default"></a></li>
 {% endblock %}
 {% block contenido %}
-    <form>
-
+    <form id="formulario" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+        {{ formulario.as_p }}
+        <p><input class="btn btn-default" type="submit" value="Crear Fase"></p>
     </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            {% for fase in fases %}
-                <th>{{ fase.Nombre }}</th>
-                <th>{{ fase.Usuario }}</th>
-                <th>{{ fase.Fecha }}</th>
-            {% endfor %}
-            </tr>
-        </tbody>
-    </table>
 {% endblock %}
+<!--
+<form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputNombre" placeholder="Nombre de la fase" maxlength="50" required autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescripcion" class="col-sm-2 control-label">Descripcion</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputDescripcion" placeholder="Descripcion" required>
+            </div>
+        </div>
+    </form>
+
+-->
