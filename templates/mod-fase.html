@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block titulo %}Modificacion de {% endblock %}
+{% block encabezado %}Modificacion de Fase{% endblock %}
+{% block usuario %}{{ usuario }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+        {{ formulario.as_p }}
+        <p><input class="btn btn-default" type="submit" value="Crear Fase"></p>
+    </form>
+{% endblock %}

@@ -61,13 +61,13 @@ def administracion(request):
     return render_to_response('administracion.html', {'usuario':usuario}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def admfases(request):
+def adm_fases(request):
     usuario = request.user.get_full_name()
     fases = Fase.objects.all()
     return render_to_response('adm-fases.html', {'usuario':usuario, 'fases':fases}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def crearfase(request):
+def crear_fase(request):
     usuario = request.user.get_full_name()
     if request.method=='POST':
         formulario = FaseForm(request.POST)
@@ -77,3 +77,15 @@ def crearfase(request):
     else:
         formulario = FaseForm()
     return render_to_response('creacion-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def detalle_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    return render_to_response('detallefase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
+
+##@login_required(login_url='/ingresar')
+##def modificar_fase(request, idFase):
+    ##usuario = request.user.get_full_name()
+    ##fase = Fase.objects.get(pk=idFase)
+    ##formulario =

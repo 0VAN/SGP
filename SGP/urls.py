@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     url(r'^cerrar/$', 'administracion.views.cerrar'),
     url(r'^administracion/$', 'administracion.views.administracion'),
     url(r'^nuevousuario/$', 'administracion.views.nuevo_usuario'),
-    url(r'^admfases/$', 'administracion.views.admfases'),
-    url(r'^crearfase/$', 'administracion.views.crearfase'),
+    url(r'^administracion/fases/$', 'administracion.views.adm_fases'),
+    url(r'^administracion/fases/nuevo/$', 'administracion.views.crear_fase'),
+    url(r'^administracion/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
 
 )

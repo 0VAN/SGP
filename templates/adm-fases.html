@@ -5,9 +5,7 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/crearfase" class="btn btn-default">Crear Fase</a></li>
-    <li><a href="" class="btn btn-default">Modificar Fase</a></li>
-    <li><a href="#" class="btn btn-default">Eliminar Fase</a></li>
+    <li><a href="/administracion/fases/nuevo" class="btn btn-default">Crear Fase</a></li>
 {% endblock %}
 {% block contenido %}
     <table class="table">
@@ -21,7 +19,7 @@
         <tbody>
             <tr>
             {% for fase in fases %}
-                <th>{{ fase.Nombre }}</th>
+                <th><a href="{% url "administracion.views.detalle_fase" fase.id %}">{{ fase.Nombre }}</a></th>
                 <th>{{ fase.Usuario }}</th>
                 <th>{{ fase.Fecha }}</th>
             {% endfor %}
