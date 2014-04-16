@@ -1,0 +1,18 @@
+{% extends 'administracion.html' %}
+{% block titulo %}Administrar proyecto{% endblock %}
+
+{% block encabezado %}Lista de proyectos{% endblock %}
+
+{% block botones %}
+    <li><a href="/administracion/proyectos/nuevo" class="btn btn-default active">Crear Proyecto</a></li>
+    <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
+    <li><a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a></li>
+{% endblock %}
+
+{% block contenido %}
+    {% for proyecto in lista_proyectos %}
+        <li>{{ proyecto }}</li>
+    {% empty %}
+        <p>No hay proyectos registrados aun</p>
+    {% endfor %}
+{% endblock %}

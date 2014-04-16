@@ -1,12 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Crear nuevo proyecto{% endblock %}
 
-{% block encabezado %}Creacion de un nuevo proyecto{% endblock %}
-
-{% block botones %}
-    <li><a href="/nuevoProyecto" class="btn btn-default active">Crear Proyecto</a></li>
-    <li><a href="/listaProyecto" class="btn btn-default">Listar Proyectos</a></li>
-{% endblock %}
+{% block encabezado %}{{ mensaje }}{% endblock %}
 
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

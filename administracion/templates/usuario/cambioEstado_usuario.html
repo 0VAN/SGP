@@ -1,0 +1,13 @@
+{% extends 'usuario/administrar_usuario.html' %}
+{% block titulo %}Eliminar usuario{% endblock %}
+
+{% block encabezado %}Seleccione el usuario cuyo estado desea cambiar {% endblock %}
+
+{% block contenido %}
+    {% for usuario in lista_usuarios %}
+            <li><a href='{% url "administracion.views.cambioEstado_usuario_form" usuario.id %}'>{{ usuario.username }}</a></li>
+    {% empty %}
+        <p>No hay usuarios registrados aun</p>
+    {% endfor %}
+
+{% endblock %}

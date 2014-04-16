@@ -1,12 +1,11 @@
 {% extends 'usuario/administrar_usuario.html' %}
-{% block titulo %}Crear nuevo usuario{% endblock %}
+{% block titulo %}form usuario{% endblock %}
 
-{% block encabezado %}Creacion de un nuevo usuario{% endblock %}
+{% block encabezado %}{{ mensaje }} {{ usuario.username }}{% endblock %}
 
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>{{ formulario }}</p></table>
+        <table class="table"><p>{{ formulario }}{{ form }}</p></table>
         <p><input class="btn btn-default" type="submit" value="Registrar"></p>
     </form>
-
 {% endblock %}

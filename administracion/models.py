@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 
 """
 
-User.add_to_class('direccion', models.FloatField(null=True, blank=True))
+User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
 
