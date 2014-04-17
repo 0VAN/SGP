@@ -17,13 +17,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+
             {% for fase in fases %}
-                <th><a href="{% url "administracion.views.detalle_fase" fase.id %}">{{ fase.Nombre }}</a></th>
-                <th>{{ fase.Usuario }}</th>
-                <th>{{ fase.Fecha }}</th>
+                <tr>
+                    <th><a href="{% url "administracion.views.detalle_fase" fase.id %}">{{ fase.Nombre }}</a></th>
+                    <th>{{ fase.Usuario }}</th>
+                    <th>{{ fase.Fecha }}</th>
+                </tr>
             {% endfor %}
-            </tr>
+
         </tbody>
     </table>
 {% endblock %}

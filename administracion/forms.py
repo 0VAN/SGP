@@ -7,3 +7,4 @@ from administracion.models import Fase
 class FaseForm(ModelForm):
     class Meta:
         model = Fase
+        exclude = ['Usuario']

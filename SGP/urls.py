@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^administracion/fases/$', 'administracion.views.adm_fases'),
     url(r'^administracion/fases/nuevo/$', 'administracion.views.crear_fase'),
     url(r'^administracion/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
+    url(r'^administracion/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
 
 )

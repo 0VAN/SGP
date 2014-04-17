@@ -1,4 +1,5 @@
-from django.shortcuts import render_to_response,render,HttpResponseRedirect,HttpResponse, RequestContext
+from django.shortcuts import render_to_response,render,HttpResponseRedirect,HttpResponse, RequestContext, \
+    get_object_or_404
 from administracion.models import Fase
 from administracion.forms import FaseForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -69,11 +70,12 @@ def adm_fases(request):
 @login_required(login_url='/ingresar')
 def crear_fase(request):
     usuario = request.user.get_full_name()
+    fase = Fase(Usuario= request.user)
     if request.method=='POST':
-        formulario = FaseForm(request.POST)
+        formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/admfases')
+            return HttpResponseRedirect('/administracion/fases')
     else:
         formulario = FaseForm()
     return render_to_response('creacion-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
@@ -84,8 +86,14 @@ def detalle_fase(request, idFase):
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('detallefase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 
-##@login_required(login_url='/ingresar')
-##def modificar_fase(request, idFase):
-    ##usuario = request.user.get_full_name()
-    ##fase = Fase.objects.get(pk=idFase)
-    ##formulario =
+@login_required(login_url='/ingresar')
+def modificar_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    formulario = FaseForm(request.POST, instance=fase)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/administracion/fases/')
+    else:
+        formulario = FaseForm(instance=fase)
+    return render_to_response('mod-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
