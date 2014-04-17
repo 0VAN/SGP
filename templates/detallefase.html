@@ -6,7 +6,7 @@
 
 {%  block botones %}
     <li><a href="{% url 'administracion.views.modificar_fase' fase.id %}" class="btn btn-default">Modificar Fase</a></li>
-    <li><a href="#" class="btn btn-default">Eliminar Fase</a></li>
+    <li><a href="{% url 'administracion.views.vista_eliminar_fase' fase.id %}" class="btn btn-default">Eliminar Fase</a></li>
 {% endblock %}
 {% block contenido %}
     <dl>

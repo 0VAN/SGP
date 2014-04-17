@@ -97,3 +97,13 @@ def modificar_fase(request, idFase):
     else:
         formulario = FaseForm(instance=fase)
     return render_to_response('mod-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+
+def vista_eliminar_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    return render_to_response('eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
+
+def eliminar_fase(request, idFase):
+    fase = Fase.objects.get(pk=idFase)
+    fase.delete()
+    return render_to_response('faseeliminada.html')
