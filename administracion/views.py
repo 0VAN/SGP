@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm
+from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from administracion.models import Proyecto
+from administracion.models import Proyecto, Fase
 
 # Create your views here.
 
@@ -56,8 +56,6 @@ def cerrar_sesion(request):
     return HttpResponseRedirect('/')
 
 
-
-#############################################Vistas de Administracion de Usuarios#######################################
 """
     Vista que muestra el contenido privado del modulo de administracion
 """
@@ -66,6 +64,9 @@ def administracion(request):
     usuarios = User.objects.all()
     return render_to_response('administracion.html', {'lista_usuarios': usuarios},
                               context_instance=RequestContext(request))
+
+#############################################Vistas de Administracion de Usuarios#######################################
+
 """
     Vista de administrar usuario
 """
@@ -142,9 +143,6 @@ def administrar_proyecto(request):
     return render_to_response('proyecto/administrar_proyecto.html',
                               {'lista_proyecto': lista_proyectos}, context_instance=RequestContext(request))
 
-
-
-
 def nuevo_proyecto(request):
       if request.method == 'POST':
         formulario = ProyectoForm(request.POST)
@@ -155,3 +153,51 @@ def nuevo_proyecto(request):
         formulario = ProyectoForm()
       return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario},
                                 context_instance=RequestContext(request))
+
+###########################################Vistas de administracion de Fase
+@login_required(login_url='/ingresar')
+def administrar_fases(request):
+    usuario = request.user.get_full_name()
+    fases = Fase.objects.all()
+    return render_to_response('proyecto/fase/adm-fases.html', {'usuario':usuario, 'fases':fases}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def crear_fase(request):
+    usuario = request.user.get_full_name()
+    fase = Fase(Usuario= request.user)
+    if request.method=='POST':
+        formulario = FaseForm(request.POST, instance=fase)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/administracion/proyectos/fases')
+    else:
+        formulario = FaseForm()
+    return render_to_response('proyecto/fase/creacion-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def detalle_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def modificar_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    formulario = FaseForm(request.POST, instance=fase)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/administracion/proyectos/fases/')
+    else:
+        formulario = FaseForm(instance=fase)
+    return render_to_response('proyecto/fase/mod-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+
+def vista_eliminar_fase(request, idFase):
+    usuario = request.user.get_full_name()
+    fase = Fase.objects.get(pk=idFase)
+    return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
+
+def eliminar_fase(request, idFase):
+    fase = Fase.objects.get(pk=idFase)
+    fase.delete()
+    return render_to_response('proyecto/fase/faseeliminada.html')

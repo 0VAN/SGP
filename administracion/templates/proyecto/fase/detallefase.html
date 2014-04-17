@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block titulo %}Detalle de Fase{% endblock %}
+{% block encabezado %}{{ fase.Nombre}}{% endblock %}
+{% block usuario %}{{ usuario }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.modificar_fase' fase.id %}" class="btn btn-default">Modificar Fase</a></li>
+    <li><a href="{% url 'administracion.views.vista_eliminar_fase' fase.id %}" class="btn btn-default">Eliminar Fase</a></li>
+    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+
+{% endblock %}
+{% block contenido %}
+    <dl>
+        <dt>Descripcion:</dt>
+        <dd>{{ fase.Descripcion }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ fase.Usuario }}</dd>
+        <dt>Creado el:</dt>
+        <dd>{{ fase.Fecha }}</dd>
+    </dl>
+
+
+{% endblock %}

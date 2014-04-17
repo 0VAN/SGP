@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User
-from administracion.models import Proyecto
+from administracion.models import Proyecto, Fase
 
 class UsuarioForm(UserCreationForm):
     class Meta:
@@ -49,3 +49,8 @@ class UsuarioDelForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('is_active',)
+
+class FaseForm(forms.ModelForm):
+    class Meta:
+        model = Fase
+        exclude = ['Usuario']

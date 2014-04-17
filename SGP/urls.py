@@ -39,5 +39,13 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo$', 'administracion.views.nuevo_proyecto'),
 
+################################################URL FASE################################################################
+    url(r'^administracion/proyectos/fases/$', 'administracion.views.administrar_fases'),
+    url(r'^administracion/proyectos/fases/nuevo/$', 'administracion.views.crear_fase'),
+    url(r'^administracion/proyectos/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
+    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
+    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
+    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
+
 
 )
