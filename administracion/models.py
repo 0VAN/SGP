@@ -30,6 +30,7 @@ class Fase(models.Model):
     Descripcion = models.TextField()
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
+    Proyecto = models.ForeignKey(Proyecto)
 
     def __unicode__(self):
         return self.Nombre
