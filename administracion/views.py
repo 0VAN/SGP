@@ -61,8 +61,8 @@ def cerrar_sesion(request):
 @login_required(login_url='/iniciar_sesion')
 def administracion(request):
     usuarios = User.objects.all()
-    usuario = request.user
-    return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuario':usuario},
+    usuarioAdm = request.user
+    return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuarioAdm':usuarioAdm},
                               context_instance=RequestContext(request))
 
 #############################################Vistas de Administracion de Usuarios#######################################
@@ -73,7 +73,8 @@ def administracion(request):
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def administrar_usuario(request):
     usuario = request.user
-    return render_to_response('usuario/administrar_usuario.html', {'usuario':usuario},
+    lista_usuarios = User.objects.all()
+    return render_to_response('usuario/administrar_usuario.html', {'usuario':usuario,'lista_usuarios':lista_usuarios},
                               context_instance=RequestContext(request))
 """
     Vista de creacion de nuevo usuario
@@ -138,8 +139,8 @@ def cambioEstado_usuario_form(request, id_usuario):
 
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario):
-    usuario = get_object_or_404(User, pk=id_usuario)
-    return render_to_response('usuario/detalle_usuario.html', {'usuario': usuario},
+    usuarioDetalle = get_object_or_404(User, pk=id_usuario)
+    return render_to_response('usuario/detalle_usuario.html', {'usuarioDetalle': usuarioDetalle},
                               context_instance=RequestContext(request))
 
 ###########################################Vistas de Administrar Proyecto###############################################
@@ -147,9 +148,9 @@ def detalle_usuario(request, id_usuario):
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
-    usuario = request.user
+    usuarioProyecto = request.user
     return render_to_response('proyecto/administrar_proyecto.html',
-                              {'lista_proyectos': lista_proyectos, 'usuario':usuario}, context_instance=RequestContext(request))
+                              {'lista_proyectos': lista_proyectos, 'usuarioProyecto':usuarioProyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
@@ -167,13 +168,13 @@ def nuevo_proyecto(request):
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def administrar_fases(request):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     fases = Fase.objects.all()
     return render_to_response('proyecto/fase/adm-fases.html', {'usuario':usuario, 'fases':fases}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
 def crear_fase(request):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     fase = Fase(Usuario= request.user)
     if request.method=='POST':
         formulario = FaseForm(request.POST, instance=fase)
@@ -186,13 +187,13 @@ def crear_fase(request):
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def detalle_fase(request, idFase):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_change_fase , login_url="/iniciar_sesion")
 def modificar_fase(request, idFase):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     formulario = FaseForm(request.POST, instance=fase)
     if formulario.is_valid():
@@ -204,7 +205,7 @@ def modificar_fase(request, idFase):
 
 @user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 

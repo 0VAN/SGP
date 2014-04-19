@@ -1,6 +1,9 @@
 {% extends 'rol/administrar_rol.html' %}
 
 {% block encabezado %}Operacion exitosa{% endblock %}
+{% block botones %}
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+{% endblock %}
 {% block contenido %}
 <div class="alert alert-success">{{ mensaje }}</div>
 {% endblock %}

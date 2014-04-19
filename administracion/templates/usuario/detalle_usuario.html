@@ -1,35 +1,35 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Detalle usuario{% endblock %}
 
-{% block encabezado %}Vista en detalle del usuario {{ usuario.username }}{% endblock %}
+{% block encabezado %}Vista en detalle del usuario {{ usuarioDetalle.username }}{% endblock %}
 
 {% block contenido %}
     <div id='first_name'>
         <h4>Nombre</h4>
-        <p>{{ usuario.first_name }}</p>
+        <p>{{ usuarioDetalle.first_name }}</p>
     </div>
     <div id='last_name'>
         <h4>Apellido</h4>
-        <p>{{ usuario.last_name }}</p>
+        <p>{{ usuarioDetalle.last_name }}</p>
     </div>
     <div id='email'>
         <h4>Direccion de correo electronico</h4>
-        <p>{{ usuario.email }}</p>
+        <p>{{ usuarioDetalle.email }}</p>
     </div>
     <div id="telefono">
         <h4>Numero de telefono</h4>
-        <p>{{ usuario.telefono }}</p>
+        <p>{{ usuarioDetalle.telefono }}</p>
     </div>
      <div id="direccion">
         <h4>Direccion</h4>
-        <p>{{ usuario.direccion }}</p>
+        <p>{{ usuarioDetalle.direccion }}</p>
     </div>
     <div id="observacion">
         <h4>Observacion</h4>
-        <p>{{ usuario.observacion }}</p>
+        <p>{{ usuarioDetalle.observacion }}</p>
     </div>
     <footer>
-        <p>Registrado {{ usuario.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p>
+        <p>Registrado {{ usuarioDetalle.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p>
     </footer>
     <p><a href="/administracion" class="btn btn-default">Volver</a></p>
 
