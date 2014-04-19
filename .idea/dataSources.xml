@@ -5,8 +5,8 @@
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sgpdb</jdbc-url>
-      <user-name>sgp</user-name>
-      <user-password>dfd9dfcddfdadfcbdfd8dfc0</user-password>
+      <user-name>postgres</user-name>
+      <user-password>dfdadfc5dfd9dfdedfcddfd8dfcfdfd9</user-password>
       <libraries />
     </data-source>
   </component>
