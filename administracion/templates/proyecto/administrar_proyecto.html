@@ -11,14 +11,6 @@
             <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
         {% endif %}
     </li>
-    <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
-    <li>
-        {% if usuario.can_administrar_fase %}
-            <a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
-        {% endif %}
-    </li>
 {% endblock %}
 
 {% block contenido %}
@@ -30,7 +22,10 @@
         </thead>
         <tr>
         {% for proyecto in lista_proyectos %}
-            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">{{ proyecto.Nombre_del_Proyecto }}</td>
+            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}'>
+            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">
+            <td>{{ proyecto.Nombre_del_Proyecto }}<td/>
+            </td>
         {% empty %}
             <td class="warning">No hay proyectos registrados aun</td>
         {% endfor %}
