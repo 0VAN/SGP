@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             {% for fase in fases %}
-                <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" fase.id %}">
+                <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>

@@ -11,14 +11,12 @@
 
 {% block contenido %}
     <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <td>Nombre</td>
-            </tr>
-        </thead>
+        <tr>
+            <td>Nombre</td>
+        </tr>
         <tr>
         {% for proyecto in lista_proyectos %}
-            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">{{ proyecto }}</td>
+            <td class="info">{{ proyecto }}</td>
         {% empty %}
             <td class="warning">No hay proyectos registrados aun</td>
         {% endfor %}

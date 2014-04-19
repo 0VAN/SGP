@@ -7,7 +7,7 @@
 
 {% block botones %}
     <li>
-        {% if usuario.can_add_proyecto or usuario.can_change_proyecto or usuario.can_delete_proyecto %}
+        {% if usuario.can_add_proyecto or usuario.can_change_proyecto or usuario.can_delete_proyecto or usuario.can_add_fase or usuario.can_change_fase or usuario.can_delete_fase %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
         {% else %}
             <a href="/administracion/proyectos" class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
@@ -33,11 +33,13 @@
 {% endblock %}
 
 {% block contenido %}
-    <table class="table table-condensed table-hover">
-        <tr>
-            <td>Nombre</td>
-            <td>Estado</td>
-        </tr>
+    <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Estado</td>
+            </tr>
+        </thead>
         {% for usuario in lista_usuarios %}
             {% if usuario.is_active %}
                 <tr class="clickableRow info" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>

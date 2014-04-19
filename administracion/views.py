@@ -2,14 +2,13 @@ from django.shortcuts import render_to_response, render, HttpResponseRedirect, H
 from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from administracion.models import Proyecto, Fase
 
 # Create your views here.
 
-
-
+########################################################################################################################
 
 """
     Vista de inicio de sesion
@@ -71,6 +70,7 @@ def administracion(request):
 """
     Vista de administrar usuario
 """
+@user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def administrar_usuario(request):
     usuarios = User.objects.all()
     return render_to_response('usuario/administrar_usuario.html', {'lista_usuarios': usuarios},
@@ -78,6 +78,7 @@ def administrar_usuario(request):
 """
     Vista de creacion de nuevo usuario
 """
+@user_passes_test( User.can_add_user , login_url="/iniciar_sesion")
 def crear_usuario(request):
     if request.method == 'POST':
         formulario = UsuarioForm(request.POST)
@@ -93,6 +94,7 @@ def crear_usuario(request):
 """
     Vista de modificacion de nuevo usuario
 """
+@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def modificar_usuario(request):
     usuario = request.user
     if request.method == 'POST':
@@ -110,11 +112,13 @@ def modificar_usuario(request):
                   {'usuario': usuario, 'formulario': formulario, 'mensaje': 'Modificacion del usuario'},
                   context_instance=RequestContext(request))
 
+@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario(request):
     usuarios = User.objects.all()
     return render_to_response('usuario/cambioEstado_usuario.html', {'lista_usuarios': usuarios},
                               context_instance=RequestContext(request))
 
+@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario):
     usuario = User.objects.get(pk=id_usuario)
     if request.method == 'POST':
@@ -132,6 +136,7 @@ def cambioEstado_usuario_form(request, id_usuario):
                   {'usuario': usuario, 'formulario': formulario, 'mensaje': 'Cambio de estado del usuario'},
                   context_instance=RequestContext(request))
 
+@user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario):
     usuario = get_object_or_404(User, pk=id_usuario)
     return render_to_response('usuario/detalle_usuario.html', {'usuario': usuario},
@@ -139,11 +144,13 @@ def detalle_usuario(request, id_usuario):
 
 ###########################################Vistas de Administrar Proyecto###############################################
 
+@user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
     return render_to_response('proyecto/administrar_proyecto.html',
                               {'lista_proyecto': lista_proyectos}, context_instance=RequestContext(request))
 
+@user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
       if request.method == 'POST':
         formulario = ProyectoForm(request.POST)
@@ -156,13 +163,13 @@ def nuevo_proyecto(request):
                                 context_instance=RequestContext(request))
 
 ###########################################Vistas de administracion de Fase
-@login_required(login_url='/ingresar')
+@user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def administrar_fases(request):
     usuario = request.user.get_full_name()
     fases = Fase.objects.all()
     return render_to_response('proyecto/fase/adm-fases.html', {'usuario':usuario, 'fases':fases}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+@user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
 def crear_fase(request):
     usuario = request.user.get_full_name()
     fase = Fase(Usuario= request.user)
@@ -175,13 +182,13 @@ def crear_fase(request):
         formulario = FaseForm()
     return render_to_response('proyecto/fase/creacion-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+@user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def detalle_fase(request, idFase):
     usuario = request.user.get_full_name()
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+@user_passes_test( User.can_change_fase , login_url="/iniciar_sesion")
 def modificar_fase(request, idFase):
     usuario = request.user.get_full_name()
     fase = Fase.objects.get(pk=idFase)
@@ -193,11 +200,13 @@ def modificar_fase(request, idFase):
         formulario = FaseForm(instance=fase)
     return render_to_response('proyecto/fase/mod-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
 
+@user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase):
     usuario = request.user.get_full_name()
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 
+@user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase):
     fase = Fase.objects.get(pk=idFase)
     fase.delete()
