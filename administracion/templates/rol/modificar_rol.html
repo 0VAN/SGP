@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block titulo %}Modificacion de Fase{% endblock %}
-{% block encabezado %}Modificacion de {{ fase.Nombre }}{% endblock %}
+{% block titulo %}Modificacion de Rol{% endblock %}
+{% block encabezado %}Modificacion de {{ rol.name }}{% endblock %}
 {% block usuario %}{{ usuario }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

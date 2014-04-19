@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block titulo %}Administrar roles{% endblock %}
+
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block encabezado %}Lista de Usuarios{% endblock %}
+
+{% block contenido %}
+    <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Estado</td>
+            </tr>
+        </thead>
+        {% for usuario in lista_usuarios %}
+            {% if usuario.is_active %}
+                <tr class="clickableRow info" href='{% url "administracion.views.asignar_rol" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Activo</td>
+                </tr>
+            {% else %}
+                <tr class="clickableRow warning" href='{% url "administracion.views.asignar_rol" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Inactivo</td>
+                </tr>
+            {% endif %}
+        {% empty %}
+            <p>No hay usuarios registrados aun</p>
+        {% endfor %}
+    </table>
+{% endblock %}

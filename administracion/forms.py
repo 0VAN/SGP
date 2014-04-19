@@ -12,6 +12,11 @@ class UsuarioForm(UserCreationForm):
         model = User
         fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
 
+class AsignarRol(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('groups',)
+
 class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto

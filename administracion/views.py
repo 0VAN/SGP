@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm
+from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -149,7 +149,7 @@ def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
     usuario = request.user
     return render_to_response('proyecto/administrar_proyecto.html',
-                              {'lista_proyecto': lista_proyectos, 'usuario':usuario}, context_instance=RequestContext(request))
+                              {'lista_proyectos': lista_proyectos, 'usuario':usuario}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
@@ -225,24 +225,25 @@ def administrar_roles(request):
 @user_passes_test( User.can_add_group , login_url="/iniciar_sesion")
 def crear_rol(request):
     mensaje="Rol creado con exito"
+    usuario = request.user
     if request.method == 'POST':
         formulario = RolForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje},context_instance=RequestContext(request))
+            return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje,'usuario':usuario},context_instance=RequestContext(request))
     else:
         formulario = RolForm()
     return render_to_response('rol/crear_rol.html', {'formulario':formulario},context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     rol = Group.objects.get(pk=idRol)
     return render_to_response('rol/detallerol.html', {'usuario':usuario, 'rol':rol}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_change_group , login_url="/iniciar_sesion")
 def modificar_rol(request, idRol):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     rol = Group.objects.get(pk=idRol)
     formulario = RolForm(request.POST, instance=rol)
     if formulario.is_valid():
@@ -250,11 +251,11 @@ def modificar_rol(request, idRol):
         return HttpResponseRedirect('/administracion/roles/')
     else:
         formulario = RolForm(instance=rol)
-    return render_to_response('rol/modificar_rol.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+    return render_to_response('rol/modificar_rol.html', {'usuario':usuario, 'rol':rol, 'formulario':formulario}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_delete_group , login_url="/iniciar_sesion")
 def vista_eliminar_rol(request, idRol):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     rol = Group.objects.get(pk=idRol)
     return render_to_response('rol/eliminarrol.html', {'usuario':usuario, 'rol':rol}, context_instance=RequestContext(request))
 
@@ -263,3 +264,26 @@ def eliminar_rol(request, idRol):
     rol = Group.objects.get(pk=idRol)
     rol.delete()
     return render_to_response('rol/roleliminado.html',context_instance=RequestContext(request))
+
+@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
+def vista_asignar_rol(request):
+    usuario = request.user
+    lista_usuarios = User.objects.all()
+    return render_to_response('rol/asignar_rol.html', {'usuario':usuario, 'lista_usuarios':lista_usuarios},  context_instance=RequestContext(request))
+
+@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
+def asignar_rol(request, idRol):
+    usuario = User.objects.get(pk=idRol)
+    if request.method == 'POST':
+        formulario = AsignarRol(request.POST, instance=usuario)
+        if formulario.is_valid():
+           form = formulario.save(commit=False)
+           form.user = request
+           form.save()
+           return render_to_response('rol/operacion_rol_exito.html',
+                                     {'mensaje': 'La operacion ha sido exitosa!'},
+                                     context_instance=RequestContext(request))
+    else:
+        formulario = AsignarRol(instance=usuario)
+    return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol'},
+                  context_instance=RequestContext(request))

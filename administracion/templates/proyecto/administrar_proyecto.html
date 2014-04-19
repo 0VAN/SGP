@@ -30,7 +30,7 @@
         </thead>
         <tr>
         {% for proyecto in lista_proyectos %}
-            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">{{ proyecto }}</td>
+            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">{{ proyecto.Nombre_del_Proyecto }}</td>
         {% empty %}
             <td class="warning">No hay proyectos registrados aun</td>
         {% endfor %}
