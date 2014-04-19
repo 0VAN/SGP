@@ -1941,3 +1941,14 @@
   })
 
 }(jQuery);
+
+
+/*
+    Funcion para convertir las filas de las tablas con clase clickableRow a filas con enlace
+
+ */
+jQuery(document).ready(function($) {
+      $(".clickableRow").click(function() {
+            window.document.location = $(this).attr("href");
+      });
+});
