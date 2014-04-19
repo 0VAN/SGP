@@ -278,11 +278,8 @@ def asignar_rol(request, idRol):
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
-           form = formulario.save(commit=False)
-           form.user = request
-           form.save()
-           return render_to_response('rol/operacion_rol_exito.html',
-                                     {'mensaje': 'La operacion ha sido exitosa!'},
+            formulario.save()
+            return render_to_response('rol/operacion_rol_exito.html',{'mensaje': 'La operacion ha sido exitosa!'},
                                      context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)

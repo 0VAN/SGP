@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42485583-8d56-494b-ae73-6128789d0ae2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/administracion.html" afterPath="$PROJECT_DIR$/administracion/templates/administracion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/models.py" afterPath="$PROJECT_DIR$/administracion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/views.py" afterPath="$PROJECT_DIR$/administracion/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SGP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,39 +26,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="88" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="3240">
-              <folding>
-                <element signature="e#1#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="27" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1224">
+            <state line="17" column="27" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1224">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="operacion_rol_exito.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html">
+      <file leaf-file-name="form_rol.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/form_rol.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="14" selection-start="301" selection-end="301" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="252">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adm-fases.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="19" selection-start="515" selection-end="515" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="810">
+            <state line="10" column="14" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="288">
               <folding />
             </state>
           </provider>
@@ -77,39 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detallefase.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="90" selection-start="845" selection-end="931" vertical-scroll-proportion="-4.0740743" vertical-offset="286" max-vertical-offset="720">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form_rol.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/form_rol.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="40" selection-start="278" selection-end="278" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="288">
-              <folding>
-                <marker date="1397907690377" expanded="true" signature="220:396" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="asignar_rol.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="80" selection-start="224" selection-end="224" vertical-scroll-proportion="6.851852" vertical-offset="293" max-vertical-offset="738">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/administracion/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="703" selection-end="703" vertical-scroll-proportion="0.4562212" vertical-offset="0" max-vertical-offset="5310">
+            <state line="281" column="12" selection-start="13184" selection-end="13184" vertical-scroll-proportion="0.6062176" vertical-offset="4824" max-vertical-offset="5256">
               <folding>
                 <element signature="e#0#126#0" expanded="true" />
               </folding>
@@ -635,7 +582,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15771812" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28020135" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -973,34 +920,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="19" selection-start="515" selection-end="515" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="90" selection-start="845" selection-end="931" vertical-scroll-proportion="0.32934132" vertical-offset="286" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="80" selection-start="224" selection-end="224" vertical-scroll-proportion="-0.5331412" vertical-offset="293" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="88" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="3240">
+        <state line="128" column="88" selection-start="4378" selection-end="4378" vertical-scroll-proportion="1.7720207" vertical-offset="1620" max-vertical-offset="3240">
           <folding>
             <element signature="e#1#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
+    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="80" selection-start="224" selection-end="224" vertical-scroll-proportion="6.851852" vertical-offset="293" max-vertical-offset="738">
+        <state line="8" column="14" selection-start="301" selection-end="301" vertical-scroll-proportion="0.38709676" vertical-offset="0" max-vertical-offset="372">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/rol/form_rol.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="40" selection-start="278" selection-end="278" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="288">
-          <folding>
-            <marker date="1397907690377" expanded="true" signature="220:396" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="27" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1224">
+        <state line="10" column="14" selection-start="412" selection-end="412" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="288">
           <folding />
         </state>
       </provider>
@@ -1012,30 +971,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
+    <entry file="file://$PROJECT_DIR$/administracion/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="90" selection-start="845" selection-end="931" vertical-scroll-proportion="-4.0740743" vertical-offset="286" max-vertical-offset="720">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="14" selection-start="301" selection-end="301" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="252">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="515" selection-end="515" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="810">
+        <state line="17" column="27" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1224">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="703" selection-end="703" vertical-scroll-proportion="0.4562212" vertical-offset="0" max-vertical-offset="5310">
+        <state line="281" column="12" selection-start="13184" selection-end="13184" vertical-scroll-proportion="0.6062176" vertical-offset="4824" max-vertical-offset="5256">
           <folding>
             <element signature="e#0#126#0" expanded="true" />
           </folding>
