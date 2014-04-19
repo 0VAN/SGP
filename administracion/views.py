@@ -61,8 +61,8 @@ def cerrar_sesion(request):
 @login_required(login_url='/iniciar_sesion')
 def administracion(request):
     usuarios = User.objects.all()
-    usuario = request.user
-    return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuario':usuario},
+    usuarioAdm = request.user
+    return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuarioAdm':usuarioAdm},
                               context_instance=RequestContext(request))
 
 #############################################Vistas de Administracion de Usuarios#######################################
@@ -73,7 +73,8 @@ def administracion(request):
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def administrar_usuario(request):
     usuario = request.user
-    return render_to_response('usuario/administrar_usuario.html', {'usuario':usuario},
+    lista_usuarios = User.objects.all()
+    return render_to_response('usuario/administrar_usuario.html', {'usuario':usuario,'lista_usuarios':lista_usuarios},
                               context_instance=RequestContext(request))
 """
     Vista de creacion de nuevo usuario
@@ -138,8 +139,8 @@ def cambioEstado_usuario_form(request, id_usuario):
 
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario):
-    usuario = get_object_or_404(User, pk=id_usuario)
-    return render_to_response('usuario/detalle_usuario.html', {'usuario': usuario},
+    usuarioDetalle = get_object_or_404(User, pk=id_usuario)
+    return render_to_response('usuario/detalle_usuario.html', {'usuarioDetalle': usuarioDetalle},
                               context_instance=RequestContext(request))
 
 ###########################################Vistas de Administrar Proyecto###############################################
@@ -147,9 +148,9 @@ def detalle_usuario(request, id_usuario):
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
-    usuario = request.user
+    usuarioProyecto = request.user
     return render_to_response('proyecto/administrar_proyecto.html',
-                              {'lista_proyectos': lista_proyectos, 'usuario':usuario}, context_instance=RequestContext(request))
+                              {'lista_proyectos': lista_proyectos, 'usuarioProyecto':usuarioProyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
@@ -213,6 +214,7 @@ def modificar_fase(request, idFase):
 @user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase):
     usuario = request
+    usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
 
@@ -285,9 +287,7 @@ def asignar_rol(request, idRol):
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
-           form = formulario.save(commit=False)
-           form.user = request
-           form.save()
+           formulario.save()
            return render_to_response('rol/operacion_rol_exito.html',
                                      {'mensaje': 'La operacion ha sido exitosa!'},
                                      context_instance=RequestContext(request))

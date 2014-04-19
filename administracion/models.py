@@ -106,27 +106,28 @@ User.add_to_class('can_delete_group', can_delete_group)
 
 ###########################################Vistas de Control de Acceso #################################################
 
-def can_administrar_fase(user):
-    if user.is_active:
-        return user.can_add_fase or user.can_change_fase or user.can_delete_fase
+def can_administrar_fase(self):
+    if self.is_active:
+        if self.can_add_fase() or self.can_change_fase() or self.can_delete_fase():
+            return True
     return False
 User.add_to_class('can_administrar_fase', can_administrar_fase)
 
-def can_administrar_proyecto(user):
-    if user.is_active:
-        return user.can_add_proyecto or user.can_change_proyecto or user.can_delete_proyecto or user.can_administrar_fase
+def can_administrar_proyecto(self):
+    if self.is_active:
+        return self.can_add_proyecto() or self.can_change_proyecto() or self.can_delete_proyecto() or self.can_administrar_fase()
     return False
 User.add_to_class('can_administrar_proyecto', can_administrar_proyecto)
 
-def can_administrar_usuario(user):
-    if user.is_active:
-        return user.can_add_user or user.can_change_user or user.can_delete_user
+def can_administrar_usuario(self):
+    if self.is_active:
+        return self.can_add_user() or self.can_change_user() or self.can_delete_user()
     return False
 User.add_to_class('can_administrar_usuario', can_administrar_usuario)
 
-def can_administrar_rol(user):
-    if user.is_active:
-        return user.can_add_group or user.can_change_group or user.can_delete_group
+def can_administrar_rol(self):
+    if self.is_active:
+        return self.can_add_group() or self.can_change_group() or self.can_delete_group()
     return False
 User.add_to_class('can_administrar_rol', can_administrar_rol)
 

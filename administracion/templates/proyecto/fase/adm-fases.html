@@ -24,12 +24,10 @@
         </thead>
         <tbody>
             {% for fase in fases %}
-                {% if fase.Proyecto == proyecto.id %}
                     <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
                         <td>{{ fase.Nombre }}</td>
                         <td>{{ fase.Usuario }}</td>
                         <td>{{ fase.Fecha }}</td>
-                {% endif %}
             {% endfor %}
             </tr>
         </tbody>
