@@ -7,7 +7,7 @@
 {%  block botones %}
     <li>
         {% if usuario.can_administrar_fase %}
-            <a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a>
+            <a href='{% url "administracion.views.administrar_fases" proyecto.id %}' class="btn btn-default">Administracion de Fases</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
         {% endif %}

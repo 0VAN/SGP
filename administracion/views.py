@@ -174,9 +174,12 @@ def detalle_proyecto(request, id_proyecto):
 ###########################################Vistas de administracion de Fase#############################################
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
-def administrar_fases(request):
+def administrar_fases(request, id_proyecto):
     usuario = request.user
-    fases = Fase.objects.all()
+    try:
+        fases = Fase.objects.get(Proyect = id_proyecto)
+    except Fase.DoesNotExist:
+        fases = None
     return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
