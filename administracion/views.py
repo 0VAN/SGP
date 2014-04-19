@@ -62,7 +62,8 @@ def cerrar_sesion(request):
 @login_required(login_url='/iniciar_sesion')
 def administracion(request):
     usuarios = User.objects.all()
-    return render_to_response('administracion.html', {'lista_usuarios': usuarios},
+    usuario = request.user
+    return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuario':usuario},
                               context_instance=RequestContext(request))
 
 #############################################Vistas de Administracion de Usuarios#######################################

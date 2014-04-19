@@ -6,10 +6,30 @@
 {% block encabezado %}Lista de Usuarios{% endblock %}
 
 {% block botones %}
-    <li><a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a></li>
-    <li><a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a></li>
-    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a></li>
-    <li><a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a></li>
+    <li>
+        {% if usuario.can_add_proyecto or usuario.can_change_proyecto or usuario.can_delete_proyecto %}
+            <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
+        {% else %}
+            <a href="/administracion/proyectos" class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if usuario.can_add_user or usuario.can_change_user or usuario.can_delete_user %}
+            <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
+        {% else %}
+            <a href="/administracion/usuarios" class="btn btn-default" disabled = "disabled">Administrar Usuario</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if usuario.can_add_group or usuario.can_change_group or usuario.can_delete_group %}
+            <a href="#" class="btn btn-default">Administrar Roles</a>
+        {% else %}
+            <a href="#" class="btn btn-default" disabled = "disabled">Administrar Roles</a>
+        {% endif %}
+    </li>
+    <li>
+        <a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a>
+    </li>
 {% endblock %}
 
 {% block contenido %}

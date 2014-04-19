@@ -42,6 +42,66 @@ def tienePermiso(self, permiso):
 
 User.add_to_class('tienePermiso', tienePermiso)
 
+def can_add_user(self):
+    permiso = 'add_user'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_user', can_add_user)
+
+def can_add_proyecto(self):
+    permiso = 'add_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_proyecto', can_add_proyecto)
+
+def can_add_fase(self):
+    permiso = 'add_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_fase', can_add_fase)
+
+def can_add_group(self):
+    permiso = 'add_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_group', can_add_group)
+
+def can_change_user(self):
+    permiso = 'change_user'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_user', can_change_user)
+
+def can_change_proyecto(self):
+    permiso = 'change_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_proyecto', can_change_proyecto)
+
+def can_change_fase(self):
+    permiso = 'change_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_fase', can_change_fase)
+
+def can_change_group(self):
+    permiso = 'change_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_group', can_change_group)
+
+def can_delete_user(self):
+    permiso = 'delete_user'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_user', can_delete_user)
+
+def can_delete_proyecto(self):
+    permiso = 'delete_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_proyecto', can_delete_proyecto)
+
+def can_delete_fase(self):
+    permiso = 'delete_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_fase', can_delete_fase)
+
+def can_delete_group(self):
+    permiso = 'delete_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_group', can_delete_group)
+
 def accesoAdministracion(self):
     rol ='Administracion'
     for grupo in self.groups.all():
