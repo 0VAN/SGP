@@ -33,9 +33,25 @@
 {% endblock %}
 
 {% block contenido %}
-    {% for usuario in lista_usuarios %}
-        <li><a href='{% url "administracion.views.detalle_usuario" usuario.id %}'>{{ usuario.username }}</a></li>
-    {% empty %}
-        <p>No hay usuarios registrados aun</p>
-    {% endfor %}
+    <table class="table table-condensed table-hover">
+        <tr>
+            <td>Nombre</td>
+            <td>Estado</td>
+        </tr>
+        {% for usuario in lista_usuarios %}
+            {% if usuario.is_active %}
+                <tr class="clickableRow info" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Activo</td>
+                </tr>
+            {% else %}
+                <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Inactivo</td>
+                </tr>
+            {% endif %}
+        {% empty %}
+            <p>No hay usuarios registrados aun</p>
+        {% endfor %}
+    </table>
 {% endblock %}

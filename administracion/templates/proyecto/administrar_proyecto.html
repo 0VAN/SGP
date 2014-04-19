@@ -10,9 +10,17 @@
 {% endblock %}
 
 {% block contenido %}
-    {% for proyecto in lista_proyectos %}
-        <li>{{ proyecto }}</li>
-    {% empty %}
-        <p>No hay proyectos registrados aun</p>
-    {% endfor %}
+    <table class="table table-condensed table-hover">
+        <tr>
+            <td>Nombre</td>
+        </tr>
+        <tr>
+        {% for proyecto in lista_proyectos %}
+            <td class="info">{{ proyecto }}</td>
+        {% empty %}
+            <td class="warning">No hay proyectos registrados aun</td>
+        {% endfor %}
+        </tr>
+    </table>
+
 {% endblock %}
