@@ -72,8 +72,8 @@ def administracion(request):
 """
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def administrar_usuario(request):
-    usuarios = User.objects.all()
-    return render_to_response('usuario/administrar_usuario.html', {'lista_usuarios': usuarios},
+    usuario = request.user
+    return render_to_response('usuario/administrar_usuario.html', {'usuario':usuario},
                               context_instance=RequestContext(request))
 """
     Vista de creacion de nuevo usuario
@@ -115,7 +115,7 @@ def modificar_usuario(request):
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario(request):
     usuarios = User.objects.all()
-    return render_to_response('usuario/cambioEstado_usuario.html', {'lista_usuarios': usuarios},
+    return render_to_response('usuario/cambioEstado_usuario.html', {'lista_usuarios': usuarios,'usuarioActor':request.user},
                               context_instance=RequestContext(request))
 
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
@@ -147,8 +147,9 @@ def detalle_usuario(request, id_usuario):
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
+    usuario = request.user
     return render_to_response('proyecto/administrar_proyecto.html',
-                              {'lista_proyecto': lista_proyectos}, context_instance=RequestContext(request))
+                              {'lista_proyecto': lista_proyectos, 'usuario':usuario}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
@@ -217,7 +218,7 @@ def eliminar_fase(request, idFase):
 
 @user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
 def administrar_roles(request):
-    usuario = request.user.get_full_name()
+    usuario = request.user
     roles = Group.objects.all()
     return render_to_response('rol/administrar_rol.html', {'usuario':usuario, 'roles':roles}, context_instance=RequestContext(request))
 

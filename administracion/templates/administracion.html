@@ -7,21 +7,21 @@
 
 {% block botones %}
     <li>
-        {% if usuario.can_add_proyecto or usuario.can_change_proyecto or usuario.can_delete_proyecto or usuario.can_add_fase or usuario.can_change_fase or usuario.can_delete_fase %}
+        {% if usuario.can_administrar_fase %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario.can_add_user or usuario.can_change_user or usuario.can_delete_user %}
+        {% if usuario.can_administrar_usuario %}
             <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Usuario</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario.can_add_group or usuario.can_change_group or usuario.can_delete_group %}
+        {% if usuario.can_administrar_rol %}
             <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Roles</a>

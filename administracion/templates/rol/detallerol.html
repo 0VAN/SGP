@@ -5,8 +5,20 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}" class="btn btn-default">Modificar Rol</a></li>
-    <li><a href="{% url 'administracion.views.vista_eliminar_rol' rol.id %}" class="btn btn-default">Eliminar Rol</a></li>
+    <li>
+        {% if usuario.can_change_group %}
+            <a href="{% url 'administracion.views.modificar_rol' rol.id %}" class="btn btn-default">Modificar Rol</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Modificar Rol</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if usuario.can_delete_group %}
+            <a href="{% url 'administracion.views.vista_eliminar_rol' rol.id %}" class="btn btn-default">Eliminar Rol</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Eliminar Rol</a>
+        {% endif %}
+    </li>
     <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
 
 {% endblock %}

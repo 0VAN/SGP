@@ -4,9 +4,21 @@
 {% block encabezado %}Lista de proyectos{% endblock %}
 
 {% block botones %}
-    <li><a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a></li>
+    <li>
+        {% if usuario.can_add_proyecto %}
+            <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
+        {% endif %}
+    </li>
     <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
-    <li><a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a></li>
+    <li>
+        {% if usuario.can_administrar_fase %}
+            <a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
+        {% endif %}
+    </li>
 {% endblock %}
 
 {% block contenido %}

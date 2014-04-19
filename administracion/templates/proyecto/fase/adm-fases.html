@@ -5,7 +5,13 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos/fases/nuevo/" class="btn btn-default">Crear Fase</a></li>
+    <li>
+        {% if usuario.can_add_fase %}
+            <a href="/administracion/proyectos/fases/nuevo/" class="btn btn-default">Crear Fase</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear Fase</a>
+        {% endif %}
+    </li>
 {% endblock %}
 {% block contenido %}
     <table class="table table-condensed table-hover">

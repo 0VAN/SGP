@@ -4,7 +4,13 @@
 {% block encabezado %}Lista de roles{% endblock %}
 
 {% block botones %}
-    <li><a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a></li>
+    <li>
+        {% if usuario.can_add_group %}
+            <a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear Rol</a>
+        {% endif %}
+    </li>
     <li><a href="/administracion/roles" class="btn btn-default">Listar Roles</a></li>
 {% endblock %}
 
@@ -17,7 +23,7 @@
         </thead>
         <tr>
         {% for rol in roles %}
-            <tr class="clickableRow info" href='{% url "administracion.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla" title="Ver detalles..">
+            <tr class="clickableRow" href='{% url "administracion.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla" title="Ver detalles..">
                 <td>{{ rol }}</td>
         {% empty %}
             <td class="warning">No hay roles registrados aun</td>
