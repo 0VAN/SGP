@@ -1,24 +1,26 @@
 {% extends 'administracion.html' %}
-{% block titulo %}Administrar proyecto{% endblock %}
+{% block titulo %}Administrar roles{% endblock %}
 
-{% block encabezado %}Lista de proyectos{% endblock %}
+{% block encabezado %}Lista de roles{% endblock %}
 
 {% block botones %}
-    <li><a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a></li>
-    <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
-    <li><a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a></li>
+    <li><a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a></li>
+    <li><a href="/administracion/roles" class="btn btn-default">Listar Roles</a></li>
 {% endblock %}
 
 {% block contenido %}
     <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+            </tr>
+        </thead>
         <tr>
-            <td>Nombre</td>
-        </tr>
-        <tr>
-        {% for proyecto in lista_proyectos %}
-            <td class="info">{{ proyecto }}</td>
+        {% for rol in roles %}
+            <tr class="clickableRow info" href='{% url "administracion.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla" title="Ver detalles..">
+                <td>{{ rol }}</td>
         {% empty %}
-            <td class="warning">No hay proyectos registrados aun</td>
+            <td class="warning">No hay roles registrados aun</td>
         {% endfor %}
         </tr>
     </table>

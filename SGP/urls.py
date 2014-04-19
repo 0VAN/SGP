@@ -47,5 +47,11 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
     url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
 
-
+################################################URL ROL#################################################################
+    url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
+    url(r'^administracion/roles/nuevo/$', 'administracion.views.crear_rol'),
+    url(r'^administracion/roles/detalle/(?P<idRol>\d+)$', 'administracion.views.detalle_rol'),
+    url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
+    url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
+    url(r'^administracion/roles/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
 )

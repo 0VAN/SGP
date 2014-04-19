@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm
+from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
 
 # Create your views here.
@@ -162,7 +162,8 @@ def nuevo_proyecto(request):
       return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario},
                                 context_instance=RequestContext(request))
 
-###########################################Vistas de administracion de Fase
+###########################################Vistas de administracion de Fase#############################################
+
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def administrar_fases(request):
     usuario = request.user.get_full_name()
@@ -211,3 +212,53 @@ def eliminar_fase(request, idFase):
     fase = Fase.objects.get(pk=idFase)
     fase.delete()
     return render_to_response('proyecto/fase/faseeliminada.html')
+
+###########################################Vistas de administracion de Rol##############################################
+
+@user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
+def administrar_roles(request):
+    usuario = request.user.get_full_name()
+    roles = Group.objects.all()
+    return render_to_response('rol/administrar_rol.html', {'usuario':usuario, 'roles':roles}, context_instance=RequestContext(request))
+
+@user_passes_test( User.can_add_group , login_url="/iniciar_sesion")
+def crear_rol(request):
+    mensaje="Rol creado con exito"
+    if request.method == 'POST':
+        formulario = RolForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje},context_instance=RequestContext(request))
+    else:
+        formulario = RolForm()
+    return render_to_response('rol/crear_rol.html', {'formulario':formulario},context_instance=RequestContext(request))
+
+@user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
+def detalle_rol(request, idRol):
+    usuario = request.user.get_full_name()
+    rol = Group.objects.get(pk=idRol)
+    return render_to_response('rol/detallerol.html', {'usuario':usuario, 'rol':rol}, context_instance=RequestContext(request))
+
+@user_passes_test( User.can_change_group , login_url="/iniciar_sesion")
+def modificar_rol(request, idRol):
+    usuario = request.user.get_full_name()
+    rol = Group.objects.get(pk=idRol)
+    formulario = RolForm(request.POST, instance=rol)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/administracion/roles/')
+    else:
+        formulario = RolForm(instance=rol)
+    return render_to_response('rol/modificar_rol.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+
+@user_passes_test( User.can_delete_group , login_url="/iniciar_sesion")
+def vista_eliminar_rol(request, idRol):
+    usuario = request.user.get_full_name()
+    rol = Group.objects.get(pk=idRol)
+    return render_to_response('rol/eliminarrol.html', {'usuario':usuario, 'rol':rol}, context_instance=RequestContext(request))
+
+@user_passes_test( User.can_delete_group , login_url="/iniciar_sesion")
+def eliminar_rol(request, idRol):
+    rol = Group.objects.get(pk=idRol)
+    rol.delete()
+    return render_to_response('rol/roleliminado.html',context_instance=RequestContext(request))

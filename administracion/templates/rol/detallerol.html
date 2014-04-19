@@ -1,24 +1,18 @@
 {% extends 'base.html' %}
-{% block titulo %}Detalle de Fase{% endblock %}
-{% block encabezado %}{{ fase.Nombre}}{% endblock %}
+{% block titulo %}Detalle de Rol{% endblock %}
+{% block encabezado %}{{ rol.name}}{% endblock %}
 {% block usuario %}{{ usuario }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.modificar_fase' fase.id %}" class="btn btn-default">Modificar Fase</a></li>
-    <li><a href="{% url 'administracion.views.vista_eliminar_fase' fase.id %}" class="btn btn-default">Eliminar Fase</a></li>
-    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}" class="btn btn-default">Modificar Rol</a></li>
+    <li><a href="{% url 'administracion.views.vista_eliminar_rol' rol.id %}" class="btn btn-default">Eliminar Rol</a></li>
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
 {% block contenido %}
     <dl>
-        <dt>Descripcion:</dt>
-        <dd>{{ fase.Descripcion }}</dd>
-        <dt>Creado por:</dt>
-        <dd>{{ fase.Usuario }}</dd>
-        <dt>Creado el:</dt>
-        <dd>{{ fase.Fecha }}</dd>
+        <dt>Nombre:</dt>
+        <dd>{{ rol.name }}</dd>
     </dl>
-
-
 {% endblock %}
