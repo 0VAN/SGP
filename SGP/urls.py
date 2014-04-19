@@ -38,6 +38,7 @@ urlpatterns = patterns('',
 ###############################################URL PROYECTO#############################################################
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo$', 'administracion.views.nuevo_proyecto'),
+    url(r'^administracion/proyectos/detalle/(?P<id_proyecto>\d+)$', 'administracion.views.detalle_proyecto'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/fases/$', 'administracion.views.administrar_fases'),

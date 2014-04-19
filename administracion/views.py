@@ -163,6 +163,13 @@ def nuevo_proyecto(request):
       return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario},
                                 context_instance=RequestContext(request))
 
+@user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
+def detalle_proyecto(request, id_proyecto):
+    usuario = request.user.get_full_name()
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'proyecto':proyecto}, context_instance=RequestContext(request))
+
+
 ###########################################Vistas de administracion de Fase#############################################
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
