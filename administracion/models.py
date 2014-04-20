@@ -139,7 +139,10 @@ def accesoAdministracion(self):
             return True
     return False
 
+
+
 User.add_to_class('accesoAdministracion', accesoAdministracion)
+
 
 #Rol administracion
 grupoAdministracion, created = Group.objects.get_or_create(name='Administracion')

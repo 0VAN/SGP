@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Usuario no activo</title>
-</head>
-<body>
-    <h1>El usuario no esta activo</h1>
-</body>
-</html>
+{% extends 'iniciar_sesion.html' %}
+
+{% block error%}
+<div class="alert alert-danger">Usuario inactivo, no puede acceder al sistema.</div>
+{% endblock %}

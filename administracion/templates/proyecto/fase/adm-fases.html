@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block titulo %}Administracion de Fases{% endblock %}
 {% block encabezado %}Administracion de Fases{% endblock %}
-{% block usuario %}{{ usuario }}{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
@@ -30,6 +30,8 @@
                         <td>{{ fase.Nombre }}</td>
                         <td>{{ fase.Usuario }}</td>
                         <td>{{ fase.Fecha }}</td>
+            {% empty %}
+                <p>No hay fases</p>
             {% endfor %}
             </tr>
         </tbody>

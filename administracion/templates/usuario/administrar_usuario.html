@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Usuarios{% endblock %}
-
+{% block usuario %}{{ usuario_admin.get_full_name }}{% endblock %}
 {% block botones %}
     <li>
         {% if usuario_admin.can_add_user %}

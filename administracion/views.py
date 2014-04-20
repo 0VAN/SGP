@@ -81,6 +81,7 @@ def administrar_usuario(request):
 """
 @user_passes_test( User.can_add_user , login_url="/iniciar_sesion")
 def crear_usuario(request):
+    usuario = request.user
     if request.method == 'POST':
         formulario = UsuarioForm(request.POST)
         if formulario.is_valid():
@@ -90,7 +91,7 @@ def crear_usuario(request):
     else:
         formulario = UsuarioForm()
     return render_to_response('usuario/form_usuario.html',
-                              {'formulario': formulario, 'mensaje': 'Creacion de un nuevo usuario'},
+                              {'formulario': formulario, 'mensaje': 'Creacion de un nuevo usuario', 'usuario': usuario},
                               context_instance=RequestContext(request))
 """
     Vista de modificacion de nuevo usuario
@@ -147,7 +148,8 @@ def administrar_proyecto(request):
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
-      if request.method == 'POST':
+    usuario = request.user
+    if request.method == 'POST':
         lista_proyectos = Proyecto.objects.all()
         formulario = ProyectoForm(request.POST)
         if formulario.is_valid():
@@ -156,10 +158,10 @@ def nuevo_proyecto(request):
                                       {'mensaje':'Proyecto creado con exito', 'usuario':request.user,
                                        'lista_proyectos':lista_proyectos},
                                       context_instance=RequestContext(request))
-      else:
+    else:
         formulario = ProyectoForm()
-      return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario},
-                                context_instance=RequestContext(request))
+    return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario, 'usuario': usuario},
+                              context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def detalle_proyecto(request, id_proyecto):
@@ -175,11 +177,8 @@ def detalle_proyecto(request, id_proyecto):
 def administrar_fases(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    try:
-        fases = Fase.objects.filter(Proyecto=id_proyecto)
-    except Fase.DoesNotExist:
-        fases = None
-    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases,'proyecto':proyecto}, context_instance=RequestContext(request))
+    fases = Fase.objects.filter(Proyecto=id_proyecto)
+    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases, 'proyecto': proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):

@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar roles{% endblock %}
-
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block encabezado %}Roles{% endblock %}
 
 {% block botones %}
