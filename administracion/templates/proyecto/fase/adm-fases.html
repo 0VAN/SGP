@@ -7,7 +7,9 @@
 {%  block botones %}
     <li>
         {% if usuario.can_add_fase %}
-            <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% if proyecto.Lider_del_Proyecto == usuario %}
+                <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% endif %}
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
