@@ -63,4 +63,4 @@ class FaseForm(forms.ModelForm):
 class RolForm(forms.ModelForm):
     class Meta:
         model = Group
-        #exclude = ['Usuario']
+        exclude = ['Usuario']

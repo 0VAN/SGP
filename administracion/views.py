@@ -227,8 +227,9 @@ def administrar_roles(request):
 def crear_rol(request):
     mensaje="Rol creado con exito"
     usuario = request.user
+    rol = Group(Usuario=usuario)
     if request.method == 'POST':
-        formulario = RolForm(request.POST)
+        formulario = RolForm(request.POST, instance=rol)
         if formulario.is_valid():
             formulario.save()
             return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje,'usuario':usuario},context_instance=RequestContext(request))
