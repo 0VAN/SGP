@@ -1,6 +1,31 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 
-
+{% block botones %}
+    <li>
+        {% if usuario.can_add_proyecto %}
+            <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
+        {% endif %}
+    </li>
+{% endblock %}
 {% block contenido %}
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <td>Nombre del Proyecto</td>
+                <td>Lider de Proyecto</td>
+            </tr>
+        </thead>
+        <tr>
+        {% for proyecto in lista_proyectos %}
+            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
+            <td>{{ proyecto.Nombre_del_Proyecto }}</td>
+            <td>{{ proyecto.Lider_del_Proyecto }}</td>
+        {% empty %}
+            <td class="warning">No hay proyectos registrados aun</td>
+        {% endfor %}
+        </tr>
+    </table>
 <div class="alert alert-success">{{ mensaje }}</div>
 {% endblock %}

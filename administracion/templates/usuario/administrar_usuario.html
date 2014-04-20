@@ -3,26 +3,43 @@
 
 {% block botones %}
     <li>
-        {% if usuario.can_add_user %}
+        {% if usuario_admin.can_add_user %}
             <a href="/administracion/usuarios/nuevo" class="btn btn-default">Crear Usuario</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Crear Usuario</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario.can_change_user %}
-            <a href="/administracion/usuarios/modificar" class="btn btn-default">Modificar Usuario</a>
+        {% if usuario_admin.can_change_user %}
+            <a href="/administracion/usuarios/modificar" class="btn btn-default">Gestion de datos personales</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Modificar Usuario</a>
         {% endif %}
     </li>
-    <li>
-        {% if usuario.can_change_user %}
-            <a href="/administracion/usuarios/estado" class="btn btn-default">Cambio de estado de Usuario</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Cambio de estado de Usuario</a>
-        {% endif %}
-    </li>
-    <li><a href="/administracion/usuarios" class="btn btn-default">Listar Usuarios</a></li>
+{% endblock %}
 
+{% block contenido %}
+    <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Estado</td>
+            </tr>
+        </thead>
+        {% for usuario in lista_usuarios %}
+            {% if usuario.is_active %}
+                <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Activo</td>
+                </tr>
+            {% else %}
+                <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <td>{{ usuario.username }}</td>
+                    <td>Inactivo</td>
+                </tr>
+            {% endif %}
+        {% empty %}
+            <p>No hay usuarios registrados aun</p>
+        {% endfor %}
+    </table>
 {% endblock %}

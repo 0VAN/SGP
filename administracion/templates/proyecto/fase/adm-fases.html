@@ -12,6 +12,8 @@
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
     </li>
+    <li><a href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' class="btn btn-default">Volver</a></li>
+
 {% endblock %}
 {% block contenido %}
     <table class="table table-condensed table-hover">

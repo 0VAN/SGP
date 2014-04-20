@@ -2,7 +2,11 @@
 {% block titulo %}Crear nuevo rol{% endblock %}
 
 {% block encabezado %}{{ mensaje }}{% endblock %}
-
+{% block botones %}
+    <li>
+            <a href="/administracion/roles" class="btn btn-default">Volver</a>
+    </li>
+{% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table"><p>{{ formulario }}</p></table>

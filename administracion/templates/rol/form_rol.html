@@ -3,6 +3,10 @@
 
 {% block encabezado %}{{ mensaje }} {{ rol.name }}{% endblock %}
 
+{%  block botones %}
+    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table"><p>{{ formulario }}{{ form }}</p></table>

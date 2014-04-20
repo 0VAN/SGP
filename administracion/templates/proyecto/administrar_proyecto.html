@@ -11,28 +11,24 @@
             <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
         {% endif %}
     </li>
-
-    <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
-
 {% endblock %}
 
 {% block contenido %}
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
-                <td>Nombre</td>
+                <td>Nombre del Proyecto</td>
+                <td>Lider de Proyecto</td>
             </tr>
         </thead>
         <tr>
         {% for proyecto in lista_proyectos %}
-            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}'>
-            <td class="info" id="tablaProyecto" rel="tabla" title="Ver detalles..">
-            <td>{{ proyecto.Nombre_del_Proyecto }}<td/>
-            </td>
+            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
+            <td>{{ proyecto.Nombre_del_Proyecto }}</td>
+            <td>{{ proyecto.Lider_del_Proyecto }}</td>
         {% empty %}
             <td class="warning">No hay proyectos registrados aun</td>
         {% endfor %}
         </tr>
     </table>
-
 {% endblock %}

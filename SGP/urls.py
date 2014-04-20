@@ -31,8 +31,7 @@ urlpatterns = patterns('',
         {'template_name': 'usuario/operacion_usuario_exito.html'}, name='pass_done'),
     url(r'^administracion/usuarios/modificar/', include('django.contrib.auth.urls')),
 
-    url(r'^administracion/usuarios/estado/$', 'administracion.views.cambioEstado_usuario'),
-    url(r'^administracion/usuarios/estado/(?P<id_usuario>\d+)$$', 'administracion.views.cambioEstado_usuario_form'),
+    url(r'^administracion/usuarios/detalle/(?P<id_usuario>\d+)$$', 'administracion.views.cambioEstado_usuario_form'),
     url(r'^administracion/usuarios/detalle/(?P<id_usuario>\d+)$$', 'administracion.views.detalle_usuario'),
 
 ###############################################URL PROYECTO#############################################################
