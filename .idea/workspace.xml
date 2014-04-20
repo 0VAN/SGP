@@ -2,105 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42485583-8d56-494b-ae73-6128789d0ae2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/Administracion.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/doctrees/Administracion.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/doctrees/environment.pickle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/doctrees/index.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/.buildinfo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/Administracion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/forms.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/models.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/views.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/Administracion.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/index.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/ajax-loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/basic.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment-bright.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment-close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/doctools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/down-pressed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/down.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/minus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/nature.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/plus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/pygments.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/searchtools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/underscore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/up-pressed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/up.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/_static/websupport.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/genindex.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/objects.inv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/py-modindex.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/search.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/_build/html/searchindex.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/conf.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/index.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/SGP.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/SGP.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/administracion.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/environment.pickle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/index.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/manage.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/doctrees/modules.doctree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/.buildinfo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/SGP.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_modules/administracion/forms.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_modules/administracion/models.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_modules/administracion/tests.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_modules/administracion/views.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_modules/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_sources/SGP.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_sources/administracion.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_sources/index.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_sources/manage.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_sources/modules.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/ajax-loader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/basic.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/comment-bright.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/comment-close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/comment.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/default.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/doctools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/down-pressed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/down.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/minus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/plus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/pygments.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/searchtools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/sidebar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/underscore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/up-pressed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/up.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/_static/websupport.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/administracion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/genindex.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/manage.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/modules.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/objects.inv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/py-modindex.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/search.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/_build/html/searchindex.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/administracion.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/conf.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/index.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/make.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/manage.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docp/modules.rst" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutoDocumentacion.sh" afterPath="$PROJECT_DIR$/AutoDocumentacion.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Creacion de Base de Datos.sh" afterPath="$PROJECT_DIR$/Creacion de Base de Datos.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/models.py" afterPath="$PROJECT_DIR$/administracion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SGP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,7 +28,7 @@
       <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/administracion/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="793" selection-end="793" vertical-scroll-proportion="0.6057692" vertical-offset="90" max-vertical-offset="2628">
+            <state line="19" column="75" selection-start="868" selection-end="868" vertical-scroll-proportion="0.5897436" vertical-offset="112" max-vertical-offset="2646">
               <folding>
                 <element signature="e#1#29#0" expanded="true" />
               </folding>
@@ -534,7 +436,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31543624" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22986577" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27348992" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15939598" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952815" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -840,7 +742,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="793" selection-end="793" vertical-scroll-proportion="0.6057692" vertical-offset="90" max-vertical-offset="2628">
+        <state line="19" column="75" selection-start="868" selection-end="868" vertical-scroll-proportion="0.5897436" vertical-offset="112" max-vertical-offset="2646">
           <folding>
             <element signature="e#1#29#0" expanded="true" />
           </folding>
