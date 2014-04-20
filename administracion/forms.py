@@ -20,6 +20,7 @@ class AsignarRol(forms.ModelForm):
 class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto
+        exclude = ['Usuario']
 
 class UsuarioModForm(forms.ModelForm):
 

@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>administracion.views &mdash; documentación de SGP - 1.0.0</title>
+    <title>administracion.views &mdash; documentación de SGP - 1</title>
     
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentación de SGP - 1.0.0" href="../../index.html" />
+    <link rel="top" title="documentación de SGP - 1" href="../../index.html" />
     <link rel="up" title="Código de módulo" href="../index.html" /> 
   </head>
   <body>
@@ -37,82 +37,10 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li><a href="../../index.html">documentación de SGP - 1.0.0</a> &raquo;</li>
+        <li><a href="../../index.html">documentación de SGP - 1</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Código de módulo</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <h1>Código fuente para administracion.views</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span><span class="p">,</span><span class="n">render</span><span class="p">,</span><span class="n">HttpResponseRedirect</span><span class="p">,</span><span class="n">HttpResponse</span><span class="p">,</span> <span class="n">RequestContext</span>
-<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Usuario</span>
-<span class="kn">from</span> <span class="nn">administracion.forms</span> <span class="kn">import</span> <span class="n">UsuarioForm</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span><span class="p">,</span> <span class="n">AuthenticationForm</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">login</span><span class="p">,</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">logout</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
-
-
-
-<span class="c"># Create your views here.</span>
-<div class="viewcode-block" id="lista_usuarios"><a class="viewcode-back" href="../../Administracion.html#administracion.views.lista_usuarios">[documentos]</a><span class="k">def</span> <span class="nf">lista_usuarios</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;lista_usuario.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuarios&#39;</span><span class="p">:</span><span class="n">usuarios</span><span class="p">})</span>
-</div>
-<div class="viewcode-block" id="nuevo_usuario"><a class="viewcode-back" href="../../Administracion.html#administracion.views.nuevo_usuario">[documentos]</a><span class="k">def</span> <span class="nf">nuevo_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UserCreationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
-            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;administracionmensaje.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UserCreationForm</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuarioform.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-
-</div>
-<div class="viewcode-block" id="ingresar"><a class="viewcode-back" href="../../Administracion.html#administracion.views.ingresar">[documentos]</a><span class="k">def</span> <span class="nf">ingresar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-            <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;username&#39;</span><span class="p">]</span>
-            <span class="n">clave</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span>
-            <span class="n">acceso</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">usuario</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">clave</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">acceso</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">acceso</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
-                    <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">acceso</span><span class="p">)</span>
-                    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion&#39;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;noactivo.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;ingresarerror.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;ingresar.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-</div>
-<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/ingresar&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="privado"><a class="viewcode-back" href="../../Administracion.html#administracion.views.privado">[documentos]</a><span class="k">def</span> <span class="nf">privado</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;privado.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-</div>
-<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/ingresar&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="cerrar"><a class="viewcode-back" href="../../Administracion.html#administracion.views.cerrar">[documentos]</a><span class="k">def</span> <span class="nf">cerrar</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
-</div>
-<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/ingresar&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="administracion"><a class="viewcode-back" href="../../Administracion.html#administracion.views.administracion">[documentos]</a><span class="k">def</span> <span class="nf">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;administracion.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
-</pre></div>
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none">
@@ -130,6 +58,323 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Código fuente para administracion.views</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span><span class="p">,</span> <span class="n">render</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">RequestContext</span><span class="p">,</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">administracion.forms</span> <span class="kn">import</span> <span class="n">UsuarioForm</span><span class="p">,</span> <span class="n">ProyectoForm</span><span class="p">,</span> <span class="n">UsuarioModForm</span><span class="p">,</span> <span class="n">UsuarioDelForm</span><span class="p">,</span> <span class="n">FaseForm</span><span class="p">,</span> <span class="n">RolForm</span><span class="p">,</span> <span class="n">AsignarRol</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">AuthenticationForm</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">login</span><span class="p">,</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">logout</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">user_passes_test</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Permission</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Fase</span>
+
+<span class="c"># Create your views here.</span>
+
+<span class="c">########################################################################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista de inicio de sesion</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="iniciar_sesion"><a class="viewcode-back" href="../../administracion.html#administracion.views.iniciar_sesion">[documentos]</a><span class="k">def</span> <span class="nf">iniciar_sesion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+            <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;username&#39;</span><span class="p">]</span>
+            <span class="n">clave</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span>
+            <span class="n">acceso</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">usuario</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">clave</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">acceso</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">acceso</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                    <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">acceso</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;no_activo.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;sesion_error.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AuthenticationForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;iniciar_sesion.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+</div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista que muestra el contenido privado del modulo de administracion</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/iniciar_sesion&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="privado"><a class="viewcode-back" href="../../administracion.html#administracion.views.privado">[documentos]</a><span class="k">def</span> <span class="nf">privado</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;privado_administrador.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+</div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista para cerrar la sesion de un ususario</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/iniciar_sesion&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="cerrar_sesion"><a class="viewcode-back" href="../../administracion.html#administracion.views.cerrar_sesion">[documentos]</a><span class="k">def</span> <span class="nf">cerrar_sesion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+
+</div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista que muestra el contenido privado del modulo de administracion</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/iniciar_sesion&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="administracion"><a class="viewcode-back" href="../../administracion.html#administracion.views.administracion">[documentos]</a><span class="k">def</span> <span class="nf">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">usuarioAdm</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;administracion.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;lista_usuarios&#39;</span><span class="p">:</span> <span class="n">usuarios</span><span class="p">,</span> <span class="s">&#39;usuarioAdm&#39;</span><span class="p">:</span><span class="n">usuarioAdm</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="c">########################################################################################################################</span>
+<span class="c">#############################################Vistas de Administracion de Usuarios#######################################</span>
+<span class="c">########################################################################################################################</span></div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista de administrar usuario</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@login_required</span><span class="p">(</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="administrar_usuario"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_usuario">[documentos]</a><span class="k">def</span> <span class="nf">administrar_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">lista_usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/administrar_usuario.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario_admin&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span><span class="s">&#39;lista_usuarios&#39;</span><span class="p">:</span><span class="n">lista_usuarios</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista de creacion de nuevo usuario</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_add_user</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="crear_usuario"><a class="viewcode-back" href="../../administracion.html#administracion.views.crear_usuario">[documentos]</a><span class="k">def</span> <span class="nf">crear_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/operacion_usuario_exito.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Usuario creado con exito&#39;</span><span class="p">}</span>
+                                      <span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/form_usuario.html&#39;</span><span class="p">,</span>
+                              <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Creacion de un nuevo usuario&#39;</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista de modificacion de nuevo usuario</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="modificar_usuario"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_usuario">[documentos]</a><span class="k">def</span> <span class="nf">modificar_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioModForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+           <span class="n">form</span> <span class="o">=</span> <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+           <span class="n">form</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span>
+           <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+           <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/operacion_usuario_exito.html&#39;</span><span class="p">,</span>
+                                     <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Usuario modificado con exito&#39;</span><span class="p">},</span>
+                                     <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioModForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;usuario/form_usuario.html&#39;</span><span class="p">,</span>
+                  <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Modificacion del usuario&#39;</span><span class="p">},</span>
+                  <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_change_user</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="cambioEstado_usuario_form"><a class="viewcode-back" href="../../administracion.html#administracion.views.cambioEstado_usuario_form">[documentos]</a><span class="k">def</span> <span class="nf">cambioEstado_usuario_form</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_usuario</span><span class="p">):</span>
+    <span class="n">usuarioDetalle</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_usuario</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioDelForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">usuarioDetalle</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+           <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+           <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/operacion_usuario_exito.html&#39;</span><span class="p">,</span>
+                                     <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span><span class="s">&#39;Cambio de estado de usuario con exito&#39;</span><span class="p">}</span>
+                                     <span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">UsuarioDelForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">usuarioDetalle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/form_usuario.html&#39;</span><span class="p">,</span>
+                  <span class="p">{</span><span class="s">&#39;usuario_admin&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuarioDetalle</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Cambio de estado del usuario&#39;</span><span class="p">},</span>
+                  <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_usuario</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="detalle_usuario"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_usuario">[documentos]</a><span class="k">def</span> <span class="nf">detalle_usuario</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_usuario</span><span class="p">):</span>
+    <span class="n">usuarioDetalle</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_usuario</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;usuario/detalle_usuario.html&#39;</span><span class="p">,{</span><span class="s">&#39;usuario_admin&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="s">&#39;usuarioDetalle&#39;</span><span class="p">:</span> <span class="n">usuarioDetalle</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="c">########################################################################################################################</span>
+<span class="c">###########################################Vistas de Administrar Proyecto###############################################</span>
+<span class="c">########################################################################################################################</span></div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_proyecto</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="administrar_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">administrar_proyecto</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">lista_proyectos</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">usuarioProyecto</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/administrar_proyecto.html&#39;</span><span class="p">,</span>
+                              <span class="p">{</span><span class="s">&#39;lista_proyectos&#39;</span><span class="p">:</span> <span class="n">lista_proyectos</span><span class="p">,</span> <span class="s">&#39;usuarioProyecto&#39;</span><span class="p">:</span><span class="n">usuarioProyecto</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_add_proyecto</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="nuevo_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.views.nuevo_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">nuevo_proyecto</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">lista_proyectos</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ProyectoForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/crear_proyecto_exito.html&#39;</span><span class="p">,</span>
+                                      <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span><span class="s">&#39;Proyecto creado con exito&#39;</span><span class="p">,</span> <span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                                       <span class="s">&#39;lista_proyectos&#39;</span><span class="p">:</span><span class="n">lista_proyectos</span><span class="p">},</span>
+                                      <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ProyectoForm</span><span class="p">()</span>
+      <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/crear_proyecto.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">},</span>
+                                <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_proyecto</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="detalle_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">detalle_proyecto</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/detalle_proyecto.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+<span class="c">########################################################################################################################</span>
+<span class="c">###########################################Vistas de administracion de Fase#############################################</span>
+<span class="c">########################################################################################################################</span></div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="administrar_fases"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_fases">[documentos]</a><span class="k">def</span> <span class="nf">administrar_fases</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fases</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Fase</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="n">fases</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/adm-fases.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;fases&#39;</span><span class="p">:</span> <span class="n">fases</span><span class="p">,</span><span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_add_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="crear_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.crear_fase">[documentos]</a><span class="k">def</span> <span class="nf">crear_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="p">(</span><span class="n">Usuario</span><span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="o">==</span><span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">FaseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion/proyectos/&#39;</span><span class="o">+</span><span class="n">id_proyecto</span><span class="o">+</span><span class="s">&#39;/fases&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">FaseForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/creacion-fase.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span><span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="detalle_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_fase">[documentos]</a><span class="k">def</span> <span class="nf">detalle_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/detallefase.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span> <span class="n">fase</span><span class="p">,</span><span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_change_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="modificar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_fase">[documentos]</a><span class="k">def</span> <span class="nf">modificar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">formulario</span> <span class="o">=</span> <span class="n">FaseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion/proyectos/&#39;</span><span class="o">+</span><span class="n">id_proyecto</span><span class="o">+</span><span class="s">&#39;/fases/detalle/&#39;</span><span class="o">+</span><span class="n">idFase</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">FaseForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/mod-fase.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_delete_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="vista_eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_fase">[documentos]</a><span class="k">def</span> <span class="nf">vista_eliminar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/eliminarfase.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">,</span><span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_delete_fase</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_fase">[documentos]</a><span class="k">def</span> <span class="nf">eliminar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fase</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fases</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/faseeliminada.html&#39;</span><span class="p">,{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span><span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span><span class="s">&#39;fases&#39;</span><span class="p">:</span><span class="n">fases</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="c">########################################################################################################################</span>
+<span class="c">###########################################Vistas de administracion de Rol##############################################</span>
+<span class="c">########################################################################################################################</span></div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_rol</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="administrar_roles"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_roles">[documentos]</a><span class="k">def</span> <span class="nf">administrar_roles</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">roles</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/administrar_rol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;roles&#39;</span><span class="p">:</span><span class="n">roles</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_add_group</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="crear_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.crear_rol">[documentos]</a><span class="k">def</span> <span class="nf">crear_rol</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">mensaje</span><span class="o">=</span><span class="s">&quot;Rol creado con exito&quot;</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">RolForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/crear_rol_exito.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span><span class="n">mensaje</span><span class="p">,</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">RolForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/crear_rol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_administrar_rol</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="detalle_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_rol">[documentos]</a><span class="k">def</span> <span class="nf">detalle_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/detallerol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;rol&#39;</span><span class="p">:</span><span class="n">rol</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_change_group</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="modificar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_rol">[documentos]</a><span class="k">def</span> <span class="nf">modificar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+    <span class="n">formulario</span> <span class="o">=</span> <span class="n">RolForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">rol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/administracion/roles/&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">RolForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">rol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/modificar_rol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;rol&#39;</span><span class="p">:</span><span class="n">rol</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_delete_group</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="vista_eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_rol">[documentos]</a><span class="k">def</span> <span class="nf">vista_eliminar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/eliminarrol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;rol&#39;</span><span class="p">:</span><span class="n">rol</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_delete_group</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_rol">[documentos]</a><span class="k">def</span> <span class="nf">eliminar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
+    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+    <span class="n">rol</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/roleliminado.html&#39;</span><span class="p">,</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_change_user</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="vista_asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_asignar_rol">[documentos]</a><span class="k">def</span> <span class="nf">vista_asignar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">lista_usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/asignar_rol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;lista_usuarios&#39;</span><span class="p">:</span><span class="n">lista_usuarios</span><span class="p">},</span>  <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@user_passes_test</span><span class="p">(</span> <span class="n">User</span><span class="o">.</span><span class="n">can_change_user</span> <span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.asignar_rol">[documentos]</a><span class="k">def</span> <span class="nf">asignar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AsignarRol</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+           <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+           <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/operacion_rol_exito.html&#39;</span><span class="p">,</span>
+                                     <span class="p">{</span><span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;La operacion ha sido exitosa!&#39;</span><span class="p">},</span>
+                                     <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">AsignarRol</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;rol/form_rol.html&#39;</span><span class="p">,{</span><span class="s">&#39;usuario&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="s">&#39;Asignacion de rol&#39;</span><span class="p">},</span>
+                  <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -141,12 +386,12 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li><a href="../../index.html">documentación de SGP - 1.0.0</a> &raquo;</li>
+        <li><a href="../../index.html">documentación de SGP - 1</a> &raquo;</li>
           <li><a href="../index.html" >Código de módulo</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, SGP.
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

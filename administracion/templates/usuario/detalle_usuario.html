@@ -1,7 +1,7 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Detalle usuario{% endblock %}
 
-{% block encabezado %}Vista en detalle del usuario {{ usuario_admin.username }}{% endblock %}
+{% block encabezado %}Vista en detalle del usuario {{ usuarioDetalle.username }}{% endblock %}
 {% block botones %}
       <li>
         {% if usuario_admin.can_change_user %}

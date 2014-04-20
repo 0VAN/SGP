@@ -1,0 +1,814 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>administracion package &mdash; documentación de SGP - 1</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="documentación de SGP - 1" href="index.html" />
+    <link rel="up" title="." href="modules.html" />
+    <link rel="next" title="manage module" href="manage.html" />
+    <link rel="prev" title="SGP package" href="SGP.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="manage.html" title="manage module"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="SGP.html" title="SGP package"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">documentación de SGP - 1</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">.</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">administracion package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-administracion.admin">administracion.admin module</a></li>
+<li><a class="reference internal" href="#module-administracion.forms">administracion.forms module</a></li>
+<li><a class="reference internal" href="#module-administracion.models">administracion.models module</a><ul>
+<li><a class="reference internal" href="#modelos-del-modulo-de-administracion">Modelos del modulo de administracion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-administracion.tests">administracion.tests module</a></li>
+<li><a class="reference internal" href="#module-administracion.views">administracion.views module</a></li>
+<li><a class="reference internal" href="#module-administracion">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="SGP.html"
+                        title="capítulo anterior">SGP package</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="manage.html"
+                        title="próximo capítulo">manage module</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/administracion.txt"
+           rel="nofollow">Mostrar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="administracion-package">
+<h1>administracion package<a class="headerlink" href="#administracion-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-administracion.admin">
+<span id="administracion-admin-module"></span><h2>administracion.admin module<a class="headerlink" href="#module-administracion.admin" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-administracion.forms">
+<span id="administracion-forms-module"></span><h2>administracion.forms module<a class="headerlink" href="#module-administracion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.forms.AsignarRol">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">AsignarRol</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#AsignarRol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AsignarRol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.AsignarRol.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#AsignarRol.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AsignarRol.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.AsignarRol.Meta.fields">
+<tt class="descname">fields</tt><em class="property"> = ('groups',)</em><a class="headerlink" href="#administracion.forms.AsignarRol.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AsignarRol.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.AsignarRol.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AsignarRol.base_fields">
+<tt class="descclassname">AsignarRol.</tt><tt class="descname">base_fields</tt><em class="property"> = {'groups': &lt;django.forms.models.ModelMultipleChoiceField object at 0x52765d0&gt;}</em><a class="headerlink" href="#administracion.forms.AsignarRol.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AsignarRol.declared_fields">
+<tt class="descclassname">AsignarRol.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#administracion.forms.AsignarRol.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AsignarRol.media">
+<tt class="descclassname">AsignarRol.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.AsignarRol.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.FaseForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">FaseForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#FaseForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FaseForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.FaseForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#FaseForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FaseForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.FaseForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Proyecto']</em><a class="headerlink" href="#administracion.forms.FaseForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FaseForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.FaseForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Fase</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FaseForm.base_fields">
+<tt class="descclassname">FaseForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x528a610&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x528a6d0&gt;}</em><a class="headerlink" href="#administracion.forms.FaseForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FaseForm.declared_fields">
+<tt class="descclassname">FaseForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#administracion.forms.FaseForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FaseForm.media">
+<tt class="descclassname">FaseForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.FaseForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.ProyectoForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">ProyectoForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#ProyectoForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.ProyectoForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#ProyectoForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.ProyectoForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.ProyectoForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Proyecto</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.ProyectoForm.base_fields">
+<tt class="descclassname">ProyectoForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Lider': &lt;django.forms.models.ModelChoiceField object at 0x5276a10&gt;, 'Nombre': &lt;django.forms.fields.CharField object at 0x52769d0&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x5276ad0&gt;, 'Fecha_inicio': &lt;django.forms.fields.DateField object at 0x5276b90&gt;, 'Fecha_finalizacion': &lt;django.forms.fields.DateField object at 0x5276c90&gt;}</em><a class="headerlink" href="#administracion.forms.ProyectoForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.ProyectoForm.declared_fields">
+<tt class="descclassname">ProyectoForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#administracion.forms.ProyectoForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.ProyectoForm.media">
+<tt class="descclassname">ProyectoForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.ProyectoForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.RolForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">RolForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#RolForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RolForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.RolForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#RolForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RolForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.RolForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.RolForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Group</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.base_fields">
+<tt class="descclassname">RolForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'name': &lt;django.forms.fields.CharField object at 0x528aad0&gt;, 'permissions': &lt;django.forms.models.ModelMultipleChoiceField object at 0x528af90&gt;}</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.declared_fields">
+<tt class="descclassname">RolForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.media">
+<tt class="descclassname">RolForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.RolForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.UsuarioDelForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioDelForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioDelForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioDelForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.UsuarioDelForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#UsuarioDelForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioDelForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.UsuarioDelForm.Meta.fields">
+<tt class="descname">fields</tt><em class="property"> = ('is_active',)</em><a class="headerlink" href="#administracion.forms.UsuarioDelForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioDelForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.UsuarioDelForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioDelForm.base_fields">
+<tt class="descclassname">UsuarioDelForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'is_active': &lt;django.forms.fields.BooleanField object at 0x528a490&gt;}</em><a class="headerlink" href="#administracion.forms.UsuarioDelForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioDelForm.declared_fields">
+<tt class="descclassname">UsuarioDelForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#administracion.forms.UsuarioDelForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioDelForm.media">
+<tt class="descclassname">UsuarioDelForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.UsuarioDelForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.UsuarioForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.forms.UserCreationForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.UsuarioForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#UsuarioForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.UsuarioForm.Meta.fields">
+<tt class="descname">fields</tt><em class="property"> = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')</em><a class="headerlink" href="#administracion.forms.UsuarioForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.UsuarioForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioForm.base_fields">
+<tt class="descclassname">UsuarioForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5011ad0&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x5011cd0&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x5011e10&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x5276050&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x50dcfd0&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x5267ad0&gt;, 'telefono': &lt;django.forms.fields.IntegerField object at 0x52761d0&gt;, 'direccion': &lt;django.forms.fields.CharField object at 0x5276110&gt;, 'observacion': &lt;django.forms.fields.CharField object at 0x5276290&gt;}</em><a class="headerlink" href="#administracion.forms.UsuarioForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioForm.declared_fields">
+<tt class="descclassname">UsuarioForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5011ad0&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x5011cd0&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x5011e10&gt;}</em><a class="headerlink" href="#administracion.forms.UsuarioForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioForm.media">
+<tt class="descclassname">UsuarioForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.UsuarioForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.UsuarioModForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioModForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioModForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioModForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="class">
+<dt id="administracion.forms.UsuarioModForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/administracion/forms.html#UsuarioModForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioModForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="administracion.forms.UsuarioModForm.Meta.fields">
+<tt class="descname">fields</tt><em class="property"> = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')</em><a class="headerlink" href="#administracion.forms.UsuarioModForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioModForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#administracion.forms.UsuarioModForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioModForm.base_fields">
+<tt class="descclassname">UsuarioModForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5276790&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5276e10&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x528a110&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x527e910&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x527ecd0&gt;, 'telefono': &lt;django.forms.fields.IntegerField object at 0x528a290&gt;, 'direccion': &lt;django.forms.fields.CharField object at 0x528a210&gt;, 'observacion': &lt;django.forms.fields.CharField object at 0x528a350&gt;}</em><a class="headerlink" href="#administracion.forms.UsuarioModForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.forms.UsuarioModForm.clean_password">
+<tt class="descclassname">UsuarioModForm.</tt><tt class="descname">clean_password</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioModForm.clean_password"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioModForm.clean_password" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioModForm.declared_fields">
+<tt class="descclassname">UsuarioModForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5276790&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5276e10&gt;}</em><a class="headerlink" href="#administracion.forms.UsuarioModForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UsuarioModForm.media">
+<tt class="descclassname">UsuarioModForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#administracion.forms.UsuarioModForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.models">
+<span id="administracion-models-module"></span><h2>administracion.models module<a class="headerlink" href="#module-administracion.models" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="modelos-del-modulo-de-administracion">
+<h3>Modelos del modulo de administracion<a class="headerlink" href="#modelos-del-modulo-de-administracion" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="class">
+<dt id="administracion.models.Fase">
+<em class="property">class </em><tt class="descclassname">administracion.models.</tt><tt class="descname">Fase</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#Fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Fase(id, Nombre, Descripcion, Usuario_id, Proyecto_id, Fecha)</p>
+<dl class="exception">
+<dt id="administracion.models.Fase.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#administracion.models.Fase.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Fase.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Fase.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#administracion.models.Fase.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Fase.Proyecto">
+<tt class="descclassname">Fase.</tt><tt class="descname">Proyecto</tt><a class="headerlink" href="#administracion.models.Fase.Proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Fase.Usuario">
+<tt class="descclassname">Fase.</tt><tt class="descname">Usuario</tt><a class="headerlink" href="#administracion.models.Fase.Usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Fase.get_next_by_Fecha">
+<tt class="descclassname">Fase.</tt><tt class="descname">get_next_by_Fecha</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Fase.get_next_by_Fecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Fase.get_previous_by_Fecha">
+<tt class="descclassname">Fase.</tt><tt class="descname">get_previous_by_Fecha</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Fase.get_previous_by_Fecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Fase.objects">
+<tt class="descclassname">Fase.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x50d4c10&gt;</em><a class="headerlink" href="#administracion.models.Fase.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.Proyecto">
+<em class="property">class </em><tt class="descclassname">administracion.models.</tt><tt class="descname">Proyecto</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#Proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<ul class="simple">
+<li>Contiene los campos de la tabla proyecto en la base de datos</li>
+</ul>
+<blockquote>
+<div><dl class="docutils">
+<dt>Variales</dt>
+<dd>Lider: es el usuario lider del proyecto
+Nombre: es el nombre que posee el proyecto
+Descripcion: es la decripcion del proyecto
+Fecha de inicio: es la fecha en que el proyecto dara inicio
+Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado</dd>
+</dl>
+</div></blockquote>
+<dl class="exception">
+<dt id="administracion.models.Proyecto.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#administracion.models.Proyecto.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.Lider">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">Lider</tt><a class="headerlink" href="#administracion.models.Proyecto.Lider" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Proyecto.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Proyecto.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#administracion.models.Proyecto.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.fase_set">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">fase_set</tt><a class="headerlink" href="#administracion.models.Proyecto.fase_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_next_by_Fecha_finalizacion">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">get_next_by_Fecha_finalizacion</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Proyecto.get_next_by_Fecha_finalizacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_next_by_Fecha_inicio">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">get_next_by_Fecha_inicio</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Proyecto.get_next_by_Fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_previous_by_Fecha_finalizacion">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">get_previous_by_Fecha_finalizacion</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Proyecto.get_previous_by_Fecha_finalizacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_previous_by_Fecha_inicio">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">get_previous_by_Fecha_inicio</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#administracion.models.Proyecto.get_previous_by_Fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.objects">
+<tt class="descclassname">Proyecto.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x50d45d0&gt;</em><a class="headerlink" href="#administracion.models.Proyecto.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.accesoAdministracion">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">accesoAdministracion</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#accesoAdministracion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.accesoAdministracion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_add_fase">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_add_fase</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_add_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_add_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_add_group">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_add_group</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_add_group"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_add_group" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_add_proyecto">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_add_proyecto</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_add_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_add_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_add_user">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_add_user</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_add_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_add_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_administrar_fase">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_administrar_fase</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_administrar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_administrar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_administrar_proyecto">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_administrar_proyecto</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_administrar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_administrar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_administrar_rol">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_administrar_rol</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_administrar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_administrar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_administrar_usuario">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_administrar_usuario</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_administrar_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_administrar_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_change_fase">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_change_fase</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_change_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_change_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_change_group">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_change_group</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_change_group"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_change_group" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_change_proyecto">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_change_proyecto</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_change_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_change_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_change_user">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_change_user</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_change_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_change_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_delete_fase">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_delete_fase</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_delete_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_delete_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_delete_group">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_delete_group</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_delete_group"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_delete_group" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_delete_proyecto">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_delete_proyecto</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_delete_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_delete_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.can_delete_user">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">can_delete_user</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#can_delete_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.can_delete_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.models.tienePermiso">
+<tt class="descclassname">administracion.models.</tt><tt class="descname">tienePermiso</tt><big>(</big><em>self</em>, <em>permiso</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#tienePermiso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.tienePermiso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-administracion.tests">
+<span id="administracion-tests-module"></span><h2>administracion.tests module<a class="headerlink" href="#module-administracion.tests" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.tests.TestCrearUsuario">
+<em class="property">class </em><tt class="descclassname">administracion.tests.</tt><tt class="descname">TestCrearUsuario</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestCrearUsuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestCrearUsuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></tt></p>
+<dl class="method">
+<dt id="administracion.tests.TestCrearUsuario.crear_correctamente">
+<tt class="descname">crear_correctamente</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestCrearUsuario.crear_correctamente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestCrearUsuario.crear_correctamente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.TestLogin">
+<em class="property">class </em><tt class="descclassname">administracion.tests.</tt><tt class="descname">TestLogin</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestLogin"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestLogin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></tt></p>
+<dl class="attribute">
+<dt id="administracion.tests.TestLogin.fixtures">
+<tt class="descname">fixtures</tt><em class="property"> = ['fixtures/Usuarios.json']</em><a class="headerlink" href="#administracion.tests.TestLogin.fixtures" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.tests.TestLogin.password">
+<tt class="descname">password</tt><em class="property"> = 'sgparj'</em><a class="headerlink" href="#administracion.tests.TestLogin.password" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.TestLogin.test_login_usuario">
+<tt class="descname">test_login_usuario</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestLogin.test_login_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestLogin.test_login_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.TestLogin.test_usuario_no_registrado">
+<tt class="descname">test_usuario_no_registrado</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestLogin.test_usuario_no_registrado"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestLogin.test_usuario_no_registrado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.tests.TestLogin.usuario">
+<tt class="descname">usuario</tt><em class="property"> = 'sgp'</em><a class="headerlink" href="#administracion.tests.TestLogin.usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.TestUser">
+<em class="property">class </em><tt class="descclassname">administracion.tests.</tt><tt class="descname">TestUser</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestUser"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestUser" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></tt></p>
+<dl class="method">
+<dt id="administracion.tests.TestUser.test_numero_elementos">
+<tt class="descname">test_numero_elementos</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestUser.test_numero_elementos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestUser.test_numero_elementos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.TestUser2">
+<em class="property">class </em><tt class="descclassname">administracion.tests.</tt><tt class="descname">TestUser2</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestUser2"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestUser2" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></tt></p>
+<dl class="attribute">
+<dt id="administracion.tests.TestUser2.fixtures">
+<tt class="descname">fixtures</tt><em class="property"> = ['fixtures/Usuarios.json']</em><a class="headerlink" href="#administracion.tests.TestUser2.fixtures" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.TestUser2.test_numero_elementos">
+<tt class="descname">test_numero_elementos</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/administracion/tests.html#TestUser2.test_numero_elementos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.TestUser2.test_numero_elementos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.views">
+<span id="administracion-views-module"></span><h2>administracion.views module<a class="headerlink" href="#module-administracion.views" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="function">
+<dt id="administracion.views.administracion">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administracion</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administracion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administracion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.administrar_fases">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_fases</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_fases"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_fases" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.administrar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.administrar_roles">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_roles</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_roles"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_roles" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.administrar_usuario">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.asignar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">asignar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#asignar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.asignar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.cambioEstado_usuario_form">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">cambioEstado_usuario_form</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#cambioEstado_usuario_form"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.cambioEstado_usuario_form" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.cerrar_sesion">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">cerrar_sesion</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#cerrar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.cerrar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.crear_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">crear_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#crear_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.crear_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.crear_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">crear_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#crear_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.crear_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.crear_usuario">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">crear_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#crear_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.crear_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.detalle_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.detalle_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.detalle_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.detalle_usuario">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.eliminar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.eliminar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.iniciar_sesion">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">iniciar_sesion</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#iniciar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.iniciar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.modificar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.modificar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.modificar_usuario">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.nuevo_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">nuevo_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#nuevo_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.nuevo_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.privado">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">privado</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#privado"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.privado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.vista_asignar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_asignar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_asignar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_asignar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.vista_eliminar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_eliminar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_eliminar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_eliminar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.vista_eliminar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_eliminar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_eliminar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_eliminar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-administracion">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-administracion" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="manage.html" title="manage module"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="SGP.html" title="SGP package"
+             >anterior</a> |</li>
+        <li><a href="index.html">documentación de SGP - 1</a> &raquo;</li>
+          <li><a href="modules.html" >.</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

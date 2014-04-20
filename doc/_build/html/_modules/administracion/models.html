@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>administracion.models &mdash; documentación de SGP - 1.0.0</title>
+    <title>administracion.models &mdash; documentación de SGP - 1</title>
     
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
+        VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentación de SGP - 1.0.0" href="../../index.html" />
+    <link rel="top" title="documentación de SGP - 1" href="../../index.html" />
     <link rel="up" title="Código de módulo" href="../index.html" /> 
   </head>
   <body>
@@ -37,38 +37,10 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li><a href="../../index.html">documentación de SGP - 1.0.0</a> &raquo;</li>
+        <li><a href="../../index.html">documentación de SGP - 1</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Código de módulo</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <h1>Código fuente para administracion.models</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-<span class="c"># Create your models here.</span>
-
-<span class="k">class</span> <span class="nc">Usuario</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<div class="viewcode-block" id="Usuario"><a class="viewcode-back" href="../../Administracion.html#administracion.models.Usuario">[documentos]</a>    <span class="c">#Nombre_de_usuario = models.CharField(max_length=30)</span>
-    <span class="c">#Contrasena = models.CharField(max_length=20) # falta como hacer que la contrasenha este encriptada</span>
-
-    <span class="n">Nombres</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="n">Apellidos</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="n">Email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="n">Direccion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">Numero_de_telefono</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="n">Observacion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nombre_de_usuario</span>
-</pre></div></div>
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none">
@@ -86,6 +58,168 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Código fuente para administracion.models</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Modelos del modulo de administracion</span>
+<span class="sd">====================================</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Permission</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Se utiliza la clase User por de defecto en Django para la creacion de los usuarios, pero</span>
+<span class="sd">    se incluyen 3 atributos:</span>
+<span class="sd">        - direccion: direccion del usuario</span>
+<span class="sd">        - telefono: numero del telefono del usuario</span>
+<span class="sd">        - observacion: observacion sobre el usuario por parte del administrador del sistema</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;direccion&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;telefono&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;observacion&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="c">#Group.add_to_class(&#39;Usuario&#39;, models.ForeignKey(User))</span>
+
+
+<div class="viewcode-block" id="Proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.models.Proyecto">[documentos]</a><span class="k">class</span> <span class="nc">Proyecto</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     * Contiene los campos de la tabla proyecto en la base de datos</span>
+<span class="sd">      Variales</span>
+<span class="sd">       Lider: es el usuario lider del proyecto</span>
+<span class="sd">       Nombre: es el nombre que posee el proyecto</span>
+<span class="sd">       Descripcion: es la decripcion del proyecto</span>
+<span class="sd">       Fecha de inicio: es la fecha en que el proyecto dara inicio</span>
+<span class="sd">       Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Lider</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="n">Nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">Descripcion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">Fecha_inicio</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="s">&#39;Fecha de inicio&#39;</span><span class="p">)</span>
+    <span class="n">Fecha_finalizacion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="s">&#39;Fecha de finalizacion&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.Fase">[documentos]</a><span class="k">class</span> <span class="nc">Fase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">Nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">Descripcion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">Usuario</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="n">Proyecto</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span>
+    <span class="n">Fecha</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nombre</span>
+</div>
+<div class="viewcode-block" id="tienePermiso"><a class="viewcode-back" href="../../administracion.html#administracion.models.tienePermiso">[documentos]</a><span class="k">def</span> <span class="nf">tienePermiso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">permiso</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">grupo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">permisoUsuario</span> <span class="ow">in</span> <span class="n">grupo</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">permisoUsuario</span><span class="o">.</span><span class="n">codename</span> <span class="o">==</span> <span class="n">permiso</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;tienePermiso&#39;</span><span class="p">,</span> <span class="n">tienePermiso</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_add_user"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_add_user">[documentos]</a><span class="k">def</span> <span class="nf">can_add_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;add_user&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_add_user&#39;</span><span class="p">,</span> <span class="n">can_add_user</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_add_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_add_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">can_add_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;add_proyecto&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_add_proyecto&#39;</span><span class="p">,</span> <span class="n">can_add_proyecto</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_add_fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_add_fase">[documentos]</a><span class="k">def</span> <span class="nf">can_add_fase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;add_fase&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_add_fase&#39;</span><span class="p">,</span> <span class="n">can_add_fase</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_add_group"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_add_group">[documentos]</a><span class="k">def</span> <span class="nf">can_add_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;add_group&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_add_group&#39;</span><span class="p">,</span> <span class="n">can_add_group</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_change_user"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_change_user">[documentos]</a><span class="k">def</span> <span class="nf">can_change_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;change_user&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_change_user&#39;</span><span class="p">,</span> <span class="n">can_change_user</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_change_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_change_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">can_change_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;change_proyecto&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_change_proyecto&#39;</span><span class="p">,</span> <span class="n">can_change_proyecto</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_change_fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_change_fase">[documentos]</a><span class="k">def</span> <span class="nf">can_change_fase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;change_fase&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_change_fase&#39;</span><span class="p">,</span> <span class="n">can_change_fase</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_change_group"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_change_group">[documentos]</a><span class="k">def</span> <span class="nf">can_change_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;change_group&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_change_group&#39;</span><span class="p">,</span> <span class="n">can_change_group</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_delete_user"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_delete_user">[documentos]</a><span class="k">def</span> <span class="nf">can_delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;delete_user&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_delete_user&#39;</span><span class="p">,</span> <span class="n">can_delete_user</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_delete_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_delete_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">can_delete_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;delete_proyecto&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_delete_proyecto&#39;</span><span class="p">,</span> <span class="n">can_delete_proyecto</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_delete_fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_delete_fase">[documentos]</a><span class="k">def</span> <span class="nf">can_delete_fase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;delete_fase&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_delete_fase&#39;</span><span class="p">,</span> <span class="n">can_delete_fase</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_delete_group"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_delete_group">[documentos]</a><span class="k">def</span> <span class="nf">can_delete_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">permiso</span> <span class="o">=</span> <span class="s">&#39;delete_group&#39;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tienePermiso</span><span class="p">(</span><span class="n">permiso</span><span class="p">)</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_delete_group&#39;</span><span class="p">,</span> <span class="n">can_delete_group</span><span class="p">)</span>
+
+<span class="c">###########################################Vistas de Control de Acceso #################################################</span>
+
+<div class="viewcode-block" id="can_administrar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_administrar_fase">[documentos]</a><span class="k">def</span> <span class="nf">can_administrar_fase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_add_fase</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_change_fase</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_delete_fase</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_administrar_fase&#39;</span><span class="p">,</span> <span class="n">can_administrar_fase</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_administrar_proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_administrar_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">can_administrar_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_add_proyecto</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_change_proyecto</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_delete_proyecto</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_administrar_fase</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">False</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_administrar_proyecto&#39;</span><span class="p">,</span> <span class="n">can_administrar_proyecto</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_administrar_usuario"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_administrar_usuario">[documentos]</a><span class="k">def</span> <span class="nf">can_administrar_usuario</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_add_user</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_change_user</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_delete_user</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">False</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_administrar_usuario&#39;</span><span class="p">,</span> <span class="n">can_administrar_usuario</span><span class="p">)</span>
+
+<div class="viewcode-block" id="can_administrar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.models.can_administrar_rol">[documentos]</a><span class="k">def</span> <span class="nf">can_administrar_rol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_add_group</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_change_group</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_delete_group</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">False</span></div>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;can_administrar_rol&#39;</span><span class="p">,</span> <span class="n">can_administrar_rol</span><span class="p">)</span>
+
+<div class="viewcode-block" id="accesoAdministracion"><a class="viewcode-back" href="../../administracion.html#administracion.models.accesoAdministracion">[documentos]</a><span class="k">def</span> <span class="nf">accesoAdministracion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">rol</span> <span class="o">=</span><span class="s">&#39;Administracion&#39;</span>
+    <span class="k">for</span> <span class="n">grupo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">grupo</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">rol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -97,12 +231,12 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
-        <li><a href="../../index.html">documentación de SGP - 1.0.0</a> &raquo;</li>
+        <li><a href="../../index.html">documentación de SGP - 1</a> &raquo;</li>
           <li><a href="../index.html" >Código de módulo</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, SGP.
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

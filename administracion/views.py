@@ -64,9 +64,9 @@ def administracion(request):
     usuarioAdm = request.user
     return render_to_response('administracion.html', {'lista_usuarios': usuarios, 'usuarioAdm':usuarioAdm},
                               context_instance=RequestContext(request))
-
+########################################################################################################################
 #############################################Vistas de Administracion de Usuarios#######################################
-
+########################################################################################################################
 """
     Vista de administrar usuario
 """
@@ -135,9 +135,9 @@ def detalle_usuario(request, id_usuario):
     usuarioDetalle = User.objects.get(pk=id_usuario)
     return render_to_response('usuario/detalle_usuario.html',{'usuario_admin': request.user, 'usuarioDetalle': usuarioDetalle},
                               context_instance=RequestContext(request))
-
+########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
-
+########################################################################################################################
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     lista_proyectos = Proyecto.objects.all()
@@ -149,7 +149,7 @@ def administrar_proyecto(request):
 def nuevo_proyecto(request):
       if request.method == 'POST':
         lista_proyectos = Proyecto.objects.all()
-        formulario = ProyectoForm(request.POST)
+        formulario = ProyectoForm(request.POST, Usuario=request.user)
         if formulario.is_valid():
             formulario.save()
             return render_to_response('proyecto/crear_proyecto_exito.html',
@@ -168,9 +168,9 @@ def detalle_proyecto(request, id_proyecto):
     return render_to_response('proyecto/detalle_proyecto.html', {'usuario': usuario, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
-
+########################################################################################################################
 ###########################################Vistas de administracion de Fase#############################################
-
+########################################################################################################################
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def administrar_fases(request, id_proyecto):
     usuario = request.user
@@ -231,9 +231,9 @@ def eliminar_fase(request, idFase, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fases = Fase.objects.filter(pk=id_proyecto)
     return render_to_response('proyecto/fase/faseeliminada.html',{'usuario':usuario,'proyecto':proyecto,'fases':fases}, context_instance=RequestContext(request))
-
+########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
-
+########################################################################################################################
 @user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
 def administrar_roles(request):
     usuario = request.user
