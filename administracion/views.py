@@ -250,7 +250,7 @@ def crear_rol(request):
             return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje,'usuario':usuario},context_instance=RequestContext(request))
     else:
         formulario = RolForm()
-    return render_to_response('rol/crear_rol.html', {'formulario':formulario},context_instance=RequestContext(request))
+    return render_to_response('rol/crear_rol.html', {'formulario':formulario, 'usuario':usuario},context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
@@ -290,6 +290,7 @@ def vista_asignar_rol(request):
 
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def asignar_rol(request, idRol):
+    usuario_logueado = request.user
     usuario = User.objects.get(pk=idRol)
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
@@ -300,5 +301,5 @@ def asignar_rol(request, idRol):
                                      context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)
-    return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol'},
+    return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol', 'usuario_logueado':usuario_logueado},
                   context_instance=RequestContext(request))

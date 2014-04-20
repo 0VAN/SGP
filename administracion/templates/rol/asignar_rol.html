@@ -6,6 +6,7 @@
 {%  block botones %}
     <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
 {% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 
 {% block encabezado %}Lista de Usuarios{% endblock %}
 
