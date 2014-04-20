@@ -5,12 +5,13 @@
 {% block encabezado %}Vista en detalle del usuario {{ usuarioDetalle.username }}{% endblock %}
 {% block botones %}
       <li>
-        {% if usuario_admin.can_change_user %}
+        {% if usuario_admin.can_change_user and usuario_admin.id != usuarioDetalle.id %}
             <a href="{% url 'administracion.views.cambioEstado_usuario_form' usuarioDetalle.id %}" class="btn btn-default">Cambio de estado de Usuario</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Cambio de estado de Usuario</a>
         {% endif %}
     </li>
+    <li><a href="/administracion/usuarios" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 
@@ -38,6 +39,5 @@
         <dd>{{ usuarioDetalle.date_joined|date:'SHORT_DATETIME_FORMAT' }}</dd>
 
     </dl>
-    <a href="/administracion" class="btn btn-default">Volver</a>
 
 {% endblock %}

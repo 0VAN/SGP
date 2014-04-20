@@ -120,19 +120,19 @@ def modificar_usuario(request):
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario):
     usuarioDetalle = User.objects.get(pk=id_usuario)
-    usuario = request.user
+    usuario_admin = request.user
     if request.method == 'POST':
         formulario = UsuarioDelForm(request.POST, instance=usuarioDetalle)
         if formulario.is_valid():
            formulario.save()
            lista_usuarios = User.objects.all()
            return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje':'Cambio de estado de usuario con exito', 'usuario_admin':usuario, 'lista_usuarios':lista_usuarios}
+                                     {'mensaje':'Cambio de estado de usuario con exito', 'usuario_admin':usuario_admin, 'lista_usuarios':lista_usuarios}
                                      , context_instance=RequestContext(request))
     else:
         formulario = UsuarioDelForm(instance=usuarioDetalle)
     return render_to_response('usuario/form_usuario.html',
-                  {'usuario_admin': request.user, 'usuario': usuarioDetalle, 'formulario': formulario, 'mensaje': 'Cambio de estado del usuario'},
+                  {'usuario_admin': usuario_admin, 'usuario': usuarioDetalle, 'formulario': formulario, 'mensaje': 'Cambio de estado del usuario'},
                   context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
@@ -155,7 +155,7 @@ def nuevo_proyecto(request):
     usuario = request.user
     if request.method == 'POST':
         lista_proyectos = Proyecto.objects.all()
-        formulario = ProyectoForm(request.POST, Usuario=request.user)
+        formulario = ProyectoForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return render_to_response('proyecto/crear_proyecto_exito.html',
@@ -247,8 +247,9 @@ def administrar_roles(request):
 def crear_rol(request):
     mensaje="Rol creado con exito"
     usuario = request.user
+    rol = Group(Usuario=usuario)
     if request.method == 'POST':
-        formulario = RolForm(request.POST)
+        formulario = RolForm(request.POST, instance=rol)
         if formulario.is_valid():
             formulario.save()
             roles = Group.objects.all()

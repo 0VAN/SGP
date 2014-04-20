@@ -4,6 +4,7 @@ Modelos del modulo de administracion
 """
 from django.db import models
 from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 """
     Se utiliza la clase User por de defecto en Django para la creacion de los usuarios, pero
@@ -16,7 +17,8 @@ from django.contrib.auth.models import User, Group, Permission
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
-#Group.add_to_class('Usuario', models.ForeignKey(User))
+Group.add_to_class('Usuario', models.ForeignKey(User, null=True))
+Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
 
 
 class Proyecto(models.Model):
@@ -36,7 +38,7 @@ class Proyecto(models.Model):
     Descripcion = models.TextField()
     Fecha_inicio = models.DateField('Fecha de inicio')
     Fecha_finalizacion = models.DateField('Fecha de finalizacion')
-    Usuario = models.ForeignKey(User)
+    #Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
 
 
@@ -154,3 +156,4 @@ def accesoAdministracion(self):
             return True
     return False
 
+User.add_to_class('accesoAdministracion', accesoAdministracion)

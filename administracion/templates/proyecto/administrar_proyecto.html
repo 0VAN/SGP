@@ -25,8 +25,8 @@
         <tr>
         {% for proyecto in lista_proyectos %}
             <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
-            <td>{{ proyecto.Nombre_del_Proyecto }}</td>
-            <td>{{ proyecto.Lider_del_Proyecto }}</td>
+            <td>{{ proyecto.Nombre }}</td>
+            <td>{{ proyecto.Lider }}</td>
         {% empty %}
             <td class="warning">No hay proyectos registrados aun</td>
         {% endfor %}

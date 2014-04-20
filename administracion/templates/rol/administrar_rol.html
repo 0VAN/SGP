@@ -30,13 +30,16 @@
                 <td>Nombre</td>
             </tr>
         </thead>
-        <tr>
-        {% for rol in roles %}
-            <tr class="clickableRow" href='{% url "administracion.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla" title="Ver detalles..">
-                <td>{{ rol }}</td>
-        {% empty %}
-            <td class="warning">No hay roles registrados aun</td>
-        {% endfor %}
+        {% if roles|length > 2 %}
+            {% for rol in roles %}
+                {% if rol.pk > 2 %}
+                    <tr class="clickableRow" href='{% url "administracion.views.detalle_rol" rol.id %}' id="tablaRol" rel="tabla" title="Ver detalles..">
+                        <td>{{ rol }}</td>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <tr><td class="warning">No hay roles de usuario registrados aun</td>
+        {% endif %}
         </tr>
     </table>
     {% block mensaje %}{% endblock %}
