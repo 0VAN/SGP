@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Usuarios{% endblock %}
-
+{% block usuario %}{{ usuario_admin.get_full_name }}{% endblock %}
 {% block botones %}
     <li>
         {% if usuario_admin.can_add_user %}
@@ -12,6 +12,7 @@
     <li>
             <a href="/administracion/usuarios/modificar" class="btn btn-default">Gestion de datos personales</a>
     </li>
+    <li><a href="/administracion" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
@@ -42,4 +43,3 @@
     {% else %}
         <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
     {% endif %}
-{% endblock %}

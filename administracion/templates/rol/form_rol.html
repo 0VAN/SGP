@@ -1,5 +1,6 @@
 {% extends 'rol/administrar_rol.html' %}
 {% block titulo %}form rol{% endblock %}
+{% block usuario %}{{ usuario_logueado.get_full_name }}{% endblock %}
 
 {% block encabezado %}{{ mensaje }} {{ rol.name }}{% endblock %}
 

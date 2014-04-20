@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block titulo %}Eliminar Rol{% endblock %}
 {% block encabezado %}Eliminar {{ rol.name }}{% endblock %}
-{% block usuario %}{{ usuario }}{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}

@@ -1,5 +1,6 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Detalle usuario{% endblock %}
+{% block usuario %}{{ usuario_admin.get_full_name }}{% endblock %}
 
 {% block encabezado %}Vista en detalle del usuario {{ usuarioDetalle.username }}{% endblock %}
 {% block botones %}
@@ -14,33 +15,29 @@
 
 
 {% block contenido %}
-    <div id='first_name'>
-        <h4>Nombre</h4>
-        <p>{{ usuarioDetalle.first_name }}</p>
-    </div>
-    <div id='last_name'>
-        <h4>Apellido</h4>
-        <p>{{ usuarioDetalle.last_name }}</p>
-    </div>
-    <div id='email'>
-        <h4>Direccion de correo electronico</h4>
-        <p>{{ usuarioDetalle.email }}</p>
-    </div>
-    <div id="telefono">
-        <h4>Numero de telefono</h4>
-        <p>{{ usuarioDetalle.telefono }}</p>
-    </div>
-     <div id="direccion">
-        <h4>Direccion</h4>
-        <p>{{ usuarioDetalle.direccion }}</p>
-    </div>
-    <div id="observacion">
-        <h4>Observacion</h4>
-        <p>{{ usuarioDetalle.observacion }}</p>
-    </div>
-    <footer>
-        <p>Registrado {{ usuarioDetalle.date_joined|date:'SHORT_DATETIME_FORMAT' }}</p>
-    </footer>
-    <p><a href="/administracion" class="btn btn-default">Volver</a></p>
+    <dl>
+        <dt>Nombre</dt>
+        <dd>{{ usuarioDetalle.first_name }}</dd>
+
+        <dt>Apellido</dt>
+        <dd>{{ usuarioDetalle.last_name }}</dd>
+
+        <dt>Direccion de correo electronico</dt>
+        <dd>{{ usuarioDetalle.email }}</dd>
+
+        <dt>Numero de telefono</dt>
+        <dd>{{ usuarioDetalle.telefono }}</dd>
+
+        <dt>Direccion</dt>
+        <dd>{{ usuarioDetalle.direccion }}</dd>
+
+        <dt>Observacion</dt>
+        <dd>{{ usuarioDetalle.observacion }}</dd>
+
+        <dt>Registrado</dt>
+        <dd>{{ usuarioDetalle.date_joined|date:'SHORT_DATETIME_FORMAT' }}</dd>
+
+    </dl>
+    <a href="/administracion" class="btn btn-default">Volver</a>
 
 {% endblock %}

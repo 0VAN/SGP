@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block titulo %}Administracion de Fases{% endblock %}
 {% block encabezado %}Administracion de Fases{% endblock %}
-{% block usuario %}{{ usuario }}{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
     <li>
         {% if usuario.can_add_fase %}
-            <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% if proyecto.Lider_del_Proyecto == usuario %}
+                <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% endif %}
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
@@ -30,6 +32,8 @@
                         <td>{{ fase.Nombre }}</td>
                         <td>{{ fase.Usuario }}</td>
                         <td>{{ fase.Fecha }}</td>
+            {% empty %}
+                <p>No hay fases</p>
             {% endfor %}
             </tr>
         </tbody>

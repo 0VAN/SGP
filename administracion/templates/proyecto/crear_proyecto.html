@@ -1,5 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Crear nuevo proyecto{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 
 {% block encabezado %}{{ mensaje }}{% endblock %}
 {% block botones %}

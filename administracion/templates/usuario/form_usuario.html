@@ -1,5 +1,6 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}form usuario{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 
 {% block encabezado %}{{ mensaje }} {{ usuario.username }}{% endblock %}
 

@@ -1,5 +1,6 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Eliminar usuario{% endblock %}
+{% block usuario %}{{ usuario_admin.get_full_name }}{% endblock %}
 
 {% block encabezado %}Seleccione el usuario cuyo estado desea cambiar {% endblock %}
 

@@ -1,5 +1,6 @@
 {% extends 'rol/administrar_rol.html' %}
 {% block titulo %}Crear nuevo rol{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 
 {% block encabezado %}{{ mensaje }}{% endblock %}
 {% block botones %}

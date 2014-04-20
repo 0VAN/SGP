@@ -1,7 +1,7 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar roles{% endblock %}
-
-{% block encabezado %}Roles{% endblock %}
+{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
+{% block encabezado %}Roles <small>Haz click en un rol para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -17,6 +17,9 @@
         {% else %}
             <a class="btn btn-default">Asignar Rol</a>
         {% endif %}
+    </li>
+    <li>
+        <a href="/administracion" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 
@@ -36,5 +39,5 @@
         {% endfor %}
         </tr>
     </table>
-
+    {% block mensaje %}{% endblock %}
 {% endblock %}

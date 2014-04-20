@@ -81,16 +81,18 @@ def administrar_usuario(request):
 """
 @user_passes_test( User.can_add_user , login_url="/iniciar_sesion")
 def crear_usuario(request):
+    usuario = request.user
     if request.method == 'POST':
         formulario = UsuarioForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('usuario/operacion_usuario_exito.html', {'mensaje': 'Usuario creado con exito'}
+            lista_usuarios = User.objects.all()
+            return render_to_response('usuario/operacion_usuario_exito.html', {'mensaje': 'Usuario creado con exito', 'usuario_admin': usuario, 'lista_usuarios': lista_usuarios}
                                       , context_instance=RequestContext(request))
     else:
         formulario = UsuarioForm()
     return render_to_response('usuario/form_usuario.html',
-                              {'formulario': formulario, 'mensaje': 'Creacion de un nuevo usuario'},
+                              {'formulario': formulario, 'mensaje': 'Creacion de un nuevo usuario', 'usuario': usuario},
                               context_instance=RequestContext(request))
 """
     Vista de modificacion de nuevo usuario
@@ -104,8 +106,9 @@ def modificar_usuario(request):
            form = formulario.save(commit=False)
            form.user = request
            form.save()
+           lista_usuarios = User.objects.all()
            return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje': 'Usuario modificado con exito'},
+                                     {'mensaje': 'Usuario modificado con exito', 'usuario_admin': usuario, 'lista_usuarios': lista_usuarios},
                                      context_instance=RequestContext(request))
     else:
         formulario = UsuarioModForm(instance=usuario)
@@ -117,12 +120,14 @@ def modificar_usuario(request):
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario):
     usuarioDetalle = User.objects.get(pk=id_usuario)
+    usuario = request.user
     if request.method == 'POST':
         formulario = UsuarioDelForm(request.POST, instance=usuarioDetalle)
         if formulario.is_valid():
            formulario.save()
+           lista_usuarios = User.objects.all()
            return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje':'Cambio de estado de usuario con exito'}
+                                     {'mensaje':'Cambio de estado de usuario con exito', 'usuario_admin':usuario, 'lista_usuarios':lista_usuarios}
                                      , context_instance=RequestContext(request))
     else:
         formulario = UsuarioDelForm(instance=usuarioDetalle)
@@ -147,19 +152,20 @@ def administrar_proyecto(request):
 
 @user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
-      if request.method == 'POST':
+    usuario = request.user
+    if request.method == 'POST':
         lista_proyectos = Proyecto.objects.all()
         formulario = ProyectoForm(request.POST, Usuario=request.user)
         if formulario.is_valid():
             formulario.save()
             return render_to_response('proyecto/crear_proyecto_exito.html',
-                                      {'mensaje':'Proyecto creado con exito', 'usuario':request.user,
+                                      {'mensaje':'Proyecto creado con exito', 'usuarioProyecto':request.user,
                                        'lista_proyectos':lista_proyectos},
                                       context_instance=RequestContext(request))
-      else:
+    else:
         formulario = ProyectoForm()
-      return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario},
-                                context_instance=RequestContext(request))
+    return render_to_response('proyecto/crear_proyecto.html', {'formulario': formulario, 'usuario': usuario},
+                              context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
 def detalle_proyecto(request, id_proyecto):
@@ -175,11 +181,8 @@ def detalle_proyecto(request, id_proyecto):
 def administrar_fases(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    try:
-        fases = Fase.objects.filter(Proyecto=id_proyecto)
-    except Fase.DoesNotExist:
-        fases = None
-    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases,'proyecto':proyecto}, context_instance=RequestContext(request))
+    fases = Fase.objects.filter(Proyecto=id_proyecto)
+    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases, 'proyecto': proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):
@@ -248,10 +251,11 @@ def crear_rol(request):
         formulario = RolForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje,'usuario':usuario},context_instance=RequestContext(request))
+            roles = Group.objects.all()
+            return render_to_response('rol/crear_rol_exito.html', {'mensaje':mensaje,'usuario':usuario, 'roles': roles},context_instance=RequestContext(request))
     else:
         formulario = RolForm()
-    return render_to_response('rol/crear_rol.html', {'formulario':formulario},context_instance=RequestContext(request))
+    return render_to_response('rol/crear_rol.html', {'formulario':formulario, 'usuario':usuario},context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_rol , login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
@@ -281,7 +285,9 @@ def vista_eliminar_rol(request, idRol):
 def eliminar_rol(request, idRol):
     rol = Group.objects.get(pk=idRol)
     rol.delete()
-    return render_to_response('rol/roleliminado.html',context_instance=RequestContext(request))
+    usuario = request.user
+    roles = Group.objects.all()
+    return render_to_response('rol/roleliminado.html', {'usuario': usuario, 'roles':roles}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def vista_asignar_rol(request):
@@ -291,15 +297,17 @@ def vista_asignar_rol(request):
 
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def asignar_rol(request, idRol):
+    usuario_logueado = request.user
     usuario = User.objects.get(pk=idRol)
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
            formulario.save()
+           roles = Group.objects.all()
            return render_to_response('rol/operacion_rol_exito.html',
-                                     {'mensaje': 'La operacion ha sido exitosa!'},
+                                     {'mensaje': 'Rol asignado con exito', 'usuario': usuario_logueado, 'roles': roles},
                                      context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)
-    return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol'},
+    return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol', 'usuario_logueado':usuario_logueado},
                   context_instance=RequestContext(request))

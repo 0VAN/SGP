@@ -2,7 +2,7 @@
 {% block titulo %}Administracion{% endblock %}
 
 {% block activo-admin %}active{% endblock %}
-
+{% block usuario%} {{ usuarioAdm.get_full_name }} {% endblock %}
 {% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
 
 {% block botones %}
@@ -26,6 +26,7 @@
     <li>
         <a href="#" class="btn btn-default" disabled = "disabled">Administrar Credenciales</a>
     </li>
+
 {% endblock %}
 
 {% block contenido %}
