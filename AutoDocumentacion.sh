@@ -1,15 +1,4 @@
 #!/bin/bash
-
-#Limpiar la carpeta docp
-rm -rf docp/*
-
-#Creacion de los archivos base para la documentacion
-echo Seguir la guia Sphinx.txt para completar este paso
-cd docp
-sphinx-quickstart
-
-cd ..
-
 #Cracion de .rst de todos los modulos del proyecto
 sphinx-apidoc -f -o docp/ .
 
