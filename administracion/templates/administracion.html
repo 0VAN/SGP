@@ -14,11 +14,7 @@
         {% endif %}
     </li>
     <li>
-        {% if usuarioAdm.can_administrar_usuario %}
-            <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
-        {% else %}
-            <a class="btn btn-default" disabled = "disabled">Administrar Usuario</a>
-        {% endif %}
+         <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
     </li>
     <li>
         {% if usuarioAdm.can_administrar_rol %}
@@ -33,27 +29,31 @@
 {% endblock %}
 
 {% block contenido %}
-    <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
-        <thead>
-            <tr>
-                <td>Nombre</td>
-                <td>Estado</td>
-            </tr>
-        </thead>
-        {% for usuario in lista_usuarios %}
-            {% if usuario.is_active %}
-                <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                    <td>{{ usuario.username }}</td>
-                    <td>Activo</td>
+    {% if usuarioAdm.can_administrar_usuario %}
+        <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Estado</td>
                 </tr>
-            {% else %}
-                <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                    <td>{{ usuario.username }}</td>
-                    <td>Inactivo</td>
-                </tr>
-            {% endif %}
-        {% empty %}
-            <p>No hay usuarios registrados aun</p>
-        {% endfor %}
-    </table>
+            </thead>
+            {% for usuario in lista_usuarios %}
+                {% if usuario.is_active %}
+                    <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                        <td>{{ usuario.username }}</td>
+                        <td>Activo</td>
+                    </tr>
+                {% else %}
+                    <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                        <td>{{ usuario.username }}</td>
+                        <td>Inactivo</td>
+                    </tr>
+                {% endif %}
+            {% empty %}
+                <p>No hay usuarios registrados aun</p>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
+    {% endif %}
 {% endblock %}

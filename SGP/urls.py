@@ -28,7 +28,7 @@ urlpatterns = patterns('',
          'password_change_form': SetPasswordForm},
         name='password'),
     url(r'^administracion/usuarios/modificar/password/done$', 'django.contrib.auth.views.password_change_done',
-        {'template_name': 'usuario/operacion_usuario_exito.html'}, name='pass_done'),
+        {'template_name': 'usuario/operacion_usuario_exito_pass.html'}, name='pass_done'),
     url(r'^administracion/usuarios/modificar/', include('django.contrib.auth.urls')),
 
     url(r'^administracion/usuarios/detalle/(?P<id_usuario>\d+)$$', 'administracion.views.cambioEstado_usuario_form'),

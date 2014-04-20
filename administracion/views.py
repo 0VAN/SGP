@@ -70,7 +70,7 @@ def administracion(request):
 """
     Vista de administrar usuario
 """
-@user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
+@login_required( login_url="/iniciar_sesion")
 def administrar_usuario(request):
     usuario = request.user
     lista_usuarios = User.objects.all()
@@ -95,7 +95,7 @@ def crear_usuario(request):
 """
     Vista de modificacion de nuevo usuario
 """
-@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def modificar_usuario(request):
     usuario = request.user
     if request.method == 'POST':
