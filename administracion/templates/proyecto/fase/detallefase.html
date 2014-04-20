@@ -7,20 +7,20 @@
 {%  block botones %}
     <li>
         {% if usuario.can_change_fase %}
-            <a href="{% url 'administracion.views.modificar_fase' fase.id %}" class="btn btn-default">Modificar Fase</a>
+            <a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}" class="btn btn-default">Modificar Fase</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Modificar Fase</a>
         {% endif %}
     </li>
     <li>
         {% if usuario.can_delete_fase %}
-            <a href="{% url 'administracion.views.vista_eliminar_fase' fase.id %}" class="btn btn-default">Eliminar Fase</a>
+            <a href="{% url 'administracion.views.vista_eliminar_fase' proyecto.id fase.id %}" class="btn btn-default">Eliminar Fase</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Eliminar Fase</a>
         {% endif %}
     </li>
 
-    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
 {% block contenido %}

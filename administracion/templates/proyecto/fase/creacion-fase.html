@@ -5,7 +5,7 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

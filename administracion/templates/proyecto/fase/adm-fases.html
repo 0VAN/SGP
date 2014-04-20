@@ -7,7 +7,7 @@
 {%  block botones %}
     <li>
         {% if usuario.can_add_fase %}
-            <a href="/administracion/proyectos/fases/nuevo/" class="btn btn-default">Crear Fase</a>
+            <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             {% for fase in fases %}
-                    <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
+                    <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" proyecto.id fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
                         <td>{{ fase.Nombre }}</td>
                         <td>{{ fase.Usuario }}</td>
                         <td>{{ fase.Fecha }}</td>
@@ -32,4 +32,5 @@
             </tr>
         </tbody>
     </table>
+    {% block mensaje %}{% endblock %}
 {% endblock %}

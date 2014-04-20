@@ -13,13 +13,7 @@
     </li>
 
     <li><a href="/administracion/proyectos" class="btn btn-default">Listar Proyectos</a></li>
-    <li>
-        {% if usuarioProyecto.can_administrar_fase %}
-            <a href="/administracion/proyectos/fases" class="btn btn-default">Administracion de Fases</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
-        {% endif %}
-    </li>
+
 {% endblock %}
 
 {% block contenido %}

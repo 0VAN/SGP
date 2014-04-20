@@ -58,7 +58,7 @@ class UsuarioDelForm(forms.ModelForm):
 class FaseForm(forms.ModelForm):
     class Meta:
         model = Fase
-        exclude = ['Usuario']
+        exclude = ['Usuario', 'Proyecto']
 
 class RolForm(forms.ModelForm):
     class Meta:

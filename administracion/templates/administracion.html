@@ -3,7 +3,7 @@
 
 {% block activo-admin %}active{% endblock %}
 
-{% block encabezado %}Lista de Usuarios{% endblock %}
+{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -42,7 +42,7 @@
         </thead>
         {% for usuario in lista_usuarios %}
             {% if usuario.is_active %}
-                <tr class="clickableRow info" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
                     <td>{{ usuario.username }}</td>
                     <td>Activo</td>
                 </tr>

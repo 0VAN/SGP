@@ -26,11 +26,12 @@ class Proyecto(models.Model):
     Fecha_finalizacion = models.DateField('Fecha de finalizacion')
 
 class Fase(models.Model):
-    Nombre = models.CharField(max_length=50)
+    Nombre = models.CharField(max_length=50, unique=True)
     Descripcion = models.TextField()
     Usuario = models.ForeignKey(User)
-    Fecha = models.DateTimeField(auto_now=True)
     Proyecto = models.ForeignKey(Proyecto)
+    Fecha = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return self.Nombre
@@ -173,3 +174,4 @@ permisoAdd = Permission.objects.get(codename='add_fase')
 permisoChange = Permission.objects.get(codename='change_fase')
 permisoDelete = Permission.objects.get(codename='delete_fase')
 grupoLiderProyecto.permissions.add(permisoAdd, permisoChange, permisoDelete)
+

@@ -5,13 +5,13 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos/fases/" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <p>Desea eliminar la fase {{ fase.Nombre }}?</p>
     <p>
-        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_fase' fase.id %}">Si</a>
-        <a class="btn btn-default btn-lg" href="/administracion/proyectos/fases/">No</a>
+        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_fase' proyecto.id fase.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">No</a>
     </p>
 
 

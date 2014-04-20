@@ -175,54 +175,65 @@ def detalle_proyecto(request, id_proyecto):
 ###########################################Vistas de administracion de Fase#############################################
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
-def administrar_fases(request):
+def administrar_fases(request, id_proyecto):
     usuario = request.user
-    fases = Fase.objects.all()
-    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases}, context_instance=RequestContext(request))
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    try:
+        fases = Fase.objects.filter(Proyecto=id_proyecto)
+    except Fase.DoesNotExist:
+        fases = None
+    return render_to_response('proyecto/fase/adm-fases.html', {'usuario': usuario, 'fases': fases,'proyecto':proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_add_fase , login_url="/iniciar_sesion")
-def crear_fase(request):
+def crear_fase(request, id_proyecto):
     usuario = request.user
-    fase = Fase(Usuario= request.user)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase(Usuario= request.user, Proyecto=proyecto)
     if request.method=='POST':
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/administracion/proyectos/fases')
+            return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases')
     else:
         formulario = FaseForm()
-    return render_to_response('proyecto/fase/creacion-fase.html', {'usuario': usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+    return render_to_response('proyecto/fase/creacion-fase.html', {'usuario': usuario, 'formulario':formulario,'proyecto':proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
-def detalle_fase(request, idFase):
+def detalle_fase(request, idFase, id_proyecto):
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
-    return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'fase': fase}, context_instance=RequestContext(request))
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('proyecto/fase/detallefase.html', {'usuario':usuario, 'fase': fase,'proyecto':proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_change_fase , login_url="/iniciar_sesion")
-def modificar_fase(request, idFase):
+def modificar_fase(request, idFase, id_proyecto):
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     formulario = FaseForm(request.POST, instance=fase)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/administracion/proyectos/fases/')
+        return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases/detalle/'+idFase)
     else:
         formulario = FaseForm(instance=fase)
-    return render_to_response('proyecto/fase/mod-fase.html', {'usuario':usuario, 'formulario':formulario}, context_instance=RequestContext(request))
+    return render_to_response('proyecto/fase/mod-fase.html', {'usuario':usuario, 'formulario':formulario, 'proyecto':proyecto, 'fase':fase}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
-def vista_eliminar_fase(request, idFase):
-    usuario = request
+def vista_eliminar_fase(request, idFase, id_proyecto):
     usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=idFase)
-    return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase}, context_instance=RequestContext(request))
+    return render_to_response('proyecto/fase/eliminarfase.html', {'usuario':usuario, 'fase':fase,'proyecto':proyecto}, context_instance=RequestContext(request))
 
 @user_passes_test( User.can_delete_fase , login_url="/iniciar_sesion")
-def eliminar_fase(request, idFase):
+def eliminar_fase(request, idFase, id_proyecto):
     fase = Fase.objects.get(pk=idFase)
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase.delete()
-    return render_to_response('proyecto/fase/faseeliminada.html')
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases = Fase.objects.filter(pk=id_proyecto)
+    return render_to_response('proyecto/fase/faseeliminada.html',{'usuario':usuario,'proyecto':proyecto,'fases':fases}, context_instance=RequestContext(request))
 
 ###########################################Vistas de administracion de Rol##############################################
 

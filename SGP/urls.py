@@ -41,12 +41,12 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/detalle/(?P<id_proyecto>\d+)$', 'administracion.views.detalle_proyecto'),
 
 ################################################URL FASE################################################################
-    url(r'^administracion/proyectos/fases/$', 'administracion.views.administrar_fases'),
-    url(r'^administracion/proyectos/fases/nuevo/$', 'administracion.views.crear_fase'),
-    url(r'^administracion/proyectos/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
-    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
-    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
-    url(r'^administracion/proyectos/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/nuevo/$', 'administracion.views.crear_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
 
 ################################################URL ROL#################################################################
     url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
