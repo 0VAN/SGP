@@ -1,18 +1,17 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar roles{% endblock %}
-{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block encabezado %}Roles <small>Haz click en un rol para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuario.can_add_group %}
+        {% if usuario_actor.can_add_group %}
             <a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Rol</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario.can_change_user %}
+        {% if usuario_actor.can_change_user %}
             <a href="/administracion/roles/asignar" class="btn btn-default">Asignar Rol</a>
         {% else %}
             <a class="btn btn-default">Asignar Rol</a>

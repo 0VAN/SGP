@@ -1,9 +1,8 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Usuarios{% endblock %}
-{% block usuario %}{{ usuario_admin.get_username }}{% endblock %}
 {% block botones %}
     <li>
-        {% if usuario_admin.can_add_user %}
+        {% if usuario_actor.can_add_user %}
             <a href="/administracion/usuarios/nuevo" class="btn btn-default">Crear Usuario</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Crear Usuario</a>
@@ -16,7 +15,7 @@
 {% endblock %}
 
 {% block contenido %}
-    {% if usuario_admin.can_administrar_usuario %}
+    {% if usuario_actor.can_administrar_usuario %}
         <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
             <thead>
                 <tr>

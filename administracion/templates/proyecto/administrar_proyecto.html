@@ -1,11 +1,10 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar proyecto{% endblock %}
-{% block usuario %}{{ usuarioProyecto.get_full_name }}{% endblock %}
 {% block encabezado %}Lista de proyectos <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuarioProyecto.can_add_proyecto %}
+        {% if usuario_actor.can_add_proyecto %}
             <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>

@@ -1,19 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'rol/administrar_rol.html' %}
 {% block titulo %}Detalle de Rol{% endblock %}
 {% block encabezado %}{{ rol.name}}{% endblock %}
-{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
     <li>
-        {% if usuario.can_change_group %}
+        {% if usuario_actor.can_change_group %}
             <a href="{% url 'administracion.views.modificar_rol' rol.id %}" class="btn btn-default">Modificar Rol</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Modificar Rol</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario.can_delete_group %}
+        {% if usuario_actor.can_delete_group %}
             <a href="{% url 'administracion.views.vista_eliminar_rol' rol.id %}" class="btn btn-default">Eliminar Rol</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Eliminar Rol</a>

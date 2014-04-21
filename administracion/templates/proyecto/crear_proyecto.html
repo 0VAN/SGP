@@ -1,8 +1,7 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
-{% block titulo %}Crear nuevo proyecto{% endblock %}
-{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
+{% block titulo %}Crear proyecto{% endblock %}
 
-{% block encabezado %}{{ mensaje }}{% endblock %}
+{% block encabezado %}{{ operacion }}{% endblock %}
 {% block botones %}
     <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
 {% endblock %}

@@ -1,12 +1,11 @@
 {% extends 'usuario/administrar_usuario.html' %}
 {% block titulo %}Detalle usuario{% endblock %}
-{% block usuario %}{{ usuario_admin.get_full_name }}{% endblock %}
 
-{% block encabezado %}Vista en detalle del usuario {{ usuarioDetalle.username }}{% endblock %}
+{% block encabezado %}Vista detalle del usuario {{ usuario_parametro.username }}{% endblock %}
 {% block botones %}
       <li>
-        {% if usuario_admin.can_change_user and usuario_admin.id != usuarioDetalle.id %}
-            <a href="{% url 'administracion.views.cambioEstado_usuario_form' usuarioDetalle.id %}" class="btn btn-default">Cambio de estado de Usuario</a>
+        {% if usuario_actor.can_change_user and usuario_actor.id != usuario_parametro.id %}
+            <a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario_parametro.id %}" class="btn btn-default">Cambio de estado de Usuario</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Cambio de estado de Usuario</a>
         {% endif %}
@@ -18,25 +17,19 @@
 {% block contenido %}
     <dl>
         <dt>Nombre</dt>
-        <dd>{{ usuarioDetalle.first_name }}</dd>
-
+        <dd>{{ usuario_parametro.first_name }}</dd>
         <dt>Apellido</dt>
-        <dd>{{ usuarioDetalle.last_name }}</dd>
-
+        <dd>{{ usuario_parametro.last_name }}</dd>
         <dt>Direccion de correo electronico</dt>
-        <dd>{{ usuarioDetalle.email }}</dd>
-
+        <dd>{{ usuario_parametro.email }}</dd>
         <dt>Numero de telefono</dt>
-        <dd>{{ usuarioDetalle.telefono }}</dd>
-
+        <dd>{{ usuario_parametro.telefono }}</dd>
         <dt>Direccion</dt>
-        <dd>{{ usuarioDetalle.direccion }}</dd>
-
+        <dd>{{ usuario_parametro.direccion }}</dd>
         <dt>Observacion</dt>
-        <dd>{{ usuarioDetalle.observacion }}</dd>
-
+        <dd>{{ usuario_parametro.observacion }}</dd>
         <dt>Registrado</dt>
-        <dd>{{ usuarioDetalle.date_joined|date:'SHORT_DATETIME_FORMAT' }}</dd>
+        <dd>{{ usuario_parametro.date_joined|date:'SHORT_DATETIME_FORMAT' }}</dd>
 
     </dl>
 

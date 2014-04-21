@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Detalle de Fase{% endblock %}
-{% block encabezado %}Vista en detalle del proyecto {{ proyecto.Nombre_del_Proyecto}}{% endblock %}
-{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
+{% block encabezado %}Vista detalle del proyecto {{ proyecto.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
     <li>
-        {% if usuario.can_administrar_fase %}
+        {% if usuario_actor.can_administrar_fase %}
             <a href='{% url "administracion.views.administrar_fases" proyecto.id %}' class="btn btn-default">Administracion de Fases</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
@@ -18,9 +17,9 @@
 {% block contenido %}
     <dl>
         <dt>Descripcion:</dt>
-        <dd>{{ proyecto.Descripcion_del_Proyecto }}</dd>
+        <dd>{{ proyecto.Descripcion }}</dd>
         <dt>Creado por:</dt>
-        <dd>{{ proyecto.Lider_del_Proyecto }}</dd>
+        <dd>{{ proyecto.Lider }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ proyecto.Fecha_inicio }}</dd>
         <dt>Finaliza el:</dt>

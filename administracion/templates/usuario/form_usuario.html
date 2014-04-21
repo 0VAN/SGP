@@ -1,14 +1,14 @@
 {% extends 'usuario/administrar_usuario.html' %}
-{% block titulo %}form usuario{% endblock %}
-{% block usuario %}{{ usuario.get_full_name }}{% endblock %}
+{% block titulo %}Formulario crear usuario{% endblock %}
 
-{% block encabezado %}{{ mensaje }} {{ usuario.username }}{% endblock %}
+{% block encabezado %}{{ operacion }}{% endblock %}
 
 {% block botones %}
     <li>
             <a href="/administracion/usuarios" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
+
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table"><p>{{ formulario }}{{ form }}</p></table>

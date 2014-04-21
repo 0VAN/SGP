@@ -13,7 +13,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'administracion.views.iniciar_sesion'),
     url(r'^ingresar/$', 'administracion.views.iniciar_sesion'),
-    url(r'^privado/$','administracion.views.privado'),
     url(r'^cerrar/$', 'administracion.views.cerrar_sesion'),
     url(r'^administracion/$', 'administracion.views.administracion'),
 
@@ -31,8 +30,8 @@ urlpatterns = patterns('',
         {'template_name': 'usuario/operacion_usuario_exito_pass.html'}, name='pass_done'),
     url(r'^administracion/usuarios/modificar/', include('django.contrib.auth.urls')),
 
-    url(r'^administracion/usuarios/cambio_de_estado/(?P<id_usuario>\d+)$$', 'administracion.views.cambioEstado_usuario_form'),
-    url(r'^administracion/usuarios/detalle/(?P<id_usuario>\d+)$$', 'administracion.views.detalle_usuario'),
+    url(r'^administracion/usuarios/cambio_de_estado/(?P<id_usuario_p>\d+)$', 'administracion.views.cambioEstado_usuario_form'),
+    url(r'^administracion/usuarios/detalle/(?P<id_usuario_p>\d+)$', 'administracion.views.detalle_usuario'),
 
 ###############################################URL PROYECTO#############################################################
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),

@@ -2,12 +2,12 @@
 {% block titulo %}Administracion{% endblock %}
 
 {% block activo-admin %}active{% endblock %}
-{% block usuario%} {{ usuarioAdm.get_username }} {% endblock %}
+{% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
 {% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuarioAdm.can_administrar_proyecto %}
+        {% if usuario_actor.can_administrar_proyecto %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
@@ -17,7 +17,7 @@
          <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
     </li>
     <li>
-        {% if usuarioAdm.can_administrar_rol %}
+        {% if usuario_actor.can_administrar_rol %}
             <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Roles</a>
@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block contenido %}
-    {% if usuarioAdm.can_administrar_usuario %}
+    {% if usuario_actor.can_administrar_usuario %}
         <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
             <thead>
                 <tr>
