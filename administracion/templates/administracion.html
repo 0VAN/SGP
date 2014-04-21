@@ -24,7 +24,11 @@
         {% endif %}
     </li>
     <li>
-        <a href="/administracion/credenciales" class="btn btn-default">Administrar Credenciales</a>
+        {% if usuario_actor.can_administrar_proyecto %}
+            <a href="/administracion/credenciales" class="btn btn-default">Administrar Credenciales</a>
+        {% else %}
+            <a class="btn btn-default" disabled = "disabled">Administrar Credenciales</a>
+        {% endif %}
     </li>
 
 {% endblock %}

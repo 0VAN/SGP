@@ -17,10 +17,10 @@ def iniciar_sesion(request):
     :param request:
     :return:
 
-        Vista de inicio de sesion
+    Vista de inicio de sesion
 
-        Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y su existencia
-        en el sistema.
+    Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y su existencia
+    en el sistema.
 
         * Si el usuario inicia sesion con exito, retorna iniciar_sesion.html
         * Si el usuario esta inactivo, retorna no_activo.html
@@ -60,10 +60,10 @@ def cerrar_sesion(request):
     :param request:
     :return:
 
-        Vista para cerrar la sesion de un ususario
+    Vista para cerrar la sesion de un ususario
 
-        Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al usuario a la
-        pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
+    Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al usuario a la
+    pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
     """
     logout(request)
     return HttpResponseRedirect('/')
@@ -519,4 +519,5 @@ def asignar_rol(request, idRol):
 ########################################################################################################################
 
 def administrar_credencial(request):
-    return render_to_response('credencial/administrar_credencial.html',context_instance=RequestContext(request))
+    return render_to_response('credencial/administrar_credencial.html',{'usuario_actor':request.user}
+                              ,context_instance=RequestContext(request))
