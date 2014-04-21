@@ -56,4 +56,7 @@ urlpatterns = patterns('',
     url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
+
+###############################################URL CREDENCIAL###########################################################
+    url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
 )

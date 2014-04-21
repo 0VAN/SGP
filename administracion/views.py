@@ -312,3 +312,11 @@ def asignar_rol(request, idRol):
         formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_rol.html',{'usuario': usuario, 'formulario': formulario, 'mensaje': 'Asignacion de rol', 'usuario_logueado':usuario_logueado},
                   context_instance=RequestContext(request))
+
+
+########################################################################################################################
+#########################################Vista de credenciales##########################################################
+########################################################################################################################
+
+def administrar_credencial(request):
+    return render_to_response('credencial/administrar_credencial.html',context_instance=RequestContext(request))

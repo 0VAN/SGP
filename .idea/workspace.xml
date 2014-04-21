@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d518295b-d18a-4c15-94b9-82f41bf68b11" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/forms.py" afterPath="$PROJECT_DIR$/administracion/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/administracion.html" afterPath="$PROJECT_DIR$/administracion/templates/administracion.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/urls.py" afterPath="$PROJECT_DIR$/SGP/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/views.py" afterPath="$PROJECT_DIR$/administracion/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SGP.iws" />
@@ -26,28 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="administrar_proyecto.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="33" selection-start="1193" selection-end="1193" vertical-scroll-proportion="-18.666666" vertical-offset="0" max-vertical-offset="720">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detalle_usuario.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="41" selection-start="716" selection-end="716" vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="864">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="operacion_usuario_exito_pass.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/operacion_usuario_exito_pass.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="270">
+            <state line="13" column="41" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="864">
               <folding />
             </state>
           </provider>
@@ -56,7 +42,52 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="4" selection-start="5433" selection-end="5433" vertical-scroll-proportion="0.0" vertical-offset="2072" max-vertical-offset="5634">
+            <state line="321" column="69" selection-start="16997" selection-end="16997" vertical-scroll-proportion="0.0" vertical-offset="1652" max-vertical-offset="2286">
+              <folding>
+                <element signature="e#775#1750#0" expanded="false" />
+                <element signature="e#1904#2079#0" expanded="false" />
+                <element signature="e#2214#2266#0" expanded="false" />
+                <element signature="e#2427#2666#0" expanded="false" />
+                <element signature="e#3155#3414#0" expanded="false" />
+                <element signature="e#3562#4333#0" expanded="false" />
+                <element signature="e#4466#5355#0" expanded="false" />
+                <element signature="e#5485#6433#0" expanded="false" />
+                <element signature="e#6560#6808#0" expanded="false" />
+                <element signature="e#7291#7579#0" expanded="false" />
+                <element signature="e#7686#8471#0" expanded="false" />
+                <element signature="e#8601#8855#0" expanded="false" />
+                <element signature="e#9345#9637#0" expanded="false" />
+                <element signature="e#9749#10343#0" expanded="false" />
+                <element signature="e#10473#10747#0" expanded="false" />
+                <element signature="e#10874#11439#0" expanded="false" />
+                <element signature="e#11571#11845#0" expanded="false" />
+                <element signature="e#11971#12364#0" expanded="false" />
+                <element signature="e#12839#13029#0" expanded="false" />
+                <element signature="e#13128#13754#0" expanded="false" />
+                <element signature="e#13868#14055#0" expanded="false" />
+                <element signature="e#14168#14607#0" expanded="false" />
+                <element signature="e#14725#14913#0" expanded="false" />
+                <element signature="e#15025#15268#0" expanded="false" />
+                <element signature="e#15377#15590#0" expanded="false" />
+                <element signature="e#15700#16524#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGP/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="90" selection-start="4226" selection-end="4226" vertical-scroll-proportion="0.0" vertical-offset="518" max-vertical-offset="1170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="no_activo.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/no_activo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="36" selection-start="90" selection-end="90" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="180">
               <folding />
             </state>
           </provider>
@@ -65,16 +96,7 @@
       <file leaf-file-name="form_usuario.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="45" selection-start="304" selection-end="304" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="396">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crear_proyecto.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="43" selection-start="147" selection-end="147" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="342">
+            <state line="8" column="45" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="396">
               <folding />
             </state>
           </provider>
@@ -82,11 +104,8 @@
       </file>
       <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="30" selection-start="39" selection-end="39" vertical-scroll-proportion="-1.862069" vertical-offset="0" max-vertical-offset="180">
+            <state line="3" column="30" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
               <folding />
             </state>
           </provider>
@@ -101,19 +120,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="0" selection-start="3769" selection-end="3769" vertical-scroll-proportion="0.87323946" vertical-offset="2247" max-vertical-offset="2781">
+            <state line="101" column="0" selection-start="3769" selection-end="3769" vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="1854">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/models.py">
+      <file leaf-file-name="administracion.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="5" selection-start="1703" selection-end="1703" vertical-scroll-proportion="0.0" vertical-offset="2221" max-vertical-offset="3260">
+            <state line="12" column="60" selection-start="532" selection-end="553" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="1170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="administrar_credencial.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="64" selection-start="192" selection-end="192" vertical-scroll-proportion="0.18336163" vertical-offset="0" max-vertical-offset="589">
               <folding />
             </state>
           </provider>
@@ -139,14 +167,12 @@
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/eliminarfase.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/mod-fase.html" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html" />
-        <option value="$PROJECT_DIR$/SGP/urls.py" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/crear_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/detallerol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/eliminarrol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/modificar_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/form_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html" />
-        <option value="$PROJECT_DIR$/administracion/templates/administracion.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/roleliminado.html" />
@@ -159,12 +185,15 @@
         <option value="$PROJECT_DIR$/AutoDocumentacion.sh" />
         <option value="$PROJECT_DIR$/doc/conf.py" />
         <option value="$PROJECT_DIR$/administracion/models.py" />
-        <option value="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
-        <option value="$PROJECT_DIR$/administracion/views.py" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/cambioEstado_usuario.html" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html" />
         <option value="$PROJECT_DIR$/administracion/forms.py" />
+        <option value="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
+        <option value="$PROJECT_DIR$/administracion/views.py" />
+        <option value="$PROJECT_DIR$/SGP/urls.py" />
+        <option value="$PROJECT_DIR$/administracion/templates/administracion.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html" />
       </list>
     </option>
   </component>
@@ -200,7 +229,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,8 +261,85 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="administracion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="administracion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="usuario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="administracion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="credencial" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SGP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -242,6 +347,7 @@
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -333,27 +439,7 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SGP" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -379,7 +465,27 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SGP" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -504,20 +610,20 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2432283" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24599226" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48541668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30104166" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -623,25 +729,9 @@
         <state line="2" column="52" selection-start="134" selection-end="134" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="378" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="1104" selection-end="1104" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/privado_administrador.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/no_activo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="36" selection-start="90" selection-end="90" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html">
@@ -685,13 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="51" selection-start="1698" selection-end="1698" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1116">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/operacion_usuario_exito.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="14" selection-start="349" selection-end="349" vertical-scroll-proportion="0.41489363" vertical-offset="0" max-vertical-offset="564">
@@ -722,9 +805,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/faseeliminada.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="57" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="162">
-          <folding />
-        </state>
+        <state line="2" column="57" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="162" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/mod-fase.html">
@@ -736,37 +817,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Creacion de Base de Datos.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="450">
-          <folding />
-        </state>
+        <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="450" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AbrirDocumentacion.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fixtures/Usuarios.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AutoDocumentacion.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252">
-          <folding />
-        </state>
+        <state line="1" column="0" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/conf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="110" column="0" selection-start="3496" selection-end="3496" vertical-scroll-proportion="0.0" vertical-offset="5673" max-vertical-offset="6264">
           <folding>
-            <element signature="e#414#424#0" expanded="true" />
+            <element signature="e#414#424#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -801,14 +874,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="43" selection-start="147" selection-end="147" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="342">
+        <state line="2" column="43" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="342">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="33" selection-start="1193" selection-end="1193" vertical-scroll-proportion="-18.666666" vertical-offset="0" max-vertical-offset="720">
+        <state line="28" column="33" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="720">
           <folding />
         </state>
       </provider>
@@ -820,42 +893,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="11" selection-start="1891" selection-end="1891" vertical-scroll-proportion="-28.0" vertical-offset="54" max-vertical-offset="918">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="4" selection-start="5433" selection-end="5433" vertical-scroll-proportion="0.0" vertical-offset="1910" max-vertical-offset="5634">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="41" selection-start="716" selection-end="716" vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="864">
+        <state line="13" column="41" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="864">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="45" selection-start="304" selection-end="304" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="396">
+        <state line="8" column="45" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="396">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="30" selection-start="39" selection-end="39" vertical-scroll-proportion="-1.862069" vertical-offset="0" max-vertical-offset="180">
+        <state line="3" column="30" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/admin.py">
@@ -867,7 +926,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="3769" selection-end="3769" vertical-scroll-proportion="0.87323946" vertical-offset="2247" max-vertical-offset="2781">
+        <state line="101" column="0" selection-start="3769" selection-end="3769" vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="1854">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="16" selection-start="228" selection-end="323" vertical-scroll-proportion="-4.0" vertical-offset="0" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="321" column="69" selection-start="16997" selection-end="16997" vertical-scroll-proportion="0.0" vertical-offset="1652" max-vertical-offset="2286">
+          <folding>
+            <element signature="e#775#1750#0" expanded="false" />
+            <element signature="e#1904#2079#0" expanded="false" />
+            <element signature="e#2214#2266#0" expanded="false" />
+            <element signature="e#2427#2666#0" expanded="false" />
+            <element signature="e#3155#3414#0" expanded="false" />
+            <element signature="e#3562#4333#0" expanded="false" />
+            <element signature="e#4466#5355#0" expanded="false" />
+            <element signature="e#5485#6433#0" expanded="false" />
+            <element signature="e#6560#6808#0" expanded="false" />
+            <element signature="e#7291#7579#0" expanded="false" />
+            <element signature="e#7686#8471#0" expanded="false" />
+            <element signature="e#8601#8855#0" expanded="false" />
+            <element signature="e#9345#9637#0" expanded="false" />
+            <element signature="e#9749#10343#0" expanded="false" />
+            <element signature="e#10473#10747#0" expanded="false" />
+            <element signature="e#10874#11439#0" expanded="false" />
+            <element signature="e#11571#11845#0" expanded="false" />
+            <element signature="e#11971#12364#0" expanded="false" />
+            <element signature="e#12839#13029#0" expanded="false" />
+            <element signature="e#13128#13754#0" expanded="false" />
+            <element signature="e#13868#14055#0" expanded="false" />
+            <element signature="e#14168#14607#0" expanded="false" />
+            <element signature="e#14725#14913#0" expanded="false" />
+            <element signature="e#15025#15268#0" expanded="false" />
+            <element signature="e#15377#15590#0" expanded="false" />
+            <element signature="e#15700#16524#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="90" selection-start="4226" selection-end="4226" vertical-scroll-proportion="0.0" vertical-offset="518" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/no_activo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="36" selection-start="90" selection-end="90" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="180">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="60" selection-start="532" selection-end="553" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="64" selection-start="192" selection-end="192" vertical-scroll-proportion="0.18336163" vertical-offset="0" max-vertical-offset="589">
           <folding />
         </state>
       </provider>
