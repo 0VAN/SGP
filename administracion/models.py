@@ -1,11 +1,7 @@
-"""
-Modelos del modulo de administracion
-====================================
-"""
+
 from django.db import models
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
-
 """
     Se utiliza la clase User por de defecto en Django para la creacion de los usuarios, pero
     se incluyen 3 atributos:
@@ -23,15 +19,16 @@ Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
 
 class Proyecto(models.Model):
     """
-     * Contiene los campos de la tabla proyecto en la base de datos
-      Variales
-       Lider: es el usuario lider del proyecto
-       Nombre: es el nombre que posee el proyecto
-       Descripcion: es la decripcion del proyecto
-       Fecha de inicio: es la fecha en que el proyecto dara inicio
-       Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
-       Usuario: usuario que creo el proyecto
-       Fecha: es la fecha de creacion del proyecto
+    Clase Proyecto:
+        * Contiene los campos de la tabla proyecto en la base de datos
+
+        * Variales
+            -   Lider: es el usuario lider del proyecto
+            -   Nombre: es el nombre que posee el proyecto
+            -   Descripcion: es la decripcion del proyecto
+            -   Fecha de inicio: es la fecha en que el proyecto dara inicio
+            -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
+            -   Fecha: es la fecha de creacion del proyecto
     """
     Lider = models.ForeignKey(User)
     Nombre = models.CharField(max_length=30, unique=True)
@@ -43,6 +40,17 @@ class Proyecto(models.Model):
 
 
 class Fase(models.Model):
+    """
+    Clase Fase:
+        * Contiene los campos de la tabla fase en la base de datos
+
+        * Variales
+            -   Nombre: es el nombre que posee la fase
+            -   Descripcion: es la decripcion de la fase
+            -   Usuario: usuario que creo la fase
+            -   Proyecto: proyecto al que corresponde la fase
+            -   Fecha: es la fecha de creacion de la fase
+    """
     Nombre = models.CharField(max_length=50, unique=True)
     Descripcion = models.TextField()
     Usuario = models.ForeignKey(User)

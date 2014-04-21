@@ -8,7 +8,7 @@
     
     <title>administracion.forms &mdash; documentación de SGP - 1</title>
     
-    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -40,24 +40,7 @@
         <li><a href="../../index.html">documentación de SGP - 1</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Código de módulo</a> &raquo;</li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Búsqueda rápida</h3>
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Ir a" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -75,21 +58,41 @@
 <span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Fase</span>
 
 <div class="viewcode-block" id="UsuarioForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioForm">[documentos]</a><span class="k">class</span> <span class="nc">UsuarioForm</span><span class="p">(</span><span class="n">UserCreationForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para la creacion de usuarios</span>
+<span class="sd">    Hereda del formulario UserCreationForm y utiliza la clase user</span>
+<span class="sd">    para agregar ciertos campos de la clase a la hora de la creacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="UsuarioForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;username&#39;</span><span class="p">,</span> <span class="s">&#39;password1&#39;</span><span class="p">,</span> <span class="s">&#39;password2&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;first_name&#39;</span><span class="p">,</span> <span class="s">&#39;last_name&#39;</span><span class="p">,</span> <span class="s">&#39;telefono&#39;</span><span class="p">,</span> <span class="s">&#39;direccion&#39;</span><span class="p">,</span> <span class="s">&#39;observacion&#39;</span><span class="p">)</span>
 </div></div>
 <div class="viewcode-block" id="AsignarRol"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AsignarRol">[documentos]</a><span class="k">class</span> <span class="nc">AsignarRol</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para la asignacion de roles a los usuarios</span>
+<span class="sd">    Hereda del forms.ModelForm y utiliza la clase user</span>
+<span class="sd">    para agregar ciertos campos de la clase a la hora de la asignacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="AsignarRol.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AsignarRol.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;groups&#39;</span><span class="p">,)</span>
 </div></div>
 <div class="viewcode-block" id="ProyectoForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.ProyectoForm">[documentos]</a><span class="k">class</span> <span class="nc">ProyectoForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para la creacion de proyectos en el sistema</span>
+<span class="sd">    Hereda de ModelForm y utiliza la clase Proyecto</span>
+<span class="sd">    para agregar ciertos campos de la clase a la hora de la creacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="ProyectoForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.ProyectoForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Proyecto</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">]</span>
 </div></div>
 <div class="viewcode-block" id="UsuarioModForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioModForm">[documentos]</a><span class="k">class</span> <span class="nc">UsuarioModForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
-
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formluario para la modificacion de usuarios</span>
+<span class="sd">    Hereda de forms.ModelForm y utiliza la clase user para</span>
+<span class="sd">    agregar ciertos campos a la hora de la modificacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">RegexField</span><span class="p">(</span>
         <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Username&quot;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s">r&quot;^[\w.@+-]+$&quot;</span><span class="p">,</span>
         <span class="n">help_text</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Required. 30 characters or fewer. Letters, digits and &quot;</span>
@@ -118,22 +121,54 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">]</span>
 </div></div>
 <div class="viewcode-block" id="UsuarioDelForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioDelForm">[documentos]</a><span class="k">class</span> <span class="nc">UsuarioDelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para el la eliminacion logica del usuario</span>
+<span class="sd">    Hereda de forms.ModelForm y utiliza la clase user para</span>
+<span class="sd">    agregar ciertos campos a la hora de la eliminacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="UsuarioDelForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioDelForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;is_active&#39;</span><span class="p">,)</span>
 </div></div>
 <div class="viewcode-block" id="FaseForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.FaseForm">[documentos]</a><span class="k">class</span> <span class="nc">FaseForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para el la creacion de fases</span>
+<span class="sd">    Hereda de forms.ModelForm y utiliza la clase Fase para</span>
+<span class="sd">    agregar ciertos campos a la hora de la creacion/modificacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="FaseForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.FaseForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Fase</span>
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span> <span class="s">&#39;Proyecto&#39;</span><span class="p">]</span>
 </div></div>
 <div class="viewcode-block" id="RolForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.RolForm">[documentos]</a><span class="k">class</span> <span class="nc">RolForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para el la creacion de roles</span>
+<span class="sd">    Hereda de forms.ModelForm y utiliza la clase Group para</span>
+<span class="sd">    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="RolForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.RolForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Group</span>
-        <span class="c">#exclude = [&#39;Usuario&#39;]</span></div></div>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">]</span></div></div>
 </pre></div>
 
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
