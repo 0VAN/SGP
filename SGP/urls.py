@@ -58,4 +58,10 @@ urlpatterns = patterns('',
 
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
+
+
+
+###############################################URL DESARROLLO###########################################################
+    url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
+
 )
