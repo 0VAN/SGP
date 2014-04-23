@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase
+from administracion.models import Proyecto, Fase, can_administrar_fase
 
 # Create your views here.
 ########################################################################################################################
@@ -224,7 +224,7 @@ def cambioEstado_usuario_form(request, id_usuario_p):
         formulario = UsuarioDelForm(instance=usuario_parametro)
     return render_to_response('usuario/form_usuario.html',
                    {'usuario_actor': usuario_actor, 'usuario_parametro': usuario_parametro,
-                   'formulario': formulario, 'mensaje': 'Cambio de estado del usuario'},
+                   'formulario': formulario, 'operacion': 'Cambio de estado del usuario'},
                    context_instance=RequestContext(request))
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
@@ -268,12 +268,13 @@ def nuevo_proyecto(request):
         -   formulario: es el formulario que el usuario debe completar
     """
     usuario_actor = request.user
-    #lista_usuarios = User.objects.filter(User.has_perm())
+    proyecto = Proyecto(Usuario=usuario_actor)
     if request.method == 'POST':
         lista_proyectos = Proyecto.objects.all()
-        formulario = ProyectoForm(request.POST)
+        formulario = ProyectoForm(request.POST, instance=proyecto)
         if formulario.is_valid():
             formulario.save()
+
             return render_to_response('proyecto/crear_proyecto_exito.html',
                                       {'mensaje': 'El proyecto ha sido creado con exito',
                                        'usuario_actor': usuario_actor, 'lista_proyectos': lista_proyectos},
@@ -558,14 +559,14 @@ def vista_asignar_rol(request):
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
-def asignar_rol(request, idRol):
+def asignar_rol(request, id_usuario_p):
     """
     :param request:
     :param idRol:
     :return:
     """
     usuario_actor = request.user
-    usuario_parametro = User.objects.get(pk=idRol)
+    usuario_parametro = User.objects.get(pk=id_usuario_p)
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario_parametro)
         if formulario.is_valid():

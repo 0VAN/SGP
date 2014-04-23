@@ -11,6 +11,14 @@
             <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
         {% endif %}
     </li>
+        {% if usuario_actor.can_admnistrar_proyecto %}
+            <a href='{% url "administracion.views.modificar_proyecto" proyecto.id %}' class="btn btn-default">Modificar Proyecto</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Modificar Proyecto</a>
+        {% endif %}
+    <li>
+
+    </li>
     <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
@@ -23,6 +31,8 @@
         <dt>Creado el:</dt>
         <dd>{{ proyecto.Fecha_inicio }}</dd>
         <dt>Finaliza el:</dt>
-        <dd>{{ proyecto.Fecha_finalizacion}}</dd>
+        <dd>{{ proyecto.Fecha_finalizacion }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ proyecto.get_Estado_display}}</dd>
     </dl>
 {% endblock %}

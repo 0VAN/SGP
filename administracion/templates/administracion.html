@@ -42,6 +42,7 @@
                     <td>Estado</td>
                 </tr>
             </thead>
+            
             {% for usuario in lista_usuarios %}
                 {% if usuario.is_active %}
                     <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>

@@ -2,14 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
-"""
-    Se utiliza la clase User por de defecto en Django para la creacion de los usuarios, pero
-    se incluyen 3 atributos:
-        - direccion: direccion del usuario
-        - telefono: numero del telefono del usuario
-        - observacion: observacion sobre el usuario por parte del administrador del sistema
 
-"""
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
@@ -17,49 +10,9 @@ Group.add_to_class('Usuario', models.ForeignKey(User, null=True))
 Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
 
 
-class Proyecto(models.Model):
-    """
-    Clase Proyecto:
-        * Contiene los campos de la tabla proyecto en la base de datos
-
-        * Variales
-            -   Lider: es el usuario lider del proyecto
-            -   Nombre: es el nombre que posee el proyecto
-            -   Descripcion: es la decripcion del proyecto
-            -   Fecha de inicio: es la fecha en que el proyecto dara inicio
-            -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
-            -   Fecha: es la fecha de creacion del proyecto
-    """
-    Lider = models.ForeignKey(User)
-    Nombre = models.CharField(max_length=30, unique=True)
-    Descripcion = models.TextField()
-    Fecha_inicio = models.DateField('Fecha de inicio')
-    Fecha_finalizacion = models.DateField('Fecha de finalizacion')
-    #Usuario = models.ForeignKey(User)
-    Fecha = models.DateTimeField(auto_now=True)
 
 
-class Fase(models.Model):
-    """
-    Clase Fase:
-        * Contiene los campos de la tabla fase en la base de datos
 
-        * Variales
-            -   Nombre: es el nombre que posee la fase
-            -   Descripcion: es la decripcion de la fase
-            -   Usuario: usuario que creo la fase
-            -   Proyecto: proyecto al que corresponde la fase
-            -   Fecha: es la fecha de creacion de la fase
-    """
-    Nombre = models.CharField(max_length=50, unique=True)
-    Descripcion = models.TextField()
-    Usuario = models.ForeignKey(User)
-    Proyecto = models.ForeignKey(Proyecto)
-    Fecha = models.DateTimeField(auto_now=True)
-
-
-    def __unicode__(self):
-        return self.Nombre
 
 def tienePermiso(self, permiso):
     for grupo in self.groups.all():
@@ -165,3 +118,53 @@ def accesoAdministracion(self):
     return False
 
 User.add_to_class('accesoAdministracion', accesoAdministracion)
+class Proyecto(models.Model):
+    """
+    Clase Proyecto:
+        * Contiene los campos de la tabla proyecto en la base de datos
+
+        * Variales
+            -   Lider: es el usuario lider del proyecto
+            -   Nombre: es el nombre que posee el proyecto
+            -   Descripcion: es la decripcion del proyecto
+            -   Fecha de inicio: es la fecha en que el proyecto dara inicio
+            -   Fecha de finalizacion: es la fecha en la que el proyecto estara finalizado
+            -   Fecha: es la fecha de creacion del proyecto
+    """
+    Lider = models.ForeignKey(User, related_name='Lider')
+    Nombre = models.CharField(max_length=30, unique=True)
+    Descripcion = models.TextField()
+    Fecha_inicio = models.DateField('Fecha de inicio')
+    Fecha_finalizacion = models.DateField('Fecha de finalizacion')
+    Estado = models.CharField(max_length=2,
+                              choices=( ('P', 'Pendiente'),
+                                        ('A', 'Activo'),
+                                        ('C', 'Cancelado'),
+                                        ('F', 'Finalizado'),)
+                              , default= 'P')
+    Usuario = models.ForeignKey(User, related_name='Usuario_Creador')
+    Usuarios = models.ManyToManyField(User, related_name='Participantes')
+    Fecha = models.DateTimeField(auto_now=True)
+
+
+class Fase(models.Model):
+    """
+    Clase Fase:
+        * Contiene los campos de la tabla fase en la base de datos
+
+        * Variales
+            -   Nombre: es el nombre que posee la fase
+            -   Descripcion: es la decripcion de la fase
+            -   Usuario: usuario que creo la fase
+            -   Proyecto: proyecto al que corresponde la fase
+            -   Fecha: es la fecha de creacion de la fase
+    """
+    Nombre = models.CharField(max_length=50, unique=True)
+    Descripcion = models.TextField()
+    Usuario = models.ForeignKey(User)
+    Proyecto = models.ForeignKey(Proyecto)
+    Fecha = models.DateTimeField(auto_now=True)
+
+
+    def __unicode__(self):
+        return self.Nombre

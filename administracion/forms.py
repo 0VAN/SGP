@@ -35,7 +35,7 @@ class ProyectoForm(ModelForm):
     """
     class Meta:
         model = Proyecto
-        exclude = ['Usuario']
+        exclude = ['Usuario', 'Estado', 'Usuarios']
 
 class UsuarioModForm(forms.ModelForm):
     """
