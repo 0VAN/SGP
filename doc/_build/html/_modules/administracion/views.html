@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="documentación de SGP - 2" href="../../index.html" />
-    <link rel="up" title="Código de módulo" href="../index.html" /> 
+    <link rel="up" title="administracion" href="../administracion.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,8 @@
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li><a href="../../index.html">documentación de SGP - 2</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Código de módulo</a> &raquo;</li> 
+          <li><a href="../index.html" >Código de módulo</a> &raquo;</li>
+          <li><a href="../administracion.html" accesskey="U">administracion</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,14 +63,13 @@
 <span class="c">########################################################################################################################</span>
 <span class="k">def</span> <span class="nf">iniciar_sesion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <div class="viewcode-block" id="iniciar_sesion"><a class="viewcode-back" href="../../administracion.html#administracion.views.iniciar_sesion">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: Vista de inicio de sesion</span>
 
-<span class="sd">    :param request:</span>
-<span class="sd">    :return:</span>
+<span class="sd">        :param request:</span>
+<span class="sd">        :return: iniciar_sesion.html</span>
 
-<span class="sd">    Vista de inicio de sesion</span>
-
-<span class="sd">    Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y su existencia</span>
-<span class="sd">    en el sistema.</span>
+<span class="sd">        | Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y</span>
+<span class="sd">        | su existencia en el sistema.</span>
 
 <span class="sd">        * Si el usuario inicia sesion con exito, retorna iniciar_sesion.html</span>
 <span class="sd">        * Si el usuario esta inactivo, retorna no_activo.html</span>
@@ -111,8 +111,8 @@
 
 <span class="sd">    Vista para cerrar la sesion de un ususario</span>
 
-<span class="sd">    Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al usuario a la</span>
-<span class="sd">    pagina web &#39;/&#39; (raiz) donde se solicita el inicio de sesion de un usuario</span>
+<span class="sd">    | Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al</span>
+<span class="sd">    | usuario a la pagina web &#39;/&#39; (raiz) donde se solicita el inicio de sesion de un usuario</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
@@ -125,8 +125,8 @@
 
 <span class="sd">    Vista que muestra el contenido privado del modulo de administracion</span>
 
-<span class="sd">    Recibe como parametro un request y retorna la pagina web admiistracion.html donde se muestra la lista de usuarios</span>
-<span class="sd">    del sistema si el usuario_actor posee los permisos correspondientes</span>
+<span class="sd">    | Recibe como parametro un request y retorna la pagina web admiistracion.html donde se muestra la</span>
+<span class="sd">    | lista de usuarios del sistema si el usuario_actor posee los permisos correspondientes</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   lista_usuarios: es la lista de usuarios existentes en el sistema</span>
@@ -148,8 +148,8 @@
 
 <span class="sd">    Vista de administrar usuario</span>
 
-<span class="sd">    Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra la lista de</span>
-<span class="sd">    usuarios si el usuario_actor posee los permsos correspondientes</span>
+<span class="sd">    | Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra</span>
+<span class="sd">    | la lista de usuarios si el usuario_actor posee los permsos correspondientes</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: es el usuario que realiza la accion</span>
@@ -168,8 +168,8 @@
 
 <span class="sd">    Vista de creacion de nuevo usuario</span>
 
-<span class="sd">    Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar los datos</span>
-<span class="sd">    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</span>
+<span class="sd">    | Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar</span>
+<span class="sd">    | los datos del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: es el usuario que realiza la accion</span>
@@ -199,8 +199,8 @@
 
 <span class="sd">    Vista de modificacion de nuevo usuario</span>
 
-<span class="sd">    Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar los datos</span>
-<span class="sd">    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</span>
+<span class="sd">    | Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar</span>
+<span class="sd">    | los datos el usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: es el usuario que realiza la accion</span>
@@ -251,8 +251,9 @@
 
 <span class="sd">    Vista de cambio de estado de usuario</span>
 
-<span class="sd">    Recibe un request y un id de usuario y retorna la pagina web form_usuario.html donde se debe completar los datos</span>
-<span class="sd">    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</span>
+<span class="sd">    | Recibe un request y un id de usuario y retorna la pagina web form_usuario.html donde se debe</span>
+<span class="sd">    | completar los datos del usuario y luego operacion_usuario_exito.html si se completo debidamente</span>
+<span class="sd">    | el formulario</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_parametro: es el usuario cuyo estado podra se cambiado en la pagina web form_usuario.html</span>
@@ -307,8 +308,9 @@
 
 <span class="sd">    Vista nuevo proyecto</span>
 
-<span class="sd">    Recibe como parametro un request y retorna la pagina web crear_proyecto.html donde se debe completar los datos</span>
-<span class="sd">    del proyecto y luego crear_proyecto_exito.html si se completo debidamente el formulario</span>
+<span class="sd">    | Recibe como parametro un request y retorna la pagina web crear_proyecto.html donde se debe</span>
+<span class="sd">    | completar los datos del proyecto y luego crear_proyecto_exito.html si se completo debidamente</span>
+<span class="sd">    | el formulario</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: es el usuario que realiza la accion</span>
@@ -342,7 +344,8 @@
 
 <span class="sd">    Vista detalle de proyecto</span>
 
-<span class="sd">    Recibe un request y un id de proyecto y retorna una pagina web detalle_proyecto.html con los detalles de un proyecto</span>
+<span class="sd">    | Recibe un request y un id de proyecto y retorna una pagina web detalle_proyecto.html con los detalles</span>
+<span class="sd">    | de un proyecto</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: es el usuario que realiza la accion</span>
@@ -420,8 +423,8 @@
 
 <span class="sd">    Vista detalle fase</span>
 
-<span class="sd">    Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web detallefase.html que</span>
-<span class="sd">    muestra en detalle la informacion de dicha fase</span>
+<span class="sd">    | Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web</span>
+<span class="sd">    | detallefase.html que muestra en detalle la informacion de dicha fase</span>
 
 <span class="sd">    * Variables</span>
 <span class="sd">        -   usuario_actor: usuario que realiza la accion</span>
@@ -437,7 +440,14 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_change_fase</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">modificar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
-<div class="viewcode-block" id="modificar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_fase">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="modificar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_fase">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idFase:</span>
+<span class="sd">    :param id_proyecto:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
     <span class="n">formulario</span> <span class="o">=</span> <span class="n">FaseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
@@ -452,7 +462,14 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_delete_fase</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">vista_eliminar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
-<div class="viewcode-block" id="vista_eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_fase">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="vista_eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_fase">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idFase:</span>
+<span class="sd">    :param id_proyecto:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
     <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;proyecto/fase/eliminarfase.html&#39;</span><span class="p">,</span>
@@ -460,7 +477,14 @@
                               <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_delete_fase</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">eliminar_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idFase</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
-<div class="viewcode-block" id="eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_fase">[documentos]</a>    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
+<div class="viewcode-block" id="eliminar_fase"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_fase">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idFase:</span>
+<span class="sd">    :param id_proyecto:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idFase</span><span class="p">)</span>
     <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">fase</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
@@ -473,14 +497,24 @@
 <span class="c">########################################################################################################################</span>
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_administrar_rol</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">administrar_roles</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<div class="viewcode-block" id="administrar_roles"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_roles">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="administrar_roles"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_roles">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">roles</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/administrar_rol.html&#39;</span><span class="p">,</span>
                               <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;roles&#39;</span><span class="p">:</span> <span class="n">roles</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_add_group</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">crear_rol</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<div class="viewcode-block" id="crear_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.crear_rol">[documentos]</a>    <span class="n">mensaje</span><span class="o">=</span><span class="s">&quot;Rol creado con exito&quot;</span>
+<div class="viewcode-block" id="crear_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.crear_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mensaje</span><span class="o">=</span><span class="s">&quot;Rol creado con exito&quot;</span>
     <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="n">Usuario</span><span class="o">=</span><span class="n">usuario_actor</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
@@ -500,14 +534,26 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_administrar_rol</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">detalle_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
-<div class="viewcode-block" id="detalle_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_rol">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="detalle_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.detalle_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idRol:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/detallerol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;rol&#39;</span><span class="p">:</span> <span class="n">rol</span><span class="p">},</span>
                               <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_change_group</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">modificar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
-<div class="viewcode-block" id="modificar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_rol">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="modificar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.modificar_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idRol:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
     <span class="n">formulario</span> <span class="o">=</span> <span class="n">RolForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">rol</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
@@ -521,14 +567,26 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_delete_group</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">vista_eliminar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
-<div class="viewcode-block" id="vista_eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_rol">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="vista_eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_eliminar_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idRol:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/eliminarrol.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;rol&#39;</span><span class="p">:</span> <span class="n">rol</span><span class="p">},</span>
                               <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_delete_group</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">eliminar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
-<div class="viewcode-block" id="eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_rol">[documentos]</a>    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
+<div class="viewcode-block" id="eliminar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.eliminar_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idRol:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rol</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
     <span class="n">rol</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
     <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">roles</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -538,7 +596,12 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_change_user</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">vista_asignar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<div class="viewcode-block" id="vista_asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_asignar_rol">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="vista_asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.vista_asignar_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">lista_usuarios</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;rol/asignar_rol.html&#39;</span><span class="p">,</span>
                               <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;lista_usuarios&#39;</span><span class="p">:</span> <span class="n">lista_usuarios</span><span class="p">},</span>
@@ -546,7 +609,12 @@
 
 <span class="nd">@user_passes_test</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">can_change_user</span><span class="p">,</span> <span class="n">login_url</span><span class="o">=</span><span class="s">&quot;/iniciar_sesion&quot;</span><span class="p">)</span></div>
 <span class="k">def</span> <span class="nf">asignar_rol</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">idRol</span><span class="p">):</span>
-<div class="viewcode-block" id="asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.asignar_rol">[documentos]</a>    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<div class="viewcode-block" id="asignar_rol"><a class="viewcode-back" href="../../administracion.html#administracion.views.asignar_rol">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idRol:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">usuario_parametro</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">idRol</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">formulario</span> <span class="o">=</span> <span class="n">AsignarRol</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">usuario_parametro</span><span class="p">)</span>
@@ -568,7 +636,13 @@
 <span class="c">########################################################################################################################</span>
 
 <span class="k">def</span> <span class="nf">administrar_credencial</span><span class="p">(</span><span class="n">request</span><span class="p">):</span></div>
-<div class="viewcode-block" id="administrar_credencial"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_credencial">[documentos]</a>    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;credencial/administrar_credencial.html&#39;</span><span class="p">,</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<div class="viewcode-block" id="administrar_credencial"><a class="viewcode-back" href="../../administracion.html#administracion.views.administrar_credencial">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;credencial/administrar_credencial.html&#39;</span><span class="p">,{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">}</span>
+                              <span class="p">,</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 </pre></div></div>
 
           </div>
@@ -603,7 +677,8 @@
           <a href="../../py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li><a href="../../index.html">documentación de SGP - 2</a> &raquo;</li>
-          <li><a href="../index.html" >Código de módulo</a> &raquo;</li> 
+          <li><a href="../index.html" >Código de módulo</a> &raquo;</li>
+          <li><a href="../administracion.html" >administracion</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

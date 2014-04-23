@@ -13,14 +13,13 @@ from administracion.models import Proyecto, Fase
 ########################################################################################################################
 def iniciar_sesion(request):
     """
+    .. method:: Vista de inicio de sesion
 
-    :param request:
-    :return:
+        :param request:
+        :return: iniciar_sesion.html
 
-    Vista de inicio de sesion
-
-    Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y su existencia
-    en el sistema.
+        | Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y
+        | su existencia en el sistema.
 
         * Si el usuario inicia sesion con exito, retorna iniciar_sesion.html
         * Si el usuario esta inactivo, retorna no_activo.html
@@ -62,8 +61,8 @@ def cerrar_sesion(request):
 
     Vista para cerrar la sesion de un ususario
 
-    Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al usuario a la
-    pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
+    | Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al
+    | usuario a la pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
     """
     logout(request)
     return HttpResponseRedirect('/')
@@ -76,8 +75,8 @@ def administracion(request):
 
     Vista que muestra el contenido privado del modulo de administracion
 
-    Recibe como parametro un request y retorna la pagina web admiistracion.html donde se muestra la lista de usuarios
-    del sistema si el usuario_actor posee los permisos correspondientes
+    | Recibe como parametro un request y retorna la pagina web admiistracion.html donde se muestra la
+    | lista de usuarios del sistema si el usuario_actor posee los permisos correspondientes
 
     * Variables
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
@@ -99,8 +98,8 @@ def administrar_usuario(request):
 
     Vista de administrar usuario
 
-    Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra la lista de
-    usuarios si el usuario_actor posee los permsos correspondientes
+    | Recibe como parametro un request y retorna la pagina web administrar_usuario.html donde se muestra
+    | la lista de usuarios si el usuario_actor posee los permsos correspondientes
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
@@ -119,8 +118,8 @@ def crear_usuario(request):
 
     Vista de creacion de nuevo usuario
 
-    Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar los datos
-    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
+    | Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar
+    | los datos del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
@@ -150,8 +149,8 @@ def modificar_usuario(request):
 
     Vista de modificacion de nuevo usuario
 
-    Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar los datos
-    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
+    | Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar
+    | los datos el usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
@@ -202,8 +201,9 @@ def cambioEstado_usuario_form(request, id_usuario_p):
 
     Vista de cambio de estado de usuario
 
-    Recibe un request y un id de usuario y retorna la pagina web form_usuario.html donde se debe completar los datos
-    del usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
+    | Recibe un request y un id de usuario y retorna la pagina web form_usuario.html donde se debe
+    | completar los datos del usuario y luego operacion_usuario_exito.html si se completo debidamente
+    | el formulario
 
     * Variables
         -   usuario_parametro: es el usuario cuyo estado podra se cambiado en la pagina web form_usuario.html
@@ -258,8 +258,9 @@ def nuevo_proyecto(request):
 
     Vista nuevo proyecto
 
-    Recibe como parametro un request y retorna la pagina web crear_proyecto.html donde se debe completar los datos
-    del proyecto y luego crear_proyecto_exito.html si se completo debidamente el formulario
+    | Recibe como parametro un request y retorna la pagina web crear_proyecto.html donde se debe
+    | completar los datos del proyecto y luego crear_proyecto_exito.html si se completo debidamente
+    | el formulario
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
@@ -293,7 +294,8 @@ def detalle_proyecto(request, id_proyecto):
 
     Vista detalle de proyecto
 
-    Recibe un request y un id de proyecto y retorna una pagina web detalle_proyecto.html con los detalles de un proyecto
+    | Recibe un request y un id de proyecto y retorna una pagina web detalle_proyecto.html con los detalles
+    | de un proyecto
 
     * Variables
         -   usuario_actor: es el usuario que realiza la accion
@@ -371,8 +373,8 @@ def detalle_fase(request, idFase, id_proyecto):
 
     Vista detalle fase
 
-    Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web detallefase.html que
-    muestra en detalle la informacion de dicha fase
+    | Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web
+    | detallefase.html que muestra en detalle la informacion de dicha fase
 
     * Variables
         -   usuario_actor: usuario que realiza la accion
@@ -388,6 +390,13 @@ def detalle_fase(request, idFase, id_proyecto):
 
 @user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
+    """
+
+    :param request:
+    :param idFase:
+    :param id_proyecto:
+    :return:
+    """
     usuario_actor = request.user
     fase = Fase.objects.get(pk=idFase)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -403,6 +412,13 @@ def modificar_fase(request, idFase, id_proyecto):
 
 @user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase, id_proyecto):
+    """
+
+    :param request:
+    :param idFase:
+    :param id_proyecto:
+    :return:
+    """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=idFase)
@@ -411,6 +427,13 @@ def vista_eliminar_fase(request, idFase, id_proyecto):
                               context_instance=RequestContext(request))
 @user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
+    """
+
+    :param request:
+    :param idFase:
+    :param id_proyecto:
+    :return:
+    """
     fase = Fase.objects.get(pk=idFase)
     usuario_actor = request.user
     fase.delete()
@@ -424,6 +447,11 @@ def eliminar_fase(request, idFase, id_proyecto):
 ########################################################################################################################
 @user_passes_test(User.can_administrar_rol, login_url="/iniciar_sesion")
 def administrar_roles(request):
+    """
+
+    :param request:
+    :return:
+    """
     usuario_actor = request.user
     roles = Group.objects.all()
     return render_to_response('rol/administrar_rol.html',
@@ -431,6 +459,11 @@ def administrar_roles(request):
 
 @user_passes_test(User.can_add_group, login_url="/iniciar_sesion")
 def crear_rol(request):
+    """
+
+    :param request:
+    :return:
+    """
     mensaje="Rol creado con exito"
     usuario_actor = request.user
     rol = Group(Usuario=usuario_actor)
@@ -451,6 +484,12 @@ def crear_rol(request):
 
 @user_passes_test(User.can_administrar_rol, login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
     return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol},
@@ -458,6 +497,12 @@ def detalle_rol(request, idRol):
 
 @user_passes_test(User.can_change_group, login_url="/iniciar_sesion")
 def modificar_rol(request, idRol):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
     formulario = RolForm(request.POST, instance=rol)
@@ -472,6 +517,12 @@ def modificar_rol(request, idRol):
 
 @user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
 def vista_eliminar_rol(request, idRol):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
     return render_to_response('rol/eliminarrol.html', {'usuario_actor': usuario_actor, 'rol': rol},
@@ -479,6 +530,12 @@ def vista_eliminar_rol(request, idRol):
 
 @user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
 def eliminar_rol(request, idRol):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
     rol = Group.objects.get(pk=idRol)
     rol.delete()
     usuario_actor = request.user
@@ -489,6 +546,11 @@ def eliminar_rol(request, idRol):
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
 def vista_asignar_rol(request):
+    """
+
+    :param request:
+    :return:
+    """
     usuario_actor = request.user
     lista_usuarios = User.objects.all()
     return render_to_response('rol/asignar_rol.html',
@@ -497,6 +559,11 @@ def vista_asignar_rol(request):
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
 def asignar_rol(request, idRol):
+    """
+    :param request:
+    :param idRol:
+    :return:
+    """
     usuario_actor = request.user
     usuario_parametro = User.objects.get(pk=idRol)
     if request.method == 'POST':
@@ -519,5 +586,10 @@ def asignar_rol(request, idRol):
 ########################################################################################################################
 
 def administrar_credencial(request):
+    """
+
+    :param request:
+    :return:
+    """
     return render_to_response('credencial/administrar_credencial.html',{'usuario_actor':request.user}
                               ,context_instance=RequestContext(request))

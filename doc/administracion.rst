@@ -1,54 +1,23 @@
-administracion package
-======================
+Modulo de Administracion
+========================
 
-Submodules
-----------
-
-administracion.admin module
----------------------------
-
-.. automodule:: administracion.admin
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-administracion.forms module
----------------------------
+Formularios
+-----------
 
 .. automodule:: administracion.forms
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-administracion.models module
-----------------------------
+Modelos
+-------
 
 .. automodule:: administracion.models
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-administracion.tests module
----------------------------
-
-.. automodule:: administracion.tests
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-administracion.views module
----------------------------
+Vistas
+------
 
 .. automodule:: administracion.views
     :members:
-    :undoc-members:
-    :show-inheritance:
 
 
-Module contents
----------------
 
-.. automodule:: administracion
-    :members:
-    :undoc-members:
-    :show-inheritance:
