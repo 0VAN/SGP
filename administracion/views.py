@@ -1,11 +1,11 @@
 
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
+from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase, can_administrar_fase
+from administracion.models import Proyecto, Fase, Atributo
 
 # Create your views here.
 ########################################################################################################################
@@ -594,3 +594,53 @@ def administrar_credencial(request):
     """
     return render_to_response('credencial/administrar_credencial.html',{'usuario_actor':request.user}
                               ,context_instance=RequestContext(request))
+
+########################################################################################################################
+#########################################Vista de atributos#############################################################
+########################################################################################################################
+def administrar_atributo(request, id_proyecto):
+    """
+
+    :param request:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/atributo/administrar_atributo.html',
+                              {'usuario_actor': usuario_actor, 'lista_atributos': lista_atributos,
+                               'proyecto':proyecto},
+                              context_instance=RequestContext(request))
+
+def crear_atributo(request, id_proyecto):
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    atributo = Atributo(Usuario=usuario_actor, Proyecto=proyecto)
+    if request.method == 'POST':
+        formulario = AtributoForm(request.POST, instance=atributo)
+        if formulario.is_valid():
+            formulario.save()
+            return render_to_response('rol/crear_rol_exito.html',
+                                      {'mensaje': 'Atributo creado con exito',
+                                       'usuario_actor': usuario_actor},
+                                      context_instance=RequestContext(request))
+    else:
+        formulario = AtributoForm()
+    return render_to_response('proyecto/atributo/crear_atributo.html',
+                              {'formulario': formulario, 'operacion': 'Crear Atributo',
+                               'usuario_actor': usuario_actor},
+                              context_instance=RequestContext(request))
+
+def detalle_atributo(request, id_atributo, id_proyecto):
+    """
+
+    :param request:
+    :param idRol:
+    :return:
+    """
+    usuario_actor = request.user
+    atributo = Atributo.objects.get(pk=id_atributo)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('proyecto/atributo/detalle_atributo.html', {'usuario_actor': usuario_actor, 'atributo': atributo,
+                                                      'proyecto':proyecto},
+                              context_instance=RequestContext(request))

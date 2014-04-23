@@ -133,7 +133,7 @@ class Proyecto(models.Model):
     """
     Lider = models.ForeignKey(User, related_name='Lider')
     Nombre = models.CharField(max_length=30, unique=True)
-    Descripcion = models.TextField()
+    Descripcion = models.TextField(max_length=100)
     Fecha_inicio = models.DateField('Fecha de inicio')
     Fecha_finalizacion = models.DateField('Fecha de finalizacion')
     Estado = models.CharField(max_length=2,
@@ -146,6 +146,8 @@ class Proyecto(models.Model):
     Usuarios = models.ManyToManyField(User, related_name='Participantes')
     Fecha = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.Nombre
 
 class Fase(models.Model):
     """
@@ -160,11 +162,25 @@ class Fase(models.Model):
             -   Fecha: es la fecha de creacion de la fase
     """
     Nombre = models.CharField(max_length=50, unique=True)
-    Descripcion = models.TextField()
+    Descripcion = models.TextField(max_length=100)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
     Fecha = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.Nombre
+
+
+class Atributo(models.Model):
+    """
+
+    """
+    Nombre = models.CharField(max_length=30, unique=True)
+    Descripcion = models.TextField(max_length=100)
+    Costo_temporal = models.PositiveSmallIntegerField()
+    Costo_monetario = models.PositiveIntegerField()
+    Usuario = models.ForeignKey(User)
+    Proyecto = models.ForeignKey(Proyecto)
 
     def __unicode__(self):
         return self.Nombre

@@ -58,4 +58,10 @@ urlpatterns = patterns('',
 
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
+################################################URL ATRIBUTO############################################################
+
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/$', 'administracion.views.administrar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/nuevo/$', 'administracion.views.crear_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/detalle/(?P<id_atributo>\d+)$', 'administracion.views.detalle_atributo'),
+
 )

@@ -1,0 +1,34 @@
+{% extends 'administracion.html' %}
+{% block titulo %}Administrar atributos{% endblock %}
+{% block encabezado %}Lista de atributos <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
+
+{% block botones %}
+    <li>
+        {% if usuario_actor.can_add_proyecto %}
+            <a href="{% url 'administracion.views.crear_atributo' proyecto.id %}" class="btn btn-default">Crear atributos</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear atributos</a>
+        {% endif %}
+        <a href="/administracion" class="btn btn-default">Volver</a>
+    </li>
+{% endblock %}
+
+{% block contenido %}
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <td>Nombre del atributo</td>
+                <td>Usuario que lo creo</td>
+            </tr>
+        </thead>
+        <tr>
+        {% for atributo in lista_atributos %}
+            <tr class="clickableRow info" href='{% url "administracion.views.detalle_atributo" proyecto.id atributo.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
+            <td>{{ atributo.Nombre }}</td>
+            <td>{{ atributo.Usuario }}</td>
+        {% empty %}
+            <td class="warning">No hay proyectos registrados aun</td>
+        {% endfor %}
+        </tr>
+    </table>
+{% endblock %}

@@ -19,7 +19,7 @@
         {% endif %}
     </li>
     <li>
-          <a href='{% url "administracion.views.administrar_atributo" proyecto.id %}' class="btn btn-default">Administrar Atributo</a>
+          <a href='{% url "administracion.views.crear_atributo" proyecto.id %}' class="btn btn-default">Crear Atributo</a>
     </li>
     <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
 
@@ -27,14 +27,8 @@
 {% block contenido %}
     <dl>
         <dt>Descripcion:</dt>
-        <dd>{{ proyecto.Descripcion }}</dd>
+        <dd>{{ atributo.Descripcion }}</dd>
         <dt>Creado por:</dt>
-        <dd>{{ proyecto.Lider }}</dd>
-        <dt>Creado el:</dt>
-        <dd>{{ proyecto.Fecha_inicio }}</dd>
-        <dt>Finaliza el:</dt>
-        <dd>{{ proyecto.Fecha_finalizacion }}</dd>
-        <dt>Estado:</dt>
-        <dd>{{ proyecto.get_Estado_display}}</dd>
+        <dd>{{ atributo.Usuario }}</dd>
     </dl>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
-from administracion.models import Proyecto, Fase
+from administracion.models import Proyecto, Fase, Atributo
 
 class UsuarioForm(UserCreationForm):
     """
@@ -99,3 +99,13 @@ class RolForm(forms.ModelForm):
     class Meta:
         model = Group
         exclude = ['Usuario']
+
+class AtributoForm(forms.ModelForm):
+    """
+    Formulario para el la creacion de roles
+    Hereda de forms.ModelForm y utiliza la clase Group para
+    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
+    """
+    class Meta:
+        model = Atributo
+        exclude = ['Usuario', 'Proyecto']
