@@ -224,7 +224,7 @@ def cambioEstado_usuario_form(request, id_usuario_p):
         formulario = UsuarioDelForm(instance=usuario_parametro)
     return render_to_response('usuario/form_usuario.html',
                    {'usuario_actor': usuario_actor, 'usuario_parametro': usuario_parametro,
-                   'formulario': formulario, 'mensaje': 'Cambio de estado del usuario'},
+                   'formulario': formulario, 'operacion': 'Cambio de estado del usuario: '},
                    context_instance=RequestContext(request))
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################

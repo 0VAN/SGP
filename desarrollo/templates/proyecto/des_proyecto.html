@@ -1,34 +1,27 @@
-{% extends 'base.html' %}
-{% block titulo %}Desarrollo{% endblock %}
-
-{% block activo-des %}active{% endblock %}
-
-{% block usuario %}{% endblock %}
-
-{% block encabezado %}Lista de proyectos{% endblock %}
-
+{% extends 'desarrollo.html' %}
+{% block titulo %}Desarrollo de Proyecto{% endblock %}
 {% block botones %}
-    <li>
-        <a href="#" class="btn btn-default">Buscar proyectos</a>
-    </li>
+    <li><a href="{% url 'desarrollo.views.desarrollo' %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
+
+{% block encabezado %}Lista de fases del proyecto: {{ proyecto.Nombre }} {% endblock %}
 
 {% block contenido %}
     <table class="table table-striped">
         <thead>
             <tr>
                 <td>Nombre</td>
-                <td>Lider</td>
-                <td>Estado</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
                 <td></td>
             </tr>
         </thead>
         <tbody>
-            {% for proyecto in lista_proyectos %}
+            {% for fase in lista_fases %}
                 <tr>
-                    <td>{{ proyecto.Nombre }}</td>
-                    <td>{{ proyecto.Lider }}</td>
-                    <td>proyecto</td>
+                    <td>{{ fase.Nombre }}</td>
+                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.Fecha }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -36,17 +29,15 @@
                             </button>
 
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'desarrollo.views.des_proyecto' proyecto.id %}">Desarrollo</a></li>
+                                <li><a href="{% url 'desarrollo.views.des_fase' proyecto.id fase.id %}">Desarrollo</a></li>
                                 <li><a href="#">Acción #2</a></li>
                                 <li><a href="#">Acción #3</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Acción #4</a></li>
                             </ul>
                         </div>
                     </td>
                 </tr>
             {% empty %}
-                <p>No hay proyectos disponibles</p>
+                <p>No hay fases disponibles</p>
             {% endfor %}
         </tbody>
     </table>

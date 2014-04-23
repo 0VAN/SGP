@@ -16,28 +16,59 @@
 
 {% block contenido %}
     {% if usuario_actor.can_administrar_usuario %}
-        <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <td>Nombre</td>
                     <td>Estado</td>
+                    <td></td>
                 </tr>
             </thead>
+            <tbody>
             {% for usuario in lista_usuarios %}
                 {% if usuario.is_active %}
-                    <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <tr>
                         <td>{{ usuario.username }}</td>
                         <td>Activo</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Opciones <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="'menu">
+                                    <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Detalle</a></li>
+                                    <li><a href="#">Modificar</a></li>
+                                    <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                 {% else %}
-                    <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                    <tr>
                         <td>{{ usuario.username }}</td>
                         <td>Inactivo</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Opciones <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="'menu">
+                                    <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Detalle</a></li>
+                                    <li><a href="#">Modificar</a></li>
+                                    {% if usuario_actor.can_change_user and usuario_actor.id != usuario_parametro.id %}
+                                        <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                 {% endif %}
             {% empty %}
                 <p>No hay usuarios registrados aun</p>
             {% endfor %}
+            </tbody>
         </table>
     {% else %}
         <div class="alert alert-danger">No tienes permiso para ver este contenido</div>

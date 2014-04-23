@@ -26,3 +26,20 @@ def desarrollo(request):
     usuario = request.user
     return render_to_response('desarrollo.html', {'lista_proyectos': lista_proyectos, 'usuario': usuario},
                               context_instance=RequestContext(request))
+
+
+def des_proyecto(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
+    return render_to_response('proyecto/des_proyecto.html',
+        {'usuario': usuario, 'proyecto': proyecto, 'lista_fases': lista_fases},
+        context_instance=RequestContext(request))
+
+def des_fase(request, id_proyecto, id_fase):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    return render_to_response('proyecto/fase/des_fase.html',
+        {'usuario': usuario, 'fase': fase},
+        context_instance=RequestContext(request))
+
