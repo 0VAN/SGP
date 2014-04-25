@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import  ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
+from administracion.forms import  ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, ItemForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase
+from administracion.models import Proyecto, Fase, Item
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -41,5 +41,20 @@ def des_fase(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     return render_to_response('proyecto/fase/des_fase.html',
         {'usuario': usuario, 'fase': fase},
+        context_instance=RequestContext(request))
+
+def crear_item(request, id_proyecto, id_fase):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item(Usuario=usuario, Fase=fase)
+    if request.method=='POST':
+        formulario = ItemForm(request.POST, instance=item)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fases')
+    else:
+        formulario = ItemForm()
+    return render_to_response('proyecto/fase/item/crear_item.html',
+        {'usuario': usuario, 'formulario': formulario, 'fase': fase},
         context_instance=RequestContext(request))
 

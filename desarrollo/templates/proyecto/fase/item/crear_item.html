@@ -1,0 +1,11 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block encabezado %}Crear Item{% endblock %}
+{% block botones%}<li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>{% endblock %}
+
+{% block titulo %}Crear item {% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table"><p>{{ formulario }}</p></table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

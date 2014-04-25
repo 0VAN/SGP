@@ -184,3 +184,31 @@ class Atributo(models.Model):
 
     def __unicode__(self):
         return self.Nombre
+
+
+
+class Item(models.Model):
+
+    CONSTRUCCION = 'CON'
+    VALIDADO = 'VAL'
+    FINALIZADO = 'FIN'
+    REVISION = 'REV'
+    ESTADO_CHOICES = (
+        (CONSTRUCCION, 'Construccion'),
+        (VALIDADO, 'Validado'),
+        (FINALIZADO, 'Finalizado'),
+        (REVISION, 'Revision'),
+    )
+
+    Nombre = models.CharField(max_length=30, unique=True)
+    Prioridad = models.IntegerField(max_length=3)
+    Descripcion = models.TextField()
+    Observacion = models.TextField()
+    CostoTemporal = models.IntegerField()
+    CostoUnitario = models.IntegerField()
+    Estado = models.CharField(max_length=3, choices=ESTADO_CHOICES, default=CONSTRUCCION)
+    Usuario = models.ForeignKey(User)
+    Fecha = models.DateTimeField(auto_now=True)
+    Padre = models.ForeignKey("self")
+    Fase = models.ForeignKey(Fase)
+
