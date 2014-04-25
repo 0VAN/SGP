@@ -1,21 +1,10 @@
-#encoding utf-8
 __author__ = 'sgp'
-
+# -*- encoding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
 from administracion.models import Proyecto, Fase, Atributo
-
-class UsuarioForm(UserCreationForm):
-    """
-    Formulario para la creacion de usuarios
-    Hereda del formulario UserCreationForm y utiliza la clase user
-    para agregar ciertos campos de la clase a la hora de la creacion
-    """
-    class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
 
 class AsignarRol(forms.ModelForm):
     """
@@ -44,19 +33,18 @@ class UsuarioModForm(forms.ModelForm):
     agregar ciertos campos a la hora de la modificacion
     """
     username = forms.RegexField(
-        label=("Username"), max_length=30, regex=r"^[\w.@+-]+$",
+        label=("Nombre de usuario"), max_length=30, regex=r"^[\w.@+-]+$",
         help_text=("Required. 30 characters or fewer. Letters, digits and "
                       "@/./+/-/_ only."),
         error_messages={
             'invalid': ("This value may contain only letters, numbers and "
                          "@/./+/-/_ characters.")})
-    password = ReadOnlyPasswordHashField(label=("Password"),
-        help_text=("Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href= \"password/\">this form</a>."))
+    password = ReadOnlyPasswordHashField(label=("Contraseña"),
+        help_text=("Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,"
+                   "pero se puede cambiar mediante el boton cambiar contraseña"))
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
+        fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
             super(UsuarioModForm, self).__init__(*args, **kwargs)
@@ -69,6 +57,8 @@ class UsuarioModForm(forms.ModelForm):
             # This is done here, rather than on the field, because the
             # field does not have access to the initial value
             return self.initial["password"]
+
+
 
 class UsuarioDelForm(forms.ModelForm):
     """

@@ -1,4 +1,9 @@
 {% extends 'proyecto/fase/adm-fases.html' %}
+
+{% block botones %}{% endblock %}
+{% block contenido %}
 {% block mensaje %}
     <div class="alert alert-success">Fase eliminada</div>
+    <p><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Aceptar</a></p>
+{% endblock %}
 {% endblock %}

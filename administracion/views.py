@@ -1,71 +1,16 @@
-
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import UsuarioForm, ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User, Group
 from administracion.models import Proyecto, Fase, Atributo
 
 # Create your views here.
 ########################################################################################################################
 #############################Vistas de iniciar sesion, cerrar sesion, administracion####################################
 ########################################################################################################################
-def iniciar_sesion(request):
-    """
-    .. method:: Vista de inicio de sesion
 
-        :param request:
-        :return: iniciar_sesion.html
-
-        | Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y
-        | su existencia en el sistema.
-
-        * Si el usuario inicia sesion con exito, retorna iniciar_sesion.html
-        * Si el usuario esta inactivo, retorna no_activo.html
-        * Si el usuario no exite en el sistema, retorna sesion_error.html
-
-        * Variables
-            -   formulario: es el formulario que el usuario debe completar para iniciar sesion
-            -   usuario_actor: es el usuario que realiza la accion
-            -   clave: es la clave secreta introducida por el usuario_actor
-            -   acceso: contiene el resultado de la funcion authenticate que lleva como parametro
-                el par(usuario, contrasenha) verificando su existencia y estado en el sistema
-    """
-    if not request.user.is_anonymous():
-        return administracion(request)
-    if request.method == 'POST':
-        formulario = AuthenticationForm(request.POST)
-        if formulario.is_valid:
-            usuario_actor = request.POST['username']
-            clave = request.POST['password']
-            acceso = authenticate(username=usuario_actor, password=clave)
-            if acceso is not None:
-                if acceso.is_active:
-                    login(request, acceso)
-                    return administracion(request)
-                else:
-                    return render_to_response('no_activo.html', context_instance=RequestContext(request))
-            else:
-                return render_to_response('sesion_error.html', context_instance=RequestContext(request))
-    else:
-        formulario = AuthenticationForm()
-    return render_to_response('iniciar_sesion.html', {'formulario': formulario},
-                              context_instance=RequestContext(request))
-@login_required(login_url='/iniciar_sesion')
-def cerrar_sesion(request):
-    """
-
-    :param request:
-    :return:
-
-    Vista para cerrar la sesion de un ususario
-
-    | Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al
-    | usuario a la pagina web '/' (raiz) donde se solicita el inicio de sesion de un usuario
-    """
-    logout(request)
-    return HttpResponseRedirect('/')
 @login_required(login_url='/iniciar_sesion')
 def administracion(request):
     """
@@ -128,20 +73,21 @@ def crear_usuario(request):
     """
     usuario_actor = request.user
     if request.method == 'POST':
-        formulario = UsuarioForm(request.POST)
+        formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             lista_usuarios = User.objects.all()
             return render_to_response('usuario/operacion_usuario_exito.html',
-                                      {'mensaje': 'El usuario ha sido creado con exito', 'usuario_actor': usuario_actor,
+                                      {'mensaje': 'El nuevo usuario fue creado exitosamente', 'usuario_actor': usuario_actor,
                                        'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
     else:
-        formulario = UsuarioForm()
+        formulario = UserCreationForm()
     return render_to_response('usuario/form_usuario.html',
-                              {'formulario': formulario, 'operacion': 'Creacion de un nuevo usuario',
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del nuevo usuario',
                                'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
+
 @login_required(login_url="/iniciar_sesion")
-def modificar_usuario(request):
+def modificar_usuario(request, id_usuario_p):
     """
 
     :param request:
@@ -157,22 +103,42 @@ def modificar_usuario(request):
         -   formulario: es el fomrulario que debe completar el usuario_actor
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
-    usuario_actor = request.user
+    usuario_parametro = User.objects.get(pk=id_usuario_p)
+    lista_usuarios = User.objects.all()
     if request.method == 'POST':
-        formulario = UsuarioModForm(request.POST, instance=usuario_actor)
+        formulario = UsuarioModForm(request.POST, instance=usuario_parametro)
         if formulario.is_valid():
-           form = formulario.save(commit=False)
-           form.user = request
-           form.save()
-           lista_usuarios = User.objects.all()
+           formulario.save()
            return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje': 'Se ha actualizado tu informacion personal', 'usuario_actor': usuario_actor,
+                                     {'mensaje': 'Se ha actualizado la informacion personal',
+                                       'usuario_actor': request.user, 'usuario_parametro': usuario_parametro,
                                       'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
     else:
-        formulario = UsuarioModForm(instance=usuario_actor)
-    return render(request, 'usuario/form_usuario.html',
-                  {'usuario_actor': usuario_actor, 'formulario': formulario, 'operacion': 'Gestion de datos personales'},
+        formulario = UsuarioModForm(instance=usuario_parametro)
+    return render(request, 'usuario/form_usuario_mod.html',
+                  {'usuario_actor': request.user, 'formulario': formulario, 'operacion': 'Modificar usuario',
+                   'usuario_parametro': usuario_parametro},
                   context_instance=RequestContext(request))
+
+@login_required(login_url="/iniciar_sesion")
+def pass_change(request, id_usuario_p):
+    usuario_parametro = User.objects.get(pk=id_usuario_p)
+    lista_usuarios = User.objects.all()
+    if request.method == 'POST':
+        formulario = SetPasswordForm(data=request.POST, user= usuario_parametro)
+        if formulario.is_valid():
+           formulario.save()
+           return render_to_response('usuario/operacion_usuario_exito.html',
+                                     {'mensaje': 'Se ha actualizado la contraseña',
+                                       'usuario_actor': request.user, 'usuario_parametro': usuario_parametro,
+                                      'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+    else:
+        formulario = SetPasswordForm(user=usuario_parametro)
+    return render(request, 'usuario/form_usuario.html',
+                  {'usuario_actor': request.user, 'formulario': formulario, 'operacion': 'Cambio de contraseña',
+                   'usuario_parametro': usuario_parametro},
+                  context_instance=RequestContext(request))
+
 @user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario_p):
     """
@@ -224,8 +190,9 @@ def cambioEstado_usuario_form(request, id_usuario_p):
         formulario = UsuarioDelForm(instance=usuario_parametro)
     return render_to_response('usuario/form_usuario.html',
                    {'usuario_actor': usuario_actor, 'usuario_parametro': usuario_parametro,
-                   'formulario': formulario, 'operacion': 'Cambio de estado del usuario'},
+                    'formulario': formulario, 'operacion': 'Cambio de estado del usuario'},
                    context_instance=RequestContext(request))
+
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
 ########################################################################################################################
@@ -306,10 +273,11 @@ def detalle_proyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     return render_to_response('proyecto/detalle_proyecto.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
+
 ########################################################################################################################
 ###########################################Vistas de administracion de Fase#############################################
 ########################################################################################################################
-@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
+@user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
 def administrar_fases(request, id_proyecto):
     """
 

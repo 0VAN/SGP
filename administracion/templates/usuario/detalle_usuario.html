@@ -3,13 +3,6 @@
 
 {% block encabezado %}Vista detalle del usuario {{ usuario_parametro.username }}{% endblock %}
 {% block botones %}
-      <li>
-        {% if usuario_actor.can_change_user and usuario_actor.id != usuario_parametro.id %}
-            <a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario_parametro.id %}" class="btn btn-default">Cambio de estado de Usuario</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Cambio de estado de Usuario</a>
-        {% endif %}
-    </li>
     <li><a href="/administracion/usuarios" class="btn btn-default">Volver</a></li>
 {% endblock %}
 

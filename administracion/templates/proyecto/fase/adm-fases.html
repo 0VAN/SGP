@@ -17,24 +17,38 @@
 
 {% endblock %}
 {% block contenido %}
-    <table class="table table-condensed table-hover">
+   <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             {% for fase in fases %}
-                    <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" proyecto.id fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
-                        <td>{{ fase.Nombre }}</td>
-                        <td>{{ fase.Usuario }}</td>
-                        <td>{{ fase.Fecha }}</td>
+                <tr>
+                    <td>{{ fase.Nombre }}</td>
+                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.vista_eliminar_fase' proyecto.id fase.id %}">Eliminar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
             {% empty %}
-                <p>No hay fases</p>
+                <p>No hay fases disponibles</p>
             {% endfor %}
-            </tr>
         </tbody>
     </table>
     {% block mensaje %}{% endblock %}
