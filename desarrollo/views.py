@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase
+from administracion.models import Proyecto, Fase, TipoDeItem
 from desarrollo.models import Item
 from desarrollo.forms import ItemForm
 
@@ -50,6 +50,7 @@ def crear_item(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item(Usuario=usuario, Fase=fase, Version=1)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=fase.Proyecto)
     if request.method=='POST':
         formulario = ItemForm(request.POST, instance=item)
         if formulario.is_valid():
@@ -57,8 +58,8 @@ def crear_item(request, id_proyecto, id_fase):
             return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
     else:
         formulario = ItemForm()
-    return render_to_response('proyecto/fase/item/crear_item.html',
-        {'usuario': usuario, 'formulario': formulario, 'fase': fase},
+    return render_to_response('proyecto/fase/item/crear_item2.html',
+        {'usuario': usuario, 'formulario': formulario, 'fase': fase, 'lista_tipos':lista_tipos},
         context_instance=RequestContext(request))
 
 def mod_item(request, id_proyecto, id_fase, id_item):
@@ -67,6 +68,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     item.Version+=1
     formulario = ItemForm(request.POST, instance=item)
+
     if formulario.is_valid():
         formulario.save()
         return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')

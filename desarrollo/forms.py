@@ -4,7 +4,7 @@ __author__ = 'jf'
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User, Group
-from administracion.models import Proyecto, Fase, Atributo
+from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from desarrollo.models import Item
 
 class ItemForm(forms.ModelForm):
@@ -13,7 +13,6 @@ class ItemForm(forms.ModelForm):
     Hereda de forms.ModelForm y utiliza la clase Group para
     agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
     """
-
     class Meta:
         model = Item
         exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version']

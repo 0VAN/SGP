@@ -5,7 +5,7 @@
 {% block titulo %}Crear item {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>{{ formulario }}</p></table>
+        <table class="table"><p>{{ formulario.as_table }}</p></table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}

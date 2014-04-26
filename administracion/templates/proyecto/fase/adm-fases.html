@@ -7,7 +7,7 @@
     <li>
         {% if usuario_actor.can_add_fase %}
             {% if proyecto.Lider == usuario_actor %}
-                <a href="{% url 'administracion.views.administrar_proyecto' %}" class="btn btn-default">Crear Fase</a>
+                <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
             {% endif %}
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>

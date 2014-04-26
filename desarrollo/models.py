@@ -18,7 +18,7 @@ class Item(models.Model):
     )
 
     Nombre = models.CharField(max_length=30, unique=True)
-    Descripcion = models.TextField()
+    Descripcion = models.TextField(blank=True)
     Prioridad = models.IntegerField(max_length=3, blank=False)
     CostoTemporal = models.IntegerField(blank=False)
     CostoUnitario = models.IntegerField(blank=False)
@@ -28,4 +28,4 @@ class Item(models.Model):
     Fase = models.ForeignKey(Fase)
     Tipo = models.ForeignKey(TipoDeItem)
     Version = models.IntegerField()
-    Observacion = models.TextField()
+    Observacion = models.TextField(blank=True)
