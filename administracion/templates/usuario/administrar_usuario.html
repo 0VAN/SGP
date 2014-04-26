@@ -1,5 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Usuarios{% endblock %}
+{% block encabezado %}Lista de Usuarios <small>Haz click en opciones para interactuar con un usuario</small>{% endblock %}
 {% block botones %}
     <li>
         {% if usuario_actor.can_add_user %}

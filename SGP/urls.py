@@ -36,7 +36,8 @@ urlpatterns = patterns('',
 ###############################################URL PROYECTO#############################################################
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo/$', 'administracion.views.nuevo_proyecto'),
-    url(r'^administracion/proyectos/detalle/(?P<id_proyecto>\d+)/$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/detalle/$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.iniciar_proyecto'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
@@ -49,8 +50,7 @@ urlpatterns = patterns('',
 ################################################URL ROL#################################################################
     url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
     url(r'^administracion/roles/nuevo/$', 'administracion.views.crear_rol'),
-    url(r'^administracion/roles/asignar/$', 'administracion.views.vista_asignar_rol'),
-    url(r'^administracion/roles/asignar/(?P<id_usuario_p>\d+)/$', 'administracion.views.asignar_rol'),
+    url(r'^administracion/roles/asignar/(?P<id_rol>\d+)/$', 'administracion.views.asignar_rol'),
     url(r'^administracion/roles/detalle/(?P<idRol>\d+)/$', 'administracion.views.detalle_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
@@ -59,10 +59,18 @@ urlpatterns = patterns('',
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
 ################################################URL ATRIBUTO############################################################
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/$', 'administracion.views.administrar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/nuevo/$', 'administracion.views.crear_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
 
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/$', 'administracion.views.administrar_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/nuevo/$', 'administracion.views.crear_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
+###############################################URL TIPO DE ITEM#########################################################
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/nuevo/$', 'administracion.views.crear_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/detalle/(?P<id_tipo>\d+)/$', 'administracion.views.detalle_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/modificar/(?P<id_tipo>\d+)/$', 'administracion.views.modificar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
 
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),

@@ -1,0 +1,13 @@
+{% extends 'proyecto/administrar_proyecto.html' %}
+{% block titulo %}Formulario tipo de item{% endblock %}
+
+{% block encabezado %}{{ operacion }}{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table"><p>{{ formulario }}</p></table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

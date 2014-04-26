@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
-from administracion.models import Proyecto, Fase, Atributo
+from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 
 class AsignarRol(forms.ModelForm):
     """
@@ -13,8 +13,10 @@ class AsignarRol(forms.ModelForm):
     para agregar ciertos campos de la clase a la hora de la asignacion
     """
     class Meta:
-        model = User
-        fields = ('groups',)
+        model = Group
+        fields = ['Usuario']
+
+
 
 class ProyectoForm(ModelForm):
     """
@@ -41,7 +43,7 @@ class UsuarioModForm(forms.ModelForm):
                          "@/./+/-/_ characters.")})
     password = ReadOnlyPasswordHashField(label=("Contraseña"),
         help_text=("Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,"
-                   "pero se puede cambiar mediante el boton cambiar contraseña"))
+                   " pero se puede cambiar mediante el boton cambiar contraseña"))
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -99,3 +101,13 @@ class AtributoForm(forms.ModelForm):
     class Meta:
         model = Atributo
         exclude = ['Usuario', 'Proyecto']
+
+
+class tipoItemForm(forms.ModelForm):
+    """
+
+    """
+    class Meta:
+        model = TipoDeItem
+        exclude = ['Usuario', 'Proyecto']
+

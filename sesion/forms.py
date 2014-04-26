@@ -20,10 +20,14 @@ class UsuarioGestionForm(forms.ModelForm):
                          "@/./+/-/_ characters.")})
     password = ReadOnlyPasswordHashField(label=("Contraseña"),
         help_text=("Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,"
-                   "pero se puede cambiar mediante <a href=\"password/\">este formulario</a>. "))
+                   " pero se puede cambiar mediante <a href=\"password/\">este formulario</a>. "))
     class Meta:
         model = User
         fields = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion')
+        fieldsets = [
+        ( None,               {'fields': ['username', 'password']}),
+        ('Informacion personal', {'fields': ['email', 'first_name', 'last_name', 'telefono', 'direccion'], 'classes': ['collapse']}),
+        ]
 
     def __init__(self, *args, **kwargs):
             super(UsuarioGestionForm, self).__init__(*args, **kwargs)
@@ -36,3 +40,5 @@ class UsuarioGestionForm(forms.ModelForm):
             # This is done here, rather than on the field, because the
             # field does not have access to the initial value
             return self.initial["password"]
+
+    widgets = {}

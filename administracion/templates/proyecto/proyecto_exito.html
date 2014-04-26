@@ -1,20 +1,7 @@
-{% extends 'administracion.html' %}
-{% block titulo %}Administrar proyecto{% endblock %}
-{% block encabezado %}Lista de proyectos <small>Haz click en opciones para interactuar con un proyecto</small>{% endblock %}
-
-{% block botones %}
-    <li>
-        {% if usuario_actor.can_add_proyecto %}
-            <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
-        {% endif %}
-        <a href="/administracion" class="btn btn-default">Volver</a>
-    </li>
-{% endblock %}
+{% extends 'proyecto/administrar_proyecto.html' %}
 
 {% block contenido %}
-    <table class="table table-striped">
+   <table class="table table-striped">
         <thead>
             <tr>
                 <td>Nombre</td>
@@ -40,7 +27,7 @@
                                 <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}">Atributos</a></li>
                                 <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}">Tipos de item</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{% url 'administracion.views.iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                                <li><a href="#">Iniciar</a></li>
                             </ul>
                         </div>
                     </td>
@@ -50,4 +37,5 @@
             {% endfor %}
         </tbody>
     </table>
+<div class="alert alert-success">{{ mensaje }}</div>
 {% endblock %}

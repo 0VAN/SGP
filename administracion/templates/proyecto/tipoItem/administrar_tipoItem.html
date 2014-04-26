@@ -1,11 +1,11 @@
 {% extends 'administracion.html' %}
-{% block titulo %}Administrar atributos{% endblock %}
-{% block encabezado %}Lista de atributos <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
+{% block titulo %}Administrar Tipo de Item{% endblock %}
+{% block encabezado %}Lista de tipos de items <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
 
 {% block botones %}
     <li>
         {% if usuario_actor.can_add_proyecto %}
-            <a href="{% url 'administracion.views.crear_atributo' proyecto.id %}" class="btn btn-default">Crear atributo</a>
+            <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear atributo</a>
         {% endif %}
@@ -24,11 +24,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for atributo in lista_atributos %}
+            {% for tipo in lista_tipos %}
                 <tr>
-                    <td>{{ atributo.Nombre }}</td>
-                    <td>{{ atributo.Usuario }}</td>
-                    <td>{{ atributo.Fecha }}</td>
+                    <td>{{ tipo.Nombre }}</td>
+                    <td>{{ tipo.Usuario }}</td>
+                    <td>{{ tipo.Fecha }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -36,9 +36,9 @@
                             </button>
 
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id atributo.id %}">Detalle</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id atributo.id %}">Modificar</a></li>
-                                <li><a href="{% url 'administracion.views.eliminar_atributo' proyecto.id atributo.id %}">Eliminar</a></li>
+                                <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id tipo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id tipo.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.eliminar_tipo' proyecto.id tipo.id %}">Eliminar</a></li>
                             </ul>
                         </div>
                     </td>
