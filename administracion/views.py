@@ -345,7 +345,7 @@ def crear_fase(request, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
 def detalle_fase(request, idFase, id_proyecto):
     """
 
@@ -371,7 +371,7 @@ def detalle_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
     """
 
@@ -393,7 +393,7 @@ def modificar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'fase': fase}, context_instance=RequestContext(request))
 
-@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -408,7 +408,7 @@ def vista_eliminar_fase(request, idFase, id_proyecto):
     return render_to_response('proyecto/fase/eliminarfase.html',
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
-@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -541,16 +541,17 @@ def vista_asignar_rol(request):
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
-def asignar_rol(request, id_rol):
+
+def asignar_rol(request, id_usuario):
     """
     :param request:
     :param idRol:
     :return:
     """
     usuario_actor = request.user
-    rol = Group.objects.get(pk=id_rol)
+    usuario = User.objects.get(pk=id_usuario)
     if request.method == 'POST':
-        formulario = AsignarRol(request.POST, instance=rol)
+        formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
            formulario.save()
            roles = Group.objects.all()
@@ -558,10 +559,10 @@ def asignar_rol(request, id_rol):
                                      {'mensaje': 'Rol asignado con exito', 'usuario_actor': usuario_actor,
                                       'roles': roles}, context_instance=RequestContext(request))
     else:
-        formulario = AsignarRol(instance=rol)
+        formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_rol.html', {'formulario': formulario,
                                                  'operacion': 'Seleccione el usuario a quien desee asignar el rol',
-                                                 'usuario_actor': usuario_actor, 'rol':rol},
+                                                 'usuario_actor': usuario_actor, 'usuario':usuario},
                   context_instance=RequestContext(request))
 
 
@@ -666,6 +667,51 @@ def eliminar_atributo(request, id_atributo, id_proyecto):
     return render_to_response('proyecto/atributo/atributo_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El atributo ha sido eliminado exitosamente',
                                'lista_atributos': lista_atributos ,  'proyecto':proyecto},
+                              context_instance=RequestContext(request))
+
+########################################################################################################################
+########################################Vistas de tipo de item######################################################
+########################################################################################################################
+
+def administrar_tipoItem(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/tipoItem/administrar_tipoItem.html',
+                              {'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                               'proyecto': proyecto},
+                              context_instance=RequestContext(request))
+
+def crear_tipoItem(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    tipo = TipoDeItem(Usuario=usuario_actor, Proyecto=proyecto)
+    if request.method == 'POST':
+        formulario = tipoItemForm(request.POST, instance=tipo)
+        if formulario.is_valid():
+            formulario.save()
+            lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+            return render_to_response('proyecto/atributo/atributo_exito.html',
+                                      {'mensaje': 'El tipo de item se ha creado exitosamente',
+                                       'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                                       'proyecto': proyecto}, context_instance=RequestContext(request))
+    else:
+        formulario = tipoItemForm()
+    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del tipo de item',
+                               'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
 ########################################################################################################################

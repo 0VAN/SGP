@@ -13,8 +13,8 @@ class AsignarRol(forms.ModelForm):
     para agregar ciertos campos de la clase a la hora de la asignacion
     """
     class Meta:
-        model = Group
-        fields = ['Usuario']
+        model = User
+        fields = ['groups']
 
 
 
