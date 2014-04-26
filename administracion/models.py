@@ -166,6 +166,8 @@ class Fase(models.Model):
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
     Fecha = models.DateTimeField(auto_now=True)
+    Numero = models.PositiveIntegerField()
+    #Version = models.ManyToManyField("self")
 
     def __unicode__(self):
         return self.Nombre
@@ -187,3 +189,11 @@ class Atributo(models.Model):
 
     def __unicode__(self):
         return self.Nombre
+
+
+class TipoDeItem(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Usuario = models.ForeignKey(User)
+    Fecha = models.DateTimeField(auto_now=True)
+    Atributos = models.ManyToManyField(Atributo)
+    Proyecto = models.ForeignKey(Proyecto)

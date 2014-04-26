@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
-from administracion.models import Proyecto, Fase, Atributo
+from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 
 class AsignarRol(forms.ModelForm):
     """
@@ -100,4 +100,12 @@ class AtributoForm(forms.ModelForm):
     """
     class Meta:
         model = Atributo
+        exclude = ['Usuario', 'Proyecto']
+
+class tipoItemForm(forms.ModelForm):
+    """
+
+    """
+    class Meta:
+        model = TipoDeItem
         exclude = ['Usuario', 'Proyecto']

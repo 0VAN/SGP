@@ -1,0 +1,53 @@
+{% extends 'administracion.html' %}
+{% block titulo %}Administrar Tipo de Item{% endblock %}
+{% block encabezado %}Lista de tipos de items <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
+
+{% block botones %}
+    <li>
+        {% if usuario_actor.can_add_proyecto %}
+            <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Crear atributo</a>
+        {% endif %}
+        <a href="/administracion" class="btn btn-default">Volver</a>
+    </li>
+{% endblock %}
+
+{% block contenido %}
+<table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tipo in lista_tipos %}
+                <tr>
+                    <td>{{ tipo.Nombre }}</td>
+                    <td>{{ tipo.Usuario }}</td>
+                    <td>{{ tipo.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id tipo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id tipo.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.eliminar_tipo' proyecto.id tipo.id %}">Eliminar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>No hay atributos disponibles</p>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block mensaje %}{% endblock %}
+{% endblock %}
+

@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol,\
+    AtributoForm, tipoItemForm
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
-from administracion.models import Proyecto, Fase, Atributo
+from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 
 # Create your views here.
 ########################################################################################################################
@@ -665,4 +666,110 @@ def eliminar_atributo(request, id_atributo, id_proyecto):
     return render_to_response('proyecto/atributo/atributo_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El atributo ha sido eliminado exitosamente',
                                'lista_atributos': lista_atributos ,  'proyecto':proyecto},
+                              context_instance=RequestContext(request))
+
+########################################################################################################################
+########################################Vistas de tipo de item######################################################
+########################################################################################################################
+
+def administrar_tipoItem(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/tipoItem/administrar_tipoItem.html',
+                              {'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                               'proyecto': proyecto},
+                              context_instance=RequestContext(request))
+
+def crear_tipoItem(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    tipo = TipoDeItem(Usuario=usuario_actor, Proyecto=proyecto)
+    if request.method == 'POST':
+        formulario = tipoItemForm(request.POST, instance=tipo)
+        if formulario.is_valid():
+            formulario.save()
+            lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+            return render_to_response('proyecto/atributo/atributo_exito.html',
+                                      {'mensaje': 'El tipo de item se ha creado exitosamente',
+                                       'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                                       'proyecto': proyecto}, context_instance=RequestContext(request))
+    else:
+        formulario = tipoItemForm()
+    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del tipo de item',
+                               'usuario_actor': usuario_actor, 'proyecto': proyecto},
+                              context_instance=RequestContext(request))
+
+def detalle_tipoItem(request, id_tipo, id_proyecto):
+    """
+    :param request:
+    :param id_tipo:
+    :param id_proyecto:
+    :return:
+    """
+    usuario_actor = request.user
+    tipo = TipoDeItem.objects.get(pk=id_tipo)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('proyecto/tipoItem/detalle_tipoItem.html',
+                              {'usuario_actor': usuario_actor,
+                               'tipo': tipo, 'proyecto': proyecto},
+                              context_instance=RequestContext(request))
+
+def modificar_tipo(request, id_proyecto, id_tipo):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_tipo:
+    :return:
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    tipo = Atributo.objects.get(pk=id_tipo)
+    if request.method == 'POST':
+        formulario = AtributoForm(request.POST, instance=tipo)
+        if formulario.is_valid():
+            formulario.save()
+            lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+            return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
+                                      {'mensaje': 'El atributo se ha modificado exitosamente',
+                                       'usuario_actor': usuario_actor, 'proyecto':proyecto, 'tipo':tipo,
+                                       'lista_tipos': lista_tipos},
+                                      context_instance=RequestContext(request))
+    else:
+        formulario = tipoItemForm(instance=tipo)
+    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
+                              {'formulario': formulario, 'operacion': 'Modificar tipo de item',
+                               'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo':tipo},
+                              context_instance=RequestContext(request))
+
+def eliminar_tipo(request, id_tipo, id_proyecto):
+    """
+
+    :param request:
+    :param id_tipo:
+    :param id_proyecto:
+    :return:
+    """
+    tipo = Atributo.objects.get(pk=id_tipo)
+    tipo.delete()
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_tipos = Atributo.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/atributo/atributo_exito.html',
+                              {'usuario_actor': usuario_actor,'mensaje':'El tipo de item ha sido eliminado exitosamente',
+                               'lista_tipos': lista_tipos ,  'proyecto':proyecto},
                               context_instance=RequestContext(request))

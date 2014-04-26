@@ -59,12 +59,19 @@ urlpatterns = patterns('',
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
 ################################################URL ATRIBUTO############################################################
-
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/$', 'administracion.views.administrar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/nuevo/$', 'administracion.views.crear_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
+
+###############################################URL TIPO DE ITEM#########################################################
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/nuevo/$', 'administracion.views.crear_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/detalle/(?P<id_tipo>\d+)/$', 'administracion.views.detalle_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/modificar/(?P<id_tipo>\d+)/$', 'administracion.views.modificar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
+
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
