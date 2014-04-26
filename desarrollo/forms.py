@@ -16,4 +16,4 @@ class ItemForm(forms.ModelForm):
 
     class Meta:
         model = Item
-        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado']
+        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version']

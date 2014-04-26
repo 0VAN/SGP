@@ -49,7 +49,7 @@ def des_fase(request, id_proyecto, id_fase):
 def crear_item(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
-    item = Item(Usuario=usuario, Fase=fase)
+    item = Item(Usuario=usuario, Fase=fase, Version=1)
     if request.method=='POST':
         formulario = ItemForm(request.POST, instance=item)
         if formulario.is_valid():
@@ -65,6 +65,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+    item.Version+=1
     formulario = ItemForm(request.POST, instance=item)
     if formulario.is_valid():
         formulario.save()

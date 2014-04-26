@@ -1,5 +1,5 @@
 from django.db import models
-from administracion.models import Fase
+from administracion.models import Fase, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 
 # Create your models here.
@@ -26,5 +26,6 @@ class Item(models.Model):
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
     Fase = models.ForeignKey(Fase)
-    #Version = models.IntegerField()
+    Tipo = models.ForeignKey(TipoDeItem)
+    Version = models.IntegerField()
     Observacion = models.TextField()
