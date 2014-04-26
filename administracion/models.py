@@ -176,11 +176,14 @@ class Atributo(models.Model):
 
     """
     Nombre = models.CharField(max_length=30, unique=True)
-    Descripcion = models.TextField(max_length=100)
-    Costo_temporal = models.PositiveSmallIntegerField()
-    Costo_monetario = models.PositiveIntegerField()
+    Tipo = models.CharField(max_length=2,
+                              choices=( ('N', 'Numerico'),
+                                        ('C', 'Cadena'),)
+                              )
+    Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
+    Fecha = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.Nombre

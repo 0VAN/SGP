@@ -1,34 +1,23 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
-{% block titulo %}Detalle de Fase{% endblock %}
-{% block encabezado %}Vista detalle del proyecto {{ proyecto.Nombre}}{% endblock %}
+{% block titulo %}Detalle de atribto{% endblock %}
+{% block encabezado %}Vista detalle del atributo {{ atributo.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li>
-        {% if usuario_actor.can_administrar_fase %}
-            <a href='{% url "administracion.views.administrar_fases" proyecto.id %}' class="btn btn-default">Administracion de Fases</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Administracion de Fases</a>
-        {% endif %}
-    </li>
-    <li>
-        {% if usuario_actor.can_admnistrar_proyecto %}
-            <a href='{% url "administracion.views.modificar_proyecto" proyecto.id %}' class="btn btn-default">Modificar Proyecto</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Modificar Proyecto</a>
-        {% endif %}
-    </li>
-    <li>
-          <a href='{% url "administracion.views.crear_atributo" proyecto.id %}' class="btn btn-default">Crear Atributo</a>
-    </li>
-    <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
-
+    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
+
 {% block contenido %}
     <dl>
+        <dt>Nombre:</dt>
+        <dd>{{ atributo.Nombre }}</dd>
         <dt>Descripcion:</dt>
         <dd>{{ atributo.Descripcion }}</dd>
         <dt>Creado por:</dt>
         <dd>{{ atributo.Usuario }}</dd>
+        <dt>Tipo:</dt>
+        <dd>{{ atributo.Tipo }}</dd>
+        <dt>Proyecto:</dt>
+        <dd>{{ atributo.Proyecto }}</dd>
     </dl>
 {% endblock %}

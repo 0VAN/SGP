@@ -5,30 +5,49 @@
 {% block botones %}
     <li>
         {% if usuario_actor.can_add_proyecto %}
-            <a href="{% url 'administracion.views.crear_atributo' proyecto.id %}" class="btn btn-default">Crear atributos</a>
+            <a href="{% url 'administracion.views.crear_atributo' proyecto.id %}" class="btn btn-default">Crear atributo</a>
         {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear atributos</a>
+            <a class="btn btn-default" disabled="disabled">Crear atributo</a>
         {% endif %}
         <a href="/administracion" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 
 {% block contenido %}
-    <table class="table table-condensed table-hover">
+<table class="table table-striped">
         <thead>
             <tr>
-                <td>Nombre del atributo</td>
-                <td>Usuario que lo creo</td>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
             </tr>
         </thead>
-        <tr>
-        {% for atributo in lista_atributos %}
-            <tr class="clickableRow info" href='{% url "administracion.views.detalle_atributo" proyecto.id atributo.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
-            <td>{{ atributo.Nombre }}</td>
-            <td>{{ atributo.Usuario }}</td>
-        {% empty %}
-            <td class="warning">No hay proyectos registrados aun</td>
-        {% endfor %}
-        </tr>
+        <tbody>
+            {% for atributo in lista_atributos %}
+                <tr>
+                    <td>{{ atributo.Nombre }}</td>
+                    <td>{{ atributo.Usuario }}</td>
+                    <td>{{ atributo.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id atributo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id atributo.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.eliminar_atributo' proyecto.id atributo.id %}">Eliminar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>No hay atributos disponibles</p>
+            {% endfor %}
+        </tbody>
     </table>
+    {% block mensaje %}{% endblock %}
 {% endblock %}
+

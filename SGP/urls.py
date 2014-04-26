@@ -36,7 +36,8 @@ urlpatterns = patterns('',
 ###############################################URL PROYECTO#############################################################
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo/$', 'administracion.views.nuevo_proyecto'),
-    url(r'^administracion/proyectos/detalle/(?P<id_proyecto>\d+)/$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/detalle/$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.iniciar_proyecto'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
@@ -49,8 +50,7 @@ urlpatterns = patterns('',
 ################################################URL ROL#################################################################
     url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
     url(r'^administracion/roles/nuevo/$', 'administracion.views.crear_rol'),
-    url(r'^administracion/roles/asignar/$', 'administracion.views.vista_asignar_rol'),
-    url(r'^administracion/roles/asignar/(?P<id_usuario_p>\d+)/$', 'administracion.views.asignar_rol'),
+    url(r'^administracion/roles/asignar/(?P<id_rol>\d+)/$', 'administracion.views.asignar_rol'),
     url(r'^administracion/roles/detalle/(?P<idRol>\d+)/$', 'administracion.views.detalle_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
@@ -60,10 +60,11 @@ urlpatterns = patterns('',
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
 ################################################URL ATRIBUTO############################################################
 
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/$', 'administracion.views.administrar_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/nuevo/$', 'administracion.views.crear_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributo/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
-
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/$', 'administracion.views.administrar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/nuevo/$', 'administracion.views.crear_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
