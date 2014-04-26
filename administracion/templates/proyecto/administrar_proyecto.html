@@ -14,21 +14,25 @@
 {% endblock %}
 
 {% block contenido %}
-    <table class="table table-condensed table-hover">
-        <thead>
+    {% if usuario_actor.can_consultar_proyecto %}
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <td>Nombre del Proyecto</td>
+                    <td>Lider de Proyecto</td>
+                </tr>
+            </thead>
             <tr>
-                <td>Nombre del Proyecto</td>
-                <td>Lider de Proyecto</td>
+            {% for proyecto in lista_proyectos %}
+                <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
+                <td>{{ proyecto.Nombre }}</td>
+                <td>{{ proyecto.Lider }}</td>
+            {% empty %}
+                <td class="warning">No hay proyectos registrados aun</td>
+            {% endfor %}
             </tr>
-        </thead>
-        <tr>
-        {% for proyecto in lista_proyectos %}
-            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
-            <td>{{ proyecto.Nombre }}</td>
-            <td>{{ proyecto.Lider }}</td>
-        {% empty %}
-            <td class="warning">No hay proyectos registrados aun</td>
-        {% endfor %}
-        </tr>
-    </table>
+        </table>
+    {% else %}
+        <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
+    {% endif %}
 {% endblock %}

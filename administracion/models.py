@@ -1,15 +1,15 @@
 
 from django.db import models
+from django import forms
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin import widgets
 
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
 Group.add_to_class('Usuario', models.ForeignKey(User, null=True))
 Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
-
-
 
 
 
@@ -85,30 +85,25 @@ User.add_to_class('can_delete_group', can_delete_group)
 
 ###########################################Vistas de Control de Acceso #################################################
 
-def can_administrar_fase(self):
-    if self.is_active:
-        if self.can_add_fase() or self.can_change_fase() or self.can_delete_fase():
-            return True
-    return False
-User.add_to_class('can_administrar_fase', can_administrar_fase)
+def can_consultar_fase(self):
+    permiso = 'consulta_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_fase', can_consultar_fase)
 
-def can_administrar_proyecto(self):
-    if self.is_active:
-        return self.can_add_proyecto() or self.can_change_proyecto() or self.can_delete_proyecto() or self.can_administrar_fase()
-    return False
-User.add_to_class('can_administrar_proyecto', can_administrar_proyecto)
+def can_consultar_proyecto(self):
+    permiso = 'consulta_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_proyecto', can_consultar_proyecto)
 
-def can_administrar_usuario(self):
-    if self.is_active:
-        return self.can_add_user() or self.can_change_user() or self.can_delete_user()
-    return False
-User.add_to_class('can_administrar_usuario', can_administrar_usuario)
+def can_consultar_usuario(self):
+    permiso = 'consulta_user'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_usuario', can_consultar_usuario)
 
-def can_administrar_rol(self):
-    if self.is_active:
-        return self.can_add_group() or self.can_change_group() or self.can_delete_group()
-    return False
-User.add_to_class('can_administrar_rol', can_administrar_rol)
+def can_consultar_rol(self):
+    permiso = 'consulta_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_rol', can_consultar_rol)
 
 def accesoAdministracion(self):
     rol ='Administracion'
@@ -116,8 +111,9 @@ def accesoAdministracion(self):
         if grupo.name == rol:
             return True
     return False
-
 User.add_to_class('accesoAdministracion', accesoAdministracion)
+
+
 class Proyecto(models.Model):
     """
     Clase Proyecto:

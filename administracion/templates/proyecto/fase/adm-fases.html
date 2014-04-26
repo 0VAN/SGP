@@ -17,25 +17,29 @@
 
 {% endblock %}
 {% block contenido %}
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for fase in fases %}
-                    <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" proyecto.id fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
-                        <td>{{ fase.Nombre }}</td>
-                        <td>{{ fase.Usuario }}</td>
-                        <td>{{ fase.Fecha }}</td>
-            {% empty %}
-                <p>No hay fases</p>
-            {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-    {% block mensaje %}{% endblock %}
+    {% if usuario_actor.can_consultar_fase %}
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fase in fases %}
+                        <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" proyecto.id fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
+                            <td>{{ fase.Nombre }}</td>
+                            <td>{{ fase.Usuario }}</td>
+                            <td>{{ fase.Fecha }}</td>
+                {% empty %}
+                    <p>No hay fases</p>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+        {% block mensaje %}{% endblock %}
+    {% else %}
+        <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
+    {% endif %}
 {% endblock %}

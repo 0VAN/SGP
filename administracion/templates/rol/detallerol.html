@@ -29,5 +29,9 @@
         <dd>{{ rol.Usuario }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ rol.Fecha }}</dd>
+        <dt>Permisos:</dt>
+        {% for permiso in lista_permisos %}
+            <dd>{{ permiso.name }}</dd>
+        {% endfor %}
     </dl>
 {% endblock %}
