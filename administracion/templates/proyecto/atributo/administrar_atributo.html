@@ -9,7 +9,7 @@
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear atributo</a>
         {% endif %}
-        <a href="/administracion" class="btn btn-default">Volver</a>
+        <a href="/administracion/proyectos/" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 
@@ -44,7 +44,9 @@
                     </td>
                 </tr>
             {% empty %}
-                <p>No hay atributos disponibles</p>
+                <tr class="warning">
+                <td>No hay atributos disponibles</td><td></td><td></td><td></td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

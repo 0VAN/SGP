@@ -320,11 +320,11 @@ def crear_fase(request, id_proyecto):
     """
     :param request:
     :param id_proyecto:
-    :return: creacion-fase.html
+    :return: fase_form.html
 
     Vista crear fase
 
-    Recibe como parametros un request y un id de proyecto y retorna la pagina web creacion-fase.html
+    Recibe como parametros un request y un id de proyecto y retorna la pagina web fase_form.html
 
     * Variables
         -   usuario_actor: usuario que realiza la accion
@@ -341,8 +341,9 @@ def crear_fase(request, id_proyecto):
             return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases')
     else:
         formulario = FaseForm()
-    return render_to_response('proyecto/fase/creacion-fase.html',
-                              {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto},
+    return render_to_response('proyecto/fase/fase_form.html',
+                              {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
+                               'operacion':'Ingrese los datos de la fase'},
                               context_instance=RequestContext(request))
 
 #@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
@@ -389,9 +390,9 @@ def modificar_fase(request, idFase, id_proyecto):
         return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases/detalle/'+idFase)
     else:
         formulario = FaseForm(instance=fase)
-    return render_to_response('proyecto/fase/mod-fase.html',
+    return render_to_response('proyecto/fase/fase_form.html',
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
-                               'fase': fase}, context_instance=RequestContext(request))
+                               'fase': fase, 'operacion': 'Modificar Fase'}, context_instance=RequestContext(request))
 
 #@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase, id_proyecto):
@@ -702,7 +703,7 @@ def crear_tipoItem(request, id_proyecto):
         if formulario.is_valid():
             formulario.save()
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
-            return render_to_response('proyecto/atributo/atributo_exito.html',
+            return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
                                        'proyecto': proyecto}, context_instance=RequestContext(request))
@@ -738,9 +739,9 @@ def modificar_tipo(request, id_proyecto, id_tipo):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    tipo = Atributo.objects.get(pk=id_tipo)
+    tipo = TipoDeItem.objects.get(pk=id_tipo)
     if request.method == 'POST':
-        formulario = AtributoForm(request.POST, instance=tipo)
+        formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
             formulario.save()
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
@@ -764,12 +765,12 @@ def eliminar_tipo(request, id_tipo, id_proyecto):
     :param id_proyecto:
     :return:
     """
-    tipo = Atributo.objects.get(pk=id_tipo)
+    tipo = TipoDeItem.objects.get(pk=id_tipo)
     tipo.delete()
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = Atributo.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/atributo/atributo_exito.html',
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El tipo de item ha sido eliminado exitosamente',
-                               'lista_tipos': lista_tipos ,  'proyecto':proyecto},
+                               'lista_tipos': lista_tipos, 'proyecto':proyecto},
                               context_instance=RequestContext(request))

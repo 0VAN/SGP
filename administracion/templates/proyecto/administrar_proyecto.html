@@ -46,7 +46,9 @@
                     </td>
                 </tr>
             {% empty %}
-                <p>No hay proyectos disponibles</p>
+                <tr class="warning">
+                <td>No hay proyectos disponibles</td><td></td><td></td><td></td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

@@ -13,7 +13,7 @@
             <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
     </li>
-    <li><a href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
 {% block contenido %}
@@ -47,7 +47,9 @@
                     </td>
                 </tr>
             {% empty %}
-                <p>No hay fases disponibles</p>
+                <tr class="warning">
+                <td>No hay fases disponibles</td><td></td><td></td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

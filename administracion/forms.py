@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashFiel
 from django.contrib.auth.models import User, Group
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 
+
 class AsignarRol(forms.ModelForm):
     """
     Formulario para la asignacion de roles a los usuarios
