@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05aa2bc8-626a-4d71-af43-32e250fae0d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/administrar_tipoItem.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/detalle_tipoItem.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_exito.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_form.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_eliminado.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/forms.py" afterPath="$PROJECT_DIR$/administracion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/models.py" afterPath="$PROJECT_DIR$/administracion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/urls.py" afterPath="$PROJECT_DIR$/SGP/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/views.py" afterPath="$PROJECT_DIR$/administracion/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -42,52 +36,25 @@
       <file leaf-file-name="administrar_proyecto.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="61" selection-start="1845" selection-end="1980" vertical-scroll-proportion="-9.37037" vertical-offset="467" max-vertical-offset="1044">
+            <state line="40" column="61" selection-start="1845" selection-end="1980" vertical-scroll-proportion="-10.666667" vertical-offset="432" max-vertical-offset="1044">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crear_proyecto.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html">
+      <file leaf-file-name="administrar_rol.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="42" selection-start="213" selection-end="213" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="324">
+            <state line="14" column="106" selection-start="638" selection-end="638" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="1296">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detalle_proyecto.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto.html">
+      <file leaf-file-name="asignar_rol.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="83" selection-start="333" selection-end="333" vertical-scroll-proportion="-0.18518518" vertical-offset="103" max-vertical-offset="522">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="administrar_tipoItem.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/administrar_tipoItem.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="64" selection-start="353" selection-end="353" vertical-scroll-proportion="11.333333" vertical-offset="432" max-vertical-offset="1062">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proyecto_exito.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="134" selection-start="1429" selection-end="1429" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="828">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detalle_tipoItem.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/detalle_tipoItem.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="29" selection-start="670" selection-end="670" vertical-scroll-proportion="-12.0" vertical-offset="0" max-vertical-offset="468">
+            <state line="25" column="56" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.4568528" vertical-offset="270" max-vertical-offset="792">
               <folding />
             </state>
           </provider>
@@ -96,16 +63,16 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGP/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="4" selection-start="5986" selection-end="5986" vertical-scroll-proportion="0.0" vertical-offset="962" max-vertical-offset="1494">
+            <state line="54" column="95" selection-start="3841" selection-end="3841" vertical-scroll-proportion="0.0" vertical-offset="800" max-vertical-offset="1512">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="746" column="76" selection-start="33486" selection-end="33486" vertical-scroll-proportion="0.29064038" vertical-offset="13310" max-vertical-offset="14040">
+            <state line="538" column="42" selection-start="23618" selection-end="23618" vertical-scroll-proportion="0.0" vertical-offset="9400" max-vertical-offset="14040">
               <folding>
                 <element signature="e#26#152#0" expanded="true" />
               </folding>
@@ -113,19 +80,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tipoItem_exito.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_exito.html">
+      <file leaf-file-name="middleware.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/middleware.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="55" selection-start="55" selection-end="55" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="180">
+            <state line="17" column="8" selection-start="723" selection-end="723" vertical-scroll-proportion="0.0" vertical-offset="94" max-vertical-offset="1674">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tipoItem_form.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_form.html">
+      <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="76" selection-start="256" selection-end="256" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="324">
+            <state line="16" column="27" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="2088">
+              <folding>
+                <element signature="e#45#79#0" expanded="true" />
+                <marker date="1398534276614" expanded="true" signature="360:625" placeholder="..." />
+                <marker date="1398534276614" expanded="true" signature="576:625" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="504" column="26" selection-start="17717" selection-end="17738" vertical-scroll-proportion="0.0" vertical-offset="8568" max-vertical-offset="9234">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administracion/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="2" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3636">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="datosIniciales.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datosIniciales.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="9.296296" vertical-offset="251" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
@@ -165,7 +163,6 @@
         <option value="$PROJECT_DIR$/administracion/templates/rol/form_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/eliminarrol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/crear_rol.html" />
-        <option value="$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html" />
         <option value="$PROJECT_DIR$/sesion/templates/gestion_exito_pass.html" />
         <option value="$PROJECT_DIR$/sesion/templates/gestion_exito.html" />
@@ -186,20 +183,21 @@
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_eliminado.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_exito.html" />
-        <option value="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/atributo/administrar_atributo.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/atributo/detalle_atributo.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_form.html" />
         <option value="$PROJECT_DIR$/administracion/models.py" />
-        <option value="$PROJECT_DIR$/administracion/forms.py" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_exito.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/detalle_tipoItem.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_form.html" />
-        <option value="$PROJECT_DIR$/SGP/urls.py" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/administrar_tipoItem.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" />
         <option value="$PROJECT_DIR$/administracion/views.py" />
+        <option value="$PROJECT_DIR$/SGP/urls.py" />
+        <option value="$PROJECT_DIR$/administracion/forms.py" />
+        <option value="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html" />
       </list>
     </option>
   </component>
@@ -304,7 +302,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="proyecto" />
+              <option name="myItemId" value="rol" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,36 +325,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="proyecto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tipoItem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proyecto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="atributo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -691,11 +659,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21912351" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27171314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27171314" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22993827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20679012" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -727,11 +695,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/roleliminado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/rol/operacion_rol_exito.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
@@ -858,20 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="39" selection-start="198" selection-end="198" vertical-scroll-proportion="-0.0" vertical-offset="108" max-vertical-offset="738">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="6" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.0" vertical-offset="522" max-vertical-offset="9234">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/desarrollo/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
@@ -930,19 +879,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/rol/crear_rol_exito.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="43" selection-end="130" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="198" />
+        <state line="3" column="0" selection-start="43" selection-end="130" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="198">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="100" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" vertical-offset="857" max-vertical-offset="1458">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="32" selection-start="795" selection-end="795" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="1188">
           <folding />
         </state>
       </provider>
@@ -975,13 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datosIniciales.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SGP/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="13" selection-start="1086" selection-end="1086" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
@@ -992,29 +929,6 @@
     <entry file="file://$PROJECT_DIR$/sesion/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="1" selection-start="3704" selection-end="3704" vertical-scroll-proportion="0.0" vertical-offset="1619" max-vertical-offset="2106">
-          <folding>
-            <element signature="e#45#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="41" selection-start="6953" selection-end="6953" vertical-scroll-proportion="0.0" vertical-offset="3167" max-vertical-offset="3636">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="4" selection-start="5986" selection-end="5986" vertical-scroll-proportion="0.0" vertical-offset="962" max-vertical-offset="1494">
           <folding />
         </state>
       </provider>
@@ -1036,13 +950,6 @@
     <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/administrar_tipoItem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="64" selection-start="353" selection-end="353" vertical-scroll-proportion="11.333333" vertical-offset="432" max-vertical-offset="1062">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="61" selection-start="1845" selection-end="1980" vertical-scroll-proportion="-9.37037" vertical-offset="467" max-vertical-offset="1044">
           <folding />
         </state>
       </provider>
@@ -1075,12 +982,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="61" selection-start="1845" selection-end="1980" vertical-scroll-proportion="-10.666667" vertical-offset="432" max-vertical-offset="1044">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datosIniciales.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="9.296296" vertical-offset="251" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="95" selection-start="3841" selection-end="3841" vertical-scroll-proportion="0.0" vertical-offset="800" max-vertical-offset="1512">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="27" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="2088">
+          <folding>
+            <element signature="e#45#79#0" expanded="true" />
+            <marker date="1398534276614" expanded="true" signature="360:625" placeholder="..." />
+            <marker date="1398534276614" expanded="true" signature="576:625" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="106" selection-start="638" selection-end="638" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="1296">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="8" selection-start="723" selection-end="723" vertical-scroll-proportion="0.0" vertical-offset="1253" max-vertical-offset="1674">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="746" column="76" selection-start="33486" selection-end="33486" vertical-scroll-proportion="0.29064038" vertical-offset="13310" max-vertical-offset="14040">
+        <state line="538" column="42" selection-start="23618" selection-end="23618" vertical-scroll-proportion="0.0" vertical-offset="9400" max-vertical-offset="14040">
           <folding>
             <element signature="e#26#152#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="2" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="504" column="26" selection-start="17717" selection-end="17738" vertical-scroll-proportion="0.0" vertical-offset="8568" max-vertical-offset="9234">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/asignar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="56" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.4568528" vertical-offset="270" max-vertical-offset="792">
+          <folding />
         </state>
       </provider>
     </entry>

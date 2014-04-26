@@ -345,7 +345,7 @@ def crear_fase(request, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
 def detalle_fase(request, idFase, id_proyecto):
     """
 
@@ -371,7 +371,7 @@ def detalle_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
     """
 
@@ -393,7 +393,7 @@ def modificar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'fase': fase}, context_instance=RequestContext(request))
 
-@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -408,7 +408,7 @@ def vista_eliminar_fase(request, idFase, id_proyecto):
     return render_to_response('proyecto/fase/eliminarfase.html',
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
-@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -541,16 +541,16 @@ def vista_asignar_rol(request):
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
-def asignar_rol(request, id_rol):
+def asignar_rol(request, id_usuario):
     """
     :param request:
     :param idRol:
     :return:
     """
     usuario_actor = request.user
-    rol = Group.objects.get(pk=id_rol)
+    usuario = User.objects.get(pk=id_usuario)
     if request.method == 'POST':
-        formulario = AsignarRol(request.POST, instance=rol)
+        formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
            formulario.save()
            roles = Group.objects.all()
@@ -558,10 +558,10 @@ def asignar_rol(request, id_rol):
                                      {'mensaje': 'Rol asignado con exito', 'usuario_actor': usuario_actor,
                                       'roles': roles}, context_instance=RequestContext(request))
     else:
-        formulario = AsignarRol(instance=rol)
+        formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_rol.html', {'formulario': formulario,
                                                  'operacion': 'Seleccione el usuario a quien desee asignar el rol',
-                                                 'usuario_actor': usuario_actor, 'rol':rol},
+                                                 'usuario_actor': usuario_actor, 'usuario':usuario},
                   context_instance=RequestContext(request))
 
 
