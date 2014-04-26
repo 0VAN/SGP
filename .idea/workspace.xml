@@ -2,28 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05aa2bc8-626a-4d71-af43-32e250fae0d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/administrar_tipoItem.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_exito.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/detalle_tipoItem.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_falla.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_exito.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/tipoItem/tipoItem_form.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto_exito.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/crear_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/atributo_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/administrar_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/administrar_atributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/detalle_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/atributo/detalle_atributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/detallerol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/detallerol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/forms.py" afterPath="$PROJECT_DIR$/administracion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/forms.py" afterPath="$PROJECT_DIR$/sesion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/models.py" afterPath="$PROJECT_DIR$/administracion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/urls.py" afterPath="$PROJECT_DIR$/SGP/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/views.py" afterPath="$PROJECT_DIR$/administracion/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SGP.iws" />
@@ -684,7 +662,11 @@
       <created>1398268480777</created>
       <updated>1398268480777</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'alexis' into juanfran">
+      <created>1398535350075</created>
+      <updated>1398535350075</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
