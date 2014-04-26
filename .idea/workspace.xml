@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05aa2bc8-626a-4d71-af43-32e250fae0d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/item/mod_item.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" afterPath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/models.py" afterPath="$PROJECT_DIR$/desarrollo/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/urls.py" afterPath="$PROJECT_DIR$/SGP/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/views.py" afterPath="$PROJECT_DIR$/desarrollo/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" afterPath="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SGP.iws" />
@@ -58,7 +55,16 @@
       <file leaf-file-name="des_fase.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="120" selection-start="2118" selection-end="2118" vertical-scroll-proportion="-8.888889" vertical-offset="588" max-vertical-offset="1188">
+            <state line="36" column="61" selection-start="1477" selection-end="1477" vertical-scroll-proportion="-4.2222223" vertical-offset="534" max-vertical-offset="1188">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="desarrollo.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="29" selection-start="143" selection-end="143" vertical-scroll-proportion="0.17045455" vertical-offset="0" max-vertical-offset="1044">
               <folding />
             </state>
           </provider>
@@ -106,10 +112,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administracion/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="331" column="71" selection-start="15031" selection-end="15563" vertical-scroll-proportion="0.3051724" vertical-offset="5691" max-vertical-offset="11070">
+            <state line="331" column="47" selection-start="15539" selection-end="15539" vertical-scroll-proportion="0.0" vertical-offset="5691" max-vertical-offset="11070">
               <folding />
             </state>
           </provider>
@@ -147,7 +153,6 @@
         <option value="$PROJECT_DIR$/doc/index.rst" />
         <option value="$PROJECT_DIR$/doc/conf.py" />
         <option value="$PROJECT_DIR$/doc/administracion.rst" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/form_usuario_mod.html" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
         <option value="$PROJECT_DIR$/administracion/templates/usuario/operacion_usuario_exito_pass.html" />
@@ -186,10 +191,11 @@
         <option value="$PROJECT_DIR$/desarrollo/forms.py" />
         <option value="$PROJECT_DIR$/administracion/forms.py" />
         <option value="$PROJECT_DIR$/SGP/urls.py" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" />
         <option value="$PROJECT_DIR$/desarrollo/models.py" />
         <option value="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/item/mod_item.html" />
         <option value="$PROJECT_DIR$/desarrollo/views.py" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
       </list>
     </option>
   </component>
@@ -715,7 +721,11 @@
       <created>1398526039427</created>
       <updated>1398526039427</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Modificar item">
+      <created>1398528168181</created>
+      <updated>1398528168181</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -778,7 +788,8 @@
     </option>
     <MESSAGE value="Modulo de desarrollo" />
     <MESSAGE value="Crear item" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crear item" />
+    <MESSAGE value="Modificar item" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modificar item" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -962,13 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="12" selection-start="351" selection-end="1787" vertical-scroll-proportion="-15.518518" vertical-offset="499" max-vertical-offset="1044">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="9" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="256" max-vertical-offset="1260">
@@ -1103,13 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="120" selection-start="2118" selection-end="2118" vertical-scroll-proportion="-8.888889" vertical-offset="588" max-vertical-offset="1188">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/desarrollo/templates/proyecto/fase/item/mod_item.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="38" selection-start="302" selection-end="302" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="324">
@@ -1128,7 +1125,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="71" selection-start="15031" selection-end="15563" vertical-scroll-proportion="0.3051724" vertical-offset="5691" max-vertical-offset="11070">
+        <state line="331" column="47" selection-start="15539" selection-end="15539" vertical-scroll-proportion="0.0" vertical-offset="5691" max-vertical-offset="11070">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="61" selection-start="1477" selection-end="1477" vertical-scroll-proportion="-4.2222223" vertical-offset="534" max-vertical-offset="1188">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="29" selection-start="143" selection-end="143" vertical-scroll-proportion="0.17045455" vertical-offset="0" max-vertical-offset="1044">
           <folding />
         </state>
       </provider>
