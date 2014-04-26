@@ -61,3 +61,18 @@ def crear_item(request, id_proyecto, id_fase):
         {'usuario': usuario, 'formulario': formulario, 'fase': fase},
         context_instance=RequestContext(request))
 
+def mod_item(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    formulario = ItemForm(request.POST, instance=item)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/item/'+id_item+'/modificar')
+    else:
+        formulario = ItemForm(instance=item)
+    return render_to_response(
+        'proyecto/fase/item/mod_item.html',
+        {'usuario':usuario, 'item':item, 'fase':fase, 'formulario':formulario},
+        context_instance = RequestContext(request)
+    )

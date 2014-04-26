@@ -69,6 +69,7 @@ urlpatterns = patterns('',
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'desarrollo.views.des_fase'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/crear_item/$', 'desarrollo.views.crear_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/modificar/$', 'desarrollo.views.mod_item'),
 
 )
 

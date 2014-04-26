@@ -26,5 +26,5 @@ class Item(models.Model):
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
     Fase = models.ForeignKey(Fase)
-    Version = models.IntegerField()
+    #Version = models.IntegerField()
     Observacion = models.TextField()
