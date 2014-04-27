@@ -16,4 +16,4 @@ python manage.py syncdb
 
 echo 5- Se cargan los datos iniciales para el proyecto
 
-python manage.py loaddata datosIniciales.json
+#python manage.py loaddata datosIniciales.json
