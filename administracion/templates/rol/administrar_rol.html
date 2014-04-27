@@ -23,7 +23,8 @@
 {% endblock %}
 
 {% block contenido %}
-   <table class="table table-striped">
+    {% if usuario_actor.can_consultar_rol %}
+        <table class="table table-condensed table-hover">
             <thead>
                 <tr>
                     <td>Nombre</td>
@@ -62,7 +63,6 @@
           {% endif %}
             </tbody>
         </table>
+    {% endif %}
     {% block mensaje %}{% endblock %}
 {% endblock %}
-
-

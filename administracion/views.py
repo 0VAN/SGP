@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
+from django.contrib.auth.models import User, Group, Permission
+from administracion.models import Proyecto, Fase
 
 # Create your views here.
 ########################################################################################################################
@@ -140,7 +142,7 @@ def pass_change(request, id_usuario_p):
                    'usuario_parametro': usuario_parametro},
                   context_instance=RequestContext(request))
 
-@user_passes_test( User.can_administrar_usuario , login_url="/iniciar_sesion")
+@user_passes_test( User.can_consultar_usuario , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario_p):
     """
 
@@ -197,7 +199,7 @@ def cambioEstado_usuario_form(request, id_usuario_p):
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
 ########################################################################################################################
-@user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     """
 
@@ -253,7 +255,7 @@ def nuevo_proyecto(request):
                               {'formulario': formulario, 'operacion':'Ingrese los datos del proyecto'
                                , 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
-@user_passes_test( User.can_administrar_proyecto , login_url="/iniciar_sesion")
+@user_passes_test( User.can_consultar_proyecto , login_url="/iniciar_sesion")
 def detalle_proyecto(request, id_proyecto):
     """
 
@@ -291,7 +293,8 @@ def iniciar_proyecto(request, id_proyecto):
 ########################################################################################################################
 ###########################################Vistas de administracion de Fase#############################################
 ########################################################################################################################
-@user_passes_test( User.can_administrar_fase , login_url="/iniciar_sesion")
+
+@user_passes_test(User.can_consultar_fase, login_url="/iniciar_sesion")
 def administrar_fases(request, id_proyecto):
     """
 
@@ -346,7 +349,8 @@ def crear_fase(request, id_proyecto):
                                'operacion':'Ingrese los datos de la fase'},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_administrar_fase, login_url="/iniciar_sesion")
+
+@user_passes_test(User.can_consultar_fase, login_url="/iniciar_sesion")
 def detalle_fase(request, idFase, id_proyecto):
     """
 
@@ -429,7 +433,7 @@ def eliminar_fase(request, idFase, id_proyecto):
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################
-@user_passes_test(User.can_administrar_rol, login_url="/iniciar_sesion")
+@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
 def administrar_roles(request):
     """
 
@@ -466,7 +470,7 @@ def crear_rol(request):
                                'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_administrar_rol, login_url="/iniciar_sesion")
+@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
     """
 
@@ -476,7 +480,8 @@ def detalle_rol(request, idRol):
     """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
-    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol},
+    lista_permisos = rol.permissions.all()
+    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol,'lista_permisos':lista_permisos},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_group, login_url="/iniciar_sesion")

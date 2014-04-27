@@ -5,6 +5,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
+from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
+from django.contrib.auth.models import User, Group, Permission
+from administracion.models import Proyecto, Fase
+from django.contrib.admin import widgets
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
 class AsignarRol(forms.ModelForm):
@@ -27,6 +32,7 @@ class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto
         exclude = ['Usuario', 'Estado', 'Usuarios']
+
 
 class UsuarioModForm(forms.ModelForm):
     """
@@ -83,14 +89,20 @@ class FaseForm(forms.ModelForm):
         exclude = ['Usuario', 'Proyecto']
 
 class RolForm(forms.ModelForm):
+    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),
+                                          widget=FilteredSelectMultiple(('Permisos'),False,))
     """
-    Formulario para el la creacion de roles
+    Formulario para la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
     agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
     """
     class Meta:
         model = Group
         exclude = ['Usuario']
+    class Media:
+        css = {'all':('/media/css/widgets.css',),}
+        # jsi18n is required by the widget
+        js = ('/admin/jsi18n/',)
 
 class AtributoForm(forms.ModelForm):
     """
@@ -109,3 +121,4 @@ class tipoItemForm(forms.ModelForm):
     class Meta:
         model = TipoDeItem
         exclude = ['Usuario', 'Proyecto']
+

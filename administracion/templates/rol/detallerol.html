@@ -16,7 +16,8 @@
         <dt>Creado el:</dt>
         <dd>{{ rol.Fecha }}</dd>
         <dt>Permisos:</dt>
-        <dd>{{ rol.permissions }}</dd>
-
+        {% for permiso in lista_permisos %}
+            <dd>{{ permiso.name }}</dd>
+        {% endfor %}
     </dl>
 {% endblock %}
