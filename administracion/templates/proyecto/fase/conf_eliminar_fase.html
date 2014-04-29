@@ -6,11 +6,13 @@
 {%  block botones %}
     <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
+
 {% block contenido %}
-    <p>Desea eliminar la fase {{ fase.Nombre }}?</p>
+    <p class="alert alert-danger">Esta seguro que desea eliminar la fase {{ fase.Nombre }}? Este cambio no podra
+    deshacerse</p>
     <p>
-        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_fase' proyecto.id fase.id %}">Si</a>
-        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">No</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_fase' proyecto.id fase.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_fases' proyecto.id %}">No</a>
     </p>
 
 

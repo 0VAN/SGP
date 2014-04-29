@@ -175,8 +175,11 @@ class Atributo(models.Model):
     """
     Nombre = models.CharField(max_length=30, unique=True)
     Tipo = models.CharField(max_length=2,
-                              choices=( ('N', 'Numerico'),
-                                        ('C', 'Cadena'),)
+                              choices=( ('E', 'Entero'),
+                                        ('C', 'Cadena'),
+                                        ('F', 'Flotante'),
+                                        ('A', 'Archivo'),
+                                        ('L', 'Logico'),)
                               )
     Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
@@ -191,6 +194,8 @@ class TipoDeItem(models.Model):
     Nombre = models.CharField(max_length=30)
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
-    Atributos = models.ManyToManyField(Atributo)
+    Atributos = models.ManyToManyField(Atributo, blank=True)
     Proyecto = models.ForeignKey(Proyecto)
 
+    def __unicode__(self):
+        return self.Nombre

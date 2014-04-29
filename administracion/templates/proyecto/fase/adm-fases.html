@@ -1,6 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administracion de Fases{% endblock %}
-{% block encabezado %}Administracion de Fases <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
+{% block encabezado %}Lista de fases del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
@@ -27,13 +27,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for fase in fases %}
+            {% for fase in lista_fases %}
                 <tr>
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>
                     <td>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
@@ -41,8 +41,12 @@
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
-                                <li><a href="{% url 'administracion.views.vista_eliminar_fase' proyecto.id fase.id %}">Eliminar</a></li>
                             </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>
@@ -53,5 +57,6 @@
             {% endfor %}
         </tbody>
     </table>
-    {% block mensaje %}{% endblock %}
+        {% block mensaje %}{% endblock %}
+
 {% endblock %}

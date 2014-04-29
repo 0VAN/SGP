@@ -41,16 +41,20 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     Opciones <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="'menu">
                                     <li><a href="{% url 'administracion.views.detalle_rol' rol.id %}">Detalle</a></li>
                                     <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}">Modificar</a></li>
-                                    <li><a href="{% url 'administracion.views.eliminar_rol' rol.id %}">Eliminar</a></li>
                                     <li class="divider"></li>
                                 </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <a href="{% url 'administracion.views.confirmar_eliminar_rol' rol.id %}" type="button" class="btn btn-danger">Eliminar</a>
                             </div>
                         </td>
                     </tr>

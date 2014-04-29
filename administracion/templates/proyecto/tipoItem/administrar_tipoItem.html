@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Tipo de Item{% endblock %}
-{% block encabezado %}Lista de tipos de items <small>Haz click en opciones para interactuar con un tipo de item</small>{% endblock %}
+{% block encabezado %}Lista de tipos de items del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con un tipo de item</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -30,7 +30,7 @@
                     <td>{{ tipo.Usuario }}</td>
                     <td>{{ tipo.Fecha }}</td>
                     <td>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
@@ -38,8 +38,12 @@
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id tipo.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id tipo.id %}">Modificar</a></li>
-                                <li><a href="{% url 'administracion.views.eliminar_tipo' proyecto.id tipo.id %}">Eliminar</a></li>
                             </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_tipo' proyecto.id tipo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>

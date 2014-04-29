@@ -43,3 +43,4 @@ def des_fase(request, id_proyecto, id_fase):
         {'usuario': usuario, 'fase': fase},
         context_instance=RequestContext(request))
 
+

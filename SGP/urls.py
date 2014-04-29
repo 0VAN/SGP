@@ -40,14 +40,18 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo/$', 'administracion.views.nuevo_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/detalle/$', 'administracion.views.detalle_proyecto'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.iniciar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.confirmar_iniciar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciado/$', 'administracion.views.iniciar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/modificar/$', 'administracion.views.modificar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminado/$', 'administracion.views.eliminar_proyecto'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/nuevo/$', 'administracion.views.crear_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/detalle/(?P<idFase>\d+)/$', 'administracion.views.detalle_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
 
 ################################################URL ROL#################################################################
@@ -57,7 +61,7 @@ urlpatterns = patterns('',
     url(r'^administracion/roles/asignar/(?P<id_usuario>\d+)/$', 'administracion.views.asignar_rol'),
     url(r'^administracion/roles/detalle/(?P<idRol>\d+)/$', 'administracion.views.detalle_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
-    url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
+    url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
 
 ###############################################URL CREDENCIAL###########################################################
@@ -67,15 +71,16 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/nuevo/$', 'administracion.views.crear_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.confirmar_eliminar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminado/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
 
 ###############################################URL TIPO DE ITEM#########################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/nuevo/$', 'administracion.views.crear_tipoItem'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/detalle/(?P<id_tipo>\d+)/$', 'administracion.views.detalle_tipoItem'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/modificar/(?P<id_tipo>\d+)/$', 'administracion.views.modificar_tipo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
-
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.confirmar_eliminar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminado/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),

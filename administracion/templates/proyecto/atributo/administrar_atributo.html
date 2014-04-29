@@ -1,6 +1,6 @@
-{% extends 'administracion.html' %}
+{% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administrar atributos{% endblock %}
-{% block encabezado %}Lista de atributos <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
+{% block encabezado %}Lista de atributos del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con un atributo</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -30,7 +30,7 @@
                     <td>{{ atributo.Usuario }}</td>
                     <td>{{ atributo.Fecha }}</td>
                     <td>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
@@ -38,8 +38,12 @@
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id atributo.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id atributo.id %}">Modificar</a></li>
-                                <li><a href="{% url 'administracion.views.eliminar_atributo' proyecto.id atributo.id %}">Eliminar</a></li>
                             </ul>
+                        </div>
+                    </td>
+                    <td>
+                         <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>

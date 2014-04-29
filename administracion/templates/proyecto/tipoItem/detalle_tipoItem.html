@@ -16,6 +16,8 @@
         <dt>Proyecto:</dt>
         <dd>{{ tipo.Proyecto }}</dd>
         <dt>Atributos:</dt>
-        <dd>{{ tipo.Atributos }}</dd>
+        {% for atributo in tipo.Atributos.all %}
+        <dd>{{ atributo.Nombre }} de tipo {{ atributo.get_Tipo_display }}</dd>
+        {% endfor %}
     </dl>
 {% endblock %}

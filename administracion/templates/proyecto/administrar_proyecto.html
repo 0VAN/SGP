@@ -20,7 +20,6 @@
                 <td>Nombre</td>
                 <td>Lider</td>
                 <td>Estado</td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -30,18 +29,33 @@
                     <td>{{ proyecto.Lider }}</td>
                     <td>{{ proyecto.get_Estado_display }}</td>
                     <td>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'administracion.views.detalle_proyecto' proyecto.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.detalle_proyecto' proyecto.id %}">Detalles</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Administrar <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}">Fases</a></li>
                                 <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}">Atributos</a></li>
                                 <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}">Tipos de item</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url 'administracion.views.iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
                             </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>
@@ -52,4 +66,5 @@
             {% endfor %}
         </tbody>
     </table>
+    {% block mensaje %}{% endblock %}
 {% endblock %}
