@@ -58,7 +58,7 @@ def crear_item(request, id_proyecto, id_fase):
             return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
     else:
         formulario = ItemForm()
-    return render_to_response('proyecto/fase/item/crear_item2.html',
+    return render_to_response('proyecto/fase/item/crear_item.html',
         {'usuario': usuario, 'formulario': formulario, 'fase': fase, 'lista_tipos':lista_tipos},
         context_instance=RequestContext(request))
 

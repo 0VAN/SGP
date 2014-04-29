@@ -5,8 +5,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
+from desarrollo.forms import MyForm
 
-class AsignarRol(forms.ModelForm):
+class AsignarRol(MyForm):
     """
     Formulario para la asignacion de roles a los usuarios
     Hereda del forms.ModelForm y utiliza la clase user
@@ -18,7 +19,7 @@ class AsignarRol(forms.ModelForm):
 
 
 
-class ProyectoForm(ModelForm):
+class ProyectoForm(MyForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto
@@ -72,7 +73,7 @@ class UsuarioDelForm(forms.ModelForm):
         model = User
         fields = ('is_active',)
 
-class FaseForm(forms.ModelForm):
+class FaseForm(MyForm):
     """
     Formulario para el la creacion de fases
     Hereda de forms.ModelForm y utiliza la clase Fase para
@@ -82,7 +83,7 @@ class FaseForm(forms.ModelForm):
         model = Fase
         exclude = ['Usuario', 'Proyecto']
 
-class RolForm(forms.ModelForm):
+class RolForm(MyForm):
     """
     Formulario para el la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
@@ -92,7 +93,7 @@ class RolForm(forms.ModelForm):
         model = Group
         exclude = ['Usuario']
 
-class AtributoForm(forms.ModelForm):
+class AtributoForm(MyForm):
     """
     Formulario para el la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
@@ -103,7 +104,7 @@ class AtributoForm(forms.ModelForm):
         exclude = ['Usuario', 'Proyecto']
 
 
-class tipoItemForm(forms.ModelForm):
+class tipoItemForm(MyForm):
     """
 
     """
