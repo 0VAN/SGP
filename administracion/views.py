@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from django.contrib.auth import models
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
 from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol,\
     AtributoForm, tipoItemForm
@@ -6,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
+from django.contrib import admin
+from django.db import models
 
 # Create your views here.
 ########################################################################################################################
@@ -672,6 +675,43 @@ def eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
+def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
+    """
+    Create specified model
+    """
+    class Meta:
+        # Using type('Meta', ...) gives a dictproxy error during model creation
+        pass
+
+    if app_label:
+        # app_label must be set using the Meta inner class
+        setattr(Meta, 'app_label', app_label)
+
+    # Update Meta with any options that were provided
+    if options is not None:
+        for key, value in options.iteritems():
+            setattr(Meta, key, value)
+
+    # Set up a dictionary to simulate declarations within a class
+    attrs = {'__module__': module, 'Meta': Meta}
+
+    # Add in any fields that were provided
+    if fields:
+        attrs.update(fields)
+
+    # Create the class, which automatically triggers ModelBase processing
+    model = type(name, (models.Model,), attrs)
+
+    # Create an Admin class if admin options were provided
+    if admin_opts is not None:
+        class Admin(admin.ModelAdmin):
+            pass
+        for key, value in admin_opts:
+            setattr(Admin, key, value)
+        admin.site.register(model, Admin)
+
+    return model
+
 
 def administrar_tipoItem(request, id_proyecto):
     """
@@ -701,52 +741,13 @@ def crear_tipoItem(request, id_proyecto):
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
+            nombrex = request.POST['Nombre']
+            nombre = str(nombrex)
             formulario.save()
-            lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
-            return render_to_response('proyecto/atributo/atributo_exito.html',
-                                      {'mensaje': 'El tipo de item se ha creado exitosamente',
-                                       'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
-                                       'proyecto': proyecto}, context_instance=RequestContext(request))
-    else:
-        formulario = tipoItemForm()
-    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
-                              {'formulario': formulario, 'operacion': 'Ingrese los datos del tipo de item',
-                               'usuario_actor': usuario_actor, 'proyecto': proyecto},
-                              context_instance=RequestContext(request))
-
-########################################################################################################################
-########################################Vistas de tipo de item######################################################
-########################################################################################################################
-
-def administrar_tipoItem(request, id_proyecto):
-    """
-
-    :param request:
-    :param id_proyecto:
-    :return:
-    """
-    usuario_actor = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/tipoItem/administrar_tipoItem.html',
-                              {'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
-                               'proyecto': proyecto},
-                              context_instance=RequestContext(request))
-
-def crear_tipoItem(request, id_proyecto):
-    """
-
-    :param request:
-    :param id_proyecto:
-    :return:
-    """
-    usuario_actor = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
-    tipo = TipoDeItem(Usuario=usuario_actor, Proyecto=proyecto)
-    if request.method == 'POST':
-        formulario = tipoItemForm(request.POST, instance=tipo)
-        if formulario.is_valid():
-            formulario.save()
+            model = type(nombre, (models.Model,), {
+                'Nombre': models.CharField(max_length=1000),
+                '__module__': __name__,
+            })
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/atributo/atributo_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
@@ -819,3 +820,4 @@ def eliminar_tipo(request, id_tipo, id_proyecto):
                               {'usuario_actor': usuario_actor,'mensaje':'El tipo de item ha sido eliminado exitosamente',
                                'lista_tipos': lista_tipos ,  'proyecto':proyecto},
                               context_instance=RequestContext(request))
+

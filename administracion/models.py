@@ -178,10 +178,23 @@ class Atributo(models.Model):
 
     """
     Nombre = models.CharField(max_length=30, unique=True)
-    Tipo = models.CharField(max_length=2,
-                              choices=( ('N', 'Numerico'),
-                                        ('C', 'Cadena'),)
-                              )
+    NUMERICO = 'N'
+    CADENA = 'C'
+    FECHA = 'F'
+    HORA = 'H'
+    TIPO_CHOICES = (
+        (NUMERICO, 'Numerico'),
+        (CADENA, 'Cadena'),
+        (FECHA, 'Fecha'),
+        (HORA, 'Hora'),
+    )
+    TIPO_MODELO = (
+        (NUMERICO, models.IntegerField),
+        (CADENA, models.CharField),
+        (FECHA, models.DateField),
+        (HORA, models.TimeField),
+    )
+    Tipo = models.CharField(max_length=1, choices=(TIPO_CHOICES))
     Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)

@@ -35,6 +35,7 @@ class UsuarioModForm(forms.ModelForm):
     Hereda de forms.ModelForm y utiliza la clase user para
     agregar ciertos campos a la hora de la modificacion
     """
+    error_css_class = 'list-group-item-danger'
     username = forms.RegexField(
         label=("Nombre de usuario"), max_length=30, regex=r"^[\w.@+-]+$",
         help_text=("Required. 30 characters or fewer. Letters, digits and "
@@ -51,6 +52,8 @@ class UsuarioModForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
             super(UsuarioModForm, self).__init__(*args, **kwargs)
+            for field_name, field in self.fields.items():
+                field.widget.attrs['class'] = 'form-control'
             f = self.fields.get('user_permissions', None)
             if f is not None:
                 f.queryset = f.queryset.select_related('content_type')
@@ -63,7 +66,7 @@ class UsuarioModForm(forms.ModelForm):
 
 
 
-class UsuarioDelForm(forms.ModelForm):
+class UsuarioDelForm(MyForm):
     """
     Formulario para el la eliminacion logica del usuario
     Hereda de forms.ModelForm y utiliza la clase user para
