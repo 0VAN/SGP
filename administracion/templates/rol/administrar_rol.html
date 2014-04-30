@@ -11,6 +11,7 @@
         {% endif %}
     </li>
     <li>
+
         {% if usuario_actor.can_add_group %}
             <a href="{% url 'administracion.views.vista_asignar_rol' %} "class="btn btn-default">Asignar Rol</a>
         {% else %}
@@ -30,9 +31,11 @@
                     <td>Nombre</td>
                 </tr>
             </thead>
+
           {% if roles|length > 2 %}
             {% for rol in roles %}
               {% if rol.pk > 2 %}
+
                     <tr>
                         <td>{{ rol }}</td>
                         <td></td>
@@ -49,6 +52,10 @@
                                     <li><a href="{% url 'administracion.views.detalle_rol' rol.id %}">Detalle</a></li>
                                     <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}">Modificar</a></li>
                                     <li class="divider"></li>
+<<<<<<< HEAD
+                                    <li><a href="{% url 'administracion.views.asignar_rol' rol.id %}">Asignar</a></li>
+=======
+>>>>>>> alexis
                                 </ul>
                             </div>
                         </td>

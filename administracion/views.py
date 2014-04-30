@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
+from django.contrib.auth import models
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm, AtributoModForm
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
@@ -8,6 +9,9 @@ from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
 import reversion
+from django.contrib import admin
+from django.db import models
+
 # Create your views here.
 ########################################################################################################################
 #############################Vistas de iniciar sesion, cerrar sesion, administracion####################################
@@ -440,7 +444,10 @@ def crear_fase(request, id_proyecto):
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases')
+            return render_to_response('proyecto/fase/fases_exito.html',
+                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
+                               'mensaje': 'Se ha creado la fase exitosamente'},
+                              context_instance=RequestContext(request))
     else:
         formulario = FaseForm(instance=fase)
     return render_to_response('proyecto/fase/fase_form.html',
@@ -510,7 +517,10 @@ def modificar_fase(request, idFase, id_proyecto):
                 formulario = FaseForm(request.POST, instance=fase)
                 if formulario.is_valid():
                     formulario.save()
-                    return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases/detalle/'+idFase)
+                    return render_to_response('proyecto/fase/fases_exito.html',
+                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
+                               'mensaje': 'Se ha modificado la fase exitosamente'},
+                              context_instance=RequestContext(request))
                 else:
                     formulario = FaseForm(instance=fase)
                     return render_to_response('proyecto/fase/fase_form.html',
@@ -688,6 +698,7 @@ def vista_asignar_rol(request):
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
+
 def asignar_rol(request, id_usuario):
     """
     :param request:
@@ -906,6 +917,43 @@ def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
+def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
+    """
+    Create specified model
+    """
+    class Meta:
+        # Using type('Meta', ...) gives a dictproxy error during model creation
+        pass
+
+    if app_label:
+        # app_label must be set using the Meta inner class
+        setattr(Meta, 'app_label', app_label)
+
+    # Update Meta with any options that were provided
+    if options is not None:
+        for key, value in options.iteritems():
+            setattr(Meta, key, value)
+
+    # Set up a dictionary to simulate declarations within a class
+    attrs = {'__module__': module, 'Meta': Meta}
+
+    # Add in any fields that were provided
+    if fields:
+        attrs.update(fields)
+
+    # Create the class, which automatically triggers ModelBase processing
+    model = type(name, (models.Model,), attrs)
+
+    # Create an Admin class if admin options were provided
+    if admin_opts is not None:
+        class Admin(admin.ModelAdmin):
+            pass
+        for key, value in admin_opts:
+            setattr(Admin, key, value)
+        admin.site.register(model, Admin)
+
+    return model
+
 
 def administrar_tipoItem(request, id_proyecto):
     """
@@ -935,7 +983,13 @@ def crear_tipoItem(request, id_proyecto):
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
+            nombrex = request.POST['Nombre']
+            nombre = str(nombrex)
             formulario.save()
+            model = type(nombre, (models.Model,), {
+                'Nombre': models.CharField(max_length=1000),
+                '__module__': __name__,
+            })
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
@@ -1055,3 +1109,4 @@ def confirmar_eliminar_tipo(request, id_tipo, id_proyecto):
                 return render_to_response('proyecto/tipoItem/conf_eliminar_tipo.html',
                               {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
+

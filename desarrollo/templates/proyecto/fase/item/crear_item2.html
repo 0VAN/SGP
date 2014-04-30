@@ -1,0 +1,69 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block encabezado %}Crear Item{% endblock %}
+{% block botones%}<li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>{% endblock %}
+
+{% block titulo %}Crear item {% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post">{% csrf_token %}
+        {% if formulario.errors %}
+            <div class="alert alert-danger">
+                <p>Error: Algunos campos requieren atencion<p>
+                <ul class="list-unstyled">
+                    {% for field in formulario %}
+                        {% if field.errors %}
+                            <li><b>{{ field.label }}</b></li>
+                            {% for error in field.errors %}
+                                <ul>
+                                    <li>{{ error }}</li>
+                                </ul>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <p class="text-muted">Campos obligatorios (*)</p>
+        <div class="form-group">
+            <label for="id_Nombre">Nombre (*)</label>
+            <input type="text" class="form-control" id="id_Nombre" maxlength="30" name="Nombre" placeholder="Nombre del item">
+        </div>
+
+        <div class="input-group">
+            <label for="id_Tipo">Tipo (*)</label>
+            <select class="form-control" id="id_Tipo" name="Tipo">
+                <option value="" selected="selected">Elige un tipo</option>
+                {% for tipo in lista_tipos %}
+                    <option value="{{ tipo.id }}">{{ tipo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="id_Descripcion">Descripcion</label>
+			<textarea cols="40" rows="10" class="form-control" id="id_Descripcion" name="Descripcion" placeholder="Descripción del item"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="id_CostoTemporal">Costo Temporal (*)</label>
+			<input type="number" class="form-control" id="id_CostoTemporal" name="CostoTemporal" value="0" >
+        </div>
+        <br>
+        <div class="input-group">
+            <label for="id_CostoUnitario">Costo Unitario *</label>
+			<input type="number" class="form-control" id="id_CostoUnitario" name="CostoUnitario"  value="0">
+        </div>
+
+        <div class="input-group">
+            <label for="id_Prioridad">Prioridad (*)</label>
+			<input type="number" class="form-control" id="id_Prioridad" name="Prioridad"  value="0">
+        </div>
+
+        <div class="input-group">
+            <label for="id_Observacion">Observacion</label>
+			<textarea cols="40" rows="10" class="form-control" id="id_Observacion" name="Observacion" placeholder="Observaciones"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn-default btn">Crear item</button>
+    </form>
+{% endblock %}

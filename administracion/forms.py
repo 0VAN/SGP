@@ -11,8 +11,9 @@ from administracion.models import Proyecto, Fase
 from django.contrib.admin import widgets
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
+from desarrollo.forms import MyForm
 
-class AsignarRol(forms.ModelForm):
+class AsignarRol(MyForm):
     """
     Formulario para la asignacion de roles a los usuarios
     Hereda del forms.ModelForm y utiliza la clase user
@@ -23,7 +24,8 @@ class AsignarRol(forms.ModelForm):
         fields = ['groups']
 
 
-class ProyectoForm(ModelForm):
+
+class ProyectoForm(MyForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto
@@ -40,6 +42,7 @@ class UsuarioModForm(forms.ModelForm):
     Hereda de forms.ModelForm y utiliza la clase user para
     agregar ciertos campos a la hora de la modificacion
     """
+    error_css_class = 'list-group-item-danger'
     username = forms.RegexField(
         label=("Nombre de usuario"), max_length=30, regex=r"^[\w.@+-]+$",
         help_text=("Required. 30 characters or fewer. Letters, digits and "
@@ -56,6 +59,8 @@ class UsuarioModForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
             super(UsuarioModForm, self).__init__(*args, **kwargs)
+            for field_name, field in self.fields.items():
+                field.widget.attrs['class'] = 'form-control'
             f = self.fields.get('user_permissions', None)
             if f is not None:
                 f.queryset = f.queryset.select_related('content_type')
@@ -68,7 +73,7 @@ class UsuarioModForm(forms.ModelForm):
 
 
 
-class UsuarioDelForm(forms.ModelForm):
+class UsuarioDelForm(MyForm):
     """
     Formulario para el la eliminacion logica del usuario
     Hereda de forms.ModelForm y utiliza la clase user para
@@ -78,7 +83,7 @@ class UsuarioDelForm(forms.ModelForm):
         model = User
         fields = ('is_active',)
 
-class FaseForm(forms.ModelForm):
+class FaseForm(MyForm):
     """
     Formulario para el la creacion de fases
     Hereda de forms.ModelForm y utiliza la clase Fase para
@@ -88,9 +93,10 @@ class FaseForm(forms.ModelForm):
         model = Fase
         exclude = ['Usuario', 'Proyecto']
 
-class RolForm(forms.ModelForm):
+class RolForm(MyForm):
     permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),
                                           widget=FilteredSelectMultiple(('Permisos'),False,))
+
     """
     Formulario para la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
@@ -104,7 +110,7 @@ class RolForm(forms.ModelForm):
         # jsi18n is required by the widget
         js = ('/admin/jsi18n/',)
 
-class AtributoForm(forms.ModelForm):
+class AtributoForm(MyForm):
     """
     Formulario para el la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
@@ -114,19 +120,9 @@ class AtributoForm(forms.ModelForm):
         model = Atributo
         exclude = ['Usuario', 'Proyecto']
 
-class AtributoModForm(forms.ModelForm):
-    """
-    Formulario para el la creacion de roles
-    Hereda de forms.ModelForm y utiliza la clase Group para
-    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
-    """
-    class Meta:
-        model = Atributo
-        exclude = ['Usuario', 'Proyecto']
 
-    Comentario = forms.CharField(max_length=60, help_text='Realice un comentario acerca de la modificacion')
 
-class tipoItemForm(forms.ModelForm):
+class tipoItemForm(MyForm):
     """
 
     """

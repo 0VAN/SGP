@@ -49,7 +49,7 @@ urlpatterns = patterns('',
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/nuevo/$', 'administracion.views.crear_fase'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/detalle/(?P<idFase>\d+)/$', 'administracion.views.detalle_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/detalle/$', 'administracion.views.detalle_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
@@ -73,8 +73,8 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.confirmar_eliminar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminado/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/$', 'administracion.views.version_atributo'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/(?P<id_version>\d+)/$', 'administracion.views.reversion_atributo'),
+    #url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/$', 'administracion.views.version_atributo'),
+    #url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/(?P<id_version>\d+)/$', 'administracion.views.reversion_atributo'),
 
 ###############################################URL TIPO DE ITEM#########################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
@@ -87,5 +87,8 @@ urlpatterns = patterns('',
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'desarrollo.views.des_fase'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/crear_item/$', 'desarrollo.views.crear_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/modificar/$', 'desarrollo.views.mod_item'),
+
 )
 

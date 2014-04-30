@@ -1,10 +1,12 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import  ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase
+from administracion.models import Proyecto, Fase, TipoDeItem
+from desarrollo.models import Item
+from desarrollo.forms import ItemForm
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -39,8 +41,42 @@ def des_proyecto(request, id_proyecto):
 def des_fase(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
+    lista_items = Item.objects.filter(Fase=fase)
     return render_to_response('proyecto/fase/des_fase.html',
-        {'usuario': usuario, 'fase': fase},
+        {'usuario': usuario, 'fase': fase, 'lista_items': lista_items},
         context_instance=RequestContext(request))
 
 
+def crear_item(request, id_proyecto, id_fase):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item(Usuario=usuario, Fase=fase, Version=1)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=fase.Proyecto)
+    if request.method=='POST':
+        formulario = ItemForm(request.POST, instance=item)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
+    else:
+        formulario = ItemForm()
+    return render_to_response('proyecto/fase/item/crear_item.html',
+        {'usuario': usuario, 'formulario': formulario, 'fase': fase, 'lista_tipos':lista_tipos},
+        context_instance=RequestContext(request))
+
+def mod_item(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    item.Version+=1
+    formulario = ItemForm(request.POST, instance=item)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=fase.Proyecto)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
+    else:
+        formulario = ItemForm(instance=item)
+    return render_to_response(
+        'proyecto/fase/item/mod_item.html',
+        {'usuario':usuario, 'item':item, 'fase':fase, 'formulario':formulario, 'lista_tipos': lista_tipos},
+        context_instance = RequestContext(request)
+    )

@@ -1,7 +1,7 @@
 {% extends 'proyecto/des_proyecto.html' %}
 {% block titulo %}Desarrollo de Fase{% endblock %}
 {% block botones %}
-    <li><a href="" class="btn btn-default">Crear Item</a></li>
+    <li><a href="{% url 'desarrollo.views.crear_item' fase.Proyecto.id fase.id %}" class="btn btn-default">Crear Item</a></li>
     <li><a href="" class="btn btn-default">Buscar Item</a></li>
     <li><a href="" class="btn btn-default">Revivir Item</a></li>
     <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
@@ -25,17 +25,17 @@
                 <thead>
                     <tr>
                         <td>Nombre</td>
-                        <td>Usuario</td>
-                        <td>Fecha</td>
+                        <td>Creado por</td>
+                        <td>Fecha de creacion</td>
                         <td></td>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for fase in lista_fases %}
+                    {% for item in lista_items %}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ item.Nombre }}</td>
+                            <td>{{ item.Usuario.get_full_name }}</td>
+                            <td>{{ item.Fecha }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -44,7 +44,7 @@
 
                                     <ul class="dropdown-menu" role="'menu">
                                         <li><a href="#">Desarrollo</a></li>
-                                        <li><a href="#">Acción #2</a></li>
+                                        <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
                                         <li><a href="#">Acción #3</a></li>
                                     </ul>
                                 </div>

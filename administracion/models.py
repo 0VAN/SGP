@@ -178,13 +178,23 @@ class Atributo(models.Model):
 
     """
     Nombre = models.CharField(max_length=30, unique=True)
-    Tipo = models.CharField(max_length=2,
-                              choices=( ('E', ('Entero')),
-                                        ('C', 'Cadena'),
-                                        ('F', 'Flotante'),
-                                        ('A', 'Archivo'),
-                                        ('L', 'Logico'),)
-                              )
+    NUMERICO = 'N'
+    CADENA = 'C'
+    FECHA = 'F'
+    HORA = 'H'
+    TIPO_CHOICES = (
+        (NUMERICO, 'Numerico'),
+        (CADENA, 'Cadena'),
+        (FECHA, 'Fecha'),
+        (HORA, 'Hora'),
+    )
+    TIPO_MODELO = (
+        (NUMERICO, models.IntegerField),
+        (CADENA, models.CharField),
+        (FECHA, models.DateField),
+        (HORA, models.TimeField),
+    )
+    Tipo = models.CharField(max_length=1, choices=(TIPO_CHOICES))
     Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
@@ -193,13 +203,11 @@ class Atributo(models.Model):
     def __unicode__(self):
         return self.Nombre
 
-@reversion.register(Atributo)
-
 class TipoDeItem(models.Model):
     Nombre = models.CharField(max_length=30)
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
-    Atributos = models.ManyToManyField(Atributo, blank=True)
+    Atributos = models.ManyToManyField(Atributo)
     Proyecto = models.ForeignKey(Proyecto)
 
     def __unicode__(self):
