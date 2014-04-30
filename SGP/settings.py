@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'sesion',
     'administracion',
     'desarrollo',
+    'reversion',
 )
 #encoding:utf-8
 
@@ -52,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'reversion.middleware.RevisionMiddleware',
 )
 
 ROOT_URLCONF = 'SGP.urls'

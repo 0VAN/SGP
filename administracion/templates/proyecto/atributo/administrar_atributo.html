@@ -10,6 +10,7 @@
             <a class="btn btn-default" disabled="disabled">Crear atributo</a>
         {% endif %}
         <a href="/administracion/proyectos/" class="btn btn-default">Volver</a>
+
     </li>
 {% endblock %}
 
@@ -38,6 +39,7 @@
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id atributo.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id atributo.id %}">Modificar</a></li>
+                                <li><a href="{% url "administracion.views.version_atributo" proyecto.id atributo.id %}">versiones</a></li>
                             </ul>
                         </div>
                     </td>

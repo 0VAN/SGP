@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin import widgets
+import reversion
 
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
@@ -157,25 +158,28 @@ class Fase(models.Model):
             -   Proyecto: proyecto al que corresponde la fase
             -   Fecha: es la fecha de creacion de la fase
     """
-    Nombre = models.CharField(max_length=50, unique=True)
+    Nombre = models.CharField(max_length=50)
     Descripcion = models.TextField(max_length=100)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
     Fecha = models.DateTimeField(auto_now=True)
     Numero = models.PositiveIntegerField()
-    #Version = models.ManyToManyField("self")
+
+    class Meta:
+        unique_together = ("Nombre", "Proyecto")
 
     def __unicode__(self):
         return self.Nombre
 
 
 class Atributo(models.Model):
+
     """
 
     """
     Nombre = models.CharField(max_length=30, unique=True)
     Tipo = models.CharField(max_length=2,
-                              choices=( ('E', 'Entero'),
+                              choices=( ('E', ('Entero')),
                                         ('C', 'Cadena'),
                                         ('F', 'Flotante'),
                                         ('A', 'Archivo'),
@@ -184,11 +188,12 @@ class Atributo(models.Model):
     Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
-    Fecha = models.DateTimeField(auto_now=True)
+    Fecha = models.DateField(auto_now=True)
 
     def __unicode__(self):
         return self.Nombre
 
+@reversion.register(Atributo)
 
 class TipoDeItem(models.Model):
     Nombre = models.CharField(max_length=30)

@@ -1,14 +1,13 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol,\
-    AtributoForm, tipoItemForm
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm, AtributoModForm
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
-
+import reversion
 # Create your views here.
 ########################################################################################################################
 #############################Vistas de iniciar sesion, cerrar sesion, administracion####################################
@@ -250,7 +249,7 @@ def nuevo_proyecto(request):
                                        'usuario_actor': usuario_actor, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
     else:
-        formulario = ProyectoForm()
+        formulario = ProyectoForm(instance=proyecto)
     return render_to_response('proyecto/crear_proyecto.html',
                               {'formulario': formulario, 'operacion':'Ingrese los datos del proyecto'
                                , 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
@@ -443,7 +442,7 @@ def crear_fase(request, id_proyecto):
             formulario.save()
             return HttpResponseRedirect('/administracion/proyectos/'+id_proyecto+'/fases')
     else:
-        formulario = FaseForm()
+        formulario = FaseForm(instance=fase)
     return render_to_response('proyecto/fase/fase_form.html',
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'operacion':'Ingrese los datos de la fase'},
@@ -606,7 +605,7 @@ def crear_rol(request):
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
                                       context_instance=RequestContext(request))
     else:
-        formulario = RolForm()
+        formulario = RolForm(instance=rol)
     return render_to_response('rol/crear_rol.html',
                               {'formulario': formulario, 'operacion': 'Crear rol',
                                'usuario_actor': usuario_actor},
@@ -743,6 +742,7 @@ def administrar_atributo(request, id_proyecto):
                                'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
+@reversion.create_revision()
 def crear_atributo(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -757,7 +757,7 @@ def crear_atributo(request, id_proyecto):
                                        'usuario_actor': usuario_actor, 'lista_atributos':lista_atributos , 'proyecto': proyecto},
                                       context_instance=RequestContext(request))
     else:
-        formulario = AtributoForm()
+        formulario = AtributoForm(instance=atributo)
     return render_to_response('proyecto/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del atributo',
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
@@ -777,7 +777,7 @@ def detalle_atributo(request, id_atributo, id_proyecto):
                               {'usuario_actor': usuario_actor,
                                'atributo': atributo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
-
+@reversion.create_revision()
 def modificar_atributo(request, id_proyecto, id_atributo):
     """
 
@@ -816,9 +816,40 @@ def modificar_atributo(request, id_proyecto, id_atributo):
         formulario = AtributoForm(instance=atributo)
         return render_to_response('proyecto/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Modificar atributo',
-                               'usuario_actor': usuario_actor,  'proyecto':proyecto, 'atributo':atributo},
+                               'usuario_actor': usuario_actor,  'proyecto': proyecto, 'atributo': atributo},
+                              context_instance=RequestContext(request))
+"""
+def version_atributo(request, id_proyecto, id_atributo):
+
+    atributo = Atributo.objects.get(pk=id_atributo)
+    lista_versiones = reversion.get_unique_for_object(atributo)
+    return render_to_response('proyecto/atributo/versiones_atributo.html', {'lista_versiones': lista_versiones, 'atributo':atributo,
+                                                                            'proyecto':Proyecto.objects.get(pk=id_proyecto)},
                               context_instance=RequestContext(request))
 
+def reversion_atributo(request, id_proyecto, id_atributo, id_version):
+    atributo = Atributo.objects.get(pk=id_atributo)
+    lista_version = reversion.get_unique_for_object(atributo)
+    idn_version = int('0'+id_version)
+
+    for version in lista_version:
+        if version.id == idn_version:
+            version.revert()
+            return render_to_response('proyecto/atributo/atributo_exito.html',
+                                      {'mensaje': 'Se ha reversionado el atributo a la version ..... huehuehue',
+                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto), 'atributo': atributo,
+                                       'lista_atributos': Atributo.objects.all()},
+                                      context_instance=RequestContext(request))
+
+
+
+    return render_to_response('proyecto/atributo/atributo_error.html',
+                                      {'mensaje': 'Oops! no se pudo reversionar',
+                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto), 'atributo': atributo,
+                                       'lista_atributos': Atributo.objects.all()},
+                                      context_instance=RequestContext(request))
+
+"""
 def eliminar_atributo(request, id_atributo, id_proyecto):
     """
 

@@ -73,6 +73,8 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.confirmar_eliminar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminado/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/$', 'administracion.views.version_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/(?P<id_version>\d+)/$', 'administracion.views.reversion_atributo'),
 
 ###############################################URL TIPO DE ITEM#########################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),

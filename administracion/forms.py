@@ -114,6 +114,18 @@ class AtributoForm(forms.ModelForm):
         model = Atributo
         exclude = ['Usuario', 'Proyecto']
 
+class AtributoModForm(forms.ModelForm):
+    """
+    Formulario para el la creacion de roles
+    Hereda de forms.ModelForm y utiliza la clase Group para
+    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
+    """
+    class Meta:
+        model = Atributo
+        exclude = ['Usuario', 'Proyecto']
+
+    Comentario = forms.CharField(max_length=60, help_text='Realice un comentario acerca de la modificacion')
+
 class tipoItemForm(forms.ModelForm):
     """
 
