@@ -440,10 +440,12 @@ def crear_fase(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase(Usuario= usuario_actor, Proyecto=proyecto)
+    lista_fases = Fase.objects.filter(Proyecto=proyecto)
     if request.method=='POST':
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             formulario.save()
+
             return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha creado la fase exitosamente'},
@@ -917,6 +919,26 @@ def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
+def install(model):
+    from django.core.management import sql, color
+    from django.db import connection
+
+    # Standard syncdb expects models to be in reliable locations,
+    # so dynamic models need to bypass django.core.management.syncdb.
+    # On the plus side, this allows individual models to be installed
+    # without installing the entire project structure.
+    # On the other hand, this means that things like relationships and
+    # indexes will have to be handled manually.
+    # This installs only the basic table definition.
+
+    # disable terminal colors in the sql statements
+    style = color.no_style()
+
+    cursor = connection.cursor()
+    statements, pending = sql.sql_model_create(model, style)
+    for sql in statements:
+        cursor.execute(sql)
+
 def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
     """
     Create specified model
@@ -986,10 +1008,19 @@ def crear_tipoItem(request, id_proyecto):
             nombrex = request.POST['Nombre']
             nombre = str(nombrex)
             formulario.save()
-            model = type(nombre, (models.Model,), {
+            fields = {
                 'Nombre': models.CharField(max_length=1000),
-                '__module__': __name__,
-            })
+            }
+            options = {}
+            model = create_model(
+                nombre,
+                options=options,
+                admin_opts=options,
+                fields=fields,
+                app_label='myplaceholder',
+                module='fake_project.fake_app.no_models',
+            )
+            install(model)
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
@@ -1109,4 +1140,5 @@ def confirmar_eliminar_tipo(request, id_tipo, id_proyecto):
                 return render_to_response('proyecto/tipoItem/conf_eliminar_tipo.html',
                               {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
+
 

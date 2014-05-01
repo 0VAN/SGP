@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'administracion',
     'desarrollo',
     'reversion',
+    'myplaceholder',
 )
 #encoding:utf-8
 

@@ -182,17 +182,17 @@ class Atributo(models.Model):
     CADENA = 'C'
     FECHA = 'F'
     HORA = 'H'
+    LOGICO = 'L'
+    MAIL = 'M'
+    TEXTO = 'T'
     TIPO_CHOICES = (
         (NUMERICO, 'Numerico'),
         (CADENA, 'Cadena'),
         (FECHA, 'Fecha'),
         (HORA, 'Hora'),
-    )
-    TIPO_MODELO = (
-        (NUMERICO, models.IntegerField),
-        (CADENA, models.CharField),
-        (FECHA, models.DateField),
-        (HORA, models.TimeField),
+        (LOGICO, 'Logico'),
+        (MAIL, 'Mail'),
+        (TEXTO, 'Texto'),
     )
     Tipo = models.CharField(max_length=1, choices=(TIPO_CHOICES))
     Descripcion = models.TextField(max_length=100, blank=True)
@@ -212,3 +212,41 @@ class TipoDeItem(models.Model):
 
     def __unicode__(self):
         return self.Nombre
+
+
+"""
+class Numerico(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.IntegerField()
+
+
+class Fecha(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.DateField()
+
+
+class Hora(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.TimeField()
+
+
+class Logico(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.BooleanField()
+
+
+class Mail(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.EmailField
+
+
+class Texto(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.TextField()
+
+
+class Cadena(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Dato = models.CharField()
+
+"""
