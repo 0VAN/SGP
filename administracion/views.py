@@ -1005,22 +1005,7 @@ def crear_tipoItem(request, id_proyecto):
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
-            nombrex = request.POST['Nombre']
-            nombre = str(nombrex)
             formulario.save()
-            fields = {
-                'Nombre': models.CharField(max_length=1000),
-            }
-            options = {}
-            model = create_model(
-                nombre,
-                options=options,
-                admin_opts=options,
-                fields=fields,
-                app_label='myplaceholder',
-                module='fake_project.fake_app.no_models',
-            )
-            install(model)
             lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',

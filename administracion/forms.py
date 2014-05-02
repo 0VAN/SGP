@@ -112,7 +112,7 @@ class RolForm(MyForm):
 
 class AtributoForm(MyForm):
     """
-    Formulario para el la creacion de roles
+    Formulario para el la creacion de atributos
     Hereda de forms.ModelForm y utiliza la clase Group para
     agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
     """

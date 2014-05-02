@@ -1,9 +1,46 @@
 from django.db import models
-from administracion.models import TipoDeItem
-from administracion.models import Fase, TipoDeItem
+from administracion.models import *
 from django.contrib.auth.models import User, Group, Permission
 
 # Create your models here.
+
+
+class TipoAtributo(models.Model):
+    Nombre = models.CharField(max_length=30)
+    Tipo = models.CharField(max_length=1)
+
+    def __unicode__(self):
+        return self.Nombre
+
+
+class Numerico(TipoAtributo):
+    Dato = models.IntegerField()
+
+
+class Fecha(TipoAtributo):
+    Dato = models.DateField()
+
+
+class Hora(TipoAtributo):
+    Dato = models.TimeField()
+
+
+class Logico(TipoAtributo):
+    Dato = models.BooleanField()
+
+
+class Mail(TipoAtributo):
+    Dato = models.EmailField()
+
+
+class Texto(TipoAtributo):
+    Dato = models.TextField()
+
+
+class Cadena(TipoAtributo):
+    Dato = models.CharField(max_length=100)
+
+
 
 class Item(models.Model):
 
@@ -30,3 +67,10 @@ class Item(models.Model):
     Tipo = models.ForeignKey(TipoDeItem)
     Version = models.IntegerField()
     Observacion = models.TextField(blank=True)
+    Campos = models.ManyToManyField(TipoAtributo)
+
+
+
+    def __unicode__(self):
+        return self.Nombre
+

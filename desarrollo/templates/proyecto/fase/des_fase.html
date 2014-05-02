@@ -45,7 +45,7 @@
                                     <ul class="dropdown-menu" role="'menu">
                                         <li><a href="#">Desarrollo</a></li>
                                         <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
-                                        <li><a href="#">Acción #3</a></li>
+                                        <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Completar</a></li>
                                     </ul>
                                 </div>
                             </td>

@@ -214,39 +214,4 @@ class TipoDeItem(models.Model):
         return self.Nombre
 
 
-"""
-class Numerico(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.IntegerField()
 
-
-class Fecha(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.DateField()
-
-
-class Hora(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.TimeField()
-
-
-class Logico(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.BooleanField()
-
-
-class Mail(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.EmailField
-
-
-class Texto(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.TextField()
-
-
-class Cadena(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Dato = models.CharField()
-
-"""

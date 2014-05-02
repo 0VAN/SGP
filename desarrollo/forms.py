@@ -1,11 +1,9 @@
 from django.forms import ModelForm
 # -*- encoding: utf-8 -*-
 
-from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User, Group
-from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
-from desarrollo.models import Item
+from desarrollo.models import *
 
 class MyForm(forms.ModelForm):
 
@@ -25,5 +23,19 @@ class ItemForm(MyForm):
 
     class Meta:
         model = Item
-        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version']
+        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
 
+class TipoAtributoForm(MyForm):
+
+    class Meta:
+        model = TipoAtributo
+
+class NumericoForm(MyForm):
+    class Meta:
+        model = Numerico
+        fields = ['Dato']
+
+class CadenaForm(MyForm):
+    class Meta:
+        model = Cadena
+        fields = ['Dato']

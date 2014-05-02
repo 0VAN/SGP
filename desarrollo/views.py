@@ -5,8 +5,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase, TipoDeItem
-from desarrollo.models import Item
-from desarrollo.forms import ItemForm
+from desarrollo.models import *
+from desarrollo.forms import *
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -56,6 +56,8 @@ def crear_item(request, id_proyecto, id_fase):
         formulario = ItemForm(request.POST, instance=item)
         if formulario.is_valid():
             formulario.save()
+            item2 = Item.objects.last()
+            campos(item2)
             return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
     else:
         formulario = ItemForm()
@@ -78,5 +80,51 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     return render_to_response(
         'proyecto/fase/item/mod_item.html',
         {'usuario':usuario, 'item':item, 'fase':fase, 'formulario':formulario, 'lista_tipos': lista_tipos},
-        context_instance = RequestContext(request)
+        context_instance=RequestContext(request)
     )
+
+
+def completar_item(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    formularios = []
+    atributos = item.Campos.all()
+    if request.method == 'POST':
+        formularios = []
+        for campo in atributos:
+            print campo
+            print campo.Tipo
+            if campo.Tipo == 'N':
+                formularios.append(NumericoForm(request.POST, instance=campo))
+
+            elif campo.Tipo == 'C':
+                formularios.append(CadenaForm(request.POST, instance=campo))
+        print formularios[0]
+        if (formularios[0].is_valid()) and (formularios[1].is_valid()):
+            a = formularios[0].save()
+            b = formularios[1].save(commit=False)
+            b.save()
+
+            return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
+    else:
+        for campo in atributos:
+            if campo.Tipo == 'N':
+                formularios.append(NumericoForm(instance=campo))
+            elif campo.Tipo == 'C':
+                formularios.append(CadenaForm(instance=campo))
+    return render_to_response(
+        'proyecto/fase/item/com_item.html',
+        {'usuario':usuario, 'item':item, 'fase':fase, 'formularios':formularios},
+        context_instance=RequestContext(request)
+    )
+
+def campos(item):
+    for atributo in item.Tipo.Atributos.all():
+        if atributo.Tipo=='N':
+            object = Numerico(Nombre=atributo.Nombre + "(Numerico)", Dato=0, Tipo='N')
+        elif atributo.Tipo=='C':
+            object = Cadena(Nombre=atributo.Nombre + "(Cadena)", Dato="", Tipo='C')
+
+        object.save()
+        item.Campos.add(object)
