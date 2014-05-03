@@ -20,6 +20,7 @@
    <table class="table table-striped">
         <thead>
             <tr>
+                <td>#</td>
                 <td>Nombre</td>
                 <td>Usuario</td>
                 <td>Fecha</td>
@@ -29,11 +30,18 @@
         <tbody>
             {% for fase in fases %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>
                     <td>
                         <div class="btn-group">
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
+                                Arriba
+                            </a>
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
+                                Abajo
+                            </a>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>

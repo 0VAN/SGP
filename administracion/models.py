@@ -200,6 +200,32 @@ class Fase(models.Model):
     def __unicode__(self):
         return self.Nombre
 
+    def ordenar_fase_subir(self):
+        try:
+            faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto.pk).filter(Numero__lt=self.Numero).order_by('-Numero').first()
+            numeroTemporal = faseTemporal.Numero
+            faseTemporal.Numero = self.Numero
+            faseTemporal.save()
+            self.Numero = numeroTemporal
+            self.save()
+        finally:
+            return
+
+    def ordenar_fase_bajar(self):
+        try:
+            faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto).filter(Numero__gt=self.Numero).first()
+            numeroTemporal = faseTemporal.Numero
+            faseTemporal.Numero = self.Numero
+            faseTemporal.save()
+            self.Numero = numeroTemporal
+            self.save()
+        finally:
+            return
+
+
+    class Meta:
+        ordering = ["Numero"]
+
 
 class Atributo(models.Model):
     """

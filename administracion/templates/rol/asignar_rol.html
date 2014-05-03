@@ -23,7 +23,11 @@
                 <tr class="clickableRow info" href='{% url "administracion.views.asignar_rol" usuario.id %}'>
                     <td>{{ usuario.username }}</td>
                     <td>Activo</td>
-                    <td>{{ usuario.get_group_permissions }}</td>
+                    <td>
+                        {% for grupo in usuario.groups.all %}
+                            {{ grupo }}
+                        {% endfor %}
+                    </td>
                 </tr>
             {% else %}
                 <tr class="clickableRow warning" href='{% url "administracion.views.asignar_rol" usuario.id %}'>

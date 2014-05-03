@@ -32,7 +32,8 @@ def administracion(request):
     """
     lista_usuarios = User.objects.all()
     usuario_actor = request.user
-    return render_to_response('administracion.html', {'lista_usuarios': lista_usuarios, 'usuario_actor':usuario_actor},
+    seleccionado = 0
+    return render_to_response('administracion.html', {'lista_usuarios': lista_usuarios, 'usuario_actor':usuario_actor,'seleccionado':seleccionado},
                               context_instance=RequestContext(request))
 ########################################################################################################################
 #############################################Vistas de Administracion de Usuarios#######################################
@@ -160,6 +161,8 @@ def detalle_usuario(request, id_usuario_p):
     usuario_parametro = User.objects.get(pk=id_usuario_p)
     return render_to_response('usuario/detalle_usuario.html', {'usuario_actor': request.user,
                               'usuario_parametro': usuario_parametro}, context_instance=RequestContext(request))
+
+
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario_p):
     """
@@ -277,6 +280,7 @@ def detalle_proyecto(request, id_proyecto):
     return render_to_response('proyecto/detalle_proyecto.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def iniciar_proyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     if proyecto.Estado == 'A':
@@ -317,6 +321,18 @@ def administrar_fases(request, id_proyecto):
     return render_to_response('proyecto/fase/adm-fases.html',
                               {'usuario_actor': usuario_actor, 'fases': fases, 'proyecto': proyecto}
                               , context_instance=RequestContext(request))
+
+
+def ordenar_fase_subir(request, id_fase):
+    fase = Fase.objects.get(pk=id_fase)
+    fase.ordenar_fase_subir()
+    return administrar_fases(request,fase.Proyecto.id)
+
+def ordenar_fase_bajar(request, id_fase):
+    fase = Fase.objects.get(pk=id_fase)
+    fase.ordenar_fase_bajar()
+    return administrar_fases(request,fase.Proyecto.id)
+
 
 @user_passes_test(User.can_add_fase, login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):
@@ -376,7 +392,7 @@ def detalle_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
     """
 
@@ -398,7 +414,7 @@ def modificar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'fase': fase, 'operacion': 'Modificar Fase'}, context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def vista_eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -413,7 +429,7 @@ def vista_eliminar_fase(request, idFase, id_proyecto):
     return render_to_response('proyecto/fase/eliminarfase.html',
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
-#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -566,7 +582,7 @@ def asignar_rol(request, id_usuario):
     else:
         formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_rol.html', {'formulario': formulario,
-                                                 'operacion': 'Seleccione el usuario a quien desee asignar el rol',
+                                                 'operacion': 'Seleccione el rol que desea asignar al usuario',
                                                  'usuario_actor': usuario_actor, 'usuario':usuario},
                   context_instance=RequestContext(request))
 
@@ -574,7 +590,7 @@ def asignar_rol(request, id_usuario):
 ########################################################################################################################
 #########################################Vista de credenciales##########################################################
 ########################################################################################################################
-
+@login_required(login_url="/iniciar_sesion")
 def administrar_credencial(request):
     """
 
@@ -587,6 +603,7 @@ def administrar_credencial(request):
 ########################################################################################################################
 #########################################Vista de atributos#############################################################
 ########################################################################################################################
+
 def administrar_atributo(request, id_proyecto):
     """
 
@@ -601,6 +618,7 @@ def administrar_atributo(request, id_proyecto):
                                'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def crear_atributo(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -621,6 +639,7 @@ def crear_atributo(request, id_proyecto):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def detalle_atributo(request, id_atributo, id_proyecto):
     """
 
@@ -636,6 +655,7 @@ def detalle_atributo(request, id_atributo, id_proyecto):
                                'atributo': atributo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def modificar_atributo(request, id_proyecto, id_atributo):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -657,6 +677,7 @@ def modificar_atributo(request, id_proyecto, id_atributo):
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'atributo':atributo},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def eliminar_atributo(request, id_atributo, id_proyecto):
     """
 
@@ -677,7 +698,7 @@ def eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
-
+@login_required(login_url="/iniciar_sesion")
 def administrar_tipoItem(request, id_proyecto):
     """
 
@@ -693,6 +714,7 @@ def administrar_tipoItem(request, id_proyecto):
                                'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def crear_tipoItem(request, id_proyecto):
     """
 
@@ -719,6 +741,7 @@ def crear_tipoItem(request, id_proyecto):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def detalle_tipoItem(request, id_tipo, id_proyecto):
     """
     :param request:
@@ -734,6 +757,7 @@ def detalle_tipoItem(request, id_tipo, id_proyecto):
                                'tipo': tipo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def modificar_tipo(request, id_proyecto, id_tipo):
     """
 
@@ -762,6 +786,7 @@ def modificar_tipo(request, id_proyecto, id_tipo):
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo':tipo},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def eliminar_tipo(request, id_tipo, id_proyecto):
     """
 
