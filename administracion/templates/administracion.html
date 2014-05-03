@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block titulo %}Administracion{% endblock %}
-
 {% block activo-admin %}active{% endblock %}
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
-{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
+{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>
+{% endblock %}
 
 {% block botones %}
     <li>
@@ -32,7 +32,6 @@
     </li>
 
 {% endblock %}
-
 {% block contenido %}
     {% if usuario_actor.can_consultar_usuario %}
         <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
@@ -42,22 +41,23 @@
                     <td>Estado</td>
                 </tr>
             </thead>
-            
-            {% for usuario in lista_usuarios %}
-                {% if usuario.is_active %}
-                    <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                        <td>{{ usuario.username }}</td>
-                        <td>Activo</td>
-                    </tr>
-                {% else %}
-                    <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                        <td>{{ usuario.username }}</td>
-                        <td>Inactivo</td>
-                    </tr>
-                {% endif %}
-            {% empty %}
-                <p>No hay usuarios registrados aun</p>
-            {% endfor %}
+            <tbody>
+                {% for usuario in lista_usuarios %}
+                    {% if usuario.is_active %}
+                            <tr id=forloop.counter>
+                                <td>{{ usuario.username }}</td>
+                                <td>Activo</td>
+                            </tr>
+                    {% else %}
+                        <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                            <td>{{ usuario.username }}</td>
+                            <td>Inactivo</td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
+                    <p>No hay usuarios registrados aun</p>
+                {% endfor %}
+            </tbody>
         </table>
     {% else %}
         <div class="alert alert-danger">No tienes permiso para ver este contenido</div>

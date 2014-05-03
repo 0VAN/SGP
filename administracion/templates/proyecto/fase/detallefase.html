@@ -8,10 +8,14 @@
 {% endblock %}
 {% block contenido %}
     <dl>
-        <dt>Descripcion:</dt>
-        <dd>{{ fase.Descripcion }}</dd>
         <dt>Creado por:</dt>
         <dd>{{ fase.Usuario }}</dd>
+        <dt>Nombre:</dt>
+        <dd>{{ fase.Nombre }}</dd>
+        <dt>Descripcion:</dt>
+        <dd>{{ fase.Descripcion }}</dd>
+        <dt>Fase Numero:</dt>
+        <dd>{{ fase.Numero }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ fase.Fecha }}</dd>
     </dl>

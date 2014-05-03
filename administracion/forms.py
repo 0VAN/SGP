@@ -1,4 +1,3 @@
-__author__ = 'sgp'
 # -*- encoding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
@@ -8,8 +7,10 @@ from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
-from django.contrib.admin import widgets
 from django.contrib.admin.widgets import FilteredSelectMultiple
+from functools import partial
+
+DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
 from desarrollo.forms import MyForm
 
@@ -22,18 +23,26 @@ class AsignarRol(MyForm):
     class Meta:
         model = User
         fields = ['groups']
+        labels = {
+            'groups': ('Roles'),
+        }
+        help_texts = {
+            'groups': ('Selecciones el/los roles deseados que desea asignar al usuario.'),
+        }
 
 
-
-class ProyectoForm(MyForm):
+class ProyectoForm(ModelForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto
     para agregar ciertos campos de la clase a la hora de la creacion
     """
+    Fecha_inicio = forms.DateField(widget=DateInput())
+    Fecha_finalizacion = forms.DateField(widget=DateInput())
     class Meta:
         model = Proyecto
         exclude = ['Usuario', 'Estado', 'Usuarios']
+
 
 
 class UsuarioModForm(forms.ModelForm):
@@ -106,7 +115,7 @@ class RolForm(MyForm):
         model = Group
         exclude = ['Usuario']
     class Media:
-        css = {'all':('/media/css/widgets.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
         js = ('/admin/jsi18n/',)
 

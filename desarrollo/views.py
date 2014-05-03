@@ -7,6 +7,7 @@ from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase, TipoDeItem
 from desarrollo.models import *
 from desarrollo.forms import *
+import reversion
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -47,6 +48,10 @@ def des_fase(request, id_proyecto, id_fase):
         context_instance=RequestContext(request))
 
 
+
+
+
+@reversion.create_revision()
 def crear_item(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
@@ -62,7 +67,7 @@ def crear_item(request, id_proyecto, id_fase):
                 campo.save()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
-            mensaje = "El item se ha creado exitosamente"
+            mensaje = "El item se ha creado exitosamente, no olvides completar los atributos!!"
             return render_to_response(
                 'proyecto/fase/des_fase.html',
                 {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
@@ -74,6 +79,7 @@ def crear_item(request, id_proyecto, id_fase):
         {'usuario': usuario, 'formulario': formulario, 'fase': fase, 'lista_tipos':lista_tipos},
         context_instance=RequestContext(request))
 
+@reversion.create_revision()
 def mod_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
@@ -98,7 +104,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
-
+@reversion.create_revision()
 def completar_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
@@ -177,3 +183,39 @@ def form_vista(request):
     return render_to_response('form.html',
         {'usuario': usuario, 'formulario': formulario},
         context_instance=RequestContext(request))
+
+def historial_item(request, id_proyecto, id_fase, id_item):
+
+    item = Item.objects.get(pk=id_item)
+    lista_versiones = reversion.get_unique_for_object(item)
+    return render_to_response('proyecto/fase/item/historial_item.html', {'lista_versiones': lista_versiones, 'item':item,
+                                                                            'proyecto':Proyecto.objects.get(pk=id_proyecto),
+                                                                            'fase': Fase.objects.get(pk=id_fase)},
+                              context_instance=RequestContext(request))
+
+def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
+    item = Item.objects.get(pk=id_item)
+    lista_version = reversion.get_unique_for_object(item)
+    idn_version = int('0'+id_version)
+    lista_items = Item.objects.filter(Fase=id_fase)
+
+    for version in lista_version:
+        if version.id == idn_version:
+            version.revert()
+            return render_to_response('proyecto/fase/item/item_exito.html',
+                                      {'mensaje': 'Se ha reversionado el atributo a la version '+id_version,
+                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto),
+                                       'fase': Fase.objects.get(pk=id_fase),
+                                       'lista_items': lista_items},
+                                      context_instance=RequestContext(request))
+
+
+
+    return render_to_response('proyecto/fase/item/item_exito.html',
+                                      {'mensaje': 'Se ha',
+                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto),
+                                       'fase': Fase.objects.get(pk=id_fase),
+                                       'lista_items': lista_items},
+                                      context_instance=RequestContext(request))
+
+

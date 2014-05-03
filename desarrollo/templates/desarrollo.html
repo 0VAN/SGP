@@ -36,12 +36,10 @@
                             </button>
 
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'desarrollo.views.des_proyecto' proyecto.id %}">Desarrollo</a></li>
-                                <li><a href="#">Acción #2</a></li>
-                                <li><a href="#">Acción #3</a></li>
+
+                                <li><a href="{% url "administracion.views.detalle_proyecto" proyecto.id %}">Detalle</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Acción #4</a></li>
-                            </ul>
+                                <li><a href="{% url 'desarrollo.views.des_proyecto' proyecto.id %}">Desarrollar</a></li>                            </ul>
                         </div>
                     </td>
                 </tr>

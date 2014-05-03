@@ -8,9 +8,7 @@ from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
-import reversion
-from django.contrib import admin
-from django.db import models
+
 
 # Create your views here.
 ########################################################################################################################
@@ -35,7 +33,8 @@ def administracion(request):
     """
     lista_usuarios = User.objects.all()
     usuario_actor = request.user
-    return render_to_response('administracion.html', {'lista_usuarios': lista_usuarios, 'usuario_actor':usuario_actor},
+    seleccionado = 0
+    return render_to_response('administracion.html', {'lista_usuarios': lista_usuarios, 'usuario_actor':usuario_actor,'seleccionado':seleccionado},
                               context_instance=RequestContext(request))
 ########################################################################################################################
 #############################################Vistas de Administracion de Usuarios#######################################
@@ -163,6 +162,8 @@ def detalle_usuario(request, id_usuario_p):
     usuario_parametro = User.objects.get(pk=id_usuario_p)
     return render_to_response('usuario/detalle_usuario.html', {'usuario_actor': request.user,
                               'usuario_parametro': usuario_parametro}, context_instance=RequestContext(request))
+
+
 @user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario_p):
     """
@@ -280,6 +281,7 @@ def detalle_proyecto(request, id_proyecto):
     return render_to_response('proyecto/detalle_proyecto.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def iniciar_proyecto(request, id_proyecto):
     """
 
@@ -421,6 +423,18 @@ def administrar_fases(request, id_proyecto):
                               {'usuario_actor': usuario_actor, 'lista_fases': lista_fases, 'proyecto': proyecto}
                               , context_instance=RequestContext(request))
 
+
+def ordenar_fase_subir(request, id_fase):
+    fase = Fase.objects.get(pk=id_fase)
+    fase.ordenar_fase_subir()
+    return administrar_fases(request,fase.Proyecto.id)
+
+def ordenar_fase_bajar(request, id_fase):
+    fase = Fase.objects.get(pk=id_fase)
+    fase.ordenar_fase_bajar()
+    return administrar_fases(request,fase.Proyecto.id)
+
+
 @user_passes_test(User.can_add_fase, login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):
     """
@@ -484,7 +498,7 @@ def detalle_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_change_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
     """
 
@@ -529,7 +543,7 @@ def modificar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'fase': fase, 'operacion': 'Modificar Fase'}, context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def confirmar_eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -538,7 +552,6 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
     :param id_proyecto:
     :return:
     """
-
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
@@ -565,7 +578,7 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_delete_fase, login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -608,18 +621,18 @@ def crear_rol(request):
     mensaje="Rol creado con exito"
     usuario_actor = request.user
     rol = Group(Usuario=usuario_actor)
+    roles = Group.objects.all()
     if request.method == 'POST':
         formulario = RolForm(request.POST, instance=rol)
         if formulario.is_valid():
             formulario.save()
-            roles = Group.objects.all()
             return render_to_response('rol/rol_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
     return render_to_response('rol/crear_rol.html',
-                              {'formulario': formulario, 'operacion': 'Crear rol',
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del rol a crear',
                                'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
 
@@ -647,10 +660,14 @@ def modificar_rol(request, idRol):
     """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
+    roles = Group.objects.all()
     formulario = RolForm(request.POST, instance=rol)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/administracion/roles/')
+        mensaje = 'El rol ha sido modificado exitosamente'
+        return render_to_response('rol/rol_exito.html',
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
+                                      context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
     return render_to_response('rol/modificar_rol.html',
@@ -700,7 +717,6 @@ def vista_asignar_rol(request):
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
-
 def asignar_rol(request, id_usuario):
     """
     :param request:
@@ -720,7 +736,7 @@ def asignar_rol(request, id_usuario):
     else:
         formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_rol.html', {'formulario': formulario,
-                                                 'operacion': 'Seleccione el usuario a quien desee asignar el rol',
+                                                 'operacion': 'Seleccione el rol que desea asignar al usuario',
                                                  'usuario_actor': usuario_actor, 'usuario':usuario},
                   context_instance=RequestContext(request))
 
@@ -728,7 +744,7 @@ def asignar_rol(request, id_usuario):
 ########################################################################################################################
 #########################################Vista de credenciales##########################################################
 ########################################################################################################################
-
+@login_required(login_url="/iniciar_sesion")
 def administrar_credencial(request):
     """
 
@@ -741,6 +757,7 @@ def administrar_credencial(request):
 ########################################################################################################################
 #########################################Vista de atributos#############################################################
 ########################################################################################################################
+
 def administrar_atributo(request, id_proyecto):
     """
 
@@ -755,7 +772,8 @@ def administrar_atributo(request, id_proyecto):
                                'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-@reversion.create_revision()
+
+@login_required(login_url="/iniciar_sesion")
 def crear_atributo(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -776,6 +794,7 @@ def crear_atributo(request, id_proyecto):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def detalle_atributo(request, id_atributo, id_proyecto):
     """
 
@@ -790,7 +809,9 @@ def detalle_atributo(request, id_atributo, id_proyecto):
                               {'usuario_actor': usuario_actor,
                                'atributo': atributo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
-@reversion.create_revision()
+
+
+@login_required(login_url="/iniciar_sesion")
 def modificar_atributo(request, id_proyecto, id_atributo):
     """
 
@@ -831,38 +852,11 @@ def modificar_atributo(request, id_proyecto, id_atributo):
                               {'formulario': formulario, 'operacion': 'Modificar atributo',
                                'usuario_actor': usuario_actor,  'proyecto': proyecto, 'atributo': atributo},
                               context_instance=RequestContext(request))
-"""
-def version_atributo(request, id_proyecto, id_atributo):
-
-    atributo = Atributo.objects.get(pk=id_atributo)
-    lista_versiones = reversion.get_unique_for_object(atributo)
-    return render_to_response('proyecto/atributo/versiones_atributo.html', {'lista_versiones': lista_versiones, 'atributo':atributo,
-                                                                            'proyecto':Proyecto.objects.get(pk=id_proyecto)},
-                              context_instance=RequestContext(request))
-
-def reversion_atributo(request, id_proyecto, id_atributo, id_version):
-    atributo = Atributo.objects.get(pk=id_atributo)
-    lista_version = reversion.get_unique_for_object(atributo)
-    idn_version = int('0'+id_version)
-
-    for version in lista_version:
-        if version.id == idn_version:
-            version.revert()
-            return render_to_response('proyecto/atributo/atributo_exito.html',
-                                      {'mensaje': 'Se ha reversionado el atributo a la version ..... huehuehue',
-                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto), 'atributo': atributo,
-                                       'lista_atributos': Atributo.objects.all()},
-                                      context_instance=RequestContext(request))
 
 
 
-    return render_to_response('proyecto/atributo/atributo_error.html',
-                                      {'mensaje': 'Oops! no se pudo reversionar',
-                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto), 'atributo': atributo,
-                                       'lista_atributos': Atributo.objects.all()},
-                                      context_instance=RequestContext(request))
 
-"""
+@login_required(login_url="/iniciar_sesion")
 def eliminar_atributo(request, id_atributo, id_proyecto):
     """
 
@@ -919,64 +913,8 @@ def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
-def install(model):
-    from django.core.management import sql, color
-    from django.db import connection
 
-    # Standard syncdb expects models to be in reliable locations,
-    # so dynamic models need to bypass django.core.management.syncdb.
-    # On the plus side, this allows individual models to be installed
-    # without installing the entire project structure.
-    # On the other hand, this means that things like relationships and
-    # indexes will have to be handled manually.
-    # This installs only the basic table definition.
-
-    # disable terminal colors in the sql statements
-    style = color.no_style()
-
-    cursor = connection.cursor()
-    statements, pending = sql.sql_model_create(model, style)
-    for sql in statements:
-        cursor.execute(sql)
-
-def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
-    """
-    Create specified model
-    """
-    class Meta:
-        # Using type('Meta', ...) gives a dictproxy error during model creation
-        pass
-
-    if app_label:
-        # app_label must be set using the Meta inner class
-        setattr(Meta, 'app_label', app_label)
-
-    # Update Meta with any options that were provided
-    if options is not None:
-        for key, value in options.iteritems():
-            setattr(Meta, key, value)
-
-    # Set up a dictionary to simulate declarations within a class
-    attrs = {'__module__': module, 'Meta': Meta}
-
-    # Add in any fields that were provided
-    if fields:
-        attrs.update(fields)
-
-    # Create the class, which automatically triggers ModelBase processing
-    model = type(name, (models.Model,), attrs)
-
-    # Create an Admin class if admin options were provided
-    if admin_opts is not None:
-        class Admin(admin.ModelAdmin):
-            pass
-        for key, value in admin_opts:
-            setattr(Admin, key, value)
-        admin.site.register(model, Admin)
-
-    return model
-
-
+@login_required(login_url="/iniciar_sesion")
 def administrar_tipoItem(request, id_proyecto):
     """
 
@@ -992,6 +930,7 @@ def administrar_tipoItem(request, id_proyecto):
                                'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def crear_tipoItem(request, id_proyecto):
     """
 
@@ -1002,11 +941,11 @@ def crear_tipoItem(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     tipo = TipoDeItem(Usuario=usuario_actor, Proyecto=proyecto)
+    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
             formulario.save()
-            lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
@@ -1018,6 +957,7 @@ def crear_tipoItem(request, id_proyecto):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def detalle_tipoItem(request, id_tipo, id_proyecto):
     """
     :param request:
@@ -1033,6 +973,7 @@ def detalle_tipoItem(request, id_tipo, id_proyecto):
                                'tipo': tipo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def modificar_tipo(request, id_proyecto, id_tipo):
     """
 
@@ -1073,6 +1014,7 @@ def modificar_tipo(request, id_proyecto, id_tipo):
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo':tipo},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/iniciar_sesion")
 def eliminar_tipo(request, id_tipo, id_proyecto):
     """
 

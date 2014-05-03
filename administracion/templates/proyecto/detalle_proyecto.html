@@ -8,9 +8,11 @@
 {% endblock %}
 {% block contenido %}
     <dl>
+        <dt>Creado por:</dt>
+        <dd>{{ proyecto.Usuario }}</dd>
         <dt>Descripcion:</dt>
         <dd>{{ proyecto.Descripcion }}</dd>
-        <dt>Creado por:</dt>
+        <dt>Liderado por:</dt>
         <dd>{{ proyecto.Lider }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ proyecto.Fecha }}</dd>

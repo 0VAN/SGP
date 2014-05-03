@@ -48,6 +48,8 @@ urlpatterns = patterns('',
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
+    url(r'^administracion/proyectos/fases/subir/(?P<id_fase>\d+)/$', 'administracion.views.ordenar_fase_subir'),
+    url(r'^administracion/proyectos/fases/bajar/(?P<id_fase>\d+)/$', 'administracion.views.ordenar_fase_bajar'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/nuevo/$', 'administracion.views.crear_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/detalle/$', 'administracion.views.detalle_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
@@ -73,8 +75,6 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.confirmar_eliminar_atributo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminado/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
-    #url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/$', 'administracion.views.version_atributo'),
-    #url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/(?P<id_atributo>\d+)/versiones/(?P<id_version>\d+)/$', 'administracion.views.reversion_atributo'),
 
 ###############################################URL TIPO DE ITEM#########################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
@@ -92,5 +92,7 @@ urlpatterns = patterns('',
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/completar/$', 'desarrollo.views.completar_item'),
     url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/detalle/$', 'desarrollo.views.detalle_item_vista'),
     url(r'^vista/form/$', 'desarrollo.views.form_vista'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/$', 'desarrollo.views.historial_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.reversion_item'),
 )
 

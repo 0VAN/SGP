@@ -1,10 +1,10 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
-{% block titulo %}Detalle de atributo{% endblock %}
-{% block encabezado %}Versiones del atributo {{ atributo.Nombre}}{% endblock %}
+{% block titulo %}Historial item{% endblock %}
+{% block encabezado %}Versiones del item {{ item.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}" class="btn btn-default">Volver</a></li>
+    <li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
@@ -21,14 +21,14 @@
         <tbody>
             {% for version in lista_versiones %}
                 <tr>
-                <td>{{ version.field_dict.Usuario }}</td>
+                <td>{{ version.field_dict.Nombre }}</td>
                 <td>{{ version.field_dict.Tipo }}</td>
                 <td>{{ version.field_dict.Descripcion}}</td>
                 <td>{{ version.field_dict.Fecha }}</td>
                 <td>{{ version.id }}</td>
                 <td>
                     <div class="btn-group pull-right">
-                        <a href="{% url "administracion.views.reversion_atributo" proyecto.id atributo.id version.id %}" type="button" class="btn btn-danger">Revertir a esta version</a>
+                        <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-danger">Revertir a esta version</a>
                     </div>
                  </td>
                 </tr>

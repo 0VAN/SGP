@@ -25,10 +25,12 @@
 
 {% block contenido %}
     {% if usuario_actor.can_consultar_rol %}
-        <table class="table table-condensed table-hover">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <td>Nombre</td>
+                    <td>Usuario creador</td>
+                    <td>Fecha y hora de la ultima modificacion</td>
                 </tr>
             </thead>
 
@@ -38,8 +40,8 @@
 
                     <tr>
                         <td>{{ rol }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ rol.Usuario }}</td>
+                        <td>{{ rol.Fecha }}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -51,11 +53,6 @@
                                 <ul class="dropdown-menu" role="'menu">
                                     <li><a href="{% url 'administracion.views.detalle_rol' rol.id %}">Detalle</a></li>
                                     <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}">Modificar</a></li>
-                                    <li class="divider"></li>
-<<<<<<< HEAD
-                                    <li><a href="{% url 'administracion.views.asignar_rol' rol.id %}">Asignar</a></li>
-=======
->>>>>>> alexis
                                 </ul>
                             </div>
                         </td>

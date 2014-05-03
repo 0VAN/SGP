@@ -8,9 +8,9 @@
         {% if usuario_actor.can_add_fase %}
             {% if proyecto.Lider == usuario_actor %}
                 <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% else %}
+                <a class="btn btn-default" disabled="disabled">Crear Fase</a>
             {% endif %}
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
     </li>
     <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
@@ -20,6 +20,7 @@
    <table class="table table-striped">
         <thead>
             <tr>
+                <td>#</td>
                 <td>Nombre</td>
                 <td>Usuario</td>
                 <td>Fecha</td>
@@ -29,11 +30,19 @@
         <tbody>
             {% for fase in lista_fases %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>
                     <td>
                         <div class="btn-group pull-right">
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
+                                Arriba
+                            </a>
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
+                                Abajo
+                            </a>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>

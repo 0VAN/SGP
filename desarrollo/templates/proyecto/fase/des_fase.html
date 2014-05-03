@@ -2,8 +2,8 @@
 {% block titulo %}Desarrollo de Fase{% endblock %}
 {% block botones %}
     <li><a href="{% url 'desarrollo.views.crear_item' fase.Proyecto.id fase.id %}" class="btn btn-default">Crear Item</a></li>
-    <li><a href="" class="btn btn-default">Buscar Item</a></li>
-    <li><a href="" class="btn btn-default">Revivir Item</a></li>
+    <li><a href="#" class="btn btn-default">Buscar Item</a></li>
+    <li><a href="#" class="btn btn-default">Revivir Item</a></li>
     <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
@@ -48,6 +48,11 @@
                                         <li class="divider"></li>
                                         <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Gestion de Atributos</a></li>
                                     </ul>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group pull-right">
+                                    <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger">Historial de cambios</a>
                                 </div>
                             </td>
                         </tr>

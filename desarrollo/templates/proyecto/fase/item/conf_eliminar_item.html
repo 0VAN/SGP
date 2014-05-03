@@ -1,0 +1,20 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Eliminar Item{% endblock %}
+{% block encabezado %}Eliminar {{ item.Nombre }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+
+    <p class="alert alert-danger">Esta seguro que desea eliminar el item {{ item.Nombre }}? Este cambio no podra
+    deshacerse</p>
+    <p>
+        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_item' Item.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">No</a>
+    </p>
+
+
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from administracion.models import *
 from django.contrib.auth.models import User, Group, Permission
+import reversion
 
 # Create your models here.
 
@@ -33,6 +34,8 @@ class Item(models.Model):
 
     def __unicode__(self):
         return self.Nombre
+
+reversion.register(Item)
 
 class Campo(models.Model):
     item = models.ForeignKey(Item, null=True, blank=True)

@@ -61,6 +61,374 @@ class TestLogin(TestCase):
             return
         print("Prueba fallida, el usuario inicio sesion correctamente")
 
+class TestAccesoPaginas(TestCase):
+    fixtures = ['datosIniciales.json']
+    prueba ='hola'
+    passprueba ='hola'
+    usuario='sgp'
+    password='123456'
+    resp = 0
+
+
+    def test_administracion_usuario(self):
+        print("\nTEST: Ingresar a Administracion con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administracion con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_crear_usuario_usuario(self):
+        print("\nTEST: Ingresar a Crear Usuario con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/usuarios/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_crear_usuario_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Crear Usuario con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/usuarios/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_administracion_proyectos_usuario(self):
+        print("\nTEST: Ingresar a Administrar proyectos con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/proyectos/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_proyectos_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administrar proyectos con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/proyectos/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_crear_proyecto_usuario(self):
+        print("\nTEST: Ingresar a Crear Proyecto con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/proyectos/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_crear_proyecto_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Crear Proyecto con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/proyectos/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_administracion_usuarios_usuario(self):
+        print("\nTEST: Ingresar a Administrar usuarios con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/usuarios/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_usuarios_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administrar usuarios con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/usuarios/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_administracion_roles_usuario(self):
+        print("\nTEST: Ingresar a Administrar roles con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/roles/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_roles_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administrar roles con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/roles/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_crear_rol_usuario(self):
+        print("\nTEST: Ingresar a Crear Rol con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/roles/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_crear_rol_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Crear Rol con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/roles/nuevo/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_administracion_credenciales_usuario(self):
+        print("\nTEST: Ingresar a Administrar credenciales con usuario registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/credenciales/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_credenciales_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administrar credenciales con usuario no registrado")
+        try:
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/credenciales/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
+
+    def test_administracion_fases_usuario(self):
+        print("\nTEST: Ingresar a Administrar fases con usuario registrado")
+        nombre_proyecto ='prueba'
+        userPk = '1'
+        usuario = User.objects.get(pk=userPk)
+        Descripcion = "proyecto prueba"
+        Fecha_inicio = datetime.now()
+        Fecha_finalizacion = datetime.now()
+        try:
+            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
+                                Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
+            proyecto.save()
+            resp = self.client.get('/')
+            self.client.login(username=self.usuario, password=self.password)
+            resp = self.client.get('/administracion/proyectos/1/fases/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            return
+        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+
+
+    def test_administracion_fases_usuario_no_registrado(self):
+        print("\nTEST: Ingresar a Administrar fases con usuario no registrado")
+        nombre_proyecto ='prueba'
+        userPk = '1'
+        usuario = User.objects.get(pk=userPk)
+        Descripcion = "proyecto prueba"
+        Fecha_inicio = datetime.now()
+        Fecha_finalizacion = datetime.now()
+        try:
+            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
+                                Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
+            proyecto.save()
+            resp = self.client.get('/')
+            self.client.login(username=self.prueba, password=self.passprueba)
+            resp = self.client.get('/administracion/proyectos/1/fases/')
+            self.assertEqual(resp.status_code, 200)
+        except:
+            if resp.status_code == 302:
+                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
+            else:
+                if resp.status_code == 404:
+                    print("Prueba fallida, la url no existe")
+                else:
+                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            return
+        print("Prueba fallida, el usuario inicio sesion correctamente")
+
 
 class TestCrearModelo(TestCase):
     fixtures = ['fixtures/Usuarios.json']
@@ -103,7 +471,7 @@ class TestCrearModelo(TestCase):
         Fecha_finalizacion = datetime.now()
 
         try:
-            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Descripcion=Descripcion,
+            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
                                 Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
             proyecto.save()
         except:
@@ -122,14 +490,14 @@ class TestCrearModelo(TestCase):
         Usuario = User.objects.get(pk=userPk)
 
         # creamos un proyecto provisional
-        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Descripcion="descripcionProyecto",
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
                                 Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
         proyecto.save()
         try:
             fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
             fase.save()
         except:
-            print("Prueba fallida, no se pudo crear la fase")
+            print("Prueba exitosa, la fase fue creada correctamente")
             return
         if len(Fase.objects.all()) == 1:
             print("Prueba exitosa, la fase fue creada correctamente")

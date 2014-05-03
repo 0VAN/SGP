@@ -44,6 +44,16 @@ def can_add_group(self):
     return self.tienePermiso(permiso)
 User.add_to_class('can_add_group', can_add_group)
 
+def can_add_atributo(self):
+    permiso = 'add_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_atributo', can_add_atributo)
+
+def can_add_tipodeitem(self):
+    permiso = 'add_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_add_tipodeitem', can_add_tipodeitem)
+
 def can_change_user(self):
     permiso = 'change_user'
     return self.tienePermiso(permiso)
@@ -64,6 +74,16 @@ def can_change_group(self):
     return self.tienePermiso(permiso)
 User.add_to_class('can_change_group', can_change_group)
 
+def can_change_atributo(self):
+    permiso = 'change_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_atributo', can_change_atributo)
+
+def can_change_tipodeitem(self):
+    permiso = 'change_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_change_tipodeitem', can_change_tipodeitem)
+
 def can_delete_user(self):
     permiso = 'delete_user'
     return self.tienePermiso(permiso)
@@ -83,6 +103,16 @@ def can_delete_group(self):
     permiso = 'delete_group'
     return self.tienePermiso(permiso)
 User.add_to_class('can_delete_group', can_delete_group)
+
+def can_delete_atributo(self):
+    permiso = 'delete_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_atributo', can_delete_atributo)
+
+def can_delete_tipodeitem(self):
+    permiso = 'delete_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_delete_tipodeitem', can_delete_tipodeitem)
 
 ###########################################Vistas de Control de Acceso #################################################
 
@@ -106,13 +136,15 @@ def can_consultar_rol(self):
     return self.tienePermiso(permiso)
 User.add_to_class('can_consultar_rol', can_consultar_rol)
 
-def accesoAdministracion(self):
-    rol ='Administracion'
-    for grupo in self.groups.all():
-        if grupo.name == rol:
-            return True
-    return False
-User.add_to_class('accesoAdministracion', accesoAdministracion)
+def can_consultar_atributo(self):
+    permiso = 'consulta_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_atributo', can_consultar_atributo)
+
+def can_consultar_tipodeitem(self):
+    permiso = 'consulta_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('can_consultar_tipodeitem', can_consultar_tipodeitem)
 
 
 class Proyecto(models.Model):
@@ -171,6 +203,32 @@ class Fase(models.Model):
     def __unicode__(self):
         return self.Nombre
 
+    def ordenar_fase_subir(self):
+        try:
+            faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto.pk).filter(Numero__lt=self.Numero).order_by('-Numero').first()
+            numeroTemporal = faseTemporal.Numero
+            faseTemporal.Numero = self.Numero
+            faseTemporal.save()
+            self.Numero = numeroTemporal
+            self.save()
+        finally:
+            return
+
+    def ordenar_fase_bajar(self):
+        try:
+            faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto).filter(Numero__gt=self.Numero).first()
+            numeroTemporal = faseTemporal.Numero
+            faseTemporal.Numero = self.Numero
+            faseTemporal.save()
+            self.Numero = numeroTemporal
+            self.save()
+        finally:
+            return
+
+
+    class Meta:
+        ordering = ["Numero"]
+
 
 class Atributo(models.Model):
 
@@ -198,7 +256,7 @@ class Atributo(models.Model):
     Descripcion = models.TextField(max_length=100, blank=True)
     Usuario = models.ForeignKey(User)
     Proyecto = models.ForeignKey(Proyecto)
-    Fecha = models.DateField(auto_now=True)
+    Fecha = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.Nombre

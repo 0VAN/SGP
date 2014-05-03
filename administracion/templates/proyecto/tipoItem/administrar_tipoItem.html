@@ -4,10 +4,12 @@
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_add_proyecto %}
-            <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear atributo</a>
+        {% if usuario_actor.can_add_tipodeitem %}
+           {% if proyecto.Lider == usuario_actor %}
+                <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
+            {% else %}
+                <a class="btn btn-default" disabled="disabled">Crear tipo de item</a>
+            {% endif %}
         {% endif %}
         <a href="/administracion/proyectos" class="btn btn-default">Volver</a>
     </li>
