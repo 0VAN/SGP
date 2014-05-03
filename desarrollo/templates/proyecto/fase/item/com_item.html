@@ -11,7 +11,7 @@
                 <tr>
                     <th><label>{{ a.atributo.Nombre }}</label></th>
                     {% if a.atributo.Tipo == 'N' %}
-                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="number"  value="{{ a.numerico|stringformat:"f" }}"></td>
+                        <td><input step="any" class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="number"  value="{{ a.numerico|stringformat:"f" }}"></td>
                     {% elif a.atributo.Tipo == 'C' %}
                         <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="text" value="{{ a.cadena }}"></td>
                     {% elif a.atributo.Tipo == 'F' %}
@@ -19,7 +19,6 @@
                     {% elif a.atributo.Tipo == 'M' %}
                         <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="email" value="{{ a.mail}}"></td>
                     {% elif a.atributo.Tipo == 'L' %}
-                        {{ a.logico }}
                         <td>
                             <select class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}">
                                 {% if a.logico == True %}

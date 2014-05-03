@@ -24,17 +24,17 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td>Nombre</td>
-                        <td>Creado por</td>
-                        <td>Fecha de creacion</td>
-                        <td></td>
+                        <th>Nombre</th>
+                        <th>Creado por</th>
+                        <th>Fecha de creacion</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in lista_items %}
                         <tr>
                             <td>{{ item.Nombre }}</td>
-                            <td>{{ item.Usuario.get_full_name }}</td>
+                            <td>{{ item.Usuario }}</td>
                             <td>{{ item.Fecha }}</td>
                             <td>
                                 <div class="btn-group">
@@ -43,9 +43,10 @@
                                     </button>
 
                                     <ul class="dropdown-menu" role="'menu">
-                                        <li><a href="#">Desarrollo</a></li>
+                                        <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
                                         <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
-                                        <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Completar</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Gestion de Atributos</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -58,4 +59,9 @@
         </dd>
 
     </dl>
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
 {% endblock %}

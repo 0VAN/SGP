@@ -60,7 +60,14 @@ def crear_item(request, id_proyecto, id_fase):
             for atributo in item2.Tipo.Atributos.all():
                 campo = Campo.objects.create(item=item2, tipoItem=item2.Tipo, atributo=atributo)
                 campo.save()
-            return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
+            lista_items = Item.objects.filter(Fase=fase)
+            suceso = True
+            mensaje = "El item se ha creado exitosamente"
+            return render_to_response(
+                'proyecto/fase/des_fase.html',
+                {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
     else:
         formulario = ItemForm()
     return render_to_response('proyecto/fase/item/crear_item.html',
@@ -71,12 +78,18 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
-    item.Version+=1
     formulario = ItemForm(request.POST, instance=item)
     lista_tipos = TipoDeItem.objects.filter(Proyecto=fase.Proyecto)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
+        lista_items = Item.objects.filter(Fase=fase)
+        suceso = True
+        mensaje = "El item se ha modificado exitosamente"
+        return render_to_response(
+            'proyecto/fase/des_fase.html',
+            {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+            context_instance=RequestContext(request)
+        )
     else:
         formulario = ItemForm(instance=item)
     return render_to_response(
@@ -122,11 +135,31 @@ def completar_item(request, id_proyecto, id_fase, id_item):
                     elif a.atributo.Tipo == Atributo.HORA:
                         a.hora = value
                         a.save()
-        return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
+        suceso = True
+        mensaje = "Atributos modificados exitosamente"
+        lista_items = Item.objects.filter(Fase=fase)
+        return render_to_response(
+            'proyecto/fase/des_fase.html',
+            {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+            context_instance=RequestContext(request)
+        )
     #else:
     return render_to_response(
         'proyecto/fase/item/com_item.html',
         {'usuario':usuario, 'item':item, 'fase':fase, 'campos':campos},
+        context_instance=RequestContext(request)
+    )
+
+def detalle_item_vista(request, idProyecto, idFase, idItem):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=idProyecto)
+    fase = Fase.objects.get(pk=idFase)
+    item = Item.objects.get(pk=idItem)
+    campos = Campo.objects.filter(item=item)
+
+    return render_to_response(
+        'proyecto/fase/item/detalle.html',
+        {'usuario': usuario, 'item': item, 'campos': campos, 'fase':fase},
         context_instance=RequestContext(request)
     )
 
