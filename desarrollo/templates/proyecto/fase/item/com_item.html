@@ -1,15 +1,52 @@
 {% extends 'proyecto/fase/des_fase.html' %}
 
-{% block encabezado %}<Completar></Completar> item: {{ item.Nombre }}{% endblock %}
+{% block encabezado %}Completar item: {{ item.Nombre }}{% endblock %}
 {% block botones%}<li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>{% endblock %}
 
 {% block titulo %}Modificacion de item{% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
-        {% for item in formularios %}
-            <p>Atributo:</p>
-            <table class="table"><p>{{ item }}</table>
-        {% endfor %}
+        <table class="table">
+            {% for a in campos %}
+                <tr>
+                    <th><label>{{ a.atributo.Nombre }}</label></th>
+                    {% if a.atributo.Tipo == 'N' %}
+                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="number"  value="{{ a.numerico|stringformat:"f" }}"></td>
+                    {% elif a.atributo.Tipo == 'C' %}
+                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="text" value="{{ a.cadena }}"></td>
+                    {% elif a.atributo.Tipo == 'F' %}
+                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="date" value="{{ a.fecha|date:"Y-m-d" }}"></td>
+                    {% elif a.atributo.Tipo == 'M' %}
+                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="email" value="{{ a.mail}}"></td>
+                    {% elif a.atributo.Tipo == 'L' %}
+                        {{ a.logico }}
+                        <td>
+                            <select class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}">
+                                {% if a.logico == True %}
+                                    <option value="1">Desconocido</option>
+                                    <option value="2" selected="selected">Sí</option>
+                                    <option value="3">No</option>
+                                {% elif a.logico == False %}
+                                    <option value="1">Desconocido</option>
+                                    <option value="2">Sí</option>
+                                    <option value="3" selected="selected">No</option>
+                                {% else %}
+                                    <option value="1" selected="selected">Desconocido</option>
+                                    <option value="2">Sí</option>
+                                    <option value="3">No</option>
+                                {% endif %}
+                            </select>
+                        </td>
+                    {% elif a.atributo.Tipo == 'H' %}
+                        <td><input class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="time" value="{{ a.hora }}"></td>
+                    {% elif a.atributo.Tipo == 'T' %}
+                        <td><textarea cols="40" rows="10" class="form-control" id="{{ a.atributo.Nombre }}" name="{{ a.atributo.Nombre }}" type="text" value="{{ a.texto }}"></textarea></td>
+                    {% endif %}
+                </tr>
+
+            {% endfor %}
+        </table>
+
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}

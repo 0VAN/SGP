@@ -129,4 +129,3 @@ class tipoItemForm(MyForm):
     class Meta:
         model = TipoDeItem
         exclude = ['Usuario', 'Proyecto']
-

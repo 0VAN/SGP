@@ -25,17 +25,6 @@ class ItemForm(MyForm):
         model = Item
         exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
 
-class TipoAtributoForm(MyForm):
-
+class LogicoForm(MyForm):
     class Meta:
-        model = TipoAtributo
-
-class NumericoForm(MyForm):
-    class Meta:
-        model = Numerico
-        fields = ['Dato']
-
-class CadenaForm(MyForm):
-    class Meta:
-        model = Cadena
-        fields = ['Dato']
+        model = Logico1

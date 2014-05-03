@@ -57,7 +57,9 @@ def crear_item(request, id_proyecto, id_fase):
         if formulario.is_valid():
             formulario.save()
             item2 = Item.objects.last()
-            campos(item2)
+            for atributo in item2.Tipo.Atributos.all():
+                campo = Campo.objects.create(item=item2, tipoItem=item2.Tipo, atributo=atributo)
+                campo.save()
             return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase)
     else:
         formulario = ItemForm()
@@ -88,43 +90,57 @@ def completar_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
-    formularios = []
-    atributos = item.Campos.all()
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    campos = Campo.objects.filter(item=item)
     if request.method == 'POST':
-        formularios = []
-        for campo in atributos:
-            print campo
-            print campo.Tipo
-            if campo.Tipo == 'N':
-                formularios.append(NumericoForm(request.POST, instance=campo))
-
-            elif campo.Tipo == 'C':
-                formularios.append(CadenaForm(request.POST, instance=campo))
-        print formularios[0]
-        if (formularios[0].is_valid()) and (formularios[1].is_valid()):
-            a = formularios[0].save()
-            b = formularios[1].save(commit=False)
-            b.save()
-
-            return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
-    else:
-        for campo in atributos:
-            if campo.Tipo == 'N':
-                formularios.append(NumericoForm(instance=campo))
-            elif campo.Tipo == 'C':
-                formularios.append(CadenaForm(instance=campo))
+        for a in campos:
+            for key, value in request.POST.iteritems():
+                if a.atributo.Nombre == key:
+                    if a.atributo.Tipo == Atributo.NUMERICO:
+                        a.numerico = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.CADENA:
+                        a.cadena = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.FECHA:
+                        a.fecha = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.TEXTO:
+                        a.texto = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.LOGICO:
+                        if value=="1":
+                            a.logico = None
+                        elif value=="2":
+                            a.logico = True
+                        elif value=="3":
+                            a.logico = False
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.MAIL:
+                        a.mail = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.HORA:
+                        a.hora = value
+                        a.save()
+        return HttpResponseRedirect('/desarrollo/proyecto/'+id_proyecto+'/fase/'+id_fase+'/')
+    #else:
     return render_to_response(
         'proyecto/fase/item/com_item.html',
-        {'usuario':usuario, 'item':item, 'fase':fase, 'formularios':formularios},
+        {'usuario':usuario, 'item':item, 'fase':fase, 'campos':campos},
         context_instance=RequestContext(request)
     )
 
-def campos(item):
-    for atributo in item.Tipo.Atributos.all():
-        if atributo.Tipo=='N':
-            object = Numerico(Nombre=atributo.Nombre + "(Numerico)", Dato=0, Tipo='N')
-        elif atributo.Tipo=='C':
-            object = Cadena(Nombre=atributo.Nombre + "(Cadena)", Dato="", Tipo='C')
 
-        object.save()
-        item.Campos.add(object)
+def form_vista(request):
+    usuario = request.user
+    if request.method=='POST':
+        formulario = LogicoForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            logico = Logico1.objects.last()
+            return HttpResponseRedirect('/')
+    else:
+        formulario = LogicoForm()
+    return render_to_response('form.html',
+        {'usuario': usuario, 'formulario': formulario},
+        context_instance=RequestContext(request))

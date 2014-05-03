@@ -5,42 +5,6 @@ from django.contrib.auth.models import User, Group, Permission
 # Create your models here.
 
 
-class TipoAtributo(models.Model):
-    Nombre = models.CharField(max_length=30)
-    Tipo = models.CharField(max_length=1)
-
-    def __unicode__(self):
-        return self.Nombre
-
-
-class Numerico(TipoAtributo):
-    Dato = models.IntegerField()
-
-
-class Fecha(TipoAtributo):
-    Dato = models.DateField()
-
-
-class Hora(TipoAtributo):
-    Dato = models.TimeField()
-
-
-class Logico(TipoAtributo):
-    Dato = models.BooleanField()
-
-
-class Mail(TipoAtributo):
-    Dato = models.EmailField()
-
-
-class Texto(TipoAtributo):
-    Dato = models.TextField()
-
-
-class Cadena(TipoAtributo):
-    Dato = models.CharField(max_length=100)
-
-
 
 class Item(models.Model):
 
@@ -67,10 +31,26 @@ class Item(models.Model):
     Tipo = models.ForeignKey(TipoDeItem)
     Version = models.IntegerField()
     Observacion = models.TextField(blank=True)
-    Campos = models.ManyToManyField(TipoAtributo)
-
 
 
     def __unicode__(self):
         return self.Nombre
 
+class Campo(models.Model):
+    item = models.ForeignKey(Item, null=True, blank=True)
+    tipoItem = models.ForeignKey(TipoDeItem, null=True, blank=True)
+    atributo = models.ForeignKey(Atributo, null=True, blank=True)
+    fecha = models.DateField(null=True)
+    numerico = models.DecimalField(max_digits=30, decimal_places=10, null=True)
+    logico = models.NullBooleanField()
+    cadena = models.CharField(max_length=50, blank=True)
+    texto = models.TextField(blank=True)
+    mail = models.EmailField(blank=True, null=True)
+    hora = models.TimeField(blank=True, null=True)
+
+class Logico(models.Model):
+    dato = models.BooleanField(default=False)
+
+
+class Logico1(models.Model):
+    dato = models.NullBooleanField()
