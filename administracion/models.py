@@ -24,6 +24,12 @@ def tienePermiso(self, permiso):
 
 User.add_to_class('tienePermiso', tienePermiso)
 
+def accesoDesarrollo(self):
+    permiso = 'acceso_desarrollo'
+    return self.tienePermiso(permiso)
+
+User.add_to_class('accesoDesarrollo', accesoDesarrollo)
+
 def can_add_user(self):
     permiso = 'add_user'
     return self.tienePermiso(permiso)

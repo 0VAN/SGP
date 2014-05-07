@@ -3,12 +3,18 @@
 
 {% block encabezado %}
     {{ operacion }}
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/jquery-ui-1.10.4.custom.js"></script>
     <script>
     $(document).ready(function() {
         $('.datepicker').datepicker();
     });
+    </script>
+    <script>
+    function checkInput(){
+        numcheck = /[0-9_-]/;
+        return numcheck.test(String.fromCharCode(window.event.keyCode));
+    }
     </script>
     {{ formulario.media }}
 {% endblock %}
@@ -21,5 +27,6 @@
         <table class="table"><p>{{ formulario }}</p></table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
+    <input type="text" onkeypress="return checkInput();">
 {% endblock %}
 
