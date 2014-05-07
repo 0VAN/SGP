@@ -174,6 +174,7 @@ class Proyecto(models.Model):
     Usuario = models.ForeignKey(User, related_name='Usuario_Creador')
     Usuarios = models.ManyToManyField(User, related_name='Participantes')
     Fecha = models.DateTimeField(auto_now=True)
+    nFases = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.Nombre
@@ -241,7 +242,6 @@ class Atributo(models.Model):
     FECHA = 'F'
     HORA = 'H'
     LOGICO = 'L'
-    MAIL = 'M'
     TEXTO = 'T'
     TIPO_CHOICES = (
         (NUMERICO, 'Numerico'),
@@ -249,8 +249,6 @@ class Atributo(models.Model):
         (FECHA, 'Fecha'),
         (HORA, 'Hora'),
         (LOGICO, 'Logico'),
-        (MAIL, 'Mail'),
-        (TEXTO, 'Texto'),
     )
     Tipo = models.CharField(max_length=1, choices=(TIPO_CHOICES))
     Descripcion = models.TextField(max_length=100, blank=True)

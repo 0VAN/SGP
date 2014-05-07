@@ -8,6 +8,7 @@ from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
+from django.core.exceptions import *
 
 
 # Create your views here.
@@ -454,16 +455,21 @@ def crear_fase(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase(Usuario= usuario_actor, Proyecto=proyecto)
+    fase.Numero = 0
     lista_fases = Fase.objects.filter(Proyecto=proyecto)
     if request.method=='POST':
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
+            proyecto.nFases+=1
+            proyecto.save()
+            fase.Numero = proyecto.nFases
+            formulario = FaseForm(request.POST, instance=fase)
             formulario.save()
-
-            return render_to_response('proyecto/fase/fases_exito.html',
-                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
-                               'mensaje': 'Se ha creado la fase exitosamente'},
-                              context_instance=RequestContext(request))
+            return render_to_response(
+                'proyecto/fase/fases_exito.html',
+                {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases, 'mensaje': 'Se ha creado la fase exitosamente'},
+                context_instance=RequestContext(request)
+            )
     else:
         formulario = FaseForm(instance=fase)
     return render_to_response('proyecto/fase/fase_form.html',
@@ -554,29 +560,29 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
+
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
     if proyecto.Estado == 'A':
-                return render_to_response('proyecto/fase/fases_error.html',
-                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
-                               'mensaje': 'No puedes eliminar una fase de un proyecto que ha iniciado'},
-                              context_instance=RequestContext(request))
+
+        return render_to_response('proyecto/fase/fases_error.html',
+                      {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
+                       'mensaje': 'No puedes eliminar una fase de un proyecto que ha iniciado'},
+                      context_instance=RequestContext(request))
+    elif proyecto.Estado == 'C':
+        return render_to_response('proyecto/fase/fases_error.html',
+                      {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
+                       'mensaje': 'No puedes eliminar una fase de un proyecto que ha sido cancelado'},
+                      context_instance=RequestContext(request))
+    elif proyecto.Estado == 'F':
+        return render_to_response('proyecto/fase/fases_error.html',
+                      {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
+                       'mensaje': 'No puedes eliminar una fase de un proyecto que ha finalizado'},
+                      context_instance=RequestContext(request))
     else:
-        if proyecto.Estado == 'C':
-                return render_to_response('proyecto/fase/fases_error.html',
-                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
-                               'mensaje': 'No puedes eliminar una fase de un proyecto que ha sido cancelado'},
-                              context_instance=RequestContext(request))
-        else:
-            if proyecto.Estado == 'F':
-                return render_to_response('proyecto/fase/fases_error.html',
-                              {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
-                               'mensaje': 'No puedes eliminar una fase de un proyecto que ha finalizado'},
-                              context_instance=RequestContext(request))
-            else:
-                fase = Fase.objects.get(pk=idFase)
-                return render_to_response('proyecto/fase/conf_eliminar_fase.html',
-                              {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
-                              context_instance=RequestContext(request))
+        fase = Fase.objects.get(pk=idFase)
+        return render_to_response('proyecto/fase/conf_eliminar_fase.html',
+                      {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
+                      context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
@@ -589,13 +595,28 @@ def eliminar_fase(request, idFase, id_proyecto):
     """
     fase = Fase.objects.get(pk=idFase)
     usuario_actor = request.user
-    fase.delete()
     proyecto = Proyecto.objects.get(pk=id_proyecto)
+    proyecto.nFases-=1
+    proyecto.save()
+    reordenar(proyecto.id, fase.Numero)
+    fase.delete()
+
     lista_fases = Fase.objects.filter(pk=id_proyecto)
     return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha eliminado la fase seleccionada'},
                               context_instance=RequestContext(request))
+def reordenar(idproyecto, numero):
+    proyecto = Proyecto.objects.get(pk=idproyecto)
+    for n in range(numero+1, proyecto.nFases+2, 1):
+        fase = Fase.objects.get(Proyecto=proyecto, Numero=n)
+        fase.Numero-=1
+        fase.save()
+    return True
+
+
+
+
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################

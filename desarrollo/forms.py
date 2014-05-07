@@ -25,6 +25,4 @@ class ItemForm(MyForm):
         model = Item
         exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
 
-class LogicoForm(MyForm):
-    class Meta:
-        model = Logico1
+

@@ -8,6 +8,7 @@ from administracion.models import Proyecto, Fase, TipoDeItem
 from desarrollo.models import *
 from desarrollo.forms import *
 import reversion
+from django.core.exceptions import *
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -219,3 +220,15 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
                                       context_instance=RequestContext(request))
 
 
+def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    item = Item.objects.get(pk=id_item)
+    try:
+        relacion = Relacion.objects.get(item=item)
+    except ObjectDoesNotExist:
+        relacion = False
+    return render_to_response(
+        'proyecto/fase/item/gestion_relaciones.html',
+        {'usuario': usuario, 'relacion':relacion, 'item':item},
+        context_instance=RequestContext(request)
+    )

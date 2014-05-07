@@ -1,0 +1,23 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Gestionar relaciones{% endblock %}
+
+{% block botones %}
+    <li><a href="#" class="btn btn-default">Asignar relacion</a></li>
+    <li><a href="#" class="btn btn-default">Volver</a></li>
+    <li><a href="#" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block encabezado %}Relaciones del item: {{ item.Nombre }}{% endblock %}
+
+{% block contenido %}
+    {% if relacion == False %}
+        <p>El item no posee padre ni antecesor</p>
+    {% else %}
+        {% if relacion.antecesor == None %}
+            <p>Relacion: Padre</p>
+            <p>Item: {{ relacion.padre }}</p>
+        {% else %}
+            <p>Relacion: Antecesor</p>
+            <p>Item: {{ relacion.antecesor }}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

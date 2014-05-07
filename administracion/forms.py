@@ -41,7 +41,7 @@ class ProyectoForm(ModelForm):
     Fecha_finalizacion = forms.DateField(widget=DateInput())
     class Meta:
         model = Proyecto
-        exclude = ['Usuario', 'Estado', 'Usuarios']
+        exclude = ['Usuario', 'Estado', 'Usuarios', 'nFases']
 
 
 
@@ -100,7 +100,8 @@ class FaseForm(MyForm):
     """
     class Meta:
         model = Fase
-        exclude = ['Usuario', 'Proyecto']
+        exclude = ['Usuario', 'Proyecto', 'Numero']
+
 
 class RolForm(MyForm):
     permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),

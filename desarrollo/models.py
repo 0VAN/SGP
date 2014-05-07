@@ -42,16 +42,16 @@ class Campo(models.Model):
     tipoItem = models.ForeignKey(TipoDeItem, null=True, blank=True)
     atributo = models.ForeignKey(Atributo, null=True, blank=True)
     fecha = models.DateField(null=True)
-    numerico = models.DecimalField(max_digits=30, decimal_places=10, null=True)
+    numerico = models.DecimalField(null=True, decimal_places=10, max_digits=10)
+    longitud = models.IntegerField(null=True)
+    precision = models.IntegerField(null=True)
     logico = models.NullBooleanField()
-    cadena = models.CharField(max_length=50, blank=True)
-    texto = models.TextField(blank=True)
+    cadena = models.CharField(blank=True, null=True, max_length=500)
     mail = models.EmailField(blank=True, null=True)
     hora = models.TimeField(blank=True, null=True)
 
-class Logico(models.Model):
-    dato = models.BooleanField(default=False)
 
-
-class Logico1(models.Model):
-    dato = models.NullBooleanField()
+class Relacion(models.Model):
+    padre = models.ForeignKey(Item, null=True, related_name='padre')
+    antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
+    item = models.ForeignKey(Item, null=True, related_name='item')

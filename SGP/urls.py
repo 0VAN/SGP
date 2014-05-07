@@ -94,5 +94,6 @@ urlpatterns = patterns('',
     url(r'^vista/form/$', 'desarrollo.views.form_vista'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/$', 'desarrollo.views.historial_item'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.reversion_item'),
+    url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/relaciones/$', 'desarrollo.views.gestion_relacion_view'),
 )
 
