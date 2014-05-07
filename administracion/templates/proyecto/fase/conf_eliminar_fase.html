@@ -1,0 +1,19 @@
+{% extends 'proyecto/fase/adm-fases.html' %}
+{% block titulo %}Eliminar Fase{% endblock %}
+{% block encabezado %}Eliminar {{ fase.Nombre }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <p class="alert alert-danger">Esta seguro que desea eliminar la fase {{ fase.Nombre }}? Este cambio no podra
+    deshacerse</p>
+    <p>
+        <a class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_fase' proyecto.id fase.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_fases' proyecto.id %}">No</a>
+    </p>
+
+
+{% endblock %}

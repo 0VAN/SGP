@@ -3,14 +3,12 @@
 {% block encabezado %}Operacion exitosa{% endblock %}
 
 {% block botones %}
-<li>
-    <a href="/administracion/usuarios" class="btn btn-default">Volver</a>
-</li>
 {% endblock %}
 
 {% block contenido %}
 
 {% block mensaje %}
 <div class="alert alert-success">{{ mensaje }}</div>
+<p><a href="/administracion/usuarios" class="btn btn-default">Aceptar</a></p>
 {% endblock %}
 {% endblock %}

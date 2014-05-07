@@ -1,0 +1,21 @@
+{% extends 'usuario/administrar_usuario.html' %}
+{% block titulo %}Formulario crear usuario{% endblock %}
+
+{% block encabezado %}{{ operacion }} {{ usuario_parametro }}{% endblock %}
+
+{% block botones %}
+    <li>
+            <a href="/administracion/usuarios" class="btn btn-default">Volver</a>
+    </li>
+     <li>
+
+    </li>
+{% endblock %}
+
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table"><p>{{ formulario }}{{ form }}</p></table>
+        <p><a href="{% url "administracion.views.pass_change" usuario_parametro.id %}" class="btn btn-default">Cambiar contraseña</a></p>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

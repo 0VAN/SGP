@@ -1,23 +1,20 @@
-#encoding utf-8
-__author__ = 'sgp'
-
+# -*- encoding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, UserChangeForm
 from django.contrib.auth.models import User, Group
+from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
+from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
+from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from functools import partial
 
-class UsuarioForm(UserCreationForm):
-    """
-    Formulario para la creacion de usuarios
-    Hereda del formulario UserCreationForm y utiliza la clase user
-    para agregar ciertos campos de la clase a la hora de la creacion
-    """
-    class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
+DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
-class AsignarRol(forms.ModelForm):
+from desarrollo.forms import MyForm
+
+class AsignarRol(MyForm):
     """
     Formulario para la asignacion de roles a los usuarios
     Hereda del forms.ModelForm y utiliza la clase user
@@ -25,7 +22,14 @@ class AsignarRol(forms.ModelForm):
     """
     class Meta:
         model = User
-        fields = ('groups',)
+        fields = ['groups']
+        labels = {
+            'groups': ('Roles'),
+        }
+        help_texts = {
+            'groups': ('Selecciones el/los roles deseados que desea asignar al usuario.'),
+        }
+
 
 class ProyectoForm(ModelForm):
     """
@@ -33,9 +37,13 @@ class ProyectoForm(ModelForm):
     Hereda de ModelForm y utiliza la clase Proyecto
     para agregar ciertos campos de la clase a la hora de la creacion
     """
+    Fecha_inicio = forms.DateField(widget=DateInput())
+    Fecha_finalizacion = forms.DateField(widget=DateInput())
     class Meta:
         model = Proyecto
-        exclude = ['Usuario']
+        exclude = ['Usuario', 'Estado', 'Usuarios']
+
+
 
 class UsuarioModForm(forms.ModelForm):
     """
@@ -43,23 +51,25 @@ class UsuarioModForm(forms.ModelForm):
     Hereda de forms.ModelForm y utiliza la clase user para
     agregar ciertos campos a la hora de la modificacion
     """
+    error_css_class = 'list-group-item-danger'
     username = forms.RegexField(
-        label=("Username"), max_length=30, regex=r"^[\w.@+-]+$",
+        label=("Nombre de usuario"), max_length=30, regex=r"^[\w.@+-]+$",
         help_text=("Required. 30 characters or fewer. Letters, digits and "
                       "@/./+/-/_ only."),
         error_messages={
             'invalid': ("This value may contain only letters, numbers and "
                          "@/./+/-/_ characters.")})
-    password = ReadOnlyPasswordHashField(label=("Password"),
-        help_text=("Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href= \"password/\">this form</a>."))
+    password = ReadOnlyPasswordHashField(label=("Contraseña"),
+        help_text=("Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,"
+                   " pero se puede cambiar mediante el boton cambiar contraseña"))
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion', 'observacion')
+        fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
             super(UsuarioModForm, self).__init__(*args, **kwargs)
+            for field_name, field in self.fields.items():
+                field.widget.attrs['class'] = 'form-control'
             f = self.fields.get('user_permissions', None)
             if f is not None:
                 f.queryset = f.queryset.select_related('content_type')
@@ -70,7 +80,9 @@ class UsuarioModForm(forms.ModelForm):
             # field does not have access to the initial value
             return self.initial["password"]
 
-class UsuarioDelForm(forms.ModelForm):
+
+
+class UsuarioDelForm(MyForm):
     """
     Formulario para el la eliminacion logica del usuario
     Hereda de forms.ModelForm y utiliza la clase user para
@@ -80,7 +92,7 @@ class UsuarioDelForm(forms.ModelForm):
         model = User
         fields = ('is_active',)
 
-class FaseForm(forms.ModelForm):
+class FaseForm(MyForm):
     """
     Formulario para el la creacion de fases
     Hereda de forms.ModelForm y utiliza la clase Fase para
@@ -90,12 +102,39 @@ class FaseForm(forms.ModelForm):
         model = Fase
         exclude = ['Usuario', 'Proyecto']
 
-class RolForm(forms.ModelForm):
+class RolForm(MyForm):
+    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),
+                                          widget=FilteredSelectMultiple(('Permisos'),False,))
+
     """
-    Formulario para el la creacion de roles
+    Formulario para la creacion de roles
     Hereda de forms.ModelForm y utiliza la clase Group para
     agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
     """
     class Meta:
         model = Group
         exclude = ['Usuario']
+    class Media:
+        css = {'all':('/static/css/filteredselectwidget.css',),}
+        # jsi18n is required by the widget
+        js = ('/admin/jsi18n/',)
+
+class AtributoForm(MyForm):
+    """
+    Formulario para el la creacion de atributos
+    Hereda de forms.ModelForm y utiliza la clase Group para
+    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
+    """
+    class Meta:
+        model = Atributo
+        exclude = ['Usuario', 'Proyecto']
+
+
+
+class tipoItemForm(MyForm):
+    """
+
+    """
+    class Meta:
+        model = TipoDeItem
+        exclude = ['Usuario', 'Proyecto']

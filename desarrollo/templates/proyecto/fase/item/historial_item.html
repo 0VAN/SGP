@@ -1,0 +1,39 @@
+{% extends 'proyecto/administrar_proyecto.html' %}
+{% block titulo %}Historial item{% endblock %}
+{% block encabezado %}Versiones del item {{ item.Nombre}}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Tipo</td>
+                <td>Descripcion</td>
+                <td>Fecha</td>
+                <td>Id en la tabla de versiones</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for version in lista_versiones %}
+                <tr>
+                <td>{{ version.field_dict.Nombre }}</td>
+                <td>{{ version.field_dict.Tipo }}</td>
+                <td>{{ version.field_dict.Descripcion}}</td>
+                <td>{{ version.field_dict.Fecha }}</td>
+                <td>{{ version.id }}</td>
+                <td>
+                    <div class="btn-group pull-right">
+                        <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-danger">Revertir a esta version</a>
+                    </div>
+                 </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'administracion.html' %}
+{% block titulo %}Administrar Tipo de Item{% endblock %}
+{% block encabezado %}Lista de tipos de items del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con un tipo de item</small>{% endblock %}
+
+{% block botones %}
+    <li>
+        {% if usuario_actor.can_add_tipodeitem %}
+           {% if proyecto.Lider == usuario_actor %}
+                <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
+            {% else %}
+                <a class="btn btn-default" disabled="disabled">Crear tipo de item</a>
+            {% endif %}
+        {% endif %}
+        <a href="/administracion/proyectos" class="btn btn-default">Volver</a>
+    </li>
+{% endblock %}
+
+{% block contenido %}
+<table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tipo in lista_tipos %}
+                <tr>
+                    <td>{{ tipo.Nombre }}</td>
+                    <td>{{ tipo.Usuario }}</td>
+                    <td>{{ tipo.Fecha }}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id tipo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id tipo.id %}">Modificar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_tipo' proyecto.id tipo.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                    <td>No hay tipos de items disponibles</td><td></td><td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block mensaje %}{% endblock %}
+{% endblock %}
+

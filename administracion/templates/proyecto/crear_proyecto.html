@@ -1,7 +1,18 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Crear proyecto{% endblock %}
 
-{% block encabezado %}{{ operacion }}{% endblock %}
+{% block encabezado %}
+    {{ operacion }}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker();
+    });
+    </script>
+    {{ formulario.media }}
+{% endblock %}
+
 {% block botones %}
     <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
 {% endblock %}
@@ -11,3 +22,4 @@
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}
+

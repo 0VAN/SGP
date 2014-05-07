@@ -2,6 +2,9 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.contrib.auth.views import SetPasswordForm
+
+
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -11,51 +14,85 @@ urlpatterns = patterns('',
 
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'administracion.views.iniciar_sesion'),
-    url(r'^ingresar/$', 'administracion.views.iniciar_sesion'),
-    url(r'^cerrar/$', 'administracion.views.cerrar_sesion'),
+    url(r'^$', 'sesion.views.iniciar_sesion'),
+    url(r'^ingresar/$', 'sesion.views.iniciar_sesion'),
+    url(r'^cerrar/$', 'sesion.views.cerrar_sesion'),
     url(r'^administracion/$', 'administracion.views.administracion'),
-
-############################################URL USUARIO#################################################################
-    url(r'^administracion/usuarios/$', 'administracion.views.administrar_usuario'),
-    url(r'^administracion/usuarios/nuevo/$', 'administracion.views.crear_usuario'),
-    url(r'^administracion/usuarios/modificar/$', 'administracion.views.modificar_usuario'),
-    url(r'^administracion/usuarios/modificar/password/$', 'django.contrib.auth.views.password_change',
+    url(r'^usuario/$', 'sesion.views.gestion_usuario'),
+    url(r'^usuario/password/$', 'django.contrib.auth.views.password_change',
         {'current_app': 'administracion',
-         'template_name': 'usuario/form_usuario.html',
+         'template_name': 'gestion_usuario.html',
          'post_change_redirect': 'pass_done',
          'password_change_form': SetPasswordForm},
         name='password'),
-    url(r'^administracion/usuarios/modificar/password/done$', 'django.contrib.auth.views.password_change_done',
-        {'template_name': 'usuario/operacion_usuario_exito_pass.html'}, name='pass_done'),
-    url(r'^administracion/usuarios/modificar/', include('django.contrib.auth.urls')),
-
-    url(r'^administracion/usuarios/cambio_de_estado/(?P<id_usuario_p>\d+)$', 'administracion.views.cambioEstado_usuario_form'),
-    url(r'^administracion/usuarios/detalle/(?P<id_usuario_p>\d+)$', 'administracion.views.detalle_usuario'),
+    url(r'^usuario/password/done$', 'django.contrib.auth.views.password_change_done',
+        {'template_name': 'gestion_exito_pass.html'}, name='pass_done'),
+    url(r'^$', include('django.contrib.auth.urls')),
+############################################URL USUARIO#################################################################
+    url(r'^administracion/usuarios/$', 'administracion.views.administrar_usuario'),
+    url(r'^administracion/usuarios/nuevo/$', 'administracion.views.crear_usuario'),
+    url(r'^administracion/usuarios/modificar/(?P<id_usuario_p>\d+)/$', 'administracion.views.modificar_usuario'),
+    url(r'^administracion/usuarios/modificar/(?P<id_usuario_p>\d+)/password/$', 'administracion.views.pass_change'),
+    url(r'^administracion/usuarios/cambio_de_estado/(?P<id_usuario_p>\d+)/$', 'administracion.views.cambioEstado_usuario_form'),
+    url(r'^administracion/usuarios/detalle/(?P<id_usuario_p>\d+)/$', 'administracion.views.detalle_usuario'),
 
 ###############################################URL PROYECTO#############################################################
     url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
-    url(r'^administracion/proyectos/nuevo$', 'administracion.views.nuevo_proyecto'),
-    url(r'^administracion/proyectos/detalle/(?P<id_proyecto>\d+)$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/nuevo/$', 'administracion.views.nuevo_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/detalle/$', 'administracion.views.detalle_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.confirmar_iniciar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciado/$', 'administracion.views.iniciar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/modificar/$', 'administracion.views.modificar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminado/$', 'administracion.views.eliminar_proyecto'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
+    url(r'^administracion/proyectos/fases/subir/(?P<id_fase>\d+)/$', 'administracion.views.ordenar_fase_subir'),
+    url(r'^administracion/proyectos/fases/bajar/(?P<id_fase>\d+)/$', 'administracion.views.ordenar_fase_bajar'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/nuevo/$', 'administracion.views.crear_fase'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/detalle/(?P<idFase>\d+)$', 'administracion.views.detalle_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/detalle/$', 'administracion.views.detalle_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/modificar/$', 'administracion.views.modificar_fase'),
-    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.vista_eliminar_fase'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_fase'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
 
 ################################################URL ROL#################################################################
     url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
     url(r'^administracion/roles/nuevo/$', 'administracion.views.crear_rol'),
     url(r'^administracion/roles/asignar/$', 'administracion.views.vista_asignar_rol'),
-    url(r'^administracion/roles/asignar/(?P<idRol>\d+)$', 'administracion.views.asignar_rol'),
-    url(r'^administracion/roles/detalle/(?P<idRol>\d+)$', 'administracion.views.detalle_rol'),
+    url(r'^administracion/roles/asignar/(?P<id_usuario>\d+)/$', 'administracion.views.asignar_rol'),
+    url(r'^administracion/roles/detalle/(?P<idRol>\d+)/$', 'administracion.views.detalle_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
-    url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.vista_eliminar_rol'),
+    url(r'^administracion/roles/(?P<idRol>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_rol'),
     url(r'^administracion/roles/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
 
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),
+################################################URL ATRIBUTO############################################################
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/$', 'administracion.views.administrar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/nuevo/$', 'administracion.views.crear_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/detalle/(?P<id_atributo>\d+)/$', 'administracion.views.detalle_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/modificar/(?P<id_atributo>\d+)/$', 'administracion.views.modificar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminar/(?P<id_atributo>\d+)/$', 'administracion.views.confirmar_eliminar_atributo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/atributos/eliminado/(?P<id_atributo>\d+)/$', 'administracion.views.eliminar_atributo'),
+
+###############################################URL TIPO DE ITEM#########################################################
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/$', 'administracion.views.administrar_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/nuevo/$', 'administracion.views.crear_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/detalle/(?P<id_tipo>\d+)/$', 'administracion.views.detalle_tipoItem'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/modificar/(?P<id_tipo>\d+)/$', 'administracion.views.modificar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.confirmar_eliminar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/tipos/eliminado/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
+###############################################URL DESARROLLO###########################################################
+    url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'desarrollo.views.des_fase'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/crear_item/$', 'desarrollo.views.crear_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/modificar/$', 'desarrollo.views.mod_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/completar/$', 'desarrollo.views.completar_item'),
+    url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/detalle/$', 'desarrollo.views.detalle_item_vista'),
+    url(r'^vista/form/$', 'desarrollo.views.form_vista'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/$', 'desarrollo.views.historial_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.reversion_item'),
 )
+

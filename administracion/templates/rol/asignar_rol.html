@@ -15,6 +15,7 @@
             <tr>
                 <td>Nombre</td>
                 <td>Estado</td>
+                <td>Rol</td>
             </tr>
         </thead>
         {% for usuario in lista_usuarios %}
@@ -22,11 +23,17 @@
                 <tr class="clickableRow info" href='{% url "administracion.views.asignar_rol" usuario.id %}'>
                     <td>{{ usuario.username }}</td>
                     <td>Activo</td>
+                    <td>
+                        {% for grupo in usuario.groups.all %}
+                            {{ grupo }}
+                        {% endfor %}
+                    </td>
                 </tr>
             {% else %}
                 <tr class="clickableRow warning" href='{% url "administracion.views.asignar_rol" usuario.id %}'>
                     <td>{{ usuario.username }}</td>
                     <td>Inactivo</td>
+                    <td>{{ usuario.get_groups }}</td>
                 </tr>
             {% endif %}
         {% empty %}

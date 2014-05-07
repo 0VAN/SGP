@@ -1,0 +1,23 @@
+{% extends 'proyecto/administrar_proyecto.html' %}
+{% block titulo %}Detalle de tipo de item{% endblock %}
+{% block encabezado %}Vista detalle del tipo de item {{ tipo.Nombre}}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <dl>
+        <dt>Nombre:</dt>
+        <dd>{{ tipo.Nombre }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ tipo.Usuario }}</dd>
+        <dt>Proyecto:</dt>
+        <dd>{{ tipo.Proyecto }}</dd>
+        <dt>Atributos:</dt>
+        {% for atributo in tipo.Atributos.all %}
+        <dd>{{ atributo.Nombre }} de tipo {{ atributo.get_Tipo_display }}</dd>
+        {% endfor %}
+    </dl>
+{% endblock %}

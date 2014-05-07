@@ -1,26 +1,12 @@
 {% extends 'rol/administrar_rol.html' %}
 {% block titulo %}Detalle de Rol{% endblock %}
-{% block encabezado %}{{ rol.name}}{% endblock %}
+{% block encabezado %}Vista detalle del rol {{ rol.name}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li>
-        {% if usuario_actor.can_change_group %}
-            <a href="{% url 'administracion.views.modificar_rol' rol.id %}" class="btn btn-default">Modificar Rol</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Modificar Rol</a>
-        {% endif %}
-    </li>
-    <li>
-        {% if usuario_actor.can_delete_group %}
-            <a href="{% url 'administracion.views.vista_eliminar_rol' rol.id %}" class="btn btn-default">Eliminar Rol</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Eliminar Rol</a>
-        {% endif %}
-    </li>
     <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
-
 {% endblock %}
+
 {% block contenido %}
     <dl>
         <dt>Nombre:</dt>
@@ -29,5 +15,9 @@
         <dd>{{ rol.Usuario }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ rol.Fecha }}</dd>
+        <dt>Permisos:</dt>
+        {% for permiso in lista_permisos %}
+            <dd>{{ permiso.name }}</dd>
+        {% endfor %}
     </dl>
 {% endblock %}

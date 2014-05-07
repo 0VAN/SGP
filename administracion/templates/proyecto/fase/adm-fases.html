@@ -1,6 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administracion de Fases{% endblock %}
-{% block encabezado %}Administracion de Fases{% endblock %}
+{% block encabezado %}Lista de fases del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
@@ -8,34 +8,64 @@
         {% if usuario_actor.can_add_fase %}
             {% if proyecto.Lider == usuario_actor %}
                 <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
+            {% else %}
+                <a class="btn btn-default" disabled="disabled">Crear Fase</a>
             {% endif %}
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear Fase</a>
         {% endif %}
     </li>
-    <li><a href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
 {% block contenido %}
-    <table class="table table-condensed table-hover">
+   <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
+                <td>#</td>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
-            {% for fase in fases %}
-                    <tr class="clickableRow info" href="{% url "administracion.views.detalle_fase" proyecto.id fase.id %}" id="tablaFase" rel="tabla" title="Ver detalles..">
-                        <td>{{ fase.Nombre }}</td>
-                        <td>{{ fase.Usuario }}</td>
-                        <td>{{ fase.Fecha }}</td>
+            {% for fase in lista_fases %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ fase.Nombre }}</td>
+                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.Fecha }}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
+                                Arriba
+                            </a>
+                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
+                                Abajo
+                            </a>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
             {% empty %}
-                <p>No hay fases</p>
+                <tr class="warning">
+                <td>No hay fases disponibles</td><td></td><td></td>
+                </tr>
             {% endfor %}
-            </tr>
         </tbody>
     </table>
-    {% block mensaje %}{% endblock %}
+        {% block mensaje %}{% endblock %}
+
 {% endblock %}

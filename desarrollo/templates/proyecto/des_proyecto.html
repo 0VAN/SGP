@@ -1,0 +1,36 @@
+{% extends 'desarrollo.html' %}
+{% block titulo %}Desarrollo de Proyecto{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.desarrollo' %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Lista de fases del proyecto: {{ proyecto.Nombre }} {% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Usuario</td>
+                <td>Fecha</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fase in lista_fases %}
+                <tr>
+                    <td>{{ fase.Nombre }}</td>
+                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                             <a href="{% url 'desarrollo.views.des_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Desarrollar</a></li>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>No hay fases disponibles</p>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

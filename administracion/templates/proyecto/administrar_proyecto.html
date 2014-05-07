@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar proyecto{% endblock %}
-{% block encabezado %}Lista de proyectos <small>Haz click en un proyecto para mas detalles</small>{% endblock %}
+{% block encabezado %}Lista de proyectos <small>Haz click en opciones para interactuar con un proyecto</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -14,21 +14,57 @@
 {% endblock %}
 
 {% block contenido %}
-    <table class="table table-condensed table-hover">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <td>Nombre del Proyecto</td>
-                <td>Lider de Proyecto</td>
+                <td>Nombre</td>
+                <td>Lider</td>
+                <td>Estado</td>
             </tr>
         </thead>
-        <tr>
-        {% for proyecto in lista_proyectos %}
-            <tr class="clickableRow info" href='{% url "administracion.views.detalle_proyecto" proyecto.id %}' id="tablaProyecto" rel="tabla" title="Ver detalles..">
-            <td>{{ proyecto.Nombre }}</td>
-            <td>{{ proyecto.Lider }}</td>
-        {% empty %}
-            <td class="warning">No hay proyectos registrados aun</td>
-        {% endfor %}
-        </tr>
+        <tbody>
+            {% for proyecto in lista_proyectos %}
+                <tr>
+                    <td>{{ proyecto.Nombre }}</td>
+                    <td>{{ proyecto.Lider }}</td>
+                    <td>{{ proyecto.get_Estado_display }}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_proyecto' proyecto.id %}">Detalles</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Administrar <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}">Fases</a></li>
+                                <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}">Atributos</a></li>
+                                <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}">Tipos de item</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                <td>No hay proyectos disponibles</td><td></td><td></td><td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    {% block mensaje %}{% endblock %}
 {% endblock %}

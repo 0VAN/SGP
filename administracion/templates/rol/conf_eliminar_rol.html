@@ -8,7 +8,8 @@
 {% endblock %}
 
 {% block contenido %}
-    <p>Desea eliminar el rol {{ rol.name }}?</p>
+    <p class="alert alert-danger">Esta seguro que desea eliminar el rol {{ rol.name }}? Este cambio no podra
+    deshacerse</p>
     <p>
         <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_rol' rol.id %}">Si</a>
         <a class="btn btn-default btn-lg" href="/administracion/roles/">No</a>

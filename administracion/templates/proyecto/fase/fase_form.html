@@ -1,10 +1,10 @@
 {% extends 'proyecto/fase/adm-fases.html' %}
-{% block titulo %}Modificacion de Fase{% endblock %}
-{% block encabezado %}Modificacion de {{ fase.Nombre }}{% endblock %}
+{% block titulo %}Formulario de fase{% endblock %}
+{% block encabezado %}{{ operacion }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

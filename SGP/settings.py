@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 Django settings for SGP project.
 
@@ -7,7 +8,8 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-
+# -*- encoding: utf-8 -*-
+#encoding:utf-8
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -37,8 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sesion',
     'administracion',
+    'desarrollo',
+    'reversion',
 )
+#encoding:utf-8
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -47,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'reversion.middleware.RevisionMiddleware',
 )
 
 ROOT_URLCONF = 'SGP.urls'
@@ -67,6 +74,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+#encoding:utf-8
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

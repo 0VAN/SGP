@@ -1,0 +1,23 @@
+{% extends 'proyecto/administrar_proyecto.html' %}
+{% block titulo %}Detalle de atributo{% endblock %}
+{% block encabezado %}Vista detalle del atributo {{ atributo.Nombre}}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <dl>
+        <dt>Nombre:</dt>
+        <dd>{{ atributo.Nombre }}</dd>
+        <dt>Descripcion:</dt>
+        <dd>{{ atributo.Descripcion }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ atributo.Usuario }}</dd>
+        <dt>Tipo:</dt>
+        <dd>{{ atributo.get_Tipo_display }}</dd>
+        <dt>Proyecto:</dt>
+        <dd>{{ atributo.Proyecto }}</dd>
+    </dl>
+{% endblock %}

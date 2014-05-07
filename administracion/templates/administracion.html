@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block titulo %}Administracion{% endblock %}
-
 {% block activo-admin %}active{% endblock %}
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
-{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>{% endblock %}
+{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>
+{% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_administrar_proyecto %}
+        {% if usuario_actor.can_consultar_proyecto or usuario_actor.can_consultar_fase %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
@@ -17,7 +17,7 @@
          <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
     </li>
     <li>
-        {% if usuario_actor.can_administrar_rol %}
+        {% if usuario_actor.can_consultar_rol %}
             <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
         {% else %}
             <a class="btn btn-default" disabled = "disabled">Administrar Roles</a>
@@ -32,9 +32,8 @@
     </li>
 
 {% endblock %}
-
 {% block contenido %}
-    {% if usuario_actor.can_administrar_usuario %}
+    {% if usuario_actor.can_consultar_usuario %}
         <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
             <thead>
                 <tr>
@@ -42,21 +41,23 @@
                     <td>Estado</td>
                 </tr>
             </thead>
-            {% for usuario in lista_usuarios %}
-                {% if usuario.is_active %}
-                    <tr class="clickableRow" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                        <td>{{ usuario.username }}</td>
-                        <td>Activo</td>
-                    </tr>
-                {% else %}
-                    <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
-                        <td>{{ usuario.username }}</td>
-                        <td>Inactivo</td>
-                    </tr>
-                {% endif %}
-            {% empty %}
-                <p>No hay usuarios registrados aun</p>
-            {% endfor %}
+            <tbody>
+                {% for usuario in lista_usuarios %}
+                    {% if usuario.is_active %}
+                            <tr id=forloop.counter>
+                                <td>{{ usuario.username }}</td>
+                                <td>Activo</td>
+                            </tr>
+                    {% else %}
+                        <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                            <td>{{ usuario.username }}</td>
+                            <td>Inactivo</td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
+                    <p>No hay usuarios registrados aun</p>
+                {% endfor %}
+            </tbody>
         </table>
     {% else %}
         <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
