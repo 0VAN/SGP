@@ -38,7 +38,7 @@
 
                                 <ul class="dropdown-menu" role="'menu">
                                     <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Detalle</a></li>
-                                    <li><a href="{% url 'administracion.views.modificar_usuario' usuario.id %}">Modificar</a></li>
+                                    <li><a href="{% url 'administracion.views.pass_change' usuario.id %}">Modificar</a></li>
                                     <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
                                 </ul>
                             </div>
@@ -76,4 +76,5 @@
     {% else %}
         <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
     {% endif %}
+    {% block mensaje %}{% endblock %}
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends 'rol/administrar_rol.html' %}
 {% block titulo %}Modificacion de Rol{% endblock %}
+
 {% block encabezado %}Modificacion de {{ rol.name }}
     <script type="text/javascript" src="/admin/jsi18n/"></script>
     {{ formulario.media }}
@@ -7,7 +8,9 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+    <li>
+        <a href="/administracion/roles/listar" class="btn btn-default">Volver</a>
+    </li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

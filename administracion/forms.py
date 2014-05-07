@@ -52,19 +52,10 @@ class UsuarioModForm(forms.ModelForm):
     agregar ciertos campos a la hora de la modificacion
     """
     error_css_class = 'list-group-item-danger'
-    username = forms.RegexField(
-        label=("Nombre de usuario"), max_length=30, regex=r"^[\w.@+-]+$",
-        help_text=("Required. 30 characters or fewer. Letters, digits and "
-                      "@/./+/-/_ only."),
-        error_messages={
-            'invalid': ("This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters.")})
-    password = ReadOnlyPasswordHashField(label=("Contraseña"),
-        help_text=("Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,"
-                   " pero se puede cambiar mediante el boton cambiar contraseña"))
+
     class Meta:
         model = User
-        fields = ('username', 'password')
+        exclude = '__all__'
 
     def __init__(self, *args, **kwargs):
             super(UsuarioModForm, self).__init__(*args, **kwargs)
@@ -137,4 +128,4 @@ class tipoItemForm(MyForm):
     """
     class Meta:
         model = TipoDeItem
-        exclude = ['Usuario', 'Proyecto']
+        exclude = ['Usuario', 'Fase']

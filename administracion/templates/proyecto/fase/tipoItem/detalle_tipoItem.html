@@ -4,7 +4,7 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_tipoItem' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}

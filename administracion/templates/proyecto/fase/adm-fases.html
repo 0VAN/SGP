@@ -25,6 +25,9 @@
                 <td>Usuario</td>
                 <td>Fecha</td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -35,33 +38,51 @@
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>
                     <td>
-                        <div class="btn-group pull-right">
-                        <div class="btn-group">
                             <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
-                                Arriba
+                                <span class="glyphicon glyphicon-chevron-up"></span>
+
                             </a>
                             <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
-                                Abajo
+                                <span class="glyphicon glyphicon-chevron-down"></span>
                             </a>
+                    </td>
+                    <td>
+                        <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
 
-                            <ul class="dropdown-menu" role="'menu">
+                            <ul class="dropdown-menu">
                                 <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
                             </ul>
                         </div>
                     </td>
                     <td>
-                        <div class="btn-group pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Administrar <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'administracion.views.administrar_atributo' fase.Proyecto.id fase.id %}">Atributo</a></li>
+                                <li><a href="{% url 'administracion.views.administrar_tipoItem' fase.Proyecto.id fase.id %}">Tipos de item</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
                             <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>
             {% empty %}
                 <tr class="warning">
-                <td>No hay fases disponibles</td><td></td><td></td>
+                <td>No hay fases disponibles</td><td></td><td></td><td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 </tr>
             {% endfor %}
         </tbody>

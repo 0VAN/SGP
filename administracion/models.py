@@ -266,7 +266,7 @@ class TipoDeItem(models.Model):
     Usuario = models.ForeignKey(User)
     Fecha = models.DateTimeField(auto_now=True)
     Atributos = models.ManyToManyField(Atributo)
-    Proyecto = models.ForeignKey(Proyecto)
+    Fase = models.ForeignKey(Fase)
 
     def __unicode__(self):
         return self.Nombre

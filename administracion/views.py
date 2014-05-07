@@ -77,11 +77,11 @@ def crear_usuario(request):
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
     usuario_actor = request.user
+    lista_usuarios = User.objects.all()
     if request.method == 'POST':
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            lista_usuarios = User.objects.all()
             return render_to_response('usuario/operacion_usuario_exito.html',
                                       {'mensaje': 'El nuevo usuario fue creado exitosamente', 'usuario_actor': usuario_actor,
                                        'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
@@ -92,45 +92,11 @@ def crear_usuario(request):
                                'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def modificar_usuario(request, id_usuario_p):
-    """
-
-    :param request:
-    :return:
-
-    Vista de modificacion de nuevo usuario
-
-    | Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar
-    | los datos el usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario
-
-    * Variables
-        -   usuario_actor: es el usuario que realiza la accion
-        -   formulario: es el fomrulario que debe completar el usuario_actor
-        -   lista_usuarios: es la lista de usuarios existentes en el sistema
-    """
-    usuario_parametro = User.objects.get(pk=id_usuario_p)
-    lista_usuarios = User.objects.all()
-    if request.method == 'POST':
-        formulario = UsuarioModForm(request.POST, instance=usuario_parametro)
-        if formulario.is_valid():
-           formulario.save()
-           return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje': 'Se ha actualizado la informacion personal',
-                                       'usuario_actor': request.user, 'usuario_parametro': usuario_parametro,
-                                      'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
-    else:
-        formulario = UsuarioModForm(instance=usuario_parametro)
-    return render(request, 'usuario/form_usuario_mod.html',
-                  {'usuario_actor': request.user, 'formulario': formulario, 'operacion': 'Modificar usuario',
-                   'usuario_parametro': usuario_parametro},
-                  context_instance=RequestContext(request))
-
-@login_required(login_url="/iniciar_sesion")
 def pass_change(request, id_usuario_p):
     usuario_parametro = User.objects.get(pk=id_usuario_p)
     lista_usuarios = User.objects.all()
     if request.method == 'POST':
-        formulario = SetPasswordForm(data=request.POST, user= usuario_parametro)
+        formulario = SetPasswordForm(data=request.POST, user=usuario_parametro)
         if formulario.is_valid():
            formulario.save()
            return render_to_response('usuario/operacion_usuario_exito.html',
@@ -591,7 +557,7 @@ def eliminar_fase(request, idFase, id_proyecto):
     usuario_actor = request.user
     fase.delete()
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_fases = Fase.objects.filter(pk=id_proyecto)
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
     return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha eliminado la fase seleccionada'},
@@ -607,9 +573,23 @@ def administrar_roles(request):
     :return:
     """
     usuario_actor = request.user
-    roles = Group.objects.all()
+    lista_usuarios = User.objects.all()
     return render_to_response('rol/administrar_rol.html',
-                              {'usuario_actor': usuario_actor, 'roles': roles}, context_instance=RequestContext(request))
+                              {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}
+                              , context_instance=RequestContext(request))
+
+@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+def listar_roles(request):
+    """
+
+    :param request:
+    :return:
+    """
+    usuario_actor = request.user
+    roles = Group.objects.all()
+    return render_to_response('rol/listar_roles.html',
+                              {'usuario_actor': usuario_actor, 'roles': roles}
+                              , context_instance=RequestContext(request))
 
 @user_passes_test(User.can_add_group, login_url="/iniciar_sesion")
 def crear_rol(request):
@@ -620,6 +600,7 @@ def crear_rol(request):
     """
     mensaje="Rol creado con exito"
     usuario_actor = request.user
+    lista_usuarios = User.objects.all()
     rol = Group(Usuario=usuario_actor)
     roles = Group.objects.all()
     if request.method == 'POST':
@@ -627,7 +608,8 @@ def crear_rol(request):
         if formulario.is_valid():
             formulario.save()
             return render_to_response('rol/rol_exito.html',
-                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor,
+                                       'lista_usuarios': lista_usuarios, 'roles':roles},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
@@ -647,7 +629,8 @@ def detalle_rol(request, idRol):
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
     lista_permisos = rol.permissions.all()
-    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol,'lista_permisos':lista_permisos},
+    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol,
+                                                      'lista_permisos': lista_permisos},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_group, login_url="/iniciar_sesion")
@@ -661,17 +644,19 @@ def modificar_rol(request, idRol):
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
     roles = Group.objects.all()
+    lista_usuarios = User.objects.all()
     formulario = RolForm(request.POST, instance=rol)
     if formulario.is_valid():
         formulario.save()
         mensaje = 'El rol ha sido modificado exitosamente'
         return render_to_response('rol/rol_exito.html',
-                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor, 'roles': roles},
+                                      {'mensaje': mensaje, 'usuario_actor': usuario_actor,
+                                       'lista_usuarios': lista_usuarios, 'roles': roles},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
     return render_to_response('rol/modificar_rol.html',
-                              {'usuario_actor': usuario_actor, 'rol':rol, 'formulario':formulario},
+                              {'usuario_actor': usuario_actor, 'rol': rol, 'formulario': formulario},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
@@ -699,21 +684,9 @@ def eliminar_rol(request, idRol):
     rol.delete()
     usuario_actor = request.user
     roles = Group.objects.all()
-    return render_to_response('rol/roleliminado.html',
-                              {'usuario_actor': usuario_actor, 'roles': roles},
-                              context_instance=RequestContext(request))
-
-@user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
-def vista_asignar_rol(request):
-    """
-
-    :param request:
-    :return:
-    """
-    usuario_actor = request.user
-    lista_usuarios = User.objects.all()
-    return render_to_response('rol/asignar_rol.html',
-                              {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios},
+    return render_to_response('rol/rol_exito.html',
+                              {'usuario_actor': usuario_actor, 'roles': roles,
+                               'mensaje':'El rol ha sido eliminado con exito'},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
@@ -730,12 +703,12 @@ def asignar_rol(request, id_usuario):
         if formulario.is_valid():
            formulario.save()
            roles = Group.objects.all()
-           return render_to_response('rol/operacion_rol_exito.html',
+           return render_to_response('rol/asignar_rol_exito.html',
                                      {'mensaje': 'Rol asignado con exito', 'usuario_actor': usuario_actor,
                                       'roles': roles}, context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)
-    return render(request, 'rol/form_rol.html', {'formulario': formulario,
+    return render(request, 'rol/form_asignar.html', {'formulario': formulario,
                                                  'operacion': 'Seleccione el rol que desea asignar al usuario',
                                                  'usuario_actor': usuario_actor, 'usuario':usuario},
                   context_instance=RequestContext(request))
@@ -758,7 +731,7 @@ def administrar_credencial(request):
 #########################################Vista de atributos#############################################################
 ########################################################################################################################
 
-def administrar_atributo(request, id_proyecto):
+def administrar_atributo(request, id_proyecto, id_fase):
     """
 
     :param request:
@@ -767,14 +740,14 @@ def administrar_atributo(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/atributo/administrar_atributo.html',
+    return render_to_response('proyecto/fase/atributo/administrar_atributo.html',
                               {'usuario_actor': usuario_actor, 'lista_atributos': lista_atributos,
                                'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 
 @login_required(login_url="/iniciar_sesion")
-def crear_atributo(request, id_proyecto):
+def crear_atributo(request, id_proyecto, id_fase):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     atributo = Atributo(Usuario=usuario_actor, Proyecto=proyecto)
@@ -783,19 +756,19 @@ def crear_atributo(request, id_proyecto):
         if formulario.is_valid():
             formulario.save()
             lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
-            return render_to_response('proyecto/atributo/atributo_exito.html',
+            return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                                       {'mensaje': 'El atributo se ha creado exitosamente',
                                        'usuario_actor': usuario_actor, 'lista_atributos':lista_atributos , 'proyecto': proyecto},
                                       context_instance=RequestContext(request))
     else:
         formulario = AtributoForm(instance=atributo)
-    return render_to_response('proyecto/atributo/atributo_form.html',
+    return render_to_response('proyecto/fase/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del atributo',
                                'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def detalle_atributo(request, id_atributo, id_proyecto):
+def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
     :param request:
@@ -805,14 +778,14 @@ def detalle_atributo(request, id_atributo, id_proyecto):
     usuario_actor = request.user
     atributo = Atributo.objects.get(pk=id_atributo)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    return render_to_response('proyecto/atributo/detalle_atributo.html',
+    return render_to_response('proyecto/fase/atributo/detalle_atributo.html',
                               {'usuario_actor': usuario_actor,
                                'atributo': atributo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
 
 @login_required(login_url="/iniciar_sesion")
-def modificar_atributo(request, id_proyecto, id_atributo):
+def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
     :param request:
@@ -825,13 +798,13 @@ def modificar_atributo(request, id_proyecto, id_atributo):
     lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
 
     if proyecto.Estado == 'C':
-                return render_to_response('proyecto/atributo/atributo_error.html',
+                return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
                                'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha sido cancelado'},
                               context_instance=RequestContext(request))
     else:
             if proyecto.Estado == 'F':
-                return render_to_response('proyecto/atributo/atributo_error.html',
+                return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
                                'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha finalizado'},
                               context_instance=RequestContext(request))
@@ -841,14 +814,14 @@ def modificar_atributo(request, id_proyecto, id_atributo):
         formulario = AtributoForm(request.POST, instance=atributo)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('proyecto/atributo/atributo_exito.html',
+            return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                                       {'mensaje': 'El atributo se ha modificado exitosamente',
                                        'usuario_actor': usuario_actor, 'proyecto':proyecto, 'atributo': atributo,
                                        'lista_atributos': lista_atributos},
                                       context_instance=RequestContext(request))
     else:
         formulario = AtributoForm(instance=atributo)
-        return render_to_response('proyecto/atributo/atributo_form.html',
+        return render_to_response('proyecto/fase/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Modificar atributo',
                                'usuario_actor': usuario_actor,  'proyecto': proyecto, 'atributo': atributo},
                               context_instance=RequestContext(request))
@@ -857,7 +830,7 @@ def modificar_atributo(request, id_proyecto, id_atributo):
 
 
 @login_required(login_url="/iniciar_sesion")
-def eliminar_atributo(request, id_atributo, id_proyecto):
+def eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
     :param request:
@@ -869,13 +842,13 @@ def eliminar_atributo(request, id_atributo, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/atributo/atributo_exito.html',
+    return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El atributo ha sido eliminado exitosamente',
                                'lista_atributos': lista_atributos ,  'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 
-def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
+def confirmar_eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
     :param request:
@@ -888,25 +861,25 @@ def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_atributos = Atributo.objects.filter(Proyecto=id_proyecto)
     if proyecto.Estado == 'A':
-                return render_to_response('proyecto/atributo/atributo_error.html',
+                return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
                                'mensaje': 'No puedes eliminar un atributo de un proyecto que ha iniciado'},
                               context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':
-                return render_to_response('proyecto/atributo/atributo_error.html',
+                return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
                                'mensaje': 'No puedes eliminar un atributo de un proyecto que ha sido cancelado'},
                               context_instance=RequestContext(request))
         else:
             if proyecto.Estado == 'F':
-                return render_to_response('proyecto/atributo/atributo_error.html',
+                return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
                                'mensaje': 'No puedes eliminar un atributo de un proyecto que ha finalizado'},
                               context_instance=RequestContext(request))
             else:
                 atributo = Atributo.objects.get(pk=id_atributo)
-                return render_to_response('proyecto/atributo/conf_eliminar_atributo.html',
+                return render_to_response('proyecto/fase/atributo/conf_eliminar_atributo.html',
                               {'usuario_actor': usuario_actor, 'atributo': atributo, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
@@ -915,7 +888,7 @@ def confirmar_eliminar_atributo(request, id_atributo, id_proyecto):
 ########################################################################################################################
 
 @login_required(login_url="/iniciar_sesion")
-def administrar_tipoItem(request, id_proyecto):
+def administrar_tipoItem(request, id_proyecto, id_fase):
     """
 
     :param request:
@@ -924,14 +897,15 @@ def administrar_tipoItem(request, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/tipoItem/administrar_tipoItem.html',
+    fase = Fase.objects.get(pk=id_fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
+    return render_to_response('proyecto/fase/tipoItem/administrar_tipoItem.html',
                               {'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
-                               'proyecto': proyecto},
+                               'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def crear_tipoItem(request, id_proyecto):
+def crear_tipoItem(request, id_proyecto, id_fase):
     """
 
     :param request:
@@ -940,25 +914,31 @@ def crear_tipoItem(request, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    tipo = TipoDeItem(Usuario=usuario_actor, Proyecto=proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    tipo = TipoDeItem(Usuario=usuario_actor, Fase=fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
+    if Atributo.objects.filter(Proyecto=proyecto).exists() != True:
+        return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
+                                      {'mensaje': 'No existen atributos en el proyecto, creelos',
+                                       'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                                       'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
+            return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El tipo de item se ha creado exitosamente',
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
-                                       'proyecto': proyecto}, context_instance=RequestContext(request))
+                                       'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     else:
-        formulario = tipoItemForm()
-    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
+        formulario = tipoItemForm(instance=tipo)
+    return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del tipo de item',
-                               'usuario_actor': usuario_actor, 'proyecto': proyecto},
+                               'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def detalle_tipoItem(request, id_tipo, id_proyecto):
+def detalle_tipoItem(request, id_proyecto, id_fase, id_tipo):
     """
     :param request:
     :param id_tipo:
@@ -968,13 +948,14 @@ def detalle_tipoItem(request, id_tipo, id_proyecto):
     usuario_actor = request.user
     tipo = TipoDeItem.objects.get(pk=id_tipo)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    return render_to_response('proyecto/tipoItem/detalle_tipoItem.html',
+    fase = Fase.objects.get(pk=id_fase)
+    return render_to_response('proyecto/fase/tipoItem/detalle_tipoItem.html',
                               {'usuario_actor': usuario_actor,
-                               'tipo': tipo, 'proyecto': proyecto},
+                               'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def modificar_tipo(request, id_proyecto, id_tipo):
+def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
     """
 
     :param request:
@@ -984,17 +965,18 @@ def modificar_tipo(request, id_proyecto, id_tipo):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     if proyecto.Estado == 'C':
-                return render_to_response('proyecto/tipoItem/tipoItem_error.html',
+                return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_tipos': lista_tipos,
-                               'mensaje': 'No puedes modificar los datos un tipo de item de un proyecto que ha sido cancelado'},
+                               'mensaje': 'No puedes modificar los datos un tipo de item de un proyecto que ha sido cancelado', 'fase': fase},
                               context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'F':
-                return render_to_response('proyecto/tipoItem/tipoItem_error.html',
+                return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_tipos': lista_tipos,
-                               'mensaje': 'No puedes modificar los datos un tipo de item de un proyecto que ha finalizado'},
+                               'mensaje': 'No puedes modificar los datos un tipo de item de un proyecto que ha finalizado', 'fase': fase},
                               context_instance=RequestContext(request))
 
     tipo = TipoDeItem.objects.get(pk=id_tipo)
@@ -1002,20 +984,20 @@ def modificar_tipo(request, id_proyecto, id_tipo):
         formulario = tipoItemForm(request.POST, instance=tipo)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
+            return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
                                       {'mensaje': 'El atributo se ha modificado exitosamente',
                                        'usuario_actor': usuario_actor, 'proyecto':proyecto, 'tipo':tipo,
-                                       'lista_tipos': lista_tipos},
+                                       'lista_tipos': lista_tipos, 'fase': fase},
                                       context_instance=RequestContext(request))
     else:
         formulario = tipoItemForm(instance=tipo)
-    return render_to_response('proyecto/tipoItem/tipoItem_form.html',
+    return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
                               {'formulario': formulario, 'operacion': 'Modificar tipo de item',
-                               'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo':tipo},
+                               'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo': tipo, 'fase': fase},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
-def eliminar_tipo(request, id_tipo, id_proyecto):
+def eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
     """
 
     :param request:
@@ -1027,13 +1009,14 @@ def eliminar_tipo(request, id_tipo, id_proyecto):
     tipo.delete()
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=proyecto)
-    return render_to_response('proyecto/tipoItem/tipoItem_exito.html',
+    fase = Fase.objects.get(pk=id_fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
+    return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El tipo de item ha sido eliminado exitosamente',
-                               'lista_tipos': lista_tipos, 'proyecto':proyecto},
+                               'lista_tipos': lista_tipos, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-def confirmar_eliminar_tipo(request, id_tipo, id_proyecto):
+def confirmar_eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
     """
 
     :param request:
@@ -1044,28 +1027,29 @@ def confirmar_eliminar_tipo(request, id_tipo, id_proyecto):
 
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_tipos = TipoDeItem.objects.filter(Proyecto=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     if proyecto.Estado == 'A':
-                return render_to_response('proyecto/tipoItem/tipoItem_error.html',
+                return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_tipos': lista_tipos,
-                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha iniciado'},
+                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha iniciado', 'fase': fase},
                               context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':
-                return render_to_response('proyecto/tipoItem/tipoItem_error.html',
+                return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_tipos': lista_tipos,
-                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha sido cancelado'},
+                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha sido cancelado', 'fase': fase},
                               context_instance=RequestContext(request))
         else:
             if proyecto.Estado == 'F':
-                return render_to_response('proyecto/tipoItem/tipoItem_error.html',
+                return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_tipos': lista_tipos,
-                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha finalizado'},
+                               'mensaje': 'No puedes eliminar un tipo de item de un proyecto que ha finalizado', 'fase': fase},
                               context_instance=RequestContext(request))
             else:
                 tipo = TipoDeItem.objects.get(pk=id_tipo)
-                return render_to_response('proyecto/tipoItem/conf_eliminar_tipo.html',
-                              {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto},
+                return render_to_response('proyecto/fase/tipoItem/conf_eliminar_tipo.html',
+                              {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 

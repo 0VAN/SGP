@@ -6,12 +6,12 @@
     <li>
         {% if usuario_actor.can_add_tipodeitem %}
            {% if proyecto.Lider == usuario_actor %}
-                <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id %}" class="btn btn-default">Crear tipo de item</a>
+                <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id fase.id %}" class="btn btn-default">Crear tipo de item</a>
             {% else %}
                 <a class="btn btn-default" disabled="disabled">Crear tipo de item</a>
             {% endif %}
         {% endif %}
-        <a href="/administracion/proyectos" class="btn btn-default">Volver</a>
+        <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 
@@ -38,14 +38,14 @@
                             </button>
 
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id tipo.id %}">Detalle</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id tipo.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.detalle_tipoItem' proyecto.id fase.id tipo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_tipo' proyecto.id fase.id tipo.id %}">Modificar</a></li>
                             </ul>
                         </div>
                     </td>
                     <td>
                         <div class="btn-group pull-right">
-                            <a href="{% url 'administracion.views.confirmar_eliminar_tipo' proyecto.id tipo.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'administracion.views.confirmar_eliminar_tipo' proyecto.id fase.id tipo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>
