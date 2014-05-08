@@ -118,7 +118,7 @@ class AtributoForm(MyForm):
     """
     class Meta:
         model = Atributo
-        exclude = ['Usuario', 'Proyecto']
+        exclude = ['Usuario', 'Fase']
 
 
 

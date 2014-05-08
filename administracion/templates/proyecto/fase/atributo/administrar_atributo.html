@@ -1,17 +1,17 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administrar atributos{% endblock %}
-{% block encabezado %}Lista de atributos del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con un atributo</small>{% endblock %}
+{% block encabezado %}Lista de atributos de la fase {{ fase.Nombre }} <small>Haz click en opciones para interactuar con un atributo</small>{% endblock %}
 
 {% block botones %}
     <li>
         {% if usuario_actor.can_add_atributo %}
            {% if proyecto.Lider == usuario_actor %}
-                <a href="{% url 'administracion.views.crear_atributo' proyecto.id %}" class="btn btn-default">Crear atributo</a>
+                <a href="{% url 'administracion.views.crear_atributo' proyecto.id fase.id %}" class="btn btn-default">Crear atributo</a>
             {% else %}
                 <a class="btn btn-default" disabled="disabled">Crear atributo</a>
             {% endif %}
         {% endif %}
-        <a href="/administracion/proyectos/" class="btn btn-default">Volver</a>
+        <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a>
 
     </li>
 {% endblock %}
@@ -39,15 +39,15 @@
                             </button>
 
                             <ul class="dropdown-menu" role="'menu">
-                                <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id atributo.id %}">Detalle</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id atributo.id %}">Modificar</a></li>
+                                <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id fase.id atributo.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id fase.id atributo.id %}">Modificar</a></li>
                                 <li><a href="#">versiones</a></li>
                             </ul>
                         </div>
                     </td>
                     <td>
                          <div class="btn-group pull-right">
-                            <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id fase.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>

@@ -3,7 +3,7 @@
 
 {% block encabezado %}{{ operacion }}{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

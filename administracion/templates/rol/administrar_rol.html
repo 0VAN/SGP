@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar roles{% endblock %}
-{% block encabezado %}Lista de usuarios <small>Haz click en asignar para asignar un rol a un usuario</small>{% endblock %}
+{% block encabezado %}Lista de usuarios <small>Haz click en asignar rol para asignar un rol a un usuario</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -43,7 +43,7 @@
                         {% endfor %}
                     </td>
                     <td>
-                        <a href="{% url "administracion.views.asignar_rol" usuario.id %}" class="btn btn-primary">Asignar </a>
+                        <a href="{% url "administracion.views.asignar_rol" usuario.id %}" class="btn btn-primary">Asignar Rol </a>
                     </td>
                 </tr>
             {% else %}
@@ -57,4 +57,5 @@
             <p>No hay usuarios registrados aun</p>
         {% endfor %}
     </table>
+    {% block mensaje %}{% endblock %}
 {% endblock %}

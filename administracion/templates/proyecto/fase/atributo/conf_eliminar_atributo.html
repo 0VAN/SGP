@@ -4,15 +4,15 @@
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_atributo' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
     <p class="alert alert-danger">Esta seguro que desea eliminar el atributo {{ atributo.Nombre }}? Este cambio no podra
     deshacerse</p>
     <p>
-        <a class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_atributo' proyecto.id atributo.id %}">Si</a>
-        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_atributo' proyecto.id %}">No</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_atributo' proyecto.id fase.id atributo.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_atributo' proyecto.id fase.id %}">No</a>
     </p>
 
 

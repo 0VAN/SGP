@@ -260,7 +260,7 @@ def iniciar_proyecto(request, id_proyecto):
     proyecto.Fecha_inicio = timezone.now()
     proyecto.save()
     return render_to_response('proyecto/proyecto_exito.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'Se ha dado inicio al proyecto', 'lista_proyectos':Proyecto.objects.all()}
+                              'mensaje': 'Se ha dado inicio al proyecto '+proyecto.Nombre, 'lista_proyectos':Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
 
 def confirmar_iniciar_proyecto(request, id_proyecto):
@@ -273,21 +273,24 @@ def confirmar_iniciar_proyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     if proyecto.Estado == 'A':
         return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'No puedes iniciar un proyecto que ya ha sido iniciado, ver detalles', 'lista_proyectos':Proyecto.objects.all()}
+                              'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque ya ha sido iniciado, ver detalles',
+                              'lista_proyectos':Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':
             return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'No puedes iniciar un proyecto que ya ha sido cancelado, ver detalles', 'lista_proyectos':Proyecto.objects.all()}
+                              'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque  ya ha sido cancelado, ver detalles',
+                              'lista_proyectos':Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
         else:
             if proyecto.Estado == 'F':
                 return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'No puedes iniciar un proyecto que ya ha finalizado, ver detalles', 'lista_proyectos':Proyecto.objects.all()}
+                              'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque  ya ha finalizado, ver detalles',
+                              'lista_proyectos':Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
             else:
                 return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
-                                , 'lista_proyectos': Proyecto.objects.all()}, context_instance=RequestContext(request))
+                                ,'lista_proyectos': Proyecto.objects.all()}, context_instance=RequestContext(request))
 
 def eliminar_proyecto(request, id_proyecto):
     """
@@ -301,7 +304,7 @@ def eliminar_proyecto(request, id_proyecto):
     proyecto.Fecha_finalizacion = timezone.now()
     proyecto.save()
     return render_to_response('proyecto/proyecto_exito.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'Se ha cancelado el proyecto seleccionado ', 'lista_proyectos': Proyecto.objects.all()}
+                              'mensaje': 'Se ha cancelado el proyecto'+proyecto.Nombre, 'lista_proyectos': Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
 def confirmar_eliminar_proyecto(request, id_proyecto):
     """
@@ -313,7 +316,8 @@ def confirmar_eliminar_proyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     if proyecto.Estado == 'C':
         return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
-                              'mensaje': 'No puedes cancelar un proyecto que ya ha sido cancelado, ver detalles', 'lista_proyectos': Proyecto.objects.all()}
+                              'mensaje': 'No puedes cancelar el proyecto '+proyecto.Nombre + ' porque ya ha sido cancelado, ver detalles',
+                              'lista_proyectos': Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
     else:
         return render_to_response('proyecto/conf_eliminar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
@@ -334,30 +338,30 @@ def modificar_proyecto(request, id_proyecto):
             if formulario.is_valid():
                 formulario.save()
                 return render_to_response('proyecto/proyecto_exito.html',
-                                      {'mensaje': 'El proyecto ha sido modificado exitosamente',
+                                      {'mensaje': 'El proyecto '+proyecto.Nombre+' ha sido modificado exitosamente',
                                        'usuario_actor': request.user, 'lista_proyectos': Proyecto.objects.all()},
                                       context_instance=RequestContext(request))
         else:
             formulario = ProyectoForm(instance=proyecto)
             return render_to_response('proyecto/crear_proyecto.html',
-                              {'formulario': formulario, 'operacion':'Ingrese los datos del proyecto'
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del proyecto'+proyecto.Nombre
                                , 'usuario_actor': request.user}, context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':
             return render_to_response('proyecto/proyecto_error.html',
-                                      {'mensaje': 'No puedes modificar los datos de un proyecto que ya ha sido cancelado, ver detalles',
+                                      {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha sido cancelado, ver detalles',
                                        'usuario_actor': request.user, 'lista_proyectos': Proyecto.objects.all()},
                                       context_instance=RequestContext(request))
         else:
             if proyecto.Estado == 'A':
                 return render_to_response('proyecto/proyecto_error.html',
-                                      {'mensaje': 'No puedes modificar los datos de un proyecto que ya ha iniciado, ver detalles',
+                                      {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha iniciado, ver detalles',
                                        'usuario_actor': request.user, 'lista_proyectos': Proyecto.objects.all()},
                                       context_instance=RequestContext(request))
             else:
                 if proyecto.Estado == 'F':
                     return render_to_response('proyecto/proyecto_error.html',
-                                      {'mensaje': 'No puedes modificar los datos de un proyecto que ya ha finalizado, ver detalles',
+                                      {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha finalizado, ver detalles',
                                        'usuario_actor': request.user, 'lista_proyectos': Proyecto.objects.all()},
                                       context_instance=RequestContext(request))
 
@@ -417,6 +421,7 @@ def crear_fase(request, id_proyecto):
         -   proyecto: es el proyecto cuyas fases se desea administrar
         -   fases: indica que la fase correpondera a un proyecto especifico
     """
+
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase(Usuario= usuario_actor, Proyecto=proyecto)
@@ -609,7 +614,7 @@ def crear_rol(request):
             formulario.save()
             return render_to_response('rol/rol_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor,
-                                       'lista_usuarios': lista_usuarios, 'roles':roles},
+                                       'lista_usuarios': lista_usuarios, 'roles': roles},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
@@ -698,19 +703,20 @@ def asignar_rol(request, id_usuario):
     """
     usuario_actor = request.user
     usuario = User.objects.get(pk=id_usuario)
+    lista_usuarios = User.objects.all()
+
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
         if formulario.is_valid():
            formulario.save()
-           roles = Group.objects.all()
            return render_to_response('rol/asignar_rol_exito.html',
                                      {'mensaje': 'Rol asignado con exito', 'usuario_actor': usuario_actor,
-                                      'roles': roles}, context_instance=RequestContext(request))
+                                      'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)
     return render(request, 'rol/form_asignar.html', {'formulario': formulario,
                                                  'operacion': 'Seleccione el rol que desea asignar al usuario',
-                                                 'usuario_actor': usuario_actor, 'usuario':usuario},
+                                                 'usuario_actor': usuario_actor, 'usuario': usuario},
                   context_instance=RequestContext(request))
 
 
@@ -739,10 +745,12 @@ def administrar_atributo(request, id_proyecto, id_fase):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_atributos = Atributo.objects.filter(Fase=fase)
+
     return render_to_response('proyecto/fase/atributo/administrar_atributo.html',
                               {'usuario_actor': usuario_actor, 'lista_atributos': lista_atributos,
-                               'proyecto':proyecto},
+                               'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 
@@ -750,21 +758,24 @@ def administrar_atributo(request, id_proyecto, id_fase):
 def crear_atributo(request, id_proyecto, id_fase):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    atributo = Atributo(Usuario=usuario_actor, Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    atributo = Atributo(Usuario=usuario_actor, Fase=fase)
+    lista_atributos = Atributo.objects.filter(Fase=fase)
+
     if request.method == 'POST':
         formulario = AtributoForm(request.POST, instance=atributo)
         if formulario.is_valid():
             formulario.save()
-            lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
             return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                                       {'mensaje': 'El atributo se ha creado exitosamente',
-                                       'usuario_actor': usuario_actor, 'lista_atributos':lista_atributos , 'proyecto': proyecto},
+                                       'usuario_actor': usuario_actor, 'lista_atributos':lista_atributos,
+                                       'proyecto': proyecto, 'fase': fase},
                                       context_instance=RequestContext(request))
     else:
         formulario = AtributoForm(instance=atributo)
     return render_to_response('proyecto/fase/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del atributo',
-                               'usuario_actor': usuario_actor, 'proyecto': proyecto},
+                               'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 @login_required(login_url="/iniciar_sesion")
@@ -778,9 +789,10 @@ def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
     usuario_actor = request.user
     atributo = Atributo.objects.get(pk=id_atributo)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
     return render_to_response('proyecto/fase/atributo/detalle_atributo.html',
                               {'usuario_actor': usuario_actor,
-                               'atributo': atributo, 'proyecto': proyecto},
+                               'atributo': atributo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 
@@ -795,18 +807,19 @@ def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_atributos = Atributo.objects.filter(Fase=fase)
 
     if proyecto.Estado == 'C':
                 return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
-                               'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha sido cancelado'},
+                               'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha sido cancelado', 'fase': fase},
                               context_instance=RequestContext(request))
     else:
             if proyecto.Estado == 'F':
                 return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
-                               'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha finalizado'},
+                               'mensaje': 'No puedes modificar los datos un atributo de un proyecto que ha finalizado', 'fase': fase},
                               context_instance=RequestContext(request))
 
     atributo = Atributo.objects.get(pk=id_atributo)
@@ -817,13 +830,13 @@ def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
             return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                                       {'mensaje': 'El atributo se ha modificado exitosamente',
                                        'usuario_actor': usuario_actor, 'proyecto':proyecto, 'atributo': atributo,
-                                       'lista_atributos': lista_atributos},
+                                       'lista_atributos': lista_atributos, 'fase': fase},
                                       context_instance=RequestContext(request))
     else:
         formulario = AtributoForm(instance=atributo)
         return render_to_response('proyecto/fase/atributo/atributo_form.html',
                               {'formulario': formulario, 'operacion': 'Modificar atributo',
-                               'usuario_actor': usuario_actor,  'proyecto': proyecto, 'atributo': atributo},
+                               'usuario_actor': usuario_actor,  'proyecto': proyecto, 'atributo': atributo, 'fase': fase},
                               context_instance=RequestContext(request))
 
 
@@ -841,10 +854,12 @@ def eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     atributo.delete()
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_atributos = Atributo.objects.filter(Proyecto=proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+
+    lista_atributos = Atributo.objects.filter(Fase=fase)
     return render_to_response('proyecto/fase/atributo/atributo_exito.html',
                               {'usuario_actor': usuario_actor,'mensaje':'El atributo ha sido eliminado exitosamente',
-                               'lista_atributos': lista_atributos ,  'proyecto':proyecto},
+                               'lista_atributos': lista_atributos ,  'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 
@@ -859,28 +874,30 @@ def confirmar_eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
 
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_atributos = Atributo.objects.filter(Proyecto=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_atributos = Atributo.objects.filter(Fase=fase)
+
     if proyecto.Estado == 'A':
                 return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
-                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha iniciado'},
+                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha iniciado', 'fase': fase},
                               context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':
                 return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
-                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha sido cancelado'},
+                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha sido cancelado', 'fase': fase},
                               context_instance=RequestContext(request))
         else:
             if proyecto.Estado == 'F':
                 return render_to_response('proyecto/fase/atributo/atributo_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_atributos': lista_atributos,
-                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha finalizado'},
+                               'mensaje': 'No puedes eliminar un atributo de un proyecto que ha finalizado', 'fase': fase},
                               context_instance=RequestContext(request))
             else:
                 atributo = Atributo.objects.get(pk=id_atributo)
                 return render_to_response('proyecto/fase/atributo/conf_eliminar_atributo.html',
-                              {'usuario_actor': usuario_actor, 'atributo': atributo, 'proyecto': proyecto},
+                              {'usuario_actor': usuario_actor, 'atributo': atributo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
 ########################################################################################################################
@@ -917,9 +934,9 @@ def crear_tipoItem(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     tipo = TipoDeItem(Usuario=usuario_actor, Fase=fase)
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
-    if Atributo.objects.filter(Proyecto=proyecto).exists() != True:
+    if Atributo.objects.filter(Fase=fase).exists() != True:
         return render_to_response('proyecto/fase/tipoItem/tipoItem_error.html',
-                                      {'mensaje': 'No existen atributos en el proyecto, creelos',
+                                      {'mensaje': 'Aun no existen atributos en esta fase, por favor creelos',
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
                                        'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     if request.method == 'POST':
