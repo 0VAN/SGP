@@ -310,6 +310,7 @@ def eliminar_proyecto(request, id_proyecto):
     return render_to_response('proyecto/proyecto_exito.html', {'usuario_actor':request.user, 'proyecto':proyecto,
                               'mensaje': 'Se ha cancelado el proyecto'+proyecto.Nombre, 'lista_proyectos': Proyecto.objects.all()}
                               ,context_instance=RequestContext(request))
+
 def confirmar_eliminar_proyecto(request, id_proyecto):
     """
 
@@ -445,7 +446,6 @@ def crear_fase(request, id_proyecto):
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             formulario.save()
-
             return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha creado la fase exitosamente'},

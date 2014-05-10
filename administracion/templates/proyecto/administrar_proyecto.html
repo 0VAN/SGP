@@ -46,12 +46,17 @@
                             </ul>
                         </div>
                     </td>
-                    <td>
-                       <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-primary">Fases</a>
-                    </td>
-                    <td>
-                       <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
-                    </td>
+                    {% if usuario_actor == proyecto.Lider %}
+                        <td>
+                            <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-primary">Fases</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <tr class="warning">

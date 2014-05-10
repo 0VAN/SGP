@@ -212,9 +212,6 @@ class Fase(models.Model):
     Fecha = models.DateTimeField(auto_now=True)
     Numero = models.PositiveIntegerField()
 
-    class Meta:
-        unique_together = ("Nombre", "Proyecto")
-
     def __unicode__(self):
         return self.Nombre
 
@@ -243,7 +240,7 @@ class Fase(models.Model):
 
     class Meta:
         ordering = ["Numero"]
-
+        unique_together = ("Nombre", "Proyecto")
 
 class Atributo(models.Model):
 
