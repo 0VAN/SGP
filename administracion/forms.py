@@ -43,6 +43,17 @@ class ProyectoForm(ModelForm):
         model = Proyecto
         exclude = ['Usuario', 'Estado', 'Usuarios']
 
+class ProyectoFormLider(ModelForm):
+    """
+    Formulario para la creacion de proyectos en el sistema
+    Hereda de ModelForm y utiliza la clase Proyecto
+    para agregar ciertos campos de la clase a la hora de la creacion
+    """
+    Fecha_inicio = forms.DateField(widget=DateInput())
+    Fecha_finalizacion = forms.DateField(widget=DateInput())
+    class Meta:
+        model = Proyecto
+        exclude = ['Usuario', 'Estado','Lider']
 
 
 class UsuarioModForm(forms.ModelForm):

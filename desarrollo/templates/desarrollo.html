@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
 {% block titulo %}Desarrollo{% endblock %}
 
-{% block activo-des %}active{% endblock %}
+{% block activo-admin %}
+    {% if not usuario_actor.accesoLiderProyecto %}
+        hide
+    {% endif %}
+{% endblock %}
+{% block activo-des %}
+    activo
+{% endblock %}
+{% block activo-gc %}
+    {% if not usuario_actor.accesoLiderProyecto %}
+        hide
+    {% endif %}
+{% endblock %}
 
 {% block usuario %}{{ usuario }}{% endblock %}
 

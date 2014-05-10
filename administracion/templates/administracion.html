@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block titulo %}Administracion{% endblock %}
-{% block activo-admin %}active{% endblock %}
+{% block activo-admin %}
+    active
+{% endblock %}
+{% block activo-des %}
+    {% if not usuario_actor.accesoLiderProyecto %}
+        hide
+    {% endif %}
+{% endblock %}
+{% block activo-gc %}
+    {% if not usuario_actor.accesoLiderProyecto %}
+        hide
+    {% endif %}
+{% endblock %}
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
 {% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>
 {% endblock %}
@@ -14,7 +26,11 @@
         {% endif %}
     </li>
     <li>
-         <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
+        {% if usuario_actor.can_consultar_usuario %}
+            <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
+        {% else %}
+            <a class="btn btn-default" disabled="disabled">Administrar Usuario</a>
+        {% endif %}
     </li>
     <li>
         {% if usuario_actor.can_consultar_rol %}

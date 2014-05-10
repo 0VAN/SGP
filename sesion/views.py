@@ -32,7 +32,10 @@ def iniciar_sesion(request):
                 el par(usuario, contrasenha) verificando su existencia y estado en el sistema
     """
     if not request.user.is_anonymous():
-        return administracion(request)
+        if request.user.accesoDesarrollo():
+            return desarrollo(request)
+        else:
+            return administracion(request)
 
     if request.method == 'POST':
         formulario = AuthenticationForm(request.POST)
@@ -43,7 +46,10 @@ def iniciar_sesion(request):
             if acceso is not None:
                 if acceso.is_active:
                     login(request, acceso)
-                    return administracion(request)
+                    if acceso.accesoDesarrollo():
+                        return desarrollo(request)
+                    else:
+                        return administracion(request)
                 else:
                     return render_to_response('no_activo.html', context_instance=RequestContext(request))
             else:

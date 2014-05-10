@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.contrib.auth import models
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm, ProyectoFormLider
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
@@ -213,6 +213,10 @@ def nuevo_proyecto(request):
         lista_proyectos = Proyecto.objects.all()
         formulario = ProyectoForm(request.POST, instance=proyecto)
         if formulario.is_valid():
+            rolLiderProyecto = Group.objects.get(pk=2)
+            lider = User.objects.get(pk=request.POST['Lider'])
+            lider.groups.add(rolLiderProyecto)
+            lider.save()
             formulario.save()
 
             return render_to_response('proyecto/proyecto_exito.html',
@@ -332,19 +336,30 @@ def modificar_proyecto(request, id_proyecto):
     :return:
     """
     proyecto = Proyecto.objects.get(pk=id_proyecto)
+    LiderAntiguo = proyecto.Lider
     if proyecto.Estado == 'P':
         if request.method == 'POST':
             formulario = ProyectoForm(request.POST, instance=proyecto)
             if formulario.is_valid():
+                rolLiderProyecto=Group.objects.get(pk=2)
+                if Proyecto.objects.filter(Lider=LiderAntiguo).count() == 1:
+                    LiderAntiguo.groups.remove(rolLiderProyecto)
+                    LiderAntiguo.save()
+                lider = User.objects.get(pk=request.POST['Lider'])
+                lider.groups.add(rolLiderProyecto)
+                lider.save()
                 formulario.save()
                 return render_to_response('proyecto/proyecto_exito.html',
                                       {'mensaje': 'El proyecto '+proyecto.Nombre+' ha sido modificado exitosamente',
                                        'usuario_actor': request.user, 'lista_proyectos': Proyecto.objects.all()},
                                       context_instance=RequestContext(request))
         else:
-            formulario = ProyectoForm(instance=proyecto)
+            if request.user.accesoLiderProyecto():
+                formulario = ProyectoFormLider(instance=proyecto)
+            else:
+                formulario = ProyectoForm(instance=proyecto)
             return render_to_response('proyecto/crear_proyecto.html',
-                              {'formulario': formulario, 'operacion': 'Ingrese los datos del proyecto'+proyecto.Nombre
+                              {'formulario': formulario, 'operacion': 'Ingrese los datos del proyecto '+proyecto.Nombre
                                , 'usuario_actor': request.user}, context_instance=RequestContext(request))
     else:
         if proyecto.Estado == 'C':

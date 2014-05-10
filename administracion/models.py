@@ -24,6 +24,21 @@ def tienePermiso(self, permiso):
 
 User.add_to_class('tienePermiso', tienePermiso)
 
+def accesoDesarrollo(self):
+    permiso = 'acceso_desarrollo'
+    return self.tienePermiso(permiso)
+
+User.add_to_class('accesoDesarrollo', accesoDesarrollo)
+
+def accesoLiderProyecto(self):
+    rol='Lider de Proyecto'
+    for grupo in self.groups.all():
+        if grupo.name ==rol:
+                return True
+    return False
+
+User.add_to_class('accesoLiderProyecto', accesoLiderProyecto)
+
 def can_add_user(self):
     permiso = 'add_user'
     return self.tienePermiso(permiso)

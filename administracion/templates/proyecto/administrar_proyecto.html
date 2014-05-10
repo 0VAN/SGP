@@ -38,9 +38,11 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'administracion.views.detalle_proyecto' proyecto.id %}">Detalles</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                                {% if usuario_actor == proyecto.Lider %}
+                                    <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </td>
