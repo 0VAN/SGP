@@ -65,7 +65,7 @@
                                 <td>Activo</td>
                             </tr>
                     {% else %}
-                        <tr class="clickableRow warning" href='{% url "administracion.views.detalle_usuario" usuario.id %}'>
+                        <tr>
                             <td>{{ usuario.username }}</td>
                             <td>Inactivo</td>
                         </tr>

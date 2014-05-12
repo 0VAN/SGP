@@ -6,8 +6,6 @@
     <li>
         {% if usuario_actor.can_add_proyecto %}
             <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Crear Proyecto</a>
         {% endif %}
         <a href="/administracion" class="btn btn-default">Volver</a>
     </li>

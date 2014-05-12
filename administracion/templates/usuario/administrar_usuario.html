@@ -15,7 +15,7 @@
 {% block contenido %}
 
     {% if usuario_actor.can_consultar_usuario %}
-        <table class="table table-striped" id="tablaUsuario" rel="tabla" title="Ver detalles..">
+        <table class="table table-hover" id="tablaUsuario" rel="tabla">
             <thead>
                 <tr>
                     <td>Nombre</td>
@@ -27,7 +27,7 @@
             {% for usuario in lista_usuarios %}
               {% if usuario_actor != usuario %}
                 {% if usuario.is_active %}
-                    <tr>
+                    <tr class="active">
                         <td>{{ usuario.username }}</td>
                         <td>Activo</td>
                         <td>
@@ -37,7 +37,7 @@
                                 </button>
 
                                 <ul class="dropdown-menu" role="'menu">
-                                    <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Detalle</a></li>
+                                    <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Ver detalles</a></li>
                                     <li><a href="{% url 'administracion.views.pass_change' usuario.id %}">Modificar</a></li>
                                     <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
                                 </ul>
@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                 {% else %}
-                    <tr>
+                    <tr class="danger">
                         <td>{{ usuario.username }}</td>
                         <td>Inactivo</td>
                         <td>

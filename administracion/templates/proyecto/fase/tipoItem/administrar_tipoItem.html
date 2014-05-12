@@ -7,8 +7,7 @@
         {% if usuario_actor.can_add_tipodeitem %}
            {% if proyecto.Lider == usuario_actor %}
                 <a href="{% url 'administracion.views.crear_tipoItem' proyecto.id fase.id %}" class="btn btn-default">Crear tipo de item</a>
-            {% else %}
-                <a class="btn btn-default" disabled="disabled">Crear tipo de item</a>
+                <a href="{% url 'administracion.views.importar_tipo' proyecto.id fase.id %}" class="btn btn-default">Importar tipo de item</a>
             {% endif %}
         {% endif %}
         <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a>

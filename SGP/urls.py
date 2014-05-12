@@ -82,6 +82,9 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<id_fase>\d+)/tipos/modificar/(?P<id_tipo>\d+)/$', 'administracion.views.modificar_tipo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<id_fase>\d+)/tipos/eliminar/(?P<id_tipo>\d+)/$', 'administracion.views.confirmar_eliminar_tipo'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<id_fase>\d+)/tipos/eliminado/(?P<id_tipo>\d+)/$', 'administracion.views.eliminar_tipo'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<id_fase>\d+)/tipos/importar$', 'administracion.views.importar_tipo'),
+
+
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),

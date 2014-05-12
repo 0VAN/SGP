@@ -140,3 +140,11 @@ class tipoItemForm(MyForm):
     class Meta:
         model = TipoDeItem
         exclude = ['Usuario', 'Fase']
+
+class tipoItemImportar(forms.Form):
+    tipos = forms.ModelMultipleChoiceField(queryset=TipoDeItem.objects.all(),label=('Seleccionar tipos'),
+                                          widget=FilteredSelectMultiple(('Tipos'),False,))
+    class Media:
+        css = {'all':('/static/css/filteredselectwidget.css',),}
+        # jsi18n is required by the widget
+        js = ('/admin/jsi18n/',)

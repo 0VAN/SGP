@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 from django.contrib.auth import models
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm, ProyectoFormLider
+from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol, AtributoForm, tipoItemForm,\
+    ProyectoFormLider, tipoItemImportar
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group , timezone
@@ -1084,4 +1085,25 @@ def confirmar_eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
                               {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-
+def importar_tipo(request, id_proyecto, id_fase):
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_tipos = TipoDeItem.objects.filter(Fase=fase)
+    if request.method == 'POST':
+        formulario = tipoItemImportar(request.POST)
+        if formulario.is_valid():
+            importado = TipoDeItem.objects.get(pk=request.POST['tipos'])
+            tipo = TipoDeItem.objects.create(Nombre=importado.Nombre, Usuario=usuario_actor, Fase=fase)
+            tipo.Atributos = importado.Atributos.all()
+            tipo.save()
+            return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
+                                      {'mensaje': 'Se ha importado exitosamente el tipo de item '+tipo.Nombre+' del proyecto '+tipo.Fase.Proyecto.Nombre+' de la fase '+tipo.Fase.Nombre,
+                                       'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
+                                       'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
+    else:
+        formulario = tipoItemImportar()
+    return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
+                              {'formulario': formulario, 'operacion': 'Seleccione los tipos de items que desea importar',
+                               'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
+                              context_instance=RequestContext(request))
