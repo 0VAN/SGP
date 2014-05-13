@@ -1,0 +1,37 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Asignar Relacion{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+{% block encabezado %}Asignar relacion del item: {{ item }}{% endblock %}
+{% block contenido %}
+    {% if fase.Numero != 1 %}
+        <form id="formulario" method="post" action="">{% csrf_token %}
+            <table class="table">
+                <tr>
+                    <th><label for="id_Antecesor">Antecesor:</label></th>
+                    <td>
+                        <select class="form-control" id="id_Antecesor" name="antecesor">
+                            {% if relacion == None %}
+                                <option value="" selected="selected">Elija un item</option>
+                                {% for item in lista_items %}
+                                    <option value="{{ item.id }}">{{ item }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option value="">Elija un item</option>
+                                {% for item in lista_items %}
+                                    {% if relacion.item == item %}
+                                        <option value="{{ item.id }}" selected="selected">{{ item }}</option>
+                                    {% else %}
+                                        <option value="{{ item.id }}">{{ item }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p><input class="btn btn-default" type="submit" value="Asignar"></p>
+        </form>
+    {% endif %}
+{% endblock %}

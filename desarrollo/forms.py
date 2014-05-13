@@ -25,4 +25,17 @@ class ItemForm(MyForm):
         model = Item
         exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
 
+class PadreForm(MyForm):
+
+    class Meta:
+        model = Relacion
+        exclude = ['antecesor', 'item']
+
+class AntecesorForm(MyForm):
+
+    class Meta:
+        model = Relacion
+        exclude = ['padre', 'item']
+
+
 

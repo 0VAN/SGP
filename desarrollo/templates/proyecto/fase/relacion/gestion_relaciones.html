@@ -2,8 +2,8 @@
 {% block titulo %}Gestionar relaciones{% endblock %}
 
 {% block botones %}
-    <li><a href="#" class="btn btn-default">Asignar relacion</a></li>
-    <li><a href="#" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'desarrollo.views.asignar_padre_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Asignar padre</a></li>
+    <li><a href="#" class="btn btn-default">Asignar antecesor</a></li>
     <li><a href="#" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block encabezado %}Relaciones del item: {{ item.Nombre }}{% endblock %}

@@ -42,7 +42,7 @@ class Campo(models.Model):
     tipoItem = models.ForeignKey(TipoDeItem, null=True, blank=True)
     atributo = models.ForeignKey(Atributo, null=True, blank=True)
     fecha = models.DateField(null=True)
-    numerico = models.DecimalField(null=True, decimal_places=10, max_digits=10)
+    numerico = models.DecimalField(null=True, decimal_places=3, max_digits=10, blank=True)
     longitud = models.IntegerField(null=True)
     precision = models.IntegerField(null=True)
     logico = models.NullBooleanField()

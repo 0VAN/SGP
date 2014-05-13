@@ -171,19 +171,7 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     )
 
 
-def form_vista(request):
-    usuario = request.user
-    if request.method=='POST':
-        formulario = LogicoForm(request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            logico = Logico1.objects.last()
-            return HttpResponseRedirect('/')
-    else:
-        formulario = LogicoForm()
-    return render_to_response('form.html',
-        {'usuario': usuario, 'formulario': formulario},
-        context_instance=RequestContext(request))
+
 
 def historial_item(request, id_proyecto, id_fase, id_item):
 
@@ -223,12 +211,84 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
 def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     item = Item.objects.get(pk=id_item)
+    fase = Fase.objects.get(pk=id_fase)
     try:
         relacion = Relacion.objects.get(item=item)
     except ObjectDoesNotExist:
         relacion = False
     return render_to_response(
-        'proyecto/fase/item/gestion_relaciones.html',
-        {'usuario': usuario, 'relacion':relacion, 'item':item},
+        'proyecto/fase/relacion/gestion_relaciones.html',
+        {'usuario': usuario, 'relacion': relacion, 'item': item, 'fase': fase},
+        context_instance=RequestContext(request)
+    )
+
+
+def asignar_padre_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    item = Item.objects.get(pk=id_item)
+    fase = Fase.objects.get(pk=id_fase)
+    try:
+        relacion = Relacion.objects.get(item=item)
+    except ObjectDoesNotExist:
+        relacion = None
+    lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item)
+    nueva_relacion = Relacion()
+    nueva_relacion.item = item
+    if request.method=='POST':
+        formulario = PadreForm(request.POST, instance=nueva_relacion)
+        if formulario.is_valid():
+            if(relacion != None):
+                relacion.delete()
+            formulario.save()
+            mensaje = 'Padre asignado exitosamente'
+            suceso = True
+            lista_items = Item.objects.filter(Fase=fase)
+            return render_to_response(
+                'proyecto/fase/relacion/gestion_relaciones.html',
+                {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
+    else:
+        formulario = PadreForm()
+    return render_to_response(
+        'proyecto/fase/relacion/asignar_padre.html',
+        {'formulario': formulario, 'fase': fase, 'usuario': usuario, 'relacion': relacion, 'lista_items':lista_items, 'item': item},
+        context_instance=RequestContext(request)
+    )
+
+
+def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    item = Item.objects.get(pk=id_item)
+    fase = Fase.objects.get(pk=id_fase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    try:
+        relacion = Relacion.objects.get(item=item)
+    except ObjectDoesNotExist:
+        relacion = None
+    if fase.Numero != 1:
+        faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
+        lista_items = Item.objects.filter(Fase=faseAnterior)
+    nueva_relacion = Relacion()
+    nueva_relacion.item = item
+    if request.method=='POST':
+        formulario = AntecesorForm(request.POST, instance=nueva_relacion)
+        if formulario.is_valid():
+            if(relacion != None):
+                relacion.delete()
+            formulario.save()
+            mensaje = 'Antecesor asignado exitosamente'
+            suceso = True
+            lista_items = Item.objects.filter(Fase=fase)
+            return render_to_response(
+                'proyecto/fase/relacion/gestion_relaciones.html',
+                {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
+    else:
+        formulario = PadreForm()
+    return render_to_response(
+        'proyecto/fase/relacion/asignar_antecesor.html',
+        {'formulario': formulario, 'fase': fase, 'usuario': usuario, 'relacion': relacion, 'lista_items':lista_items, 'item': item},
         context_instance=RequestContext(request)
     )
