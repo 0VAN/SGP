@@ -1,0 +1,17 @@
+{% extends 'proyecto/fase/archivo/gestion_archivos.html' %}
+{% block titulo %}Agregar archivo{% endblock %}
+
+{% block encabezado %}
+    Agregar archivo al item: {{ item }}
+{% endblock %}
+
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.gestion_archivos_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+        <table class="table">{{ formulario }}</table>
+        <p><input class="btn btn-default" type="submit" value="Agregar"></p>
+    </form>
+{% endblock %}
+

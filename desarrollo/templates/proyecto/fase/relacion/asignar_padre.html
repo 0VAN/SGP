@@ -19,7 +19,7 @@
                         {% else %}
                             <option value="">Elija un item</option>
                             {% for item in lista_items %}
-                                {% if relacion.item == item %}
+                                {% if relacion.padre == item %}
                                     <option value="{{ item.id }}" selected="selected">{{ item }}</option>
                                 {% else %}
                                     <option value="{{ item.id }}">{{ item }}</option>

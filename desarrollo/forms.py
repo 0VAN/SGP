@@ -38,4 +38,8 @@ class AntecesorForm(MyForm):
         exclude = ['padre', 'item']
 
 
+class ArchivoForm(MyForm):
 
+    class Meta:
+        model = Archivo
+        exclude = ['item']

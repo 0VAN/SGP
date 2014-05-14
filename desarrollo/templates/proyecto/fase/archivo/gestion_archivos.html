@@ -1,0 +1,34 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Agregar archivo{% endblock %}
+
+{% block encabezado %}
+    Agregar archivo al item: {{ item }}
+{% endblock %}
+
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.agregar_archivo_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Agregar Archivo</a></li>
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in lista_archivos %}
+                <tr>
+                    <td><a href="{{ MEDIA_URL }}{{ a.archivo }}" target="_blank">Archivo</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+{% endblock %}
+

@@ -55,3 +55,12 @@ class Relacion(models.Model):
     padre = models.ForeignKey(Item, null=True, related_name='padre')
     antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
     item = models.ForeignKey(Item, null=True, related_name='item')
+
+
+class Archivo(models.Model):
+    archivo = models.FileField(upload_to='carga')
+    item = models.ForeignKey(Item)
+    #nombre = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.archivo

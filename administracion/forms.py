@@ -104,7 +104,7 @@ class FaseForm(MyForm):
 
 
 class RolForm(MyForm):
-    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),
+    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),help_text='asd',
                                           widget=FilteredSelectMultiple(('Permisos'),False,))
 
     """

@@ -7,64 +7,51 @@
     <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
-{% block encabezado %}Detalles de la fase: {{ fase.Nombre }}{% endblock %}
+{% block encabezado %}Lista de items de la fase: {{ fase.Nombre }}{% endblock %}
 
 {% block contenido %}
-    <dl>
-        <dt>Nombre de la fase: </dt>
-        <dd>{{ fase.Nombre }}</dd>
-        <dt>Descripcion de la fase: </dt>
-        <dd>{{ fase.Descripcion }}</dd>
-        <dt>Creado por: </dt>
-        <dd>{{ fase.Usuario }}</dd>
-        <dt>Creado el: </dt>
-        <dd>{{ fase.Fecha }}</dd>
-        <dt>Lista de items: </dt>
-        <dd>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Creado por</th>
-                        <th>Fecha de creacion</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in lista_items %}
-                        <tr>
-                            <td>{{ item.Nombre }}</td>
-                            <td>{{ item.Usuario }}</td>
-                            <td>{{ item.Fecha }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        Opciones <span class="caret"></span>
-                                    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Creado por</th>
+                <th>Fecha de creacion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista_items %}
+                <tr>
+                    <td>{{ item.Nombre }}</td>
+                    <td>{{ item.Usuario }}</td>
+                    <td>{{ item.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
 
-                                    <ul class="dropdown-menu" role="'menu">
-                                        <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
-                                        <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Gestion de Atributos</a></li>
-                                        <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}">Gestion de Relaciones</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="btn-group pull-right">
-                                    <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger">Historial de cambios</a>
-                                </div>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <p>No hay items disponibles</p>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </dd>
-
-    </dl>
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
+                                <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Gestion de Atributos</a></li>
+                                <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}">Gestion de Relaciones</a></li>
+                                <li><a href="{% url 'desarrollo.views.gestion_archivos_view' fase.Proyecto.id fase.id item.id %}">Gestion de Archivos</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger">Historial de cambios</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>No hay items disponibles</p>
+            {% endfor %}
+        </tbody>
+    </table>
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>

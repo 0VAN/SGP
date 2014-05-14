@@ -105,3 +105,6 @@ STATICFILES_DIRS = (
 
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'carga')
+MEDIA_URL = 'http://127.0.0.1:8000/media/'

@@ -240,12 +240,12 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
             if(relacion != None):
                 relacion.delete()
             formulario.save()
+            relacion = Relacion.objects.get(item=item)
             mensaje = 'Padre asignado exitosamente'
             suceso = True
-            lista_items = Item.objects.filter(Fase=fase)
             return render_to_response(
                 'proyecto/fase/relacion/gestion_relaciones.html',
-                {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+                {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item, 'relacion':relacion},
                 context_instance=RequestContext(request)
             )
     else:
@@ -279,16 +279,91 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
             formulario.save()
             mensaje = 'Antecesor asignado exitosamente'
             suceso = True
-            lista_items = Item.objects.filter(Fase=fase)
+            relacion = Relacion.objects.get(item=item)
             return render_to_response(
                 'proyecto/fase/relacion/gestion_relaciones.html',
-                {'usuario':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+                {'usuario':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso, 'item': item, 'relacion': relacion},
                 context_instance=RequestContext(request)
             )
     else:
-        formulario = PadreForm()
+        formulario = AntecesorForm()
+
     return render_to_response(
         'proyecto/fase/relacion/asignar_antecesor.html',
         {'formulario': formulario, 'fase': fase, 'usuario': usuario, 'relacion': relacion, 'lista_items':lista_items, 'item': item},
         context_instance=RequestContext(request)
     )
+
+def gestion_archivos_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    lista_archivos = Archivo.objects.filter(item=item)
+    return render_to_response(
+        'proyecto/fase/archivo/gestion_archivos.html',
+        {'fase': fase, 'usuario': usuario, 'item': item, 'lista_archivos': lista_archivos},
+        context_instance=RequestContext(request)
+    )
+
+
+def agregar_archivo_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    archivo = Archivo()
+    archivo.item = item
+    if request.method == 'POST':
+        formulario = ArchivoForm(request.POST, request.FILES or None, instance=archivo)
+
+        print formulario.is_valid()
+        if formulario.is_valid():
+            formulario.save()
+            mensaje = 'Archivo asignado exitosamente'
+            suceso = True
+            lista_archivos = Archivo.objects.filter(item=item)
+            return  render_to_response(
+                'proyecto/fase/archivo/gestion_archivos.html',
+                {'usuario':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso,
+                 'item': item, 'lista_archivos': lista_archivos},
+                context_instance=RequestContext(request)
+            )
+    else:
+        formulario = ArchivoForm()
+    return  render_to_response(
+        'proyecto/fase/archivo/agregar_archivo.html',
+        {'formulario': formulario, 'fase': fase, 'usuario': usuario, 'item': item},
+        context_instance=RequestContext(request)
+    )
+
+def detalle_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_fase:
+    :param id_proyecto:
+    :return:
+
+    Vista detalle fase
+
+    | Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web
+    | detallefase.html que muestra en detalle la informacion de dicha fase
+
+    * Variables
+        -   usuario_actor: usuario que realiza la accion
+        -   proyecto: es el proyecto cuyas fases se desea administrar
+        -   fases: indica que la fase correpondera a un proyecto especifico
+    """
+    usuario_actor = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('proyecto/fase/detalle.html',
+                              {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
+                              context_instance=RequestContext(request))
+
+def sucesores(item):
+    sucesores = Relacion.objects.filter(antecesor=item)
+    return sucesores
+
+def hijos(item):
+    hijos = Relacion.objects.filter(padre=item)
+    return hijos
