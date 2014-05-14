@@ -44,9 +44,11 @@
                                                                 <ul class="dropdown-menu">
                                                                     <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Ver detalles</a></li>
                                                                     <li><a href="{% url 'administracion.views.pass_change' usuario.id %}">Modificar</a></li>
-                                                                    <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
                                                                 </ul>
                                                             </div>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-danger" href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Bloquear</a></li>
                                                         </td>
                                                     </tr>
                                              {% else %}
@@ -59,14 +61,14 @@
                                                                         Opciones <span class="caret"></span>
                                                                     </button>
 
-                                                                    <ul class="dropdown-menu" role="'menu">
-                                                                        <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Detalle</a></li>
-                                                                        <li><a href="#">Modificar</a></li>
-                                                                        {% if usuario_actor.can_change_user and usuario_actor.id != usuario_parametro.id %}
-                                                                            <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
-                                                                        {% endif %}
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Ver detalles</a></li>
+                                                                        <li><a href="{% url 'administracion.views.pass_change' usuario.id %}">Modificar</a></li>
                                                                     </ul>
                                                                 </div>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-success" href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Desbloquear</a></li>
                                                             </td>
                                                         </tr>
                                              {% endif %}

@@ -9,6 +9,8 @@ from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from functools import partial
+from datetime import date
+from django.forms import widgets
 
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
@@ -31,26 +33,64 @@ class AsignarRol(MyForm):
         }
 
 
+
+
+class DateSelectorWidget(widgets.MultiWidget):
+    def __init__(self, attrs=None):
+        # create choices for days, months, years
+        # example below, the rest snipped for brevity.
+        years = [(year, year) for year in (2011, 2012, 2013)]
+        days = [(day, day)for day in ('Lunes','Martes','Miercoles')]
+        months = [(month, month)for month in ('Enero','Febrero','Marzo')]
+
+        _widgets = (
+            widgets.Select(attrs=attrs, choices=days),
+            widgets.Select(attrs=attrs, choices=months),
+            widgets.Select(attrs=attrs, choices=years),
+        )
+        super(DateSelectorWidget, self).__init__(_widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return [value.day, value.month, value.year]
+        return [None, None, None]
+
+    def format_output(self, rendered_widgets):
+        return ''.join(rendered_widgets)
+
+    def value_from_datadict(self, data, files, name):
+        datelist = [
+            widget.value_from_datadict(data, files, name + '_%s' % i)
+            for i, widget in enumerate(self.widgets)]
+        try:
+            D = date(day=int(datelist[0]), month=int(datelist[1]),
+                    year=int(datelist[2]))
+        except ValueError:
+            return ''
+        else:
+            return str(D)
+############################
+#Arreglar dateimput()
+############################
 class ProyectoForm(ModelForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto
     para agregar ciertos campos de la clase a la hora de la creacion
     """
-    Fecha_inicio = forms.DateField(widget=DateInput())
-    Fecha_finalizacion = forms.DateField(widget=DateInput())
+    Fecha_inicio = forms.DateField(widget=DateSelectorWidget())
+    Fecha_finalizacion = forms.DateField(widget=DateSelectorWidget())
     class Meta:
         model = Proyecto
         exclude = ['Usuario', 'Estado', 'Usuarios']
 
-class ProyectoFormLider(ModelForm):
+
+class ProyectoFormLider(MyForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto
     para agregar ciertos campos de la clase a la hora de la creacion
     """
-    Usuarios = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label=('Seleccionar tipos'),
-                                          widget=FilteredSelectMultiple(('Tipos'),False,))
 
     Fecha_inicio = forms.DateField(widget=DateInput())
     Fecha_finalizacion = forms.DateField(widget=DateInput())
@@ -58,7 +98,21 @@ class ProyectoFormLider(ModelForm):
 
     class Meta:
         model = Proyecto
-        exclude = ['Usuario', 'Estado','Lider']
+        exclude = ['Usuario', 'Estado', 'Lider', 'Usuarios']
+
+
+
+class ProyectoAsignarUsuarioForm(MyForm):
+    """
+    Formulario para la creacion de proyectos en el sistema
+    Hereda de ModelForm y utiliza la clase Proyecto
+    para agregar ciertos campos de la clase a la hora de la creacion
+    """
+    Usuarios = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label=('Seleccionar Usuarios'),
+                                          widget=FilteredSelectMultiple(('Usuarios'),False,))
+    class Meta:
+        model = Proyecto
+        exclude = ['Usuario', 'Estado', 'Lider', 'Nombre', 'Fecha_inicio', 'Fecha_finalizacion', 'Descripcion']
 
     class Media:
         css = {'all':('/static/css/filteredselectwidget.css',),}
@@ -116,7 +170,7 @@ class FaseForm(MyForm):
     """
     class Meta:
         model = Fase
-        exclude = ['Usuario', 'Proyecto']
+        exclude = ['Usuario', 'Proyecto', 'Usuarios']
 
 class RolForm(MyForm):
     permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),

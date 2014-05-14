@@ -211,6 +211,7 @@ class Fase(models.Model):
     Proyecto = models.ForeignKey(Proyecto)
     Fecha = models.DateTimeField(auto_now=True)
     Numero = models.PositiveIntegerField()
+    Usuarios = models.ManyToManyField(User, related_name='Participantes_Fase')
 
     def __unicode__(self):
         return self.Nombre

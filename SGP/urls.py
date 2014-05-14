@@ -42,6 +42,8 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.confirmar_iniciar_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciado/$', 'administracion.views.iniciar_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/modificar/$', 'administracion.views.modificar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/completar/$', 'administracion.views.modificar_proyecto_lider'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/usuarios/$', 'administracion.views.proyecto_asignar_usuarios'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminado/$', 'administracion.views.eliminar_proyecto'),
 

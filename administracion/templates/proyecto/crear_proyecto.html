@@ -1,10 +1,10 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
-{% block titulo %}Crear proyecto{% endblock %}
+{% block titulo %}Forumlario Proyecto{% endblock %}
 
 {% block encabezado %}
     {{ operacion }}
-    <script src="/static/js/jquery-1.10.2.js"></script>
-    <script src="/static/js/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.10.4.custom.js"></script>
     <script type="text/javascript" src="/static/js/jsi18n.js"></script>
 
     <script>
@@ -21,7 +21,7 @@
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>{{ formulario }}</p></table>
+        <table class="table">{{ formulario }}</table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}
