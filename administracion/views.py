@@ -957,6 +957,8 @@ def crear_tipoItem(request, id_proyecto, id_fase):
                                        'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
+        formulario.fields["Atributos"].queryset = Atributo.objects.filter(Fase=fase)
+        formulario.fields["Atributos"].help_text = "Haga doble click en el Atributo que desee agregar"
         if formulario.is_valid():
             formulario.save()
             return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
@@ -965,6 +967,8 @@ def crear_tipoItem(request, id_proyecto, id_fase):
                                        'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     else:
         formulario = tipoItemForm(instance=tipo)
+        formulario.fields["Atributos"].queryset = Atributo.objects.filter(Fase=fase)
+        formulario.fields["Atributos"].help_text = "Haga doble click en el Atributo que desee agregar"
     return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del tipo de item',
                                'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
@@ -1015,6 +1019,8 @@ def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
     tipo = TipoDeItem.objects.get(pk=id_tipo)
     if request.method == 'POST':
         formulario = tipoItemForm(request.POST, instance=tipo)
+        formulario.fields["Atributos"].queryset = Atributo.objects.filter(Fase=fase)
+        formulario.fields["Atributos"].help_text = "Haga doble click en el Atributo que desee agregar"
         if formulario.is_valid():
             formulario.save()
             return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
@@ -1024,6 +1030,8 @@ def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
                                       context_instance=RequestContext(request))
     else:
         formulario = tipoItemForm(instance=tipo)
+        formulario.fields["Atributos"].queryset = Atributo.objects.filter(Fase=fase)
+        formulario.fields["Atributos"].help_text = "Haga doble click en el Atributo que desee agregar"
     return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
                               {'formulario': formulario, 'operacion': 'Modificar tipo de item',
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo': tipo, 'fase': fase},
@@ -1092,17 +1100,25 @@ def importar_tipo(request, id_proyecto, id_fase):
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     if request.method == 'POST':
         formulario = tipoItemImportar(request.POST)
+        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase)
+        formulario.fields["tipos"].help_text = "Haga doble click en el Atributo que desee agregar"
+        mensaje = ''
         if formulario.is_valid():
-            importado = TipoDeItem.objects.get(pk=request.POST['tipos'])
-            tipo = TipoDeItem.objects.create(Nombre=importado.Nombre, Usuario=usuario_actor, Fase=fase)
-            tipo.Atributos = importado.Atributos.all()
-            tipo.save()
+            importados = request.POST['tipos']
+            print(importados)
+            for importado in importados:
+                tipo = TipoDeItem.objects.create(Nombre=importado.Nombre, Usuario=usuario_actor, Fase=fase)
+                tipo.Atributos = importado.Atributos.all()
+                mensaje += 'Se ha importado exitosamente el tipo de item '+tipo.Nombre+' del proyecto '+tipo.Fase.Proyecto.Nombre+' de la fase '+tipo.Fase.Nombre + '/n'
+                tipo.save()
             return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
-                                      {'mensaje': 'Se ha importado exitosamente el tipo de item '+tipo.Nombre+' del proyecto '+tipo.Fase.Proyecto.Nombre+' de la fase '+tipo.Fase.Nombre,
+                                      {'mensaje': mensaje,
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,
                                        'proyecto': proyecto, 'fase': fase}, context_instance=RequestContext(request))
     else:
         formulario = tipoItemImportar()
+        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase)
+        formulario.fields["tipos"].help_text = "Haga doble click en el Atributo que desee agregar"
     return render_to_response('proyecto/fase/tipoItem/tipoItem_form.html',
                               {'formulario': formulario, 'operacion': 'Seleccione los tipos de items que desea importar',
                                'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},

@@ -14,22 +14,20 @@
                     <td>Nombre</td>
                     <td>Usuario creador</td>
                     <td>Fecha y hora de la ultima modificacion</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </thead>
 
           {% if roles|length > 2 %}
             {% for rol in roles %}
               {% if rol.pk > 2 %}
-
                     <tr>
                         <td>{{ rol }}</td>
                         <td>{{ rol.Usuario }}</td>
                         <td>{{ rol.Fecha }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td>
-                            <div class="btn-group pull-right">
+                            <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     Opciones <span class="caret"></span>
                                 </button>
@@ -40,7 +38,7 @@
                             </div>
                         </td>
                         <td>
-                            <div class="btn-group pull-right">
+                            <div class="btn-group">
                                 <a href="{% url 'administracion.views.confirmar_eliminar_rol' rol.id %}" type="button" class="btn btn-danger">Eliminar</a>
                             </div>
                         </td>
@@ -50,9 +48,12 @@
           {% else %}
                 <tr>
                 <td class="warning">No hay roles disponibles</td>
+                <td class="warning"></td>
+                <td class="warning"></td>
+                <td class="warning"></td>
+                <td class="warning"></td>
                 </tr>
           {% endif %}
-            </tbody>
         </table>
     {% endif %}
     {% block mensaje %}{% endblock %}

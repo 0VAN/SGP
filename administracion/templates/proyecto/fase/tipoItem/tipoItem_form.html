@@ -1,8 +1,9 @@
+
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Formulario tipo de item{% endblock %}
 
 {% block encabezado %}{{ operacion }}
-    <script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/js/jsi18n.js"></script>
     {{ formulario.media }}
 {% endblock %}
 
@@ -15,7 +16,9 @@
 {% block contenido %}
 
     <form id="formulario" method="post" action="">{% csrf_token %}
-        <table class="table"><p>{{ formulario }}</p></table>
+        <table class="table">
+            {{ formulario }}
+        </table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}

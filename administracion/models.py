@@ -215,6 +215,7 @@ class Fase(models.Model):
     def __unicode__(self):
         return self.Nombre
 
+
     def ordenar_fase_subir(self):
         try:
             faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto.pk).filter(Numero__lt=self.Numero).order_by('-Numero').first()

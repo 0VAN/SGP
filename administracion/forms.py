@@ -49,11 +49,25 @@ class ProyectoFormLider(ModelForm):
     Hereda de ModelForm y utiliza la clase Proyecto
     para agregar ciertos campos de la clase a la hora de la creacion
     """
+    Usuarios = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label=('Seleccionar tipos'),
+                                          widget=FilteredSelectMultiple(('Tipos'),False,))
+
     Fecha_inicio = forms.DateField(widget=DateInput())
     Fecha_finalizacion = forms.DateField(widget=DateInput())
+
+
     class Meta:
         model = Proyecto
         exclude = ['Usuario', 'Estado','Lider']
+
+    class Media:
+        css = {'all':('/static/css/filteredselectwidget.css',),}
+        # jsi18n is required by the widget
+        js = ('/static/js/jsi18n.js',)
+
+
+
+
 
 
 class UsuarioModForm(forms.ModelForm):
@@ -116,10 +130,11 @@ class RolForm(MyForm):
     class Meta:
         model = Group
         exclude = ['Usuario']
+
     class Media:
         css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/admin/jsi18n/',)
+        js = ('/static/js/jsi18n.js',)
 
 class AtributoForm(MyForm):
     """
@@ -137,9 +152,17 @@ class tipoItemForm(MyForm):
     """
 
     """
+    Atributos = forms.ModelMultipleChoiceField(queryset=None,label=('Seleccionar Atributos'),
+                                          widget=FilteredSelectMultiple(('Atributos'),False,))
     class Meta:
         model = TipoDeItem
-        exclude = ['Usuario', 'Fase']
+
+        exclude = ['Usuario','Fase']
+
+    class Media:
+        css = {'all':('/static/css/filteredselectwidget.css',),}
+        # jsi18n is required by the widget
+        js = ('/static/js/jsi18n.js',)
 
 class tipoItemImportar(forms.Form):
     tipos = forms.ModelMultipleChoiceField(queryset=TipoDeItem.objects.all(),label=('Seleccionar tipos'),
@@ -147,4 +170,4 @@ class tipoItemImportar(forms.Form):
     class Media:
         css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/admin/jsi18n/',)
+        js = ('/static/js/jsi18n.js',)
