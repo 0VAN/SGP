@@ -1104,13 +1104,14 @@ def importar_tipo(request, id_proyecto, id_fase):
         formulario.fields["tipos"].help_text = "Haga doble click en el Atributo que desee agregar"
         mensaje = ''
         if formulario.is_valid():
-            importados = request.POST['tipos']
+            importados = formulario.cleaned_data['tipos']
             print(importados)
             for importado in importados:
                 tipo = TipoDeItem.objects.create(Nombre=importado.Nombre, Usuario=usuario_actor, Fase=fase)
                 tipo.Atributos = importado.Atributos.all()
-                mensaje += 'Se ha importado exitosamente el tipo de item '+tipo.Nombre+' del proyecto '+tipo.Fase.Proyecto.Nombre+' de la fase '+tipo.Fase.Nombre + '/n'
+                mensaje += 'Se ha importado exitosamente el tipo de item '+tipo.Nombre+' de la fase '+importado.Fase.Nombre +' del proyecto '+importado.Fase.Proyecto.Nombre +'\n'
                 tipo.save()
+
             return render_to_response('proyecto/fase/tipoItem/tipoItem_exito.html',
                                       {'mensaje': mensaje,
                                        'usuario_actor': usuario_actor, 'lista_tipos': lista_tipos,

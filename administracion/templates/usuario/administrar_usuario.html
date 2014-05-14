@@ -15,7 +15,7 @@
 {% block contenido %}
 
     {% if usuario_actor.can_consultar_usuario %}
-          <table class="table table-hover" id="tablaUsuario" rel="tabla">
+          <table class="table" id="tablaUsuario" rel="tabla">
                  <thead>
                         <tr>
                             <td>Nombre</td>
@@ -41,7 +41,7 @@
                                                                     Opciones <span class="caret"></span>
                                                                 </button>
 
-                                                                <ul class="dropdown-menu" role="'menu">
+                                                                <ul class="dropdown-menu">
                                                                     <li><a href="{% url 'administracion.views.detalle_usuario' usuario.id %}">Ver detalles</a></li>
                                                                     <li><a href="{% url 'administracion.views.pass_change' usuario.id %}">Modificar</a></li>
                                                                     <li><a href="{% url 'administracion.views.cambioEstado_usuario_form' usuario.id %}">Cambio de estado</a></li>
