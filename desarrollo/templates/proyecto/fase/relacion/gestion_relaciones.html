@@ -1,0 +1,30 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Gestionar relaciones{% endblock %}
+
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.asignar_padre_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Asignar padre</a></li>
+    {% if fase.Numero != 1 %}
+        <li><a href="{% url 'desarrollo.views.asignar_antecesor_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Asignar antecesor</a></li>
+    {% endif %}
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block encabezado %}Relaciones del item: {{ item.Nombre }}{% endblock %}
+
+{% block contenido %}
+    {% if relacion == False %}
+        <p>El item no posee padre ni antecesor</p>
+    {% else %}
+        {% if relacion.antecesor == None %}
+            <p>Relacion: Padre</p>
+            <p>Item: {{ relacion.padre.Nombre }}</p>
+        {% else %}
+            <p>Relacion: Antecesor</p>
+            <p>Item: {{ relacion.antecesor.Nombre }}</p>
+        {% endif %}
+    {% endif %}
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+{% endblock %}

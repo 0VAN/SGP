@@ -22,5 +22,7 @@
         <dd>{{ proyecto.Fecha_finalizacion }}</dd>
         <dt>Estado:</dt>
         <dd>{{ proyecto.get_Estado_display}}</dd>
+        <dt>Cantidad de fases:</dt>
+        <dd>{{ proyecto.nFases }}</dd>
     </dl>
 {% endblock %}

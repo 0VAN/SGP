@@ -4,15 +4,13 @@
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_add_atributo %}
+
            {% if proyecto.Lider == usuario_actor %}
                 <a href="{% url 'administracion.views.crear_atributo' proyecto.id fase.id %}" class="btn btn-default">Crear atributo</a>
             {% else %}
                 <a class="btn btn-default" disabled="disabled">Crear atributo</a>
             {% endif %}
-        {% endif %}
         <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a>
-
     </li>
 {% endblock %}
 
@@ -22,6 +20,7 @@
             <tr>
                 <td>Nombre</td>
                 <td>Usuario</td>
+                <td>Tipo</td>
                 <td>Fecha de ultima modificacion</td>
                 <td></td>
                 <td></td>
@@ -32,6 +31,7 @@
                 <tr>
                     <td>{{ atributo.Nombre }}</td>
                     <td>{{ atributo.Usuario }}</td>
+                    <td>{{ atributo.get_Tipo_display }}</td>
                     <td>{{ atributo.Fecha }}</td>
                     <td>
                         <div class="btn-group">
@@ -53,7 +53,7 @@
                 </tr>
             {% empty %}
                 <tr class="warning">
-                <td>No hay atributos disponibles</td><td></td><td></td><td></td><td></td>
+                <td>No hay atributos disponibles</td><td></td><td></td><td></td><td></td><td></td>
                 </tr>
             {% endfor %}
         </tbody>

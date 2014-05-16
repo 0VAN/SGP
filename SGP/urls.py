@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.contrib.auth.views import SetPasswordForm
+from django.conf import settings
 
 
 
@@ -91,12 +92,24 @@ urlpatterns = patterns('',
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'desarrollo.views.des_fase'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/detalle/$', 'desarrollo.views.detalle_fase'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/crear_item/$', 'desarrollo.views.crear_item'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/modificar/$', 'desarrollo.views.mod_item'),
+    url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/eliminar/$', 'desarrollo.views.conf_eliminar_item'),
+    url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/eliminado/$', 'desarrollo.views.eliminar_item'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/completar/$', 'desarrollo.views.completar_item'),
     url(r'^desarrollo/proyecto/(?P<idProyecto>\d+)/fase/(?P<idFase>\d+)/item/(?P<idItem>\d+)/detalle/$', 'desarrollo.views.detalle_item_vista'),
-    url(r'^vista/form/$', 'desarrollo.views.form_vista'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/$', 'desarrollo.views.historial_item'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.reversion_item'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/$', 'desarrollo.views.gestion_relacion_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/asignar/padre/$', 'desarrollo.views.asignar_padre_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/asignar/antecesor/$', 'desarrollo.views.asignar_antecesor_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/archivos/$', 'desarrollo.views.gestion_archivos_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/agregar/$', 'desarrollo.views.agregar_archivo_view'),
+    url(
+        r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT, }
+    ),
+
 )
 

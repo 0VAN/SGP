@@ -33,42 +33,6 @@ class AsignarRol(MyForm):
         }
 
 
-
-
-class DateSelectorWidget(widgets.MultiWidget):
-    def __init__(self, attrs=None):
-        # create choices for days, months, years
-        # example below, the rest snipped for brevity.
-        years = [(year, year) for year in (2011, 2012, 2013)]
-        days = [(day, day)for day in ('Lunes','Martes','Miercoles')]
-        months = [(month, month)for month in ('Enero','Febrero','Marzo')]
-
-        _widgets = (
-            widgets.Select(attrs=attrs, choices=days),
-            widgets.Select(attrs=attrs, choices=months),
-            widgets.Select(attrs=attrs, choices=years),
-        )
-        super(DateSelectorWidget, self).__init__(_widgets, attrs)
-
-    def decompress(self, value):
-        if value:
-            return [value.day, value.month, value.year]
-        return [None, None, None]
-
-    def format_output(self, rendered_widgets):
-        return ''.join(rendered_widgets)
-
-    def value_from_datadict(self, data, files, name):
-        datelist = [
-            widget.value_from_datadict(data, files, name + '_%s' % i)
-            for i, widget in enumerate(self.widgets)]
-        try:
-            D = date(day=int(datelist[0]), month=int(datelist[1]),
-                    year=int(datelist[2]))
-        except ValueError:
-            return ''
-        else:
-            return str(D)
 ############################
 #Arreglar dateimput()
 ############################
@@ -82,9 +46,7 @@ class ProyectoForm(ModelForm):
     Fecha_finalizacion = forms.DateField(widget=DateInput())
     class Meta:
         model = Proyecto
-        exclude = ['Usuario', 'Estado', 'Usuarios']
-        widgets = {'Fecha_inicio':DateInput(),
-                   'Fecha_finalizacion':DateInput()}
+        exclude = ['Usuario', 'Estado', 'Usuarios', 'nFases']
 
 
 class ProyectoFormLider(MyForm):
@@ -100,7 +62,7 @@ class ProyectoFormLider(MyForm):
 
     class Meta:
         model = Proyecto
-        exclude = ['Usuario', 'Estado', 'Lider', 'Usuarios']
+        exclude = ['Usuario', 'Estado', 'Lider', 'Usuarios', 'nFases']
 
 
 
@@ -114,14 +76,12 @@ class ProyectoAsignarUsuarioForm(MyForm):
                                           widget=FilteredSelectMultiple(('Usuarios'),False,))
     class Meta:
         model = Proyecto
-        exclude = ['Usuario', 'Estado', 'Lider', 'Nombre', 'Fecha_inicio', 'Fecha_finalizacion', 'Descripcion']
+        exclude = ['Usuario', 'Estado', 'Lider', 'Nombre', 'Fecha_inicio', 'Fecha_finalizacion', 'Descripcion', 'nFases']
 
     class Media:
         css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
         js = ('/static/js/jsi18n.js',)
-
-
 
 
 
@@ -172,10 +132,11 @@ class FaseForm(MyForm):
     """
     class Meta:
         model = Fase
-        exclude = ['Usuario', 'Proyecto', 'Usuarios']
+        exclude = ['Usuario', 'Proyecto', 'Numero', 'Usuarios']
+
 
 class RolForm(MyForm):
-    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),
+    permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),help_text='asd',
                                           widget=FilteredSelectMultiple(('Permisos'),False,))
 
     """

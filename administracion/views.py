@@ -8,6 +8,7 @@ from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
+from django.core.exceptions import *
 
 
 # Create your views here.
@@ -564,14 +565,20 @@ def crear_fase(request, id_proyecto):
                                'mensaje': 'No puedes crear una fase a un proyecto que ha finalizado'},
                               context_instance=RequestContext(request))
     elif request.method == 'POST':
+        fase.Numero = 0
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
+            proyecto.nFases += 1
+            proyecto.save()
+            fase.Numero = proyecto.nFases
+            formulario = FaseForm(request.POST, instance=fase)
             formulario.save()
             fase_nombre = str(request.POST['Nombre'])
             return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha creado la fase '+fase_nombre+' exitosamente'},
                               context_instance=RequestContext(request))
+
     else:
         formulario = FaseForm(instance=fase)
         return render_to_response('proyecto/fase/fase_form.html',
@@ -685,6 +692,7 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
+
 @login_required(login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
@@ -696,14 +704,29 @@ def eliminar_fase(request, idFase, id_proyecto):
     """
     fase = Fase.objects.get(pk=idFase)
     usuario_actor = request.user
-    fase_nombre = fase.Nombre
-    fase.delete()
     proyecto = Proyecto.objects.get(pk=id_proyecto)
+    proyecto.nFases-=1
+    proyecto.save()
+    fase_nombre = fase.Nombre
+    reordenar(proyecto.id, fase.Numero)
+    fase.delete()
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+
     return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'La fase '+fase_nombre+' ha sido eliminada exitosamente'},
                               context_instance=RequestContext(request))
+def reordenar(idproyecto, numero):
+    proyecto = Proyecto.objects.get(pk=idproyecto)
+    for n in range(numero+1, proyecto.nFases+2, 1):
+        fase = Fase.objects.get(Proyecto=proyecto, Numero=n)
+        fase.Numero-=1
+        fase.save()
+    return True
+
+
+
+
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################

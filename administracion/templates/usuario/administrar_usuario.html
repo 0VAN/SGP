@@ -18,15 +18,16 @@
           <table class="table" id="tablaUsuario" rel="tabla">
                  <thead>
                         <tr>
-                            <td>Nombre</td>
-                            <td>Estado</td>
-                            <td></td>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                  </thead>
                  <tbody>
                         {% if lista_usuarios.count == 1 %}
                               <tr class="warning">
-                                  <td>No hay usuarios disponibles</td><td></td><td></td>
+                                  <td>No hay usuarios disponibles</td><td></td><td></td><td></td>
                               </tr>
                         {% else %}
                                 {% for usuario in lista_usuarios %}
@@ -37,7 +38,7 @@
                                                        <td>Activo</td>
                                                        <td>
                                                             <div class="btn-group">
-                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                                                     Opciones <span class="caret"></span>
                                                                 </button>
 
