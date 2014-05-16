@@ -1,6 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administracion de Fases{% endblock %}
-{% block encabezado %}Lista de fases del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
+{% block encabezado %}Fases del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
@@ -23,7 +23,7 @@
                 <td>#</td>
                 <td>Nombre</td>
                 <td>Usuario</td>
-                <td>Fecha</td>
+                <td>Fecha de ultima modificacion</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -48,7 +48,7 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
 

@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar Tipo de Item{% endblock %}
-{% block encabezado %}Lista de tipos de items del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con un tipo de item</small>{% endblock %}
+{% block encabezado %}Tipos de items de la fase {{ fase.Nombre }} <small>Haz click en opciones para interactuar con un tipo de item</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -22,6 +22,7 @@
                 <td>Usuario</td>
                 <td>Fecha</td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -31,8 +32,8 @@
                     <td>{{ tipo.Usuario }}</td>
                     <td>{{ tipo.Fecha }}</td>
                     <td>
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
 
@@ -50,7 +51,7 @@
                 </tr>
             {% empty %}
                 <tr class="warning">
-                    <td>No hay tipos de items disponibles</td><td></td><td></td>
+                    <td>No hay tipos de items disponibles</td><td></td><td></td><td></td><td></td><td></td>
                 </tr>
             {% endfor %}
         </tbody>

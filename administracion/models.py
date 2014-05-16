@@ -178,8 +178,8 @@ class Proyecto(models.Model):
     Lider = models.ForeignKey(User, related_name='Lider')
     Nombre = models.CharField(max_length=30, unique=True)
     Descripcion = models.TextField(max_length=100)
-    Fecha_inicio = models.DateTimeField('Fecha de inicio')
-    Fecha_finalizacion = models.DateTimeField('Fecha de finalizacion')
+    Fecha_inicio = models.DateField('Fecha de inicio')
+    Fecha_finalizacion = models.DateField('Fecha de finalizacion')
     Estado = models.CharField(max_length=2,
                               choices=( ('P', 'Pendiente'),
                                         ('A', 'Activo'),

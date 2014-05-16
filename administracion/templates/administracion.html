@@ -14,22 +14,22 @@
     {% endif %}
 {% endblock %}
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
-{% block encabezado %}Lista de Usuarios <small>Haz click en el usuario para mas detalles</small>
+{% block encabezado %}
 {% endblock %}
 
 {% block botones %}
     <li>
         {% if usuario_actor.can_consultar_proyecto or usuario_actor.can_consultar_fase %}
-            <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyecto</a>
+            <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyectos</a>
         {% else %}
-            <a class="btn btn-default" disabled = "disabled">Administrar Proyecto</a>
+            <a class="btn btn-default" disabled = "disabled">Administrar Proyectos</a>
         {% endif %}
     </li>
     <li>
         {% if usuario_actor.can_consultar_usuario %}
-            <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuario</a>
+            <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuarios</a>
         {% else %}
-            <a class="btn btn-default" disabled="disabled">Administrar Usuario</a>
+            <a class="btn btn-default" disabled="disabled">Administrar Usuarios</a>
         {% endif %}
     </li>
     <li>
@@ -48,34 +48,6 @@
     </li>
 
 {% endblock %}
+
 {% block contenido %}
-    {% if usuario_actor.can_consultar_usuario %}
-        <table class="table table-condensed table-hover" id="tablaUsuario" rel="tabla" title="Ver detalles..">
-            <thead>
-                <tr>
-                    <td>Nombre</td>
-                    <td>Estado</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for usuario in lista_usuarios %}
-                    {% if usuario.is_active %}
-                            <tr id=forloop.counter>
-                                <td>{{ usuario.username }}</td>
-                                <td>Activo</td>
-                            </tr>
-                    {% else %}
-                        <tr>
-                            <td>{{ usuario.username }}</td>
-                            <td>Inactivo</td>
-                        </tr>
-                    {% endif %}
-                {% empty %}
-                    <p>No hay usuarios registrados aun</p>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class="alert alert-danger">No tienes permiso para ver este contenido</div>
-    {% endif %}
 {% endblock %}

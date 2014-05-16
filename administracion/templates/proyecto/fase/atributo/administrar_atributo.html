@@ -1,6 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administrar atributos{% endblock %}
-{% block encabezado %}Lista de atributos de la fase {{ fase.Nombre }} <small>Haz click en opciones para interactuar con un atributo</small>{% endblock %}
+{% block encabezado %}Atributos de la fase {{ fase.Nombre }} <small>Haz click en opciones para interactuar con un atributo</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -22,7 +22,8 @@
             <tr>
                 <td>Nombre</td>
                 <td>Usuario</td>
-                <td>Fecha</td>
+                <td>Fecha de ultima modificacion</td>
+                <td></td>
                 <td></td>
             </tr>
         </thead>
@@ -33,8 +34,8 @@
                     <td>{{ atributo.Usuario }}</td>
                     <td>{{ atributo.Fecha }}</td>
                     <td>
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
 
@@ -45,14 +46,14 @@
                         </div>
                     </td>
                     <td>
-                         <div class="btn-group pull-right">
+                         <div class="btn-group">
                             <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id fase.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>
             {% empty %}
                 <tr class="warning">
-                <td>No hay atributos disponibles</td><td></td><td></td><td></td>
+                <td>No hay atributos disponibles</td><td></td><td></td><td></td><td></td>
                 </tr>
             {% endfor %}
         </tbody>

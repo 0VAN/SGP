@@ -1,6 +1,6 @@
 {% extends 'administracion.html' %}
 {% block titulo %}Administrar proyecto{% endblock %}
-{% block encabezado %}Lista de proyectos <small>Haz click en opciones para interactuar con un proyecto</small>{% endblock %}
+{% block encabezado %}Proyectos <small>Haz click en opciones para interactuar con un proyecto</small>{% endblock %}
 
 {% block botones %}
     <li>
@@ -18,9 +18,12 @@
                 <td>Nombre</td>
                 <td>Lider</td>
                 <td>Estado</td>
+                <td>Fecha de ultima modifificacion</td>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+
             </tr>
         </thead>
         <tbody>
@@ -29,6 +32,7 @@
                     <td>{{ proyecto.Nombre }}</td>
                     <td>{{ proyecto.Lider }}</td>
                     <td>{{ proyecto.get_Estado_display }}</td>
+                    <td>{{ proyecto.Fecha }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -59,11 +63,12 @@
                     {% else %}
                         <td></td>
                         <td></td>
+                        <td></td>
                     {% endif %}
                 </tr>
             {% empty %}
                 <tr class="warning">
-                <td>No hay proyectos disponibles</td><td></td><td></td><td></td>
+                <td>No hay proyectos disponibles</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                 </tr>
             {% endfor %}
         </tbody>
