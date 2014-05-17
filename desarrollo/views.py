@@ -408,10 +408,13 @@ def impacto_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     costo_m_atras = costo_monetario_atras(item)
     costo_m_adelante = costo_monetario_adelante(item)
+    costo_t_atras = costo_temporal_atras(item)
+    costo_t_adelante = costo_temporal_adelante(item)
     return render_to_response(
         'proyecto/fase/item/impacto.html',
         {'fase': fase, 'usuario': usuario, 'item': item, 'costo_monetario_atras': costo_m_atras,
-         'costo_monetario_adelante': costo_m_adelante},
+         'costo_monetario_adelante': costo_m_adelante, 'costo_temporal_atras': costo_t_atras,
+         'costo_temporal_adelante': costo_t_adelante},
         context_instance=RequestContext(request)
     )
 
@@ -442,3 +445,56 @@ def costo_monetario_adelante(item):
         cont += b.item.CostoUnitario
         cont += costo_monetario_adelante(b.item)
     return cont
+
+def costo_temporal_atras(item):
+    cont = 0
+    try:
+        relacion = Relacion.objects.get(item=item)
+        if relacion.padre != None:
+            cont += relacion.padre.CostoTemporal
+            cont += costo_temporal_atras(relacion.padre)
+        elif relacion.antecesor != None:
+            cont += relacion.antecesor.CostoTemporal
+            cont += costo_temporal_atras(relacion.antecesor)
+    except ObjectDoesNotExist:
+        return 0
+    return cont
+
+def costo_temporal_adelante(item):
+    cont = 0
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
+    for a in lista_hijos:
+        cont += a.item.CostoTemporal
+        cont += costo_temporal_adelante(a.item)
+    for b in lista_sucesores:
+        cont += b.item.CostoTemporal
+        cont += costo_temporal_adelante(b.item)
+    return cont
+
+def eliminar_relacion_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    return render_to_response(
+        'proyecto/fase/relacion/eliminar.html',
+        {'usuario': usuario, 'fase': fase, 'item': item},
+        context_instance=RequestContext(request)
+    )
+
+def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    relacion = Relacion.objects.get(item=item)
+    relacion.delete()
+    relacion = False
+    suceso = True
+    mensaje = 'Relacion eliminada con exito'
+    return render_to_response(
+        'proyecto/fase/relacion/gestion_relaciones.html',
+        {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'relacion': relacion},
+        context_instance=RequestContext(request)
+    )
