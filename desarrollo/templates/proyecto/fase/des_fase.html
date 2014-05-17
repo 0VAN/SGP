@@ -77,4 +77,8 @@
             <div class="alert alert-success">{{ mensaje }}</div>
         {% endif %}
     {% endblock mensaje %}
+    {% if lista_items %}
+        <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
+        <img src="/static/media/grafoFaseActual.png">
+    {% endif %}
 {% endblock %}

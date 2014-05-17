@@ -9,6 +9,7 @@ from desarrollo.models import *
 from desarrollo.forms import *
 import reversion
 from django.core.exceptions import *
+import pydot
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -33,14 +34,21 @@ def desarrollo(request):
 
 
 def des_proyecto(request, id_proyecto):
+    generar_grafo_proyecto(id_proyecto)
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
+    lista_items = []
+    for fase in lista_fases:
+        lista_items = Item.objects.filter(Fase=fase)
+        if lista_items:
+            break
     return render_to_response('proyecto/des_proyecto.html',
-        {'usuario_actor': usuario, 'proyecto': proyecto, 'lista_fases': lista_fases},
+        {'usuario_actor': usuario, 'proyecto': proyecto, 'lista_fases': lista_fases, 'lista_items':lista_items},
         context_instance=RequestContext(request))
 
 def des_fase(request, id_proyecto, id_fase):
+    generar_grafo_fase(id_fase)
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     lista_items = Item.objects.filter(Fase=fase)
@@ -69,6 +77,7 @@ def crear_item(request, id_proyecto, id_fase):
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
             mensaje = "El item se ha creado exitosamente, no olvides completar los atributos!!"
+            generar_grafo_fase(id_fase)
             return render_to_response(
                 'proyecto/fase/des_fase.html',
                 {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
@@ -92,6 +101,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
         lista_items = Item.objects.filter(Fase=fase)
         suceso = True
         mensaje = "El item se ha modificado exitosamente"
+        generar_grafo_fase(id_fase)
         return render_to_response(
             'proyecto/fase/des_fase.html',
             {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
@@ -194,13 +204,54 @@ def eliminar_item(request, idProyecto, idFase, idItem):
     campos.delete()
     relacion.delete()
     lista_items = Item.objects.filter(Fase=idFase)
-
+    generar_grafo_fase(idFase)
     return render_to_response(
         'proyecto/fase/item/item_exito.html',
         {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,
          'mensaje': 'El item '+item_nombre+' se ha eliminado exitosamente'},
         context_instance=RequestContext(request)
     )
+
+def generar_grafo_proyecto(id_proyecto):
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
+    relaciones_proyecto = []
+    grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
+    grafo.set_node_defaults(shape="record")
+    grafo.set_edge_defaults(color="blue", arrowhead="vee", weight="1")
+    for fase in fases_proyecto:
+        cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
+        items_fase = Item.objects.filter(Fase=fase)
+        for item in items_fase:
+            cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="white"))
+            if Relacion.objects.filter(item=item):
+                relaciones_proyecto.append(Relacion.objects.get(item=item))
+        grafo.add_subgraph(cluster)
+    for relacion in relaciones_proyecto:
+        if relacion.padre:
+            grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.item.CostoUnitario,color="blue"))
+        if relacion.antecesor:
+            grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
+    grafo.write_png('static/media/grafoProyectoActual.png')
+
+def generar_grafo_fase(id_fase):
+    fase = Fase.objects.get(pk=id_fase)
+    relaciones_fase = []
+    grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
+    grafo.set_node_defaults(shape="component")
+    grafo.set_edge_defaults(arrowhead="vee", weight="0")
+    cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
+    items_fase = Item.objects.filter(Fase=fase)
+    for item in items_fase:
+        cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+        if Relacion.objects.filter(item=item):
+            relaciones_fase.append(Relacion.objects.get(item=item))
+    grafo.add_subgraph(cluster)
+    for relacion in relaciones_fase:
+        if relacion.padre:
+            grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
+    grafo.write_png('static/media/grafoFaseActual.png')
 
 
 def historial_item(request, id_proyecto, id_fase, id_item):
@@ -263,22 +314,29 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
     try:
         relacion = Relacion.objects.get(item=item)
     except ObjectDoesNotExist:
-        relacion = None
+        relacion = False
+
     lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item)
     nueva_relacion = Relacion()
     nueva_relacion.item = item
     if request.method=='POST':
         formulario = PadreForm(request.POST, instance=nueva_relacion)
         if formulario.is_valid():
-            if(relacion != None):
-                relacion.delete()
-            formulario.save()
-            relacion = Relacion.objects.get(item=item)
-            mensaje = 'Padre asignado exitosamente'
-            suceso = True
+            if generaCiclo(id_item, request.POST['padre']):
+                suceso = False
+                mensaje = 'Error: Esta relacion genera un ciclo'
+            else:
+                if(relacion != False):
+                    relacion.delete()
+                formulario.save()
+                relacion = Relacion.objects.get(item=item)
+
+                mensaje = 'Padre asignado exitosamente'
+                suceso = True
             return render_to_response(
                 'proyecto/fase/relacion/gestion_relaciones.html',
-                {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item, 'relacion':relacion},
+                {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
+                 'relacion': relacion},
                 context_instance=RequestContext(request)
             )
     else:
@@ -288,6 +346,20 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
         {'formulario': formulario, 'fase': fase, 'usuario_actor': usuario, 'relacion': relacion, 'lista_items':lista_items, 'item': item},
         context_instance=RequestContext(request)
     )
+
+def generaCiclo(id_item,id_padre):
+    itemPadre = Item.objects.get(pk=id_padre)
+    id_item = int(id_item)
+    while(itemPadre):
+        if itemPadre.pk == id_item:
+            return True
+        try:
+            relacion = Relacion.objects.get(item=itemPadre)
+            itemPadre = relacion.padre
+        except:
+            return False
+    return False
+
 
 @reversion.create_revision()
 def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
