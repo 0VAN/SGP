@@ -48,7 +48,7 @@
 {"pk": 37, "model": "auth.permission", "fields": {"codename": "acceso_desarrollo", "name": "Puede acceder al modulo de desarrollo", "content_type": 4}},
 
 {"pk": 1, "model": "auth.group", "fields": {"name": "Administracion", "permissions": [19, 20, 21, 10, 11, 12, 31, 32, 33, 34, 35, 36]}},
-{"pk": 2, "model": "auth.group", "fields": {"name": "Lider de Proyecto", "permissions": [7, 8, 9, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32,33, 34, 35, 36]}},
+{"pk": 2, "model": "auth.group", "fields": {"name": "Lider de Proyecto", "permissions": [7, 8, 9, 11, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32,33, 34, 35, 36]}},
 {"pk": 3, "model": "auth.group", "fields": {"name": "Desarrollador", "permissions": [33,34,35,36,37]}},
 
 {"pk": 1, "model": "auth.user", "fields": {"username": "sgp", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": true, "is_staff": true, "last_login": "2014-04-20T17:55:08.342Z", "groups": [1], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}}
