@@ -1,0 +1,15 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Finalizar Item{% endblock %}
+{% block encabezado %}Finalizar item: {{ item }}{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" type="button" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <p class="alert alert-danger">Esta seguro que desea finalizar el item: {{ item }}? Una vez finalizado no podra modificar los datos</p>
+    <p>
+        <a  class="btn btn-primary btn-lg" href="{% url 'desarrollo.views.item_finalizado_view' fase.Proyecto.id fase.id item.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}">No</a>
+    </p>
+{% endblock %}
