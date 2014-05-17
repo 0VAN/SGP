@@ -1,11 +1,5 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
-from administracion.forms import ProyectoForm, UsuarioModForm, UsuarioDelForm, FaseForm, RolForm, AsignarRol
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User, Group, Permission
-from administracion.models import Proyecto, Fase, TipoDeItem
-from desarrollo.models import *
+from django.contrib.auth.decorators import login_required
 from desarrollo.forms import *
 import reversion
 from django.core.exceptions import *

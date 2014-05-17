@@ -115,6 +115,13 @@ urlpatterns = patterns('',
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/eliminar/$', 'desarrollo.views.eliminar_relacion_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/eliminada/$', 'desarrollo.views.relacion_eliminada_view'),
 
+########################################################################################################################
+#####################################URL GESTION DE CAMBIOS#############################################################
+########################################################################################################################
+    url(r'^gestion/$', 'gestion.views.gestion'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/$', 'gestion.views.gestion_proyecto'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'gestion.views.gestion_fase'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/lineaBase$', 'gestion.views.crear_lineaBase_view'),
 
 )
 

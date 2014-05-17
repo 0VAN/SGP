@@ -1,0 +1,50 @@
+{% extends 'gestion_proyecto.html' %}
+{% block titulo %}Gestion de Fase{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'gestion.views.crear_lineaBase_view' fase.Proyecto.id fase.id %}" class="btn btn-default">Crear una Linea base</a></li>
+    <li><a href="{% url 'gestion.views.gestion_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Lineas Base de la fase: {{ fase.Nombre }}{% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Creado por</th>
+                <th>Fecha de ultima modificacion</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lineabase in lista_lineabase %}
+                <tr>
+                    <td>{{ lineabase.Nombre }}</td>
+                    <td>{{ lineabase.Usuario }}</td>
+                    <td>{{ lineabase.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="#" type="button" class="btn btn-warning">Detalle</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="#" type="button" class="btn btn-primary">Solicitud de cambio</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                <td>No hay lineas disponibles</td><td></td><td></td><td></td><td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+{% endblock %}

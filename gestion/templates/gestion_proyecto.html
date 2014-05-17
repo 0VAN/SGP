@@ -1,0 +1,34 @@
+{% extends 'gestion.html' %}
+{% block titulo %}Gestion de Proyecto{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Fases del proyecto: {{ proyecto.Nombre }} {% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fase in lista_fases %}
+                <tr>
+                    <td>{{ fase.Nombre }}</td>
+                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.Fecha }}</td>
+                    <td>
+                        <a href="{% url 'gestion.views.gestion_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Lineas Base</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <p>No hay fases disponibles</p>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

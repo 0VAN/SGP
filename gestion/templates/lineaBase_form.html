@@ -1,0 +1,19 @@
+{% extends 'gestion_fase.html' %}
+{% block titulo %}Forumlario Linea Base{% endblock %}
+
+{% block encabezado %}
+    {{ operacion }}
+    <script type="text/javascript" src="/static/js/jsi18n.js"></script>
+    {{ formulario.media }}
+{% endblock %}
+
+{% block botones %}
+    <li><a href="{% url 'gestion.views.gestion_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table">{{ formulario }}</table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

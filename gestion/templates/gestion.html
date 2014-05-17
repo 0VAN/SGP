@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block titulo %}Gestion{% endblock %}
+
+{% block activo-admin %}
+    {% if not usuario_actor.accesoLiderProyecto %}
+        hide
+    {% endif %}
+{% endblock %}
+{% block activo-des %}
+    hide
+{% endblock %}
+{% block activo-gc %}
+    active
+{% endblock %}
+
+{% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
+
+{% block encabezado %}Proyectos{% endblock %}
+
+{% block botones %}
+    <li>
+        <a href="#" class="btn btn-default">Buscar proyecto</a>
+    </li>
+{% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Lider</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proyecto in lista_proyectos %}
+               {% if usuario_actor == proyecto.Lider %}
+                    <tr>
+                        <td>{{ proyecto.Nombre }}</td>
+                        <td>{{ proyecto.Lider }}</td>
+                        <td>{{ proyecto.get_Estado_display }}</td>
+                        <td>
+                            <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
+                        </td>
+                    </tr>
+               {% endif %}
+            {% empty %}
+                <p>No hay proyectos disponibles</p>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
