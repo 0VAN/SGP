@@ -3,8 +3,10 @@
 {% block botones %}
     <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
-{% block encabezado %}Impacto del item {{ item.Nombre }}{% endblock %}
+{% block encabezado %}Impacto del item: {{ item.Nombre }}{% endblock %}
 {% block contenido %}
     <p>Costo Monetario hacia atras: {{ costo_monetario_atras }}</p>
     <p>Costo Monetario hacia adelante: {{ costo_monetario_adelante }}</p>
+    <p></p>
+    <p></p>
 {% endblock %}
