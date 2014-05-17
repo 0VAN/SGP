@@ -25,6 +25,8 @@
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>
+        {% elif suceso == False %}
+            <div class="alert alert-danger">{{ mensaje }}</div>
         {% endif %}
     {% endblock mensaje %}
 {% endblock %}
