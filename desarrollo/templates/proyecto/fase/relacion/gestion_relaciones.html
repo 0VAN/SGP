@@ -22,6 +22,20 @@
             <p>Item: {{ relacion.antecesor.Nombre }}</p>
         {% endif %}
     {% endif %}
+    <p>Hijos: </p>
+    {% for a in hijos %}
+        <p>a.item</p>
+    {% empty %}
+        <p>No posee hijos</p>
+    {% endfor %}
+
+    <p>Sucesores: </p>
+    {% for a in sucesores %}
+        <p>a.item</p>
+    {% empty %}
+        <p>No posee sucesores</p>
+    {% endfor %}
+
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>

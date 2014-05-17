@@ -246,9 +246,12 @@ def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
         relacion = Relacion.objects.get(item=item)
     except ObjectDoesNotExist:
         relacion = False
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
     return render_to_response(
         'proyecto/fase/relacion/gestion_relaciones.html',
-        {'usuario_actor': usuario, 'relacion': relacion, 'item': item, 'fase': fase},
+        {'usuario_actor': usuario, 'relacion': relacion, 'item': item, 'fase': fase,
+         'hijos': lista_hijos, 'sucesores': lista_sucesores},
         context_instance=RequestContext(request)
     )
 
@@ -359,7 +362,7 @@ def agregar_archivo_view(request, id_proyecto, id_fase, id_item):
             )
     else:
         formulario = ArchivoForm()
-    return  render_to_response(
+    return render_to_response(
         'proyecto/fase/archivo/agregar_archivo.html',
         {'formulario': formulario, 'fase': fase, 'usuario_actor': usuario, 'item': item},
         context_instance=RequestContext(request)
@@ -397,3 +400,45 @@ def sucesores(item):
 def hijos(item):
     hijos = Relacion.objects.filter(padre=item)
     return hijos
+
+def impacto_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    costo_m_atras = costo_monetario_atras(item)
+    costo_m_adelante = costo_monetario_adelante(item)
+    return render_to_response(
+        'proyecto/fase/item/impacto.html',
+        {'fase': fase, 'usuario': usuario, 'item': item, 'costo_monetario_atras': costo_m_atras,
+         'costo_monetario_adelante': costo_m_adelante},
+        context_instance=RequestContext(request)
+    )
+
+
+
+def costo_monetario_atras(item):
+    cont = 0
+    try:
+        relacion = Relacion.objects.get(item=item)
+        if relacion.padre != None:
+            cont += relacion.padre.CostoUnitario
+            cont += costo_monetario_atras(relacion.padre)
+        elif relacion.antecesor != None:
+            cont += relacion.antecesor.CostoUnitario
+            cont += costo_monetario_atras(relacion.antecesor)
+    except ObjectDoesNotExist:
+        return 0
+    return cont
+
+def costo_monetario_adelante(item):
+    cont = 0
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
+    for a in lista_hijos:
+        cont += a.item.CostoUnitario
+        cont += costo_monetario_adelante(a.item)
+    for b in lista_sucesores:
+        cont += b.item.CostoUnitario
+        cont += costo_monetario_adelante(b.item)
+    return cont
