@@ -33,7 +33,7 @@
             </tr>
         </thead>
         {% for usuario in lista_usuarios %}
-           {% if usuario.accesoLiderProyecto or usuario.accesoAdministrador %}
+           {% if not usuario.accesoAdministrador and not usuario.accesoLiderProyecto %}
                     {% if usuario.is_active %}
                         <tr>
                             <td>{{ usuario.username }}</td>

@@ -44,7 +44,7 @@ def accesoAdministrador(self):
                 return True
     return False
 User.add_to_class('accesoLiderProyecto', accesoLiderProyecto)
-User.add_to_class('accesoAdministrador', accesoLiderProyecto)
+User.add_to_class('accesoAdministrador', accesoAdministrador)
 
 def can_add_user(self):
     permiso = 'add_user'

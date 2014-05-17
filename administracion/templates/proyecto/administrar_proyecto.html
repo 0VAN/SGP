@@ -43,7 +43,7 @@
                                     <li><a href="{% url 'administracion.views.modificar_proyecto_lider' proyecto.id %}">Modificar</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
-                                {% else %}
+                                {% elif usuario_actor.accesoAdministrador %}
                                      <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
                                 {% endif %}
                             </ul>
@@ -59,7 +59,7 @@
                         <td>
                             <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </td>
-                    {% elif usuario_actor. %}
+                    {% else %}
                         <td></td>
                         <td></td>
                         <td></td>
