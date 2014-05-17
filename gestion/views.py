@@ -44,6 +44,7 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     lista_lineaBase = LineBase.objects.filter(Fase=fase)
     lista_items = Item.objects.filter(Fase=fase)
+    lista_items = lista_items.filter(Estado='FIN')
     lineabase = LineBase(Fase=fase, Usuario=usuario)
     if request.method == 'POST':
         formulario = LineBaseForm(request.POST, instance=lineabase)

@@ -8,8 +8,8 @@
 {"pk": 6, "model": "auth.user", "fields": {"username": "desarrollador4", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": false, "is_staff": false, "last_login": "2014-04-20T17:55:08.342Z", "groups": [3], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}},
 
 
-{"pk": 1, "model": "administracion.proyecto", "fields": {"nFases": 3, "Lider": 2, "Fecha": "2014-05-17T01:20:07.488Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-08", "Fecha_inicio": "2014-04-30", "Descripcion": "este un ejemplo", "Nombre": "proyecto 1", "Usuarios": [3, 4, 5], "Estado": "P"}},
-{"pk": 2, "model": "administracion.proyecto", "fields": {"nFases": 5, "Lider": 7, "Fecha": "2014-05-17T04:33:59.282Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-03", "Fecha_inicio": "2014-05-01", "Descripcion": "proyecto 2 ejemplo", "Nombre": "proyecto 2", "Usuarios": [4, 5, 6], "Estado": "P"}},
+{"pk": 1, "model": "administracion.proyecto", "fields": {"nFases": 3, "Lider": 2, "Fecha": "2014-05-17T01:20:07.488Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-08", "Fecha_inicio": "2014-04-30", "Descripcion": "este un ejemplo", "Nombre": "proyecto 1", "Usuarios": [2,3, 4, 5,7], "Estado": "P"}},
+{"pk": 2, "model": "administracion.proyecto", "fields": {"nFases": 5, "Lider": 7, "Fecha": "2014-05-17T04:33:59.282Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-03", "Fecha_inicio": "2014-05-01", "Descripcion": "proyecto 2 ejemplo", "Nombre": "proyecto 2", "Usuarios": [2,4, 5, 6,7], "Estado": "P"}},
 
 {"pk": 1, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:43.660Z", "Numero": 1, "Proyecto": 1, "Descripcion": "fase 1", "Nombre": "planificar", "Usuarios": [2,3,7]}},
 {"pk": 2, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:53.184Z", "Numero": 2, "Proyecto": 1, "Descripcion": "fase2", "Nombre": "desarrollar", "Usuarios": [2,4,7]}},
@@ -42,7 +42,7 @@
 
 {"pk": 7, "model": "administracion.tipodeitem", "fields": {"Nombre": "documento", "Fecha": "2014-05-17T04:35:04.867Z", "Fase": 4, "Atributos": [8, 9], "Usuario": 7}},
 {"pk": 8, "model": "administracion.tipodeitem", "fields": {"Nombre": "cuerda", "Fecha": "2014-05-17T04:35:54.532Z", "Fase": 5, "Atributos": [10], "Usuario": 7}},
-{"pk": 9, "model": "administracion.tipodeitem", "fields": {"Nombre": "cuerpo", "Fecha": "2014-05-17T04:36:29.807Z", "Fase": 6, "Atributos": [11, 12], "Usuario": 7}}
+{"pk": 9, "model": "administracion.tipodeitem", "fields": {"Nombre": "cuerpo", "Fecha": "2014-05-17T04:36:29.807Z", "Fase": 6, "Atributos": [11, 12], "Usuario": 7}},
 
 
 {"pk": 1, "model": "desarrollo.item", "fields": {"Tipo": 1, "Usuario": 2, "Fecha": "2014-05-17T08:41:00.015Z", "CostoTemporal": 5, "Version": 1, "CostoUnitario": 5, "Descripcion": "item 1", "Nombre": "ferrari", "Estado": "CON", "Prioridad": 2, "Fase": 1}},

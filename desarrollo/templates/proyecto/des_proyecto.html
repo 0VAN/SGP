@@ -38,4 +38,8 @@
             {% endfor %}
         </tbody>
     </table>
+    {% if lista_items %}
+        <h3>Grafo del proyecto: <i>{{ proyecto.Nombre }}</i></h3>
+        <img src="/static/media/grafoProyectoActual.png">
+    {% endif %}
 {% endblock %}
