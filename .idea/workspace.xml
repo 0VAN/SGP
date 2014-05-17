@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80fc48ca-31db-4ab0-8b5f-cec95444ab52" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/media/grafoFaseActual.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/media/grafoProyectoActual.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/PKG-INFO" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/dot_parser.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/dot_parser.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/pydot.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/pydot.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HerramientaGrafo.sh" afterPath="$PROJECT_DIR$/HerramientaGrafo.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/SGP.iml" afterPath="$PROJECT_DIR$/.idea/SGP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datosIniciales.json" afterPath="$PROJECT_DIR$/datosIniciales.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" afterPath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/des_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/proyecto/des_proyecto.html" afterPath="$PROJECT_DIR$/desarrollo/templates/proyecto/des_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/relacion/gestion_relaciones.html" afterPath="$PROJECT_DIR$/desarrollo/templates/proyecto/fase/relacion/gestion_relaciones.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/tests.py" afterPath="$PROJECT_DIR$/administracion/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/views.py" afterPath="$PROJECT_DIR$/desarrollo/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="80fc48ca-31db-4ab0-8b5f-cec95444ab52" name="Default" comment="" />
     <ignored path="SGP.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -132,7 +110,7 @@
       <file leaf-file-name="datosIniciales.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/datosIniciales.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="43" selection-start="4493" selection-end="4493" vertical-scroll-proportion="0.52196383" vertical-offset="590" max-vertical-offset="1116">
+            <state line="44" column="44" selection-start="4494" selection-end="4494" vertical-scroll-proportion="0.64951766" vertical-offset="590" max-vertical-offset="1116">
               <folding />
             </state>
           </provider>
@@ -395,7 +373,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23322147" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36073825" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24961948" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -573,7 +551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datosIniciales.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="43" selection-start="4493" selection-end="4493" vertical-scroll-proportion="0.52196383" vertical-offset="590" max-vertical-offset="1116">
+        <state line="44" column="44" selection-start="4494" selection-end="4494" vertical-scroll-proportion="0.64951766" vertical-offset="590" max-vertical-offset="1116">
           <folding />
         </state>
       </provider>
