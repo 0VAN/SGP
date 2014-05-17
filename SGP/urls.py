@@ -114,6 +114,9 @@ urlpatterns = patterns('',
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/impacto/$', 'desarrollo.views.impacto_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/eliminar/$', 'desarrollo.views.eliminar_relacion_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/relaciones/eliminada/$', 'desarrollo.views.relacion_eliminada_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/finalizar/$', 'desarrollo.views.finalizar_item_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/finalizado/$', 'desarrollo.views.item_finalizado_view'),
+
 
 
 )

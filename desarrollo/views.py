@@ -498,3 +498,30 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'relacion': relacion},
         context_instance=RequestContext(request)
     )
+
+def finalizar_item_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    return render_to_response(
+        'proyecto/fase/item/finalizar.html',
+        {'usuario': usuario, 'fase': fase, 'item': item},
+        context_instance=RequestContext(request)
+    )
+
+def item_finalizado_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    item.Estado = item.FINALIZADO
+    item.save()
+    suceso = True
+    mensaje = 'Item finalizado exitosamente'
+    lista_items = Item.objects.filter(Fase=fase)
+    return render_to_response(
+        'proyecto/fase/des_fase.html',
+        {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'lista_items': lista_items},
+        context_instance=RequestContext(request)
+    )
