@@ -6,7 +6,12 @@
     {% if fase.Numero != 1 %}
         <li><a href="{% url 'desarrollo.views.asignar_antecesor_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Asignar antecesor</a></li>
     {% endif %}
+
+    {% if relacion != True %}
+        <li><a href="{% url 'desarrollo.views.eliminar_relacion_view' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-default">Eliminar Relacion</a></li>
+    {% endif %}
     <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+
 {% endblock %}
 {% block encabezado %}Relaciones del item: {{ item.Nombre }}{% endblock %}
 
@@ -22,6 +27,20 @@
             <p>Item: {{ relacion.antecesor.Nombre }}</p>
         {% endif %}
     {% endif %}
+    <p>Hijos: </p>
+    {% for a in hijos %}
+        <p>{{ a.item }}</p>
+    {% empty %}
+        <p>No posee hijos</p>
+    {% endfor %}
+
+    <p>Sucesores: </p>
+    {% for a in sucesores %}
+        <p>{{ a.item }}</p>
+    {% empty %}
+        <p>No posee sucesores</p>
+    {% endfor %}
+
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>

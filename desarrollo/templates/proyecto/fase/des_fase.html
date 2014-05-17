@@ -37,6 +37,7 @@
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
                                 <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
+                                <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
                             </ul>
                         </div>
                     </td>
