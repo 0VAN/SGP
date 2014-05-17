@@ -17,8 +17,8 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Fecha de ultima modificacion</th>
                 <th>Usuario</th>
+                <th>Fecha de ultima modificacion</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -42,7 +42,7 @@
                         </div>
                     </td>
                     <td>
-                        <div class="btn-group pull-right">
+                        <div class="btn-group">
                             <a href="{% url 'administracion.views.confirmar_eliminar_tipo' proyecto.id fase.id tipo.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </td>

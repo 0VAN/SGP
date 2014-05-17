@@ -37,7 +37,14 @@ def accesoLiderProyecto(self):
                 return True
     return False
 
+def accesoAdministrador(self):
+    rol='Administracion'
+    for grupo in self.groups.all():
+        if grupo.name ==rol:
+                return True
+    return False
 User.add_to_class('accesoLiderProyecto', accesoLiderProyecto)
+User.add_to_class('accesoAdministrador', accesoLiderProyecto)
 
 def can_add_user(self):
     permiso = 'add_user'

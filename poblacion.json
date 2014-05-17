@@ -7,28 +7,41 @@
 {"pk": 5, "model": "auth.user", "fields": {"username": "desarrollador3", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": false, "is_staff": false, "last_login": "2014-04-20T17:55:08.342Z", "groups": [3], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}},
 {"pk": 6, "model": "auth.user", "fields": {"username": "desarrollador4", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": false, "is_staff": false, "last_login": "2014-04-20T17:55:08.342Z", "groups": [3], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}},
 
-{"pk": 1, "model": "administracion.proyecto", "fields": {"nFases": 3, "Lider": 2, "Fecha": "2014-05-17T01:20:07.488Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-08", "Fecha_inicio": "2014-04-30", "Descripcion": "este un ejemplo", "Nombre": "proyecto 1", "Usuarios": [4, 5, 3], "Estado": "P"}},
-{"pk": 2, "model": "administracion.proyecto", "fields": {"nFases": 2, "Lider": 7, "Fecha": "2014-05-17T01:18:02.259Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-03", "Fecha_inicio": "2014-05-01", "Descripcion": "proyecto 2 ejemplo", "Nombre": "proyecto 2", "Usuarios": [4,5,6], "Estado": "P"}},
 
-{"pk": 1, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:43.660Z", "Numero": 1, "Proyecto": 1, "Descripcion": "fase 1", "Nombre": "planificar", "Usuarios": []}},
-{"pk": 2, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:53.184Z", "Numero": 2, "Proyecto": 1, "Descripcion": "fase2", "Nombre": "desarrollar", "Usuarios": []}},
-{"pk": 3, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:20:07.498Z", "Numero": 3, "Proyecto": 1, "Descripcion": "fase3", "Nombre": "mantener", "Usuarios": []}},
+{"pk": 1, "model": "administracion.proyecto", "fields": {"nFases": 3, "Lider": 2, "Fecha": "2014-05-17T01:20:07.488Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-08", "Fecha_inicio": "2014-04-30", "Descripcion": "este un ejemplo", "Nombre": "proyecto 1", "Usuarios": [3, 4, 5], "Estado": "P"}},
+{"pk": 2, "model": "administracion.proyecto", "fields": {"nFases": 5, "Lider": 7, "Fecha": "2014-05-17T04:33:59.282Z", "Usuario": 1, "Fecha_finalizacion": "2014-05-03", "Fecha_inicio": "2014-05-01", "Descripcion": "proyecto 2 ejemplo", "Nombre": "proyecto 2", "Usuarios": [4, 5, 6], "Estado": "P"}},
+
+{"pk": 1, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:43.660Z", "Numero": 1, "Proyecto": 1, "Descripcion": "fase 1", "Nombre": "planificar", "Usuarios": [3]}},
+{"pk": 2, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:19:53.184Z", "Numero": 2, "Proyecto": 1, "Descripcion": "fase2", "Nombre": "desarrollar", "Usuarios": [4]}},
+{"pk": 3, "model": "administracion.fase", "fields": {"Usuario": 2, "Fecha": "2014-05-17T01:20:07.498Z", "Numero": 3, "Proyecto": 1, "Descripcion": "fase3", "Nombre": "mantener", "Usuarios": [5]}},
+
+{"pk": 4, "model": "administracion.fase", "fields": {"Usuario": 7, "Fecha": "2014-05-17T04:33:33.788Z", "Numero": 3, "Proyecto": 2, "Descripcion": "fase prueba", "Nombre": "visualizacion", "Usuarios": [4]}},
+{"pk": 5, "model": "administracion.fase", "fields": {"Usuario": 7, "Fecha": "2014-05-17T04:33:47.021Z", "Numero": 4, "Proyecto": 2, "Descripcion": "fase prueba", "Nombre": "definicion", "Usuarios": [5]}},
+{"pk": 6, "model": "administracion.fase", "fields": {"Usuario": 7, "Fecha": "2014-05-17T04:33:59.421Z", "Numero": 5, "Proyecto": 2, "Descripcion": "fase prueba", "Nombre": "implementacion", "Usuarios": [6]}},
 
 {"pk": 1, "model": "administracion.atributo", "fields": {"Tipo": "C", "Usuario": 2, "Fecha": "2014-05-17T01:20:46.566Z", "Descripcion": "atributo 1", "Nombre": "letras", "Fase": 1}},
 {"pk": 2, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 2, "Fecha": "2014-05-17T01:21:02.057Z", "Descripcion": "atributo 2", "Nombre": "cantidad", "Fase": 1}},
 {"pk": 3, "model": "administracion.atributo", "fields": {"Tipo": "C", "Usuario": 2, "Fecha": "2014-05-17T01:22:32.014Z", "Descripcion": "atributo 3", "Nombre": "color", "Fase": 1}},
-
 {"pk": 4, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 2, "Fecha": "2014-05-17T01:23:58.089Z", "Descripcion": "atributo 1", "Nombre": "ancho", "Fase": 2}},
 {"pk": 5, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 2, "Fecha": "2014-05-17T01:24:21.264Z", "Descripcion": "atributo 2", "Nombre": "largo", "Fase": 2}},
-
 {"pk": 6, "model": "administracion.atributo", "fields": {"Tipo": "F", "Usuario": 2, "Fecha": "2014-05-17T01:26:33.981Z", "Descripcion": "atributo 1", "Nombre": "fechas", "Fase": 3}},
 {"pk": 7, "model": "administracion.atributo", "fields": {"Tipo": "H", "Usuario": 2, "Fecha": "2014-05-17T01:26:48.564Z", "Descripcion": "atributo 2", "Nombre": "hora", "Fase": 3}},
+
+{"pk": 8, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 7, "Fecha": "2014-05-17T04:34:21.572Z", "Descripcion": "precio", "Nombre": "precio", "Fase": 4}},
+{"pk": 9, "model": "administracion.atributo", "fields": {"Tipo": "C", "Usuario": 7, "Fecha": "2014-05-17T04:34:45.033Z", "Descripcion": "firma", "Nombre": "firma", "Fase": 4}},
+{"pk": 10, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 7, "Fecha": "2014-05-17T04:35:23.918Z", "Descripcion": "tension", "Nombre": "tension", "Fase": 5}},
+{"pk": 11, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 7, "Fecha": "2014-05-17T04:36:09.282Z", "Descripcion": "masa", "Nombre": "masa", "Fase": 6}},
+{"pk": 12, "model": "administracion.atributo", "fields": {"Tipo": "N", "Usuario": 7, "Fecha": "2014-05-17T04:36:18.080Z", "Descripcion": "gravedad", "Nombre": "gravedad", "Fase": 6}},
 
 {"pk": 1, "model": "administracion.tipodeitem", "fields": {"Nombre": "remeras ", "Fecha": "2014-05-17T01:23:07.825Z", "Fase": 1, "Atributos": [1, 2, 3], "Usuario": 2}},
 {"pk": 2, "model": "administracion.tipodeitem", "fields": {"Nombre": "pantalones", "Fecha": "2014-05-17T01:23:28.964Z", "Fase": 1, "Atributos": [2, 3], "Usuario": 2}},
 {"pk": 3, "model": "administracion.tipodeitem", "fields": {"Nombre": "televisores", "Fecha": "2014-05-17T01:25:46.923Z", "Fase": 2, "Atributos": [4, 5], "Usuario": 2}},
 {"pk": 4, "model": "administracion.tipodeitem", "fields": {"Nombre": "barras", "Fecha": "2014-05-17T01:26:08.763Z", "Fase": 2, "Atributos": [4, 5], "Usuario": 2}},
 {"pk": 5, "model": "administracion.tipodeitem", "fields": {"Nombre": "encuentros", "Fecha": "2014-05-17T01:27:02.952Z", "Fase": 3, "Atributos": [6, 7], "Usuario": 2}},
-{"pk": 6, "model": "administracion.tipodeitem", "fields": {"Nombre": "plazos", "Fecha": "2014-05-17T01:29:04.519Z", "Fase": 3, "Atributos": [6, 7], "Usuario": 2}}
+{"pk": 6, "model": "administracion.tipodeitem", "fields": {"Nombre": "plazos", "Fecha": "2014-05-17T01:29:04.519Z", "Fase": 3, "Atributos": [6, 7], "Usuario": 2}},
+
+{"pk": 7, "model": "administracion.tipodeitem", "fields": {"Nombre": "documento", "Fecha": "2014-05-17T04:35:04.867Z", "Fase": 4, "Atributos": [8, 9], "Usuario": 7}},
+{"pk": 8, "model": "administracion.tipodeitem", "fields": {"Nombre": "cuerda", "Fecha": "2014-05-17T04:35:54.532Z", "Fase": 5, "Atributos": [10], "Usuario": 7}},
+{"pk": 9, "model": "administracion.tipodeitem", "fields": {"Nombre": "cuerpo", "Fecha": "2014-05-17T04:36:29.807Z", "Fase": 6, "Atributos": [11, 12], "Usuario": 7}}
 
 ]

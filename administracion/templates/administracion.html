@@ -21,29 +21,21 @@
     <li>
         {% if usuario_actor.can_consultar_proyecto or usuario_actor.can_consultar_fase %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyectos</a>
-        {% else %}
-            <a class="btn btn-default" disabled = "disabled">Administrar Proyectos</a>
         {% endif %}
     </li>
     <li>
         {% if usuario_actor.can_consultar_usuario %}
             <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuarios</a>
-        {% else %}
-            <a class="btn btn-default" disabled="disabled">Administrar Usuarios</a>
         {% endif %}
     </li>
     <li>
         {% if usuario_actor.can_consultar_rol %}
             <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
-        {% else %}
-            <a class="btn btn-default" disabled = "disabled">Administrar Roles</a>
         {% endif %}
     </li>
     <li>
         {% if usuario_actor.can_administrar_proyecto %}
             <a href="/administracion/credenciales" class="btn btn-default">Administrar Credenciales</a>
-        {% else %}
-            <a class="btn btn-default" disabled = "disabled">Administrar Credenciales</a>
         {% endif %}
     </li>
 

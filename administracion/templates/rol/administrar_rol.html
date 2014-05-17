@@ -33,26 +33,28 @@
             </tr>
         </thead>
         {% for usuario in lista_usuarios %}
-            {% if usuario.is_active %}
-                <tr>
-                    <td>{{ usuario.username }}</td>
-                    <td>Activo</td>
-                    <td>
-                        {% for grupo in usuario.groups.all %}
-                            {{ grupo }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        <a href="{% url "administracion.views.asignar_rol" usuario.id %}" class="btn btn-primary">Asignar Rol </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td>{{ usuario.username }}</td>
-                    <td>Inactivo</td>
-                    <td>{{ usuario.get_groups }}</td>
-                </tr>
-            {% endif %}
+           {% if usuario.accesoLiderProyecto or usuario.accesoAdministrador %}
+                    {% if usuario.is_active %}
+                        <tr>
+                            <td>{{ usuario.username }}</td>
+                            <td>Activo</td>
+                            <td>
+                                {% for grupo in usuario.groups.all %}
+                                    {{ grupo }}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url "administracion.views.asignar_rol" usuario.id %}" class="btn btn-primary">Asignar Rol </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ usuario.username }}</td>
+                            <td>Inactivo</td>
+                            <td>{{ usuario.get_groups }}</td>
+                        </tr>
+                    {% endif %}
+           {% endif %}
         {% empty %}
             <p>No hay usuarios registrados aun</p>
         {% endfor %}

@@ -280,20 +280,23 @@ def confirmar_iniciar_proyecto(request, id_proyecto):
                               'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque ya ha sido iniciado, ver detalles',
                               'lista_proyectos': lista_proyectos}
                               ,context_instance=RequestContext(request))
-    else:
-        if proyecto.Estado == 'C':
-            return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
+    elif proyecto.Estado == 'C':
+        return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
                               'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque  ya ha sido cancelado, ver detalles',
                               'lista_proyectos': lista_proyectos}
                               ,context_instance=RequestContext(request))
-        else:
-            if proyecto.Estado == 'F':
-                return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
+    elif proyecto.Estado == 'F':
+        return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
                               'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque  ya ha finalizado, ver detalles',
                               'lista_proyectos': lista_proyectos}
                               ,context_instance=RequestContext(request))
-            else:
-                return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
+    elif proyecto.nFases == 0:
+        return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
+                              'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque no tiene fase alguna, ver detalles',
+                              'lista_proyectos': lista_proyectos}
+                              ,context_instance=RequestContext(request))
+    else:
+        return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
                                 ,'lista_proyectos': lista_proyectos}, context_instance=RequestContext(request))
 
 def eliminar_proyecto(request, id_proyecto):
@@ -452,14 +455,14 @@ def proyecto_asignar_usuarios(request, id_proyecto):
                 formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1)
                 formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar al proyecto"
                 return render_to_response('proyecto/crear_proyecto.html',
-                              {'formulario': formulario, 'operacion': 'Ingrese los datos del proyecto '+proyecto.Nombre
+                              {'formulario': formulario, 'operacion': 'Usuarios que participaran en el proyecto '+proyecto.Nombre
                                , 'usuario_actor': request.user}, context_instance=RequestContext(request))
         else:
             formulario = ProyectoAsignarUsuarioForm(instance=proyecto)
             formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1)
             formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar al proyecto"
             return render_to_response('proyecto/crear_proyecto.html',
-                              {'formulario': formulario, 'operacion': 'Ingrese los datos del proyecto '+proyecto.Nombre
+                              {'formulario': formulario, 'operacion': 'Usuarios que participaran en el proyecto '+proyecto.Nombre
                                , 'usuario_actor': request.user}, context_instance=RequestContext(request))
     elif proyecto.Estado == 'C':
             return render_to_response('proyecto/proyecto_error.html',
@@ -513,8 +516,18 @@ def ordenar_fase_subir(request, id_fase):
     :return:
     """
     fase = Fase.objects.get(pk=id_fase)
-    fase.ordenar_fase_subir()
-    return administrar_fases(request,fase.Proyecto.id)
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=fase.Proyecto.id)
+    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id)
+    if fase.Proyecto.Estado == 'P':
+        fase.ordenar_fase_subir()
+        return administrar_fases(request,fase.Proyecto.id)
+    else:
+        return render_to_response('proyecto/fase/fases_error.html',
+                              {'usuario_actor': usuario_actor, 'lista_fases': lista_fases,
+                               'proyecto': proyecto,'mensaje': 'Solo puedes cambiar el orden de las fases en proyectos con estado PENDINTE'}
+                              , context_instance=RequestContext(request))
+
 
 def ordenar_fase_bajar(request, id_fase):
     """
@@ -523,10 +536,18 @@ def ordenar_fase_bajar(request, id_fase):
     :param id_fase:
     :return:
     """
+    usuario_actor = request.user
     fase = Fase.objects.get(pk=id_fase)
-    fase.ordenar_fase_bajar()
-    return administrar_fases(request,fase.Proyecto.id)
-
+    proyecto = Proyecto.objects.get(pk=fase.Proyecto.id)
+    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id)
+    if fase.Proyecto.Estado == 'P':
+        fase.ordenar_fase_bajar()
+        return administrar_fases(request,fase.Proyecto.id)
+    else:
+        return render_to_response('proyecto/fase/fases_error.html',
+                              {'usuario_actor': usuario_actor, 'lista_fases': lista_fases,
+                               'proyecto': proyecto,'mensaje': 'Solo puedes cambiar el orden de las fases en proyectos con estado PENDINTE'}
+                              , context_instance=RequestContext(request))
 
 @user_passes_test(User.can_add_fase, login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):
@@ -725,7 +746,55 @@ def reordenar(idproyecto, numero):
     return True
 
 
+def fase_asignar_usuarios(request, id_proyecto, idFase):
+    '''
 
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return:
+    '''
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('id')
+    fase = Fase.objects.get(pk=idFase)
+
+    if proyecto.Estado == 'P':
+        if request.method == 'POST':
+            formulario = AsignarUsuarioFase(request.POST, instance=fase)
+            if formulario.is_valid():
+                formulario.save()
+                return render_to_response('proyecto/fase/fases_exito.html',
+                                      {'mensaje': 'La fase '+fase.Nombre+' ha sido modificado exitosamente',
+                                       'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
+                                      context_instance=RequestContext(request))
+            else:
+                formulario.fields["Usuarios"].queryset = proyecto.Usuarios.all()
+                formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar a la fase"
+                return render_to_response('proyecto/fase/fase_form.html',
+                              {'formulario': formulario, 'operacion': 'Usuarios que participaran en la fase '+fase.Nombre
+                               , 'usuario_actor': request.user, 'proyecto': proyecto}, context_instance=RequestContext(request))
+        else:
+            formulario = AsignarUsuarioFase(instance=fase)
+            formulario.fields["Usuarios"].queryset = proyecto.Usuarios.all()
+            formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar a la fase"
+            return render_to_response('proyecto/fase/fase_form.html',
+                              {'formulario': formulario, 'operacion': 'Usuarios que participaran en la fase '+fase.Nombre
+                               , 'usuario_actor': request.user, 'proyecto': proyecto}, context_instance=RequestContext(request))
+    elif proyecto.Estado == 'C':
+            return render_to_response('proyecto/fase/fases_error.html',
+                                      {'mensaje': 'No puedes modificar los datos de la fase '+fase.Nombre + ' porque el proyecto ya ha sido cancelado, ver detalles',
+                                       'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
+                                      context_instance=RequestContext(request))
+    elif proyecto.Estado == 'A':
+            return render_to_response('proyecto/fase/fases_error.html',
+                                      {'mensaje': 'No puedes modificar los datos de la fase '+fase.Nombre + ' porque el proyecto ya ha iniciado, ver detalles',
+                                       'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
+                                      context_instance=RequestContext(request))
+    elif proyecto.Estado == 'F':
+            return render_to_response('proyecto/fase/fases_error.html',
+                                      {'mensaje': 'No puedes modificar los datos de la fase '+fase.Nombre + ' porque el proyecto ya ha finalizado, ver detalles',
+                                       'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
+                                      context_instance=RequestContext(request))
 
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################

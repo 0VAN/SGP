@@ -55,6 +55,8 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
                                 <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'administracion.views.fase_asignar_usuarios' proyecto.id fase.id %}">Usuarios</a></li>
                             </ul>
                         </div>
                     </td>

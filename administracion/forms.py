@@ -134,6 +134,18 @@ class FaseForm(MyForm):
         model = Fase
         exclude = ['Usuario', 'Proyecto', 'Numero', 'Usuarios']
 
+class AsignarUsuarioFase(MyForm):
+    Usuarios = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label=('Seleccionar Usuarios'),
+                                          widget=FilteredSelectMultiple(('Usuarios'),False,))
+    class Meta:
+        model = Fase
+        exclude = ['Usuario','Proyecto','Numero','Descripcion','Fecha','Nombre']
+
+    class Media:
+        css = {'all':('/static/css/filteredselectwidget.css',),}
+        # jsi18n is required by the widget
+        js = ('/static/js/jsi18n.js',)
+
 
 class RolForm(MyForm):
     permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),label=('Seleccionar permisos'),help_text='asd',
