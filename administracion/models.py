@@ -21,152 +21,147 @@ def tienePermiso(self, permiso):
             if permisoUsuario.codename == permiso:
                 return True
     return False
-
 User.add_to_class('tienePermiso', tienePermiso)
 
-def accesoDesarrollo(self):
-    permiso = 'acceso_desarrollo'
-    return self.tienePermiso(permiso)
+def esDesarrollador(self):
+    rol='Desarrollador'
+    for grupo in self.groups.all():
+        if grupo.name ==rol:
+                return True
+    return False
 
-User.add_to_class('accesoDesarrollo', accesoDesarrollo)
+User.add_to_class('esDesarrollador', esDesarrollador)
 
-def accesoLiderProyecto(self):
+def esLider(self):
     rol='Lider de Proyecto'
     for grupo in self.groups.all():
         if grupo.name ==rol:
                 return True
     return False
+User.add_to_class('esLider', esLider)
 
-def accesoAdministrador(self):
-    rol='Administracion'
+def esAdministrador(self):
+    rol='Administrador'
     for grupo in self.groups.all():
         if grupo.name ==rol:
                 return True
     return False
-User.add_to_class('accesoLiderProyecto', accesoLiderProyecto)
-User.add_to_class('accesoAdministrador', accesoAdministrador)
+User.add_to_class('esAdministrador', esAdministrador)
 
-def can_add_user(self):
+########################################################################################################################
+#########################PERMISOS SOBRE USUARIOS########################################################################
+########################################################################################################################
+def puede_agregar_usuarios(self):
     permiso = 'add_user'
     return self.tienePermiso(permiso)
-User.add_to_class('can_add_user', can_add_user)
-
-def can_add_proyecto(self):
-    permiso = 'add_proyecto'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_add_proyecto', can_add_proyecto)
-
-def can_add_fase(self):
-    permiso = 'add_fase'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_add_fase', can_add_fase)
-
-def can_add_group(self):
-    permiso = 'add_group'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_add_group', can_add_group)
-
-def can_add_atributo(self):
-    permiso = 'add_atributo'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_add_atributo', can_add_atributo)
-
-def can_add_tipodeitem(self):
-    permiso = 'add_tipodeitem'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_add_tipodeitem', can_add_tipodeitem)
-
-def can_change_user(self):
+User.add_to_class('puede_agregar_usuarios', puede_agregar_usuarios)
+def puede_modificar_usuarios(self):
     permiso = 'change_user'
     return self.tienePermiso(permiso)
-User.add_to_class('can_change_user', can_change_user)
-
-def can_change_proyecto(self):
-    permiso = 'change_proyecto'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_change_proyecto', can_change_proyecto)
-
-def can_change_fase(self):
-    permiso = 'change_fase'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_change_fase', can_change_fase)
-
-def can_change_group(self):
-    permiso = 'change_group'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_change_group', can_change_group)
-
-def can_change_atributo(self):
-    permiso = 'change_atributo'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_change_atributo', can_change_atributo)
-
-def can_change_tipodeitem(self):
-    permiso = 'change_tipodeitem'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_change_tipodeitem', can_change_tipodeitem)
-
-def can_delete_user(self):
+User.add_to_class('puede_modificar_usuarios', puede_modificar_usuarios)
+def puede_eliminar_usuarios(self):
     permiso = 'delete_user'
     return self.tienePermiso(permiso)
-User.add_to_class('can_delete_user', can_delete_user)
-
-def can_delete_proyecto(self):
-    permiso = 'delete_proyecto'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_delete_proyecto', can_delete_proyecto)
-
-def can_delete_fase(self):
-    permiso = 'delete_fase'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_delete_fase', can_delete_fase)
-
-def can_delete_group(self):
-    permiso = 'delete_group'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_delete_group', can_delete_group)
-
-def can_delete_atributo(self):
-    permiso = 'delete_atributo'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_delete_atributo', can_delete_atributo)
-
-def can_delete_tipodeitem(self):
-    permiso = 'delete_tipodeitem'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_delete_tipodeitem', can_delete_tipodeitem)
-
-###########################################Vistas de Control de Acceso #################################################
-
-def can_consultar_fase(self):
-    permiso = 'consulta_fase'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_fase', can_consultar_fase)
-
-def can_consultar_proyecto(self):
-    permiso = 'consulta_proyecto'
-    return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_proyecto', can_consultar_proyecto)
-
-def can_consultar_usuario(self):
+User.add_to_class('puede_eliminar_usuarios', puede_eliminar_usuarios)
+def puede_consultar_usuarios(self):
     permiso = 'consulta_user'
     return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_usuario', can_consultar_usuario)
-
-def can_consultar_rol(self):
+User.add_to_class('puede_consultar_usuarios', puede_consultar_usuarios)
+########################################################################################################################
+#############PERMISOS SOBRE PROYECTOS###################################################################################
+########################################################################################################################
+def puede_agregar_proyectos(self):
+    permiso = 'add_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_agregar_proyectos', puede_agregar_proyectos)
+def puede_modificar_proyectos(self):
+    permiso = 'change_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_modificar_proyectos', puede_modificar_proyectos)
+def puede_eliminar_proyectos(self):
+    permiso = 'delete_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_eliminar_proyectos', puede_eliminar_proyectos)
+def puede_consultar_proyectos(self):
+    permiso = 'consulta_proyecto'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_consultar_proyectos', puede_consultar_proyectos)
+########################################################################################################################
+#################################PERMISOS SOBRE FASES###################################################################
+########################################################################################################################
+def puede_agregar_fases(self):
+    permiso = 'add_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_agregar_fases', puede_agregar_fases)
+def puede_modificar_fases(self):
+    permiso = 'change_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_modificar_fases', puede_modificar_fases)
+def puede_eliminar_fases(self):
+    permiso = 'delete_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_eliminar_fases', puede_eliminar_fases)
+def puede_consultar_fases(self):
+    permiso = 'consulta_fase'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_consultar_fases', puede_consultar_fases)
+########################################################################################################################
+##################################PERMISOS SOBRE ROLES##################################################################
+########################################################################################################################
+def puede_agregar_roles(self):
+    permiso = 'add_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_agregar_roles', puede_agregar_roles)
+def puede_modificar_roles(self):
+    permiso = 'change_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_modificar_roles', puede_modificar_roles)
+def puede_eliminar_roles(self):
+    permiso = 'delete_group'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_eliminar_roles', puede_eliminar_roles)
+def puede_consultar_roles(self):
     permiso = 'consulta_group'
     return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_rol', can_consultar_rol)
-
-def can_consultar_atributo(self):
+User.add_to_class('puede_consultar_roles', puede_consultar_roles)
+########################################################################################################################
+###################################PERMISOS SOBRE ATRIBUTOS#############################################################
+########################################################################################################################
+def puede_agregar_atributos(self):
+    permiso = 'add_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_agregar_atributos', puede_agregar_atributos)
+def puede_modificar_atributos(self):
+    permiso = 'change_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_modificar_atributos', puede_modificar_atributos)
+def puede_eliminar_atributos(self):
+    permiso = 'delete_atributo'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_eliminar_atributos', puede_eliminar_atributos)
+def puede_consultar_atributos(self):
     permiso = 'consulta_atributo'
     return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_atributo', can_consultar_atributo)
-
-def can_consultar_tipodeitem(self):
+User.add_to_class('puede_consultar_atributos', puede_consultar_atributos)
+########################################################################################################################
+#####################################PERMISOS SOBRE TIPOS DE ITEMS#######################################################
+########################################################################################################################
+def puede_agregar_tipodeitem(self):
+    permiso = 'add_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_agregar_tipodeitem', puede_agregar_tipodeitem)
+def puede_modificar_tipodeitem(self):
+    permiso = 'change_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_modificar_tipodeitem', puede_modificar_tipodeitem)
+def puede_eliminar_tipodeitem(self):
+    permiso = 'delete_tipodeitem'
+    return self.tienePermiso(permiso)
+User.add_to_class('puede_eliminar_tipodeitem', puede_eliminar_tipodeitem)
+def puede_consultar_tipodeitem(self):
     permiso = 'consulta_tipodeitem'
     return self.tienePermiso(permiso)
-User.add_to_class('can_consultar_tipodeitem', can_consultar_tipodeitem)
+User.add_to_class('puede_consultar_tipodeitem', puede_consultar_tipodeitem)
 
 
 class Proyecto(models.Model):

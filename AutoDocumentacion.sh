@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #Cracion de .rst de todos los modulos del proyecto
 sphinx-apidoc -o doc/ .
 cd doc/

@@ -1,10 +1,12 @@
 {% extends 'administracion.html' %}
+
 {% block titulo %}Administrar proyecto{% endblock %}
-{% block encabezado %}Proyectos <small>Haz click en opciones para interactuar con un proyecto</small>{% endblock %}
+
+{% block encabezado %}Proyectos{% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_add_proyecto %}
+        {% if usuario_actor.puede_agregar_proyectos %}
             <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
         {% endif %}
         <a href="/administracion" class="btn btn-default">Volver</a>
@@ -43,7 +45,7 @@
                                     <li><a href="{% url 'administracion.views.modificar_proyecto_lider' proyecto.id %}">Modificar</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
-                                {% elif usuario_actor.accesoAdministrador %}
+                                {% elif usuario_actor.esAdministrador %}
                                      <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
                                 {% endif %}
                             </ul>
@@ -59,10 +61,12 @@
                         <td>
                             <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
                         </td>
+                    {% elif usuario_actor.puede_consultar_fases %}
+                        <td></td>
+                        <td><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-warning">Fases</a></td>
+                        <td></td>
                     {% else %}
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td>
                     {% endif %}
                 </tr>
             {% empty %}

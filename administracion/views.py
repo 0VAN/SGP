@@ -32,15 +32,14 @@ def administracion(request):
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
         -   usuario_actor: es el usuario que realiza la accion
     """
-    lista_usuarios = User.objects.all()
     usuario_actor = request.user
-    seleccionado = 0
-    return render_to_response('administracion.html', {'lista_usuarios': lista_usuarios, 'usuario_actor':usuario_actor,'seleccionado':seleccionado},
-                              context_instance=RequestContext(request))
+    ctx = {'usuario_actor':usuario_actor}
+    return render_to_response('administracion.html', ctx, context_instance=RequestContext(request))
 ########################################################################################################################
 #############################################Vistas de Administracion de Usuarios#######################################
 ########################################################################################################################
-@login_required( login_url="/iniciar_sesion")
+
+@user_passes_test( User.puede_consultar_usuarios , login_url="/iniciar_sesion")
 def administrar_usuario(request):
     """
 
@@ -57,10 +56,11 @@ def administrar_usuario(request):
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
     usuario_actor = request.user
-    lista_usuarios = User.objects.all()
-    return render_to_response('usuario/administrar_usuario.html', {'usuario_actor':usuario_actor,'lista_usuarios':lista_usuarios},
-                              context_instance=RequestContext(request))
-@user_passes_test( User.can_add_user , login_url="/iniciar_sesion")
+    lista_usuarios = User.objects.all().order_by('id')
+    ctx = {'usuario_actor':usuario_actor,'lista_usuarios':lista_usuarios}
+    return render_to_response('usuario/administrar_usuario.html', ctx, context_instance=RequestContext(request))
+
+@user_passes_test(User.puede_agregar_usuarios, login_url="/iniciar_sesion")
 def crear_usuario(request):
     """
 
@@ -78,22 +78,20 @@ def crear_usuario(request):
         -   lista_usuarios: es la lista de usuarios existentes en el sistema
     """
     usuario_actor = request.user
-    lista_usuarios = User.objects.all()
+    lista_usuarios = User.objects.all().order_by('id')
     if request.method == 'POST':
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             usuario_creado = str(request.POST['username'])
             formulario.save()
-            return render_to_response('usuario/operacion_usuario_exito.html',
-                                      {'mensaje': 'El usuario '+usuario_creado + ' fue creado exitosamente', 'usuario_actor': usuario_actor,
-                                       'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+            ctx = {'mensaje': 'El usuario '+usuario_creado + ' fue creado exitosamente', 'usuario_actor': usuario_actor,'lista_usuarios': lista_usuarios}
+            return render_to_response('usuario/operacion_usuario_exito.html', ctx, context_instance=RequestContext(request))
     else:
         formulario = UserCreationForm()
-    return render_to_response('usuario/form_usuario.html',
-                              {'formulario': formulario, 'operacion': 'Ingrese los datos del nuevo usuario',
-                               'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
+        ctx = {'formulario': formulario, 'operacion': 'Ingrese los datos del nuevo usuario','usuario_actor': usuario_actor}
+    return render_to_response('usuario/form_usuario.html', ctx, context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_usuarios, login_url="/iniciar_sesion")
 def pass_change(request, id_usuario_p):
     usuario_parametro = User.objects.get(pk=id_usuario_p)
     lista_usuarios = User.objects.all().order_by('id')
@@ -101,18 +99,14 @@ def pass_change(request, id_usuario_p):
         formulario = SetPasswordForm(data=request.POST, user=usuario_parametro)
         if formulario.is_valid():
            formulario.save()
-           return render_to_response('usuario/operacion_usuario_exito.html',
-                                     {'mensaje': 'Se ha actualizado la contraseña del usuario '+ str(usuario_parametro),
-                                       'usuario_actor': request.user, 'usuario_parametro': usuario_parametro,
-                                      'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+           ctx = {'mensaje': 'Se ha actualizado la contraseña del usuario '+ str(usuario_parametro), 'usuario_actor': request.user, 'usuario_parametro': usuario_parametro,'lista_usuarios': lista_usuarios}
+           return render_to_response('usuario/operacion_usuario_exito.html', ctx, context_instance=RequestContext(request))
     else:
         formulario = SetPasswordForm(user=usuario_parametro)
-    return render(request, 'usuario/form_usuario.html',
-                  {'usuario_actor': request.user, 'formulario': formulario, 'operacion': 'Cambio de contraseña',
-                   'usuario_parametro': usuario_parametro},
-                  context_instance=RequestContext(request))
+        ctx = {'usuario_actor': request.user, 'formulario': formulario, 'operacion': 'Cambio de contraseña', 'usuario_parametro': usuario_parametro}
+    return render(request, 'usuario/form_usuario.html', ctx,context_instance=RequestContext(request))
 
-@user_passes_test( User.can_consultar_usuario , login_url="/iniciar_sesion")
+@user_passes_test( User.puede_consultar_usuarios , login_url="/iniciar_sesion")
 def detalle_usuario(request, id_usuario_p):
     """
 
@@ -132,7 +126,7 @@ def detalle_usuario(request, id_usuario_p):
                               'usuario_parametro': usuario_parametro}, context_instance=RequestContext(request))
 
 
-@user_passes_test( User.can_change_user , login_url="/iniciar_sesion")
+@user_passes_test( User.puede_eliminar_usuarios , login_url="/iniciar_sesion")
 def cambioEstado_usuario_form(request, id_usuario_p):
     """
 
@@ -166,7 +160,7 @@ def cambioEstado_usuario_form(request, id_usuario_p):
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
 ########################################################################################################################
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_proyectos, login_url="/iniciar_sesion")
 def administrar_proyecto(request):
     """
 
@@ -181,12 +175,12 @@ def administrar_proyecto(request):
         -   lista_proyectos: es la lista de proyectos existentes en el sistema
         -   usuario_actor: es el usuario que realiza la accion
     """
-    lista_proyectos = Proyecto.objects.all()
+    lista_proyectos = Proyecto.objects.all().order_by('id')
     usuario_actor = request.user
     return render_to_response('proyecto/administrar_proyecto.html',
                               {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
-@user_passes_test( User.can_add_proyecto , login_url="/iniciar_sesion")
+@user_passes_test( User.puede_agregar_proyectos , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
     """
 
@@ -227,7 +221,7 @@ def nuevo_proyecto(request):
                               {'formulario': formulario, 'operacion':'Ingrese los datos del proyecto'
                                , 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
-@user_passes_test( User.can_consultar_proyecto , login_url="/iniciar_sesion")
+@user_passes_test( User.puede_consultar_proyectos, login_url="/iniciar_sesion")
 def detalle_proyecto(request, id_proyecto):
     """
 
@@ -249,7 +243,7 @@ def detalle_proyecto(request, id_proyecto):
     return render_to_response('proyecto/detalle_proyecto.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_proyectos, login_url="/iniciar_sesion")
 def iniciar_proyecto(request, id_proyecto):
     """
 
@@ -266,6 +260,7 @@ def iniciar_proyecto(request, id_proyecto):
                               'mensaje': 'Se ha dado inicio al proyecto '+proyecto.Nombre, 'lista_proyectos': lista_proyectos}
                               ,context_instance=RequestContext(request))
 
+@user_passes_test(User.puede_modificar_proyectos, login_url="/iniciar_sesion")
 def confirmar_iniciar_proyecto(request, id_proyecto):
     """
 
@@ -299,6 +294,8 @@ def confirmar_iniciar_proyecto(request, id_proyecto):
         return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
                                 ,'lista_proyectos': lista_proyectos}, context_instance=RequestContext(request))
 
+
+@user_passes_test(User.puede_eliminar_proyectos, login_url="/iniciar_sesion")
 def eliminar_proyecto(request, id_proyecto):
     """
 
@@ -315,6 +312,7 @@ def eliminar_proyecto(request, id_proyecto):
                               'mensaje': 'Se ha cancelado el proyecto'+proyecto.Nombre, 'lista_proyectos':lista_proyectos}
                               ,context_instance=RequestContext(request))
 
+@user_passes_test(User.puede_eliminar_proyectos, login_url="/iniciar_sesion")
 def confirmar_eliminar_proyecto(request, id_proyecto):
     """
 
@@ -334,7 +332,7 @@ def confirmar_eliminar_proyecto(request, id_proyecto):
         return render_to_response('proyecto/conf_eliminar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
                                 , 'lista_proyectos': lista_proyectos}, context_instance=RequestContext(request))
 
-
+@user_passes_test(User.puede_modificar_proyectos, login_url="/iniciar_sesion")
 def modificar_proyecto(request, id_proyecto):
     """
 
@@ -387,7 +385,7 @@ def modificar_proyecto(request, id_proyecto):
                                        'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
 
-
+@user_passes_test(User.puede_modificar_proyectos, login_url="/iniciar_sesion")
 def modificar_proyecto_lider(request, id_proyecto):
     """
 
@@ -432,6 +430,7 @@ def modificar_proyecto_lider(request, id_proyecto):
                                        'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
 
+@user_passes_test(User.puede_modificar_proyectos, login_url="/iniciar_sesion")
 def proyecto_asignar_usuarios(request, id_proyecto):
     """
 
@@ -483,7 +482,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
 ###########################################Vistas de administracion de Fase#############################################
 ########################################################################################################################
 
-@user_passes_test(User.can_consultar_fase, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_fases, login_url="/iniciar_sesion")
 def administrar_fases(request, id_proyecto):
     """
 
@@ -507,7 +506,7 @@ def administrar_fases(request, id_proyecto):
                               {'usuario_actor': usuario_actor, 'lista_fases': lista_fases, 'proyecto': proyecto}
                               , context_instance=RequestContext(request))
 
-
+@user_passes_test(User.puede_modificar_fases, login_url="/iniciar_sesion")
 def ordenar_fase_subir(request, id_fase):
     """
 
@@ -528,7 +527,7 @@ def ordenar_fase_subir(request, id_fase):
                                'proyecto': proyecto,'mensaje': 'Solo puedes cambiar el orden de las fases en proyectos con estado PENDINTE'}
                               , context_instance=RequestContext(request))
 
-
+@user_passes_test(User.puede_modificar_fases, login_url="/iniciar_sesion")
 def ordenar_fase_bajar(request, id_fase):
     """
 
@@ -549,7 +548,7 @@ def ordenar_fase_bajar(request, id_fase):
                                'proyecto': proyecto,'mensaje': 'Solo puedes cambiar el orden de las fases en proyectos con estado PENDINTE'}
                               , context_instance=RequestContext(request))
 
-@user_passes_test(User.can_add_fase, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_agregar_fases, login_url="/iniciar_sesion")
 def crear_fase(request, id_proyecto):
     """
     :param request:
@@ -608,7 +607,7 @@ def crear_fase(request, id_proyecto):
                               context_instance=RequestContext(request))
 
 
-@user_passes_test(User.can_consultar_fase, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_fases, login_url="/iniciar_sesion")
 def detalle_fase(request, idFase, id_proyecto):
     """
 
@@ -634,7 +633,7 @@ def detalle_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_fases, login_url="/iniciar_sesion")
 def modificar_fase(request, idFase, id_proyecto):
     """
     :param request:
@@ -680,7 +679,7 @@ def modificar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'fase': fase, 'operacion': 'Modificar Fase'}, context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_fases, login_url="/iniciar_sesion")
 def confirmar_eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -714,7 +713,7 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
                               context_instance=RequestContext(request))
 
 
-@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_fases, login_url="/iniciar_sesion")
 def eliminar_fase(request, idFase, id_proyecto):
     """
 
@@ -737,6 +736,7 @@ def eliminar_fase(request, idFase, id_proyecto):
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'La fase '+fase_nombre+' ha sido eliminada exitosamente'},
                               context_instance=RequestContext(request))
+
 def reordenar(idproyecto, numero):
     proyecto = Proyecto.objects.get(pk=idproyecto)
     for n in range(numero+1, proyecto.nFases+2, 1):
@@ -745,7 +745,7 @@ def reordenar(idproyecto, numero):
         fase.save()
     return True
 
-
+@user_passes_test(User.puede_modificar_fases, login_url="/iniciar_sesion")
 def fase_asignar_usuarios(request, id_proyecto, idFase):
     '''
 
@@ -799,7 +799,7 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################
-@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
 def administrar_roles(request):
     """
 
@@ -812,7 +812,7 @@ def administrar_roles(request):
                               {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}
                               , context_instance=RequestContext(request))
 
-@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
 def listar_roles(request):
     """
 
@@ -825,7 +825,7 @@ def listar_roles(request):
                               {'usuario_actor': usuario_actor, 'roles': roles}
                               , context_instance=RequestContext(request))
 
-@user_passes_test(User.can_add_group, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_add_group, login_url="/iniciar_sesion")
 def crear_rol(request):
     """
 
@@ -852,7 +852,7 @@ def crear_rol(request):
                                'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
     """
 
@@ -867,7 +867,7 @@ def detalle_rol(request, idRol):
                                                       'lista_permisos': lista_permisos},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_change_group, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_change_group, login_url="/iniciar_sesion")
 def modificar_rol(request, idRol):
     """
 
@@ -893,7 +893,7 @@ def modificar_rol(request, idRol):
                               {'usuario_actor': usuario_actor, 'rol': rol, 'formulario': formulario},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
 def confirmar_eliminar_rol(request, idRol):
     """
 
@@ -906,7 +906,7 @@ def confirmar_eliminar_rol(request, idRol):
     return render_to_response('rol/conf_eliminar_rol.html', {'usuario_actor': usuario_actor, 'rol': rol},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
 def eliminar_rol(request, idRol):
     """
 
@@ -923,7 +923,7 @@ def eliminar_rol(request, idRol):
                                'mensaje':'El rol ha sido eliminado con exito'},
                               context_instance=RequestContext(request))
 
-@user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
+#@user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
 def asignar_rol(request, id_usuario):
     """
     :param request:
@@ -952,7 +952,7 @@ def asignar_rol(request, id_usuario):
 ########################################################################################################################
 #########################################Vista de credenciales##########################################################
 ########################################################################################################################
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def administrar_credencial(request):
     """
 
@@ -983,7 +983,7 @@ def administrar_atributo(request, id_proyecto, id_fase):
                               context_instance=RequestContext(request))
 
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def crear_atributo(request, id_proyecto, id_fase):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -1022,7 +1022,7 @@ def crear_atributo(request, id_proyecto, id_fase):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1040,7 +1040,7 @@ def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
                               context_instance=RequestContext(request))
 
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1094,7 +1094,7 @@ def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
 
 
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1157,7 +1157,7 @@ def confirmar_eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
 ########################################Vistas de tipo de item######################################################
 ########################################################################################################################
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def administrar_tipoItem(request, id_proyecto, id_fase):
     """
 
@@ -1174,7 +1174,7 @@ def administrar_tipoItem(request, id_proyecto, id_fase):
                                'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def crear_tipoItem(request, id_proyecto, id_fase):
     """
 
@@ -1227,7 +1227,7 @@ def crear_tipoItem(request, id_proyecto, id_fase):
                            'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                           context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def detalle_tipoItem(request, id_proyecto, id_fase, id_tipo):
     """
     :param request:
@@ -1244,7 +1244,7 @@ def detalle_tipoItem(request, id_proyecto, id_fase, id_tipo):
                                'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
     """
 
@@ -1299,7 +1299,7 @@ def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo': tipo, 'fase': fase},
                               context_instance=RequestContext(request))
 
-@login_required(login_url="/iniciar_sesion")
+#@login_required(login_url="/iniciar_sesion")
 def eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
     """
 

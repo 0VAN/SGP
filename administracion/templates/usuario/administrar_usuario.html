@@ -1,12 +1,13 @@
 {% extends 'administracion.html' %}
+
 {% block titulo %}Administrar Usuarios{% endblock %}
-{% block encabezado %}Lista de Usuarios <small>Haz click en opciones para interactuar con un usuario</small>{% endblock %}
+
+{% block encabezado %}Usuarios{% endblock %}
+
 {% block botones %}
     <li>
-        {% if usuario_actor.can_add_user %}
+        {% if usuario_actor.puede_agregar_usuarios %}
             <a href="/administracion/usuarios/nuevo" class="btn btn-default">Crear Usuario</a>
-        {% else %}
-            <a class="btn btn-default" disabled = "disabled">Crear Usuario</a>
         {% endif %}
     </li>
     <li><a href="/administracion" class="btn btn-default">Volver</a></li>
@@ -14,7 +15,7 @@
 
 {% block contenido %}
 
-    {% if usuario_actor.can_consultar_usuario %}
+    {% if usuario_actor.puede_modificar_usuarios %}
           <table class="table" id="tablaUsuario" rel="tabla">
                  <thead>
                         <tr>

@@ -1,17 +1,19 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
+
 {% block titulo %}Administracion de Fases{% endblock %}
-{% block encabezado %}Fases del proyecto {{ proyecto.Nombre }} <small>Haz click en opciones para interactuar con una fase</small>{% endblock %}
+
+{% block encabezado %}Fases del proyecto {{ proyecto.Nombre }} {% endblock %}
+
 {% block activo-admin %}active{% endblock %}
+
 
 {%  block botones %}
     <li>
-        {% if usuario_actor.can_add_fase %}
             {% if proyecto.Lider == usuario_actor %}
                 <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
             {% else %}
                 <a class="btn btn-default" disabled="disabled">Crear Fase</a>
             {% endif %}
-        {% endif %}
     </li>
     <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
 

@@ -1,40 +1,43 @@
 {% extends 'base.html' %}
+
 {% block titulo %}Administracion{% endblock %}
+
 {% block activo-admin %}
     active
 {% endblock %}
+
 {% block activo-des %}
-    {% if not usuario_actor.accesoLiderProyecto %}
         hide
-    {% endif %}
 {% endblock %}
+
 {% block activo-gc %}
-    {% if not usuario_actor.accesoLiderProyecto %}
+    {% if not usuario_actor.esLider %}
         hide
     {% endif %}
 {% endblock %}
+
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
 {% block encabezado %}
 {% endblock %}
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_consultar_proyecto or usuario_actor.can_consultar_fase %}
+        {% if usuario_actor.puede_consultar_proyectos or usuario_actor.puede_consultar_fases %}
             <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyectos</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario_actor.can_consultar_usuario %}
+        {% if usuario_actor.puede_consultar_usuarios %}
             <a href="/administracion/usuarios" class="btn btn-default">Administrar Usuarios</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario_actor.can_consultar_rol %}
+        {% if usuario_actor.puede_consultar_roles %}
             <a href="/administracion/roles" class="btn btn-default">Administrar Roles</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario_actor.can_administrar_proyecto %}
+        {% if usuario_actor.puede_administrar_proyectos %}
             <a href="/administracion/credenciales" class="btn btn-default">Administrar Credenciales</a>
         {% endif %}
     </li>

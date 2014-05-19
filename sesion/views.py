@@ -32,7 +32,7 @@ def iniciar_sesion(request):
                 el par(usuario, contrasenha) verificando su existencia y estado en el sistema
     """
     if not request.user.is_anonymous():
-        if request.user.accesoDesarrollo():
+        if request.user.esDesarrollador():
             return desarrollo(request)
         else:
             return administracion(request)
@@ -46,7 +46,7 @@ def iniciar_sesion(request):
             if acceso is not None:
                 if acceso.is_active:
                     login(request, acceso)
-                    if acceso.accesoDesarrollo():
+                    if acceso.esDesarrollador():
                         return desarrollo(request)
                     else:
                         return administracion(request)
