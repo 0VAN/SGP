@@ -1363,7 +1363,7 @@ def importar_tipo(request, id_proyecto, id_fase):
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     if request.method == 'POST':
         formulario = tipoItemImportar(request.POST)
-        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase).__str__()
+        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase)
         formulario.fields["tipos"].help_text = "Haga doble click en el Tipo de item que desee agregar"
         mensaje = ''
         if formulario.is_valid():

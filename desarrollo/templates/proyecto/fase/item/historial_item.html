@@ -25,10 +25,15 @@
                 <td>{{ version.field_dict.Tipo }}</td>
                 <td>{{ version.field_dict.Descripcion}}</td>
                 <td>{{ version.field_dict.Fecha }}</td>
-                <td>{{ version.id }}</td>
+                <td>{{ version.revision_id }}</td>
                 <td>
                     <div class="btn-group pull-right">
                         <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Revertir a esta version</a>
+                    </div>
+                 </td>
+                 <td>
+                    <div class="btn-group pull-right">
+                        <a href="{% url "desarrollo.views.detalle_item_version" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Ver detalles</a>
                     </div>
                  </td>
                 </tr>

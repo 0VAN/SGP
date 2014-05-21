@@ -60,7 +60,32 @@ def crear_item(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     item = Item(Usuario=usuario, Fase=fase, Version=1)
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
-    if request.method == 'POST':
+
+    if fase.Proyecto.Estado == 'P':
+        mensaje = 'No puedes crear items en el proyecto '+fase.Proyecto.Nombre+' porque no ha iniciado'
+        suceso = False
+        return render_to_response(
+                'proyecto/fase/des_fase.html',
+                {'usuario_actor':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
+    elif fase.Proyecto.Estado == 'F':
+        mensaje = 'No puedes crear items en el proyecto '+fase.Proyecto.Nombre+' porque ha finalizado'
+        suceso = False
+        return render_to_response(
+                'proyecto/fase/des_fase.html',
+                {'usuario_actor':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
+    elif fase.Proyecto.Estado == 'C':
+        mensaje = 'No puedes crear items en el proyecto '+fase.Proyecto.Nombre+' porque ha sido cancelado'
+        suceso = False
+        return render_to_response(
+                'proyecto/fase/des_fase.html',
+                {'usuario_actor':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso},
+                context_instance=RequestContext(request)
+            )
+    elif request.method == 'POST':
         formulario = ItemForm(request.POST, instance=item)
         if formulario.is_valid():
             formulario.save()
@@ -148,6 +173,7 @@ def completar_item(request, id_proyecto, id_fase, id_item):
                         a.save()
         suceso = True
         mensaje = "Atributos modificados exitosamente"
+        item.save()
         lista_items = Item.objects.filter(Fase=fase)
         return render_to_response(
             'proyecto/fase/des_fase.html',
@@ -249,9 +275,9 @@ def generar_grafo_fase(id_fase):
 
 
 def historial_item(request, id_proyecto, id_fase, id_item):
-
     item = Item.objects.get(pk=id_item)
-    lista_versiones = reversion.get_unique_for_object(item)
+    lista_versiones = reversion.get_for_object(item)
+    lista_atributos = Campo.objects.filter(item=item)
     return render_to_response('proyecto/fase/item/historial_item.html', {'lista_versiones': lista_versiones, 'item':item,
                                                                             'proyecto':Proyecto.objects.get(pk=id_proyecto),
                                                                             'fase': Fase.objects.get(pk=id_fase)},
@@ -260,27 +286,59 @@ def historial_item(request, id_proyecto, id_fase, id_item):
 def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
     item = Item.objects.get(pk=id_item)
     lista_version = reversion.get_unique_for_object(item)
+    lista_atributos = Campo.objects.filter(item=item)
     idn_version = int('0'+id_version)
     lista_items = Item.objects.filter(Fase=id_fase)
+    version_item = 0
 
     for version in lista_version:
         if version.id == idn_version:
             version.revert()
-            return render_to_response('proyecto/fase/item/item_exito.html',
+            version_item = version.revision_id
+
+    for atributo in lista_atributos:
+        lista_version = reversion.get_unique_for_object(atributo)
+        for version in lista_version:
+            if version.revision_id == version_item:
+                version.revert()
+
+    return render_to_response('proyecto/fase/item/item_exito.html',
                                       {'mensaje': 'Se ha reversionado el atributo a la version '+id_version,
                                        'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto),
                                        'fase': Fase.objects.get(pk=id_fase),
                                        'lista_items': lista_items},
                                       context_instance=RequestContext(request))
 
+def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
+    usuario = request.user
+    fase = Fase.objects.get(pk=idFase)
+    item = Item.objects.get(pk=idItem)
+    lista_version = reversion.get_unique_for_object(item)
+    lista_atributos = Campo.objects.filter(item=item)
+    idn_version = int('0'+idVersion)
+    id = 0
+    campos = []
 
+    for version in lista_version:
+        if version.id == idn_version:
+            item = version
+            id = version.revision_id
 
-    return render_to_response('proyecto/fase/item/item_exito.html',
-                                      {'mensaje': 'Se ha',
-                                       'usuario_actor': request.user, 'proyecto':Proyecto.objects.get(pk=id_proyecto),
-                                       'fase': Fase.objects.get(pk=id_fase),
-                                       'lista_items': lista_items},
-                                      context_instance=RequestContext(request))
+    for atributo in lista_atributos:
+        lista_version = reversion.get_unique_for_object(atributo)
+        for version in lista_version:
+            if version.revision_id == id:
+                campos.append(version)
+
+    for x in campos:
+        print(x.item)
+
+    return render_to_response(
+        'proyecto/fase/item/detalle_version.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase},
+        context_instance=RequestContext(request)
+    )
+
 
 @reversion.create_revision()
 def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
@@ -323,6 +381,7 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
                 if(relacion != False):
                     relacion.delete()
                 formulario.save()
+                item.save()
                 relacion = Relacion.objects.get(item=item)
 
                 mensaje = 'Padre asignado exitosamente'
@@ -376,6 +435,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
             if(relacion != None):
                 relacion.delete()
             formulario.save()
+            item.save()
             mensaje = 'Antecesor asignado exitosamente'
             suceso = True
             relacion = Relacion.objects.get(item=item)
@@ -393,6 +453,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
+@reversion.create_revision()
 def gestion_archivos_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)

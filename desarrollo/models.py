@@ -1,6 +1,6 @@
 from django.db import models
 from administracion.models import *
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User
 import reversion
 
 # Create your models here.
@@ -51,11 +51,14 @@ class Campo(models.Model):
     hora = models.TimeField(blank=True, null=True)
 
 
+reversion.register(Campo)
+
 class Relacion(models.Model):
     padre = models.ForeignKey(Item, null=True, related_name='padre')
     antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
     item = models.ForeignKey(Item, null=True, related_name='item')
 
+reversion.register(Relacion)
 
 class Archivo(models.Model):
     archivo = models.FileField(upload_to='carga')

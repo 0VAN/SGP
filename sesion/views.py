@@ -3,11 +3,12 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect, HttpResponse, RequestContext, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from sesion.forms import UsuarioGestionForm
 from administracion.views import administracion
 from desarrollo.views import desarrollo
+from gestion.views import gestion
 
 # Create your views here.
 def iniciar_sesion(request):
@@ -34,9 +35,10 @@ def iniciar_sesion(request):
     if not request.user.is_anonymous():
         if request.user.esDesarrollador():
             return desarrollo(request)
-        else:
+        elif request.user.esLider():
+            return gestion(request)
+        elif request.user.esAdministrador():
             return administracion(request)
-
     if request.method == 'POST':
         formulario = AuthenticationForm(request.POST)
         if formulario.is_valid:
@@ -46,9 +48,11 @@ def iniciar_sesion(request):
             if acceso is not None:
                 if acceso.is_active:
                     login(request, acceso)
-                    if acceso.esDesarrollador():
+                    if request.user.esDesarrollador():
                         return desarrollo(request)
-                    else:
+                    elif request.user.esLider():
+                        return gestion(request)
+                    elif request.user.esAdministrador():
                         return administracion(request)
                 else:
                     return render_to_response('no_activo.html', context_instance=RequestContext(request))

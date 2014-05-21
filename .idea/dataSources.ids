@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source source="LOCAL" name="Django default" uuid="ca77776c-070c-48a5-92a6-103f41ce19b6">
-    <database-info product="PostgreSQL" version="9.1.13" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.3 JDBC4 (build 1100)">
+    <database-info product="PostgreSQL" version="9.1.12" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.3 JDBC4 (build 1100)">
       <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
@@ -2184,19 +2184,25 @@
       <column name="viewowner" sqlType="name" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <column name="definition" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
     </table>
-    <table name="administracion_hola" schema="public" catalog="sgpdb" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25faG9sYV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
-      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="administracion_hola_pkey" columns="id"/>
+    <table name="administracion_atributo" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fYXRyaWJ1dG9faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Tipo" sqlType="varchar" length="1" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <primary-key name="administracion_atributo_pkey" columns="id"/>
+      <foreign-key name="administracion_atributo_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_atributo_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="administracion_tipodeitem_Atributos_atributo_id_fkey" table="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" columns="atributo_id"/>
+      <exported-key name="desarrollo_campo_atributo_id_fkey" table="desarrollo_campo" schema="public" catalog="sgpdb" columns="atributo_id"/>
+      <index name="administracion_atributo_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
+      <index name="administracion_atributo_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
+      <index name="administracion_atributo_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
+      <index name="administracion_atributo_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
     </table>
-    <table name="administracion_hola_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+    <table name="administracion_atributo_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
@@ -2208,19 +2214,38 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="administracion_usuario" schema="public" catalog="sgpdb" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fdXN1YXJpb19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
-      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="administracion_usuario_pkey" columns="id"/>
+    <table name="administracion_fase" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fZmFzZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="Nombre" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Proyecto_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="Numero" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_fase_pkey" columns="id"/>
+      <foreign-key name="administracion_fase_Proyecto_id_fkey" columns="Proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_fase_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="administracion_atributo_Fase_id_fkey" table="administracion_atributo" schema="public" catalog="sgpdb" columns="Fase_id"/>
+      <exported-key name="fase_id_refs_id_faeba2de" table="administracion_fase_Usuarios" schema="public" catalog="sgpdb" columns="fase_id"/>
+      <exported-key name="administracion_tipodeitem_Fase_id_fkey" table="administracion_tipodeitem" schema="public" catalog="sgpdb" columns="Fase_id"/>
+      <exported-key name="desarrollo_item_Fase_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Fase_id"/>
+      <exported-key name="gestion_linebase_Fase_id_fkey" table="gestion_linebase" schema="public" catalog="sgpdb" columns="Fase_id"/>
+      <index name="administracion_fase_Nombre_Proyecto_id_key" unique="true" columns="&quot;Nombre&quot;,&quot;Proyecto_id&quot;"/>
+      <index name="administracion_fase_Proyecto_id" unique="false" columns="&quot;Proyecto_id&quot;"/>
+      <index name="administracion_fase_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
     </table>
-    <table name="administracion_usuario_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+    <table name="administracion_fase_Usuarios" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX2Zhc2VfVXN1YXJpb3NfaWRfc2VxIic6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="fase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_fase_Usuarios_pkey" columns="id"/>
+      <foreign-key name="fase_id_refs_id_faeba2de" columns="fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_fase_Usuarios_user_id_fkey" columns="user_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="administracion_fase_Usuarios_fase_id_user_id_key" unique="true" columns="fase_id,user_id"/>
+      <index name="administracion_fase_Usuarios_fase_id" unique="false" columns="fase_id"/>
+      <index name="administracion_fase_Usuarios_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="administracion_fase_Usuarios_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
@@ -2232,19 +2257,113 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="administracion_usuarios" schema="public" catalog="sgpdb" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fdXN1YXJpb3NfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
-      <column name="Nombre_de_usuario" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Contrasena" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Nombres" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Apellidos" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Email" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Direccion" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Numero_de_telefono" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="Observacion" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <primary-key name="administracion_usuarios_pkey" columns="id"/>
+    <table name="administracion_fase_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="administracion_usuarios_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+    <table name="administracion_proyecto" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fcHJveWVjdG9faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="Lider_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Fecha_inicio" sqlType="date" length="13" precision="0" nullable="false" jdbcType="91"/>
+      <column name="Fecha_finalizacion" sqlType="date" length="13" precision="0" nullable="false" jdbcType="91"/>
+      <column name="Estado" sqlType="varchar" length="2" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="nFases" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_proyecto_pkey" columns="id"/>
+      <foreign-key name="administracion_proyecto_Lider_id_fkey" columns="Lider_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_proyecto_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="administracion_fase_Proyecto_id_fkey" table="administracion_fase" schema="public" catalog="sgpdb" columns="Proyecto_id"/>
+      <exported-key name="proyecto_id_refs_id_c591bdf1" table="administracion_proyecto_Usuarios" schema="public" catalog="sgpdb" columns="proyecto_id"/>
+      <index name="administracion_proyecto_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
+      <index name="administracion_proyecto_Lider_id" unique="false" columns="&quot;Lider_id&quot;"/>
+      <index name="administracion_proyecto_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
+      <index name="administracion_proyecto_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+    </table>
+    <table name="administracion_proyecto_Usuarios" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX3Byb3llY3RvX1VzdWFyaW9zX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="proyecto_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_proyecto_Usuarios_pkey" columns="id"/>
+      <foreign-key name="proyecto_id_refs_id_c591bdf1" columns="proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_proyecto_Usuarios_user_id_fkey" columns="user_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="administracion_proyecto_Usuarios_proyecto_id_user_id_key" unique="true" columns="proyecto_id,user_id"/>
+      <index name="administracion_proyecto_Usuarios_proyecto_id" unique="false" columns="proyecto_id"/>
+      <index name="administracion_proyecto_Usuarios_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="administracion_proyecto_Usuarios_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="administracion_proyecto_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="administracion_tipodeitem" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWRtaW5pc3RyYWNpb25fdGlwb2RlaXRlbV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="Fase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_tipodeitem_pkey" columns="id"/>
+      <foreign-key name="administracion_tipodeitem_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="administracion_tipodeitem_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="tipodeitem_id_refs_id_0753f024" table="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" columns="tipodeitem_id"/>
+      <exported-key name="desarrollo_campo_tipoItem_id_fkey" table="desarrollo_campo" schema="public" catalog="sgpdb" columns="tipoItem_id"/>
+      <exported-key name="desarrollo_item_Tipo_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Tipo_id"/>
+      <index name="administracion_tipodeitem_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
+      <index name="administracion_tipodeitem_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+    </table>
+    <table name="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX3RpcG9kZWl0ZW1fQXRyaWJ1dG9zX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="tipodeitem_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="atributo_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="administracion_tipodeitem_Atributos_pkey" columns="id"/>
+      <foreign-key name="administracion_tipodeitem_Atributos_atributo_id_fkey" columns="atributo_id" ref-table="administracion_atributo" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="tipodeitem_id_refs_id_0753f024" columns="tipodeitem_id" ref-table="administracion_tipodeitem" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="administracion_tipodeitem_Atribut_tipodeitem_id_atributo_id_key" unique="true" columns="tipodeitem_id,atributo_id"/>
+      <index name="administracion_tipodeitem_Atributos_atributo_id" unique="false" columns="atributo_id"/>
+      <index name="administracion_tipodeitem_Atributos_tipodeitem_id" unique="false" columns="tipodeitem_id"/>
+    </table>
+    <table name="administracion_tipodeitem_Atributos_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="administracion_tipodeitem_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
@@ -2259,10 +2378,14 @@
     <table name="auth_group" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYXV0aF9ncm91cF9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="name" sqlType="varchar" length="80" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="true" jdbcType="93"/>
       <primary-key name="auth_group_pkey" columns="id"/>
+      <foreign-key name="Usuario_id_refs_id_4cead74f" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="group_id_refs_id_f4b32aac" table="auth_group_permissions" schema="public" catalog="sgpdb" columns="group_id"/>
       <exported-key name="auth_user_groups_group_id_fkey" table="auth_user_groups" schema="public" catalog="sgpdb" columns="group_id"/>
       <index name="auth_group_name_key" unique="true" columns="name"/>
+      <index name="auth_group_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
       <index name="auth_group_name_like" unique="false" columns="name"/>
     </table>
     <table name="auth_group_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
@@ -2336,10 +2459,24 @@
       <column name="is_staff" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_active" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="date_joined" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="direccion" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="telefono" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="observacion" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="auth_user_pkey" columns="id"/>
+      <exported-key name="administracion_atributo_Usuario_id_fkey" table="administracion_atributo" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="administracion_fase_Usuario_id_fkey" table="administracion_fase" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="administracion_fase_Usuarios_user_id_fkey" table="administracion_fase_Usuarios" schema="public" catalog="sgpdb" columns="user_id"/>
+      <exported-key name="administracion_proyecto_Lider_id_fkey" table="administracion_proyecto" schema="public" catalog="sgpdb" columns="Lider_id"/>
+      <exported-key name="administracion_proyecto_Usuario_id_fkey" table="administracion_proyecto" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="administracion_proyecto_Usuarios_user_id_fkey" table="administracion_proyecto_Usuarios" schema="public" catalog="sgpdb" columns="user_id"/>
+      <exported-key name="administracion_tipodeitem_Usuario_id_fkey" table="administracion_tipodeitem" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="Usuario_id_refs_id_4cead74f" table="auth_group" schema="public" catalog="sgpdb" columns="Usuario_id"/>
       <exported-key name="user_id_refs_id_40c41112" table="auth_user_groups" schema="public" catalog="sgpdb" columns="user_id"/>
       <exported-key name="user_id_refs_id_4dc23c39" table="auth_user_user_permissions" schema="public" catalog="sgpdb" columns="user_id"/>
+      <exported-key name="desarrollo_item_Usuario_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Usuario_id"/>
       <exported-key name="user_id_refs_id_c0d12874" table="django_admin_log" schema="public" catalog="sgpdb" columns="user_id"/>
+      <exported-key name="gestion_linebase_Usuario_id_fkey" table="gestion_linebase" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="reversion_revision_user_id_fkey" table="reversion_revision" schema="public" catalog="sgpdb" columns="user_id"/>
       <index name="auth_user_username_key" unique="true" columns="username"/>
       <index name="auth_user_username_like" unique="false" columns="username"/>
     </table>
@@ -2401,6 +2538,125 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
+    <table name="desarrollo_archivo" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZGVzYXJyb2xsb19hcmNoaXZvX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="archivo" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="desarrollo_archivo_pkey" columns="id"/>
+      <foreign-key name="desarrollo_archivo_item_id_fkey" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="desarrollo_archivo_item_id" unique="false" columns="item_id"/>
+    </table>
+    <table name="desarrollo_archivo_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="desarrollo_campo" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZGVzYXJyb2xsb19jYW1wb19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="tipoItem_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="atributo_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="fecha" sqlType="date" length="13" precision="0" nullable="true" jdbcType="91"/>
+      <column name="numerico" sqlType="numeric" length="10" precision="3" nullable="true" jdbcType="2"/>
+      <column name="longitud" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="precision" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="logico" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="cadena" sqlType="varchar" length="500" precision="0" nullable="true" jdbcType="12"/>
+      <column name="mail" sqlType="varchar" length="75" precision="0" nullable="true" jdbcType="12"/>
+      <column name="hora" sqlType="time" length="15" precision="6" nullable="true" jdbcType="92"/>
+      <primary-key name="desarrollo_campo_pkey" columns="id"/>
+      <foreign-key name="desarrollo_campo_atributo_id_fkey" columns="atributo_id" ref-table="administracion_atributo" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_campo_tipoItem_id_fkey" columns="tipoItem_id" ref-table="administracion_tipodeitem" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_campo_item_id_fkey" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="desarrollo_campo_atributo_id" unique="false" columns="atributo_id"/>
+      <index name="desarrollo_campo_item_id" unique="false" columns="item_id"/>
+      <index name="desarrollo_campo_tipoItem_id" unique="false" columns="&quot;tipoItem_id&quot;"/>
+    </table>
+    <table name="desarrollo_campo_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="desarrollo_item" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZGVzYXJyb2xsb19pdGVtX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Prioridad" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="CostoTemporal" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="CostoUnitario" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Estado" sqlType="varchar" length="3" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="Fase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Tipo_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Version" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="desarrollo_item_pkey" columns="id"/>
+      <foreign-key name="desarrollo_item_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_item_Tipo_id_fkey" columns="Tipo_id" ref-table="administracion_tipodeitem" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_item_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="desarrollo_archivo_item_id_fkey" table="desarrollo_archivo" schema="public" catalog="sgpdb" columns="item_id"/>
+      <exported-key name="desarrollo_campo_item_id_fkey" table="desarrollo_campo" schema="public" catalog="sgpdb" columns="item_id"/>
+      <exported-key name="desarrollo_relacion_antecesor_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="antecesor_id"/>
+      <exported-key name="desarrollo_relacion_item_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="item_id"/>
+      <exported-key name="desarrollo_relacion_padre_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="padre_id"/>
+      <exported-key name="item_id_refs_id_ab61f247" table="gestion_linebase_Items" schema="public" catalog="sgpdb" columns="item_id"/>
+      <index name="desarrollo_item_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
+      <index name="desarrollo_item_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
+      <index name="desarrollo_item_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
+      <index name="desarrollo_item_Tipo_id" unique="false" columns="&quot;Tipo_id&quot;"/>
+      <index name="desarrollo_item_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+    </table>
+    <table name="desarrollo_item_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="desarrollo_relacion" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZGVzYXJyb2xsb19yZWxhY2lvbl9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="padre_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="antecesor_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="desarrollo_relacion_pkey" columns="id"/>
+      <foreign-key name="desarrollo_relacion_antecesor_id_fkey" columns="antecesor_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_relacion_item_id_fkey" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="desarrollo_relacion_padre_id_fkey" columns="padre_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="desarrollo_relacion_antecesor_id" unique="false" columns="antecesor_id"/>
+      <index name="desarrollo_relacion_item_id" unique="false" columns="item_id"/>
+      <index name="desarrollo_relacion_padre_id" unique="false" columns="padre_id"/>
+    </table>
+    <table name="desarrollo_relacion_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="django_admin_log" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZGphbmdvX2FkbWluX2xvZ19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="action_time" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
@@ -2436,6 +2692,7 @@
       <primary-key name="django_content_type_pkey" columns="id"/>
       <exported-key name="content_type_id_refs_id_d043b34a" table="auth_permission" schema="public" catalog="sgpdb" columns="content_type_id"/>
       <exported-key name="content_type_id_refs_id_93d2d1f8" table="django_admin_log" schema="public" catalog="sgpdb" columns="content_type_id"/>
+      <exported-key name="reversion_version_content_type_id_fkey" table="reversion_version" schema="public" catalog="sgpdb" columns="content_type_id"/>
       <index name="django_content_type_app_label_model_key" unique="true" columns="app_label,model"/>
     </table>
     <table name="django_content_type_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
@@ -2457,6 +2714,107 @@
       <primary-key name="django_session_pkey" columns="session_key"/>
       <index name="django_session_expire_date" unique="false" columns="expire_date"/>
       <index name="django_session_session_key_like" unique="false" columns="session_key"/>
+    </table>
+    <table name="gestion_linebase" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9saW5lYmFzZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="Usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Fase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="gestion_linebase_pkey" columns="id"/>
+      <foreign-key name="gestion_linebase_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="gestion_linebase_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="linebase_id_refs_id_22043ed8" table="gestion_linebase_Items" schema="public" catalog="sgpdb" columns="linebase_id"/>
+      <index name="gestion_linebase_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
+      <index name="gestion_linebase_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+    </table>
+    <table name="gestion_linebase_Items" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImdlc3Rpb25fbGluZWJhc2VfSXRlbXNfaWRfc2VxIic6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="linebase_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="gestion_linebase_Items_pkey" columns="id"/>
+      <foreign-key name="item_id_refs_id_ab61f247" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="linebase_id_refs_id_22043ed8" columns="linebase_id" ref-table="gestion_linebase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="gestion_linebase_Items_linebase_id_item_id_key" unique="true" columns="linebase_id,item_id"/>
+      <index name="gestion_linebase_Items_item_id" unique="false" columns="item_id"/>
+      <index name="gestion_linebase_Items_linebase_id" unique="false" columns="linebase_id"/>
+    </table>
+    <table name="gestion_linebase_Items_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="gestion_linebase_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="reversion_revision" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgncmV2ZXJzaW9uX3JldmlzaW9uX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="manager_slug" sqlType="varchar" length="200" precision="0" nullable="false" jdbcType="12"/>
+      <column name="date_created" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
+      <column name="user_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="comment" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="reversion_revision_pkey" columns="id"/>
+      <foreign-key name="reversion_revision_user_id_fkey" columns="user_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="reversion_version_revision_id_fkey" table="reversion_version" schema="public" catalog="sgpdb" columns="revision_id"/>
+      <index name="reversion_revision_manager_slug" unique="false" columns="manager_slug"/>
+      <index name="reversion_revision_manager_slug_like" unique="false" columns="manager_slug"/>
+      <index name="reversion_revision_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="reversion_revision_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="reversion_version" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgncmV2ZXJzaW9uX3ZlcnNpb25faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="revision_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="object_id" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="object_id_int" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="content_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="format" sqlType="varchar" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <column name="serialized_data" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="object_repr" sqlType="text" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="reversion_version_pkey" columns="id"/>
+      <foreign-key name="reversion_version_content_type_id_fkey" columns="content_type_id" ref-table="django_content_type" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="reversion_version_revision_id_fkey" columns="revision_id" ref-table="reversion_revision" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="reversion_version_content_type_id" unique="false" columns="content_type_id"/>
+      <index name="reversion_version_object_id_int" unique="false" columns="object_id_int"/>
+      <index name="reversion_version_revision_id" unique="false" columns="revision_id"/>
+    </table>
+    <table name="reversion_version_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
     <procedure name="_pg_char_max_length" schema="information_schema" catalog="sgpdb" type="2">
       <prototype>
