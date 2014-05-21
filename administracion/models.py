@@ -1,10 +1,8 @@
 
 from django.db import models
-from django import forms
 from django.contrib.auth.models import User, Group, Permission
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.admin import widgets
-import reversion
+
+from django.utils import six
 
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
@@ -219,7 +217,6 @@ class Fase(models.Model):
     def __unicode__(self):
         return self.Nombre
 
-
     def ordenar_fase_subir(self):
         try:
             faseTemporal = Fase.objects.filter(Proyecto=self.Proyecto.pk).filter(Numero__lt=self.Numero).order_by('-Numero').first()
@@ -282,8 +279,9 @@ class TipoDeItem(models.Model):
     Atributos = models.ManyToManyField(Atributo)
     Fase = models.ForeignKey(Fase)
 
-    def __unicode__(self):
-        return self.Nombre
-
-
+    def __str__(self):
+        return "%s | %s | %s" % (
+            six.text_type(self.Nombre),
+            six.text_type(self.Fase.Nombre),
+            six.text_type(self.Fase.Proyecto.Nombre))
 

@@ -799,7 +799,7 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
 ########################################################################################################################
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################
-#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
 def administrar_roles(request):
     """
 
@@ -812,7 +812,7 @@ def administrar_roles(request):
                               {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}
                               , context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
 def listar_roles(request):
     """
 
@@ -825,7 +825,7 @@ def listar_roles(request):
                               {'usuario_actor': usuario_actor, 'roles': roles}
                               , context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_add_group, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_agregar_roles, login_url="/iniciar_sesion")
 def crear_rol(request):
     """
 
@@ -852,7 +852,7 @@ def crear_rol(request):
                                'usuario_actor': usuario_actor},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_consultar_rol, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
 def detalle_rol(request, idRol):
     """
 
@@ -867,7 +867,7 @@ def detalle_rol(request, idRol):
                                                       'lista_permisos': lista_permisos},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_change_group, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_roles, login_url="/iniciar_sesion")
 def modificar_rol(request, idRol):
     """
 
@@ -893,7 +893,7 @@ def modificar_rol(request, idRol):
                               {'usuario_actor': usuario_actor, 'rol': rol, 'formulario': formulario},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_roles, login_url="/iniciar_sesion")
 def confirmar_eliminar_rol(request, idRol):
     """
 
@@ -906,7 +906,7 @@ def confirmar_eliminar_rol(request, idRol):
     return render_to_response('rol/conf_eliminar_rol.html', {'usuario_actor': usuario_actor, 'rol': rol},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_delete_group, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_roles, login_url="/iniciar_sesion")
 def eliminar_rol(request, idRol):
     """
 
@@ -923,7 +923,7 @@ def eliminar_rol(request, idRol):
                                'mensaje':'El rol ha sido eliminado con exito'},
                               context_instance=RequestContext(request))
 
-#@user_passes_test(User.can_change_user, login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_usuarios, login_url="/iniciar_sesion")
 def asignar_rol(request, id_usuario):
     """
     :param request:
@@ -952,7 +952,7 @@ def asignar_rol(request, id_usuario):
 ########################################################################################################################
 #########################################Vista de credenciales##########################################################
 ########################################################################################################################
-#@login_required(login_url="/iniciar_sesion")
+@login_required(login_url="/iniciar_sesion")
 def administrar_credencial(request):
     """
 
@@ -965,7 +965,7 @@ def administrar_credencial(request):
 ########################################################################################################################
 #########################################Vista de atributos#############################################################
 ########################################################################################################################
-
+@user_passes_test(User.puede_consultar_atributos, login_url="/iniciar_sesion")
 def administrar_atributo(request, id_proyecto, id_fase):
     """
 
@@ -983,7 +983,7 @@ def administrar_atributo(request, id_proyecto, id_fase):
                               context_instance=RequestContext(request))
 
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_agregar_atributos, login_url="/iniciar_sesion")
 def crear_atributo(request, id_proyecto, id_fase):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -1022,7 +1022,7 @@ def crear_atributo(request, id_proyecto, id_fase):
                                'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_atributos, login_url="/iniciar_sesion")
 def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1040,7 +1040,7 @@ def detalle_atributo(request, id_proyecto, id_fase, id_atributo):
                               context_instance=RequestContext(request))
 
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_atributos, login_url="/iniciar_sesion")
 def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1094,7 +1094,7 @@ def modificar_atributo(request, id_proyecto, id_fase, id_atributo):
 
 
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_atributos, login_url="/iniciar_sesion")
 def eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1115,7 +1115,7 @@ def eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
                                'lista_atributos': lista_atributos ,  'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-
+@user_passes_test(User.puede_eliminar_atributos, login_url="/iniciar_sesion")
 def confirmar_eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
     """
 
@@ -1154,10 +1154,10 @@ def confirmar_eliminar_atributo(request, id_proyecto, id_fase, id_atributo):
                               context_instance=RequestContext(request))
 
 ########################################################################################################################
-########################################Vistas de tipo de item######################################################
+########################################Vistas de tipo de item##########################################################
 ########################################################################################################################
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_tipodeitem, login_url="/iniciar_sesion")
 def administrar_tipoItem(request, id_proyecto, id_fase):
     """
 
@@ -1174,7 +1174,7 @@ def administrar_tipoItem(request, id_proyecto, id_fase):
                                'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_agregar_tipodeitem, login_url="/iniciar_sesion")
 def crear_tipoItem(request, id_proyecto, id_fase):
     """
 
@@ -1227,7 +1227,7 @@ def crear_tipoItem(request, id_proyecto, id_fase):
                            'usuario_actor': usuario_actor, 'proyecto': proyecto, 'fase': fase},
                           context_instance=RequestContext(request))
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_consultar_tipodeitem, login_url="/iniciar_sesion")
 def detalle_tipoItem(request, id_proyecto, id_fase, id_tipo):
     """
     :param request:
@@ -1244,7 +1244,7 @@ def detalle_tipoItem(request, id_proyecto, id_fase, id_tipo):
                                'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_modificar_tipodeitem, login_url="/iniciar_sesion")
 def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
     """
 
@@ -1299,7 +1299,7 @@ def modificar_tipo(request, id_proyecto, id_fase, id_tipo ):
                                'usuario_actor': usuario_actor,  'proyecto':proyecto, 'tipo': tipo, 'fase': fase},
                               context_instance=RequestContext(request))
 
-#@login_required(login_url="/iniciar_sesion")
+@user_passes_test(User.puede_eliminar_tipodeitem, login_url="/iniciar_sesion")
 def eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
     """
 
@@ -1320,6 +1320,7 @@ def eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
                                'lista_tipos': lista_tipos, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
+@user_passes_test(User.puede_eliminar_tipodeitem, login_url="/iniciar_sesion")
 def confirmar_eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
     """
 
@@ -1354,6 +1355,7 @@ def confirmar_eliminar_tipo(request, id_proyecto, id_fase, id_tipo):
                               {'usuario_actor': usuario_actor, 'tipo': tipo, 'proyecto': proyecto, 'fase': fase},
                               context_instance=RequestContext(request))
 
+@user_passes_test(User.puede_agregar_tipodeitem, login_url="/iniciar_sesion")
 def importar_tipo(request, id_proyecto, id_fase):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -1361,7 +1363,7 @@ def importar_tipo(request, id_proyecto, id_fase):
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     if request.method == 'POST':
         formulario = tipoItemImportar(request.POST)
-        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase)
+        formulario.fields["tipos"].queryset = TipoDeItem.objects.exclude(Fase=fase).__str__()
         formulario.fields["tipos"].help_text = "Haga doble click en el Tipo de item que desee agregar"
         mensaje = ''
         if formulario.is_valid():

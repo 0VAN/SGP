@@ -2,7 +2,7 @@
 {% block titulo %}Gestion{% endblock %}
 
 {% block activo-admin %}
-    {% if not usuario_actor.accesoLiderProyecto %}
+    {% if not usuario_actor.esLider %}
         hide
     {% endif %}
 {% endblock %}

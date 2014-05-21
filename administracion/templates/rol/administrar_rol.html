@@ -4,14 +4,14 @@
 
 {% block botones %}
     <li>
-        {% if usuario_actor.can_add_group %}
+        {% if usuario_actor.puede_agregar_roles %}
             <a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Rol</a>
         {% endif %}
     </li>
     <li>
-        {% if usuario_actor.can_add_group %}
+        {% if usuario_actor.puede_consultar_roles %}
             <a href="/administracion/roles/listar" class="btn btn-default">Listar Roles</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Listar Roles</a>
@@ -33,7 +33,7 @@
             </tr>
         </thead>
         {% for usuario in lista_usuarios %}
-           {% if not usuario.accesoAdministrador and not usuario.accesoLiderProyecto %}
+           {% if not usuario.esAdministrador and not usuario.esLider %}
                     {% if usuario.is_active %}
                         <tr>
                             <td>{{ usuario.username }}</td>
