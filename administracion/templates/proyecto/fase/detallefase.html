@@ -1,13 +1,13 @@
 {% extends 'proyecto/fase/adm-fases.html' %}
 {% block titulo %}Detalle de Fase{% endblock %}
-{% block encabezado %}{{ fase.Nombre}}{% endblock %}
+{% block encabezado %}Detalle de la fase: {{ fase.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
     <li><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
-    <dl>
+    <dl class="dl-horizontal">
         <dt>Creado por:</dt>
         <dd>{{ fase.Usuario }}</dd>
         <dt>Nombre de proyecto:</dt>

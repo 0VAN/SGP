@@ -15,8 +15,8 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Creado por</th>
-                <th>Fecha de creacion</th>
+                <th>Estado</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -27,28 +27,34 @@
             {% for item in lista_items %}
                 <tr>
                     <td>{{ item.Nombre }}</td>
-                    <td>{{ item.Usuario }}</td>
-                    <td>{{ item.Fecha }}</td>
+                    <td>{{ item.get_Estado_display }}</td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
 
-                            <ul class="dropdown-menu" role="'menu">
+                            <ul class="dropdown-menu" role="menu">
                                 <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
                                 {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
                                     <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
                                     <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
-                                    <li><a href="{% url 'desarrollo.views.finalizar_item_view' fase.Proyecto.id fase.id item.id %}">Finalizar</a></li>
                                 {% endif %}
                             </ul>
                         </div>
                     </td>
                     <td>
+                        {% if item.Estado == 'CON' %}
+                            <a class="btn btn-success btn-sm" href="{% url 'desarrollo.views.finalizar_item_view' fase.Proyecto.id fase.id item.id %}">Aprobar</a>
+                        {% elif item.Estado == 'FIN' %}
+                            <a class="btn btn-warning btn-sm" href="{% url 'desarrollo.views.desaprobar_view' fase.Proyecto.id fase.id item.id %}">Desaprobar</a>
+                        {% endif %}
+
+                    </td>
+                    <td>
                         {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
                                     Gestionar <span class="caret"></span>
                                 </button>
 
@@ -62,16 +68,13 @@
                     </td>
                     <td>
                         {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
-                            <div class="btn-group pull-right">
-                                <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-warning">Historial</a>
-                            </div>
+                            <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-info btn-sm">Historial</a>
+
                         {% endif %}
                     </td>
                     <td>
                         {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
-                            <div class="btn-group pull-right">
-                                <a href="{% url 'desarrollo.views.conf_eliminar_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger">Eliminar</a>
-                            </div>
+                            <a href="{% url 'desarrollo.views.conf_eliminar_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger btn-sm">Eliminar</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -89,6 +92,6 @@
     {% endblock mensaje %}
     {% if lista_items %}
         <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
-        <a target="_blank" href="/static/media/grafoFaseActual.png"><img src="/static/media/grafoFaseActual.png" class="img-responsive" alt=""></a>
+        <a title="Haz click para ver la imagen en su tamano original" target="_blank" href="/static/media/grafoFaseActual.png"><img src="/static/media/grafoFaseActual.png" class="img-responsive" alt=""></a>
     {% endif %}
 {% endblock %}

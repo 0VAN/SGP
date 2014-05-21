@@ -1,6 +1,6 @@
 {% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Detalle de atributo{% endblock %}
-{% block encabezado %}Vista detalle del atributo {{ atributo.Nombre}}{% endblock %}
+{% block encabezado %}Detalle del atributo: {{ atributo.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block contenido %}
-    <dl>
+    <dl class="dl-horizontal">
         <dt>Nombre:</dt>
         <dd>{{ atributo.Nombre }}</dd>
         <dt>Descripcion:</dt>

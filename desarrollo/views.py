@@ -169,10 +169,17 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
     campos = Campo.objects.filter(item=item)
+    try:
+        relacion = Relacion.objects.get(item=item)
+    except ObjectDoesNotExist:
+        relacion = False
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
 
     return render_to_response(
         'proyecto/fase/item/detalle.html',
-        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase},
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase,
+         'relacion': relacion, 'hijos': lista_hijos, 'sucesores': lista_sucesores},
         context_instance=RequestContext(request)
     )
 
@@ -586,7 +593,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     item.Estado = item.FINALIZADO
     item.save()
     suceso = True
-    mensaje = 'Item finalizado exitosamente'
+    mensaje = 'Item aprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
     return render_to_response(
         'proyecto/fase/des_fase.html',
@@ -624,5 +631,33 @@ def solicitud_cambio_view(request, id_proyecto, id_fase):
     return render_to_response(
         'proyecto/fase/solicitud.html',
         {'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
+        context_instance=RequestContext(request)
+    )
+
+def desaprobar_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    return render_to_response(
+        'proyecto/fase/item/desaprobar.html',
+        {'usuario': usuario, 'fase': fase, 'item': item},
+        context_instance=RequestContext(request)
+    )
+
+def desaprobado_view(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    item.Estado = item.CONSTRUCCION
+    item.save()
+    suceso = True
+    mensaje = 'Item desaprobado exitosamente'
+    lista_items = Item.objects.filter(Fase=fase)
+    return render_to_response(
+        'proyecto/fase/des_fase.html',
+        {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+         'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)
     )
