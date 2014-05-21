@@ -2,8 +2,9 @@
 {% block titulo %}Desarrollo de Fase{% endblock %}
 {% block botones %}
     <li><a href="{% url 'desarrollo.views.crear_item' fase.Proyecto.id fase.id %}" class="btn btn-default">Crear Item</a></li>
-    <li><a href="#" class="btn btn-default">Buscar Item</a></li>
-    <li><a href="#" class="btn btn-default">Revivir Item</a></li>
+    <li><a href="#" class="btn btn-default" type="button">Buscar Item</a></li>
+    <li><a href="#" class="btn btn-default" type="button">Revivir Item</a></li>
+    <li><a href="{% url 'desarrollo.views.solicitud_cambio_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Solicitud de Cambio</a></li>
     <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
@@ -88,6 +89,6 @@
     {% endblock mensaje %}
     {% if lista_items %}
         <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
-        <img src="/static/media/grafoFaseActual.png">
+        <a target="_blank" href="/static/media/grafoFaseActual.png"><img src="/static/media/grafoFaseActual.png" class="img-responsive" alt=""></a>
     {% endif %}
 {% endblock %}

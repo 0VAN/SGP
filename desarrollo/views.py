@@ -4,6 +4,8 @@ from desarrollo.forms import *
 import reversion
 from django.core.exceptions import *
 import pydot
+from gestion.models import *
+from gestion.forms import *
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -70,7 +72,7 @@ def crear_item(request, id_proyecto, id_fase):
                 campo.save()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
-            mensaje = "El item se ha creado exitosamente, no olvides completar los atributos!!"
+            mensaje = "El item se ha creado exitosamente, no olvides completar los atributos"
             generar_grafo_fase(id_fase)
             return render_to_response(
                 'proyecto/fase/des_fase.html',
@@ -589,5 +591,38 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     return render_to_response(
         'proyecto/fase/des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'lista_items': lista_items},
+        context_instance=RequestContext(request)
+    )
+
+def solicitud_cambio_view(request, id_proyecto, id_fase):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = lista_items.filter(Estado=Item.VALIDADO)
+    solicitud = SolicitudCambio(proyecto=proyecto, fase=fase, usuario=usuario)
+    if request.method == 'POST':
+        formulario = SolicitudCambioForm(request.POST, instance=solicitud)
+        formulario.fields["items"].queryset = lista_items
+        formulario.fields["items"].help_text = "Haga doble click en el item que desee agregar"
+        if formulario.is_valid():
+            formulario.save()
+            lista_items = Item.objects.filter(Fase=fase)
+            suceso = True
+            mensaje = "Solicitud de cambio creada exitosamente"
+            return render_to_response(
+                'proyecto/fase/des_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+                 'suceso': suceso, 'mensaje': mensaje},
+                context_instance=RequestContext(request)
+            )
+
+    else:
+        formulario = SolicitudCambioForm(instance=solicitud)
+        formulario.fields["items"].queryset = lista_items
+        formulario.fields["items"].help_text = "Haga doble click en el item que desee agregar"
+    return render_to_response(
+        'proyecto/fase/solicitud.html',
+        {'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
         context_instance=RequestContext(request)
     )

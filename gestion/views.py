@@ -44,7 +44,7 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     lista_lineaBase = LineBase.objects.filter(Fase=fase)
     lista_items = Item.objects.filter(Fase=fase)
-    lista_items = lista_items.filter(Estado='FIN')
+    lista_items = lista_items.filter(Estado=Item.FINALIZADO)
     lineabase = LineBase(Fase=fase, Usuario=usuario)
     if request.method == 'POST':
         formulario = LineBaseForm(request.POST, instance=lineabase)
@@ -52,14 +52,21 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestion_fase.html',
-        {'usuario_actor': usuario, 'fase': fase, 'lista_lineabase': lista_lineaBase},
-        context_instance=RequestContext(request))
+            lineabase = LineBase.objects.last()
+            for item in lineabase.Items.all():
+                item.Estado = item.VALIDADO
+                item.save()
+            return render_to_response(
+                'gestion_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_lineabase': lista_lineaBase},
+                context_instance=RequestContext(request)
+            )
 
     else:
         formulario = LineBaseForm(instance=lineabase)
         formulario.fields["Items"].queryset = lista_items
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
-        return render_to_response('lineaBase_form.html',{'formulario':formulario,'usuario_actor':usuario,
-                                                         'fase':fase},
-        context_instance=RequestContext(request))
+    return render_to_response(
+        'lineaBase_form.html',{'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
+        context_instance=RequestContext(request)
+    )

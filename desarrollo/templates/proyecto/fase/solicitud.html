@@ -1,0 +1,16 @@
+{% extends 'proyecto/fase/des_fase.html' %}
+{% block titulo %}Solicitud de Cambio{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" type="button" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block encabezado %}
+    Solicitar cambio
+    <script type="text/javascript" src="/static/js/jsi18n.js"></script>
+    {{ formulario.media }}
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table">{{ formulario }}</table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'gestion.html' %}
 {% block titulo %}Gestion de Proyecto{% endblock %}
 {% block botones %}
+    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Solicitudes de Cambio</a> </li>
     <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
