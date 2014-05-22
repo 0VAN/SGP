@@ -55,7 +55,16 @@ class Relacion(models.Model):
     padre = models.ForeignKey(Item, null=True, related_name='padre')
     antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
     item = models.ForeignKey(Item, null=True, related_name='item')
+    """
+    ACTIVO = 'A'
+    ELIMINADO = 'E'
 
+    ESTADO_CHOICES = (
+        (ACTIVO, 'Activo'),
+        (ELIMINADO, 'Eliminado'),
+    )
+    estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)
+    """
 
 class Archivo(models.Model):
     archivo = models.FileField(upload_to='carga')

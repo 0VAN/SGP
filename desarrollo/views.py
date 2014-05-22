@@ -330,12 +330,17 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
                 mensaje = 'Error: Esta relacion genera un ciclo'
             else:
                 if(relacion != False):
-                    relacion.delete()
-                formulario.save()
-                relacion = Relacion.objects.get(item=item)
+                    relacion2 = formulario.save(commit=False)
+                    relacion.padre = relacion2.padre
+                    relacion.antecesor = None
+                    relacion.save()
+                else:
+                    formulario.save()
+                    relacion = Relacion.objects.get(item=item)
 
                 mensaje = 'Padre asignado exitosamente'
                 suceso = True
+                relacion = Relacion.objects.get(item=item)
             return render_to_response(
                 'proyecto/fase/relacion/gestion_relaciones.html',
                 {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
@@ -373,7 +378,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
     try:
         relacion = Relacion.objects.get(item=item)
     except ObjectDoesNotExist:
-        relacion = None
+        relacion = False
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
         lista_items = Item.objects.filter(Fase=faseAnterior)
@@ -382,8 +387,14 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
     if request.method=='POST':
         formulario = AntecesorForm(request.POST, instance=nueva_relacion)
         if formulario.is_valid():
-            if(relacion != None):
-                relacion.delete()
+            if relacion != False:
+                relacion2 = formulario.save(commit=False)
+                relacion.antecesor = relacion2.antecesor
+                relacion.padre = None
+                relacion.save()
+            else:
+                formulario.save()
+                relacion = Relacion.objects.get(item=item)
             formulario.save()
             mensaje = 'Antecesor asignado exitosamente'
             suceso = True

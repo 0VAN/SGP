@@ -25,17 +25,29 @@ class ItemForm(MyForm):
         model = Item
         exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
 
+
+class ModItemForm(MyForm):
+    """
+    Formulario para la creacion de items
+    Hereda de forms.ModelForm y utiliza la clase Group para
+    agregar ciertos campos a la hora de la creacion/modificacion/eliminacion
+    """
+
+    class Meta:
+        model = Item
+        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo']
+
 class PadreForm(MyForm):
 
     class Meta:
         model = Relacion
-        exclude = ['antecesor', 'item']
+        exclude = ['antecesor', 'item', 'estado']
 
 class AntecesorForm(MyForm):
 
     class Meta:
         model = Relacion
-        exclude = ['padre', 'item']
+        exclude = ['padre', 'item', 'estado']
 
 
 class ArchivoForm(MyForm):
