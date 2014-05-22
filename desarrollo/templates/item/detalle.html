@@ -28,6 +28,20 @@
         <dd>{{ item.Fase }}</dd>
         <dt>Tipo de Item:</dt>
         <dd>{{ item.Tipo }}</dd>
+
+        {% if relacion == False %}
+            <dt>Relacion: </dt>
+            <dd>El item no posee padre ni antecesor</dd>
+        {% else %}
+            {% if relacion.antecesor == None %}
+                <dt>Padre:</dt>
+                <dd>{{ relacion.padre.Nombre }} | fase: {{ item.Fase }} | proyecto: {{ item.Fase.Proyecto }}</dd>
+            {% else %}
+                <dt>Antecesor:</dt>
+                <dd>{{ relacion.antecesor.Nombre }} | fase: {{ item.Fase }} | proyecto: {{ item.Fase.Proyecto }}</dd>
+            {% endif %}
+        {% endif %}
+
     </dl>
     <div class="col-lg-6">
         <table class="table table-bordered">
@@ -57,6 +71,50 @@
                         <td>{{ a.texto }}</td>
                     {% endif %}
                     </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-pull-3"></div>
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Hijos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in hijos %}
+                    <tr>
+                        <td>{{ a.item }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No posee hijos</td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sucesores</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in sucesores %}
+                    <tr>
+                        <td>{{ a.item }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No posee sucesores</td>
+                    </tr>
+
                 {% endfor %}
             </tbody>
         </table>

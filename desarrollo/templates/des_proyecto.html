@@ -29,7 +29,7 @@
                     </td>
                 <td>
                     {% if usuario_actor in fase.Usuarios.all %}
-                        <a href="{% url 'desarrollo.views.des_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Desarrollar</a>
+                        <a href="{% url 'desarrollo.views.des_fase' proyecto.id fase.id %}" type="button" class="btn btn-success">Desarrollar</a>
                     {% endif %}
                 </td>
                 </tr>
@@ -40,6 +40,6 @@
     </table>
     {% if lista_items %}
         <h3>Grafo del proyecto: <i>{{ proyecto.Nombre }}</i></h3>
-        <img src="/static/media/grafoProyectoActual.png">
+        <a title="Haz click para ver la imagen en su tamano original" target="_blank" href="/static/media/grafoProyectoActual.png"><img src="/static/media/grafoProyectoActual.png" class="img-responsive"></a>
     {% endif %}
 {% endblock %}

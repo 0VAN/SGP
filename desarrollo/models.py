@@ -59,7 +59,16 @@ class Relacion(models.Model):
     padre = models.ForeignKey(Item, null=True, related_name='padre')
     antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
     item = models.ForeignKey(Item, null=True, related_name='item')
+    """
+    ACTIVO = 'A'
+    ELIMINADO = 'E'
 
+    ESTADO_CHOICES = (
+        (ACTIVO, 'Activo'),
+        (ELIMINADO, 'Eliminado'),
+    )
+    estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)
+    """
 reversion.register(Relacion)
 
 class Archivo(models.Model):
@@ -69,3 +78,5 @@ class Archivo(models.Model):
 
     def __unicode__(self):
         return self.archivo
+
+reversion.register(Archivo)
