@@ -31,6 +31,7 @@
                 <th>Lider</th>
                 <th>Estado</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,9 @@
                         <td>{{ proyecto.Nombre }}</td>
                         <td>{{ proyecto.Lider }}</td>
                         <td>{{ proyecto.get_Estado_display }}</td>
+                        <td class="btn-group">
+                            <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
+                        </td>
                         <td>
                             <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
                         </td>

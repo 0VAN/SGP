@@ -1,14 +1,14 @@
-{% extends 'gestion_fase.html' %}
-{% block titulo %}Formulario Linea Base{% endblock %}
+{% extends 'comite/gestion_comite.html' %}
+{% block titulo %}Formulario Comite de Gestion de Cambio{% endblock %}
 
 {% block encabezado %}
-    {{ operacion }}
+    Crear Comite de Gestion de Cambio
     <script type="text/javascript" src="/static/js/jsi18n.js"></script>
     {{ formulario.media }}
 {% endblock %}
 
 {% block botones %}
-    <li><a href="{% url 'gestion.views.gestion_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'gestion.views.gestion_comite' id_proyecto %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}

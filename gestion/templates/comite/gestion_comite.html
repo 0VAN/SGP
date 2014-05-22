@@ -1,0 +1,21 @@
+{% extends 'gestion_proyecto.html' %}
+{% block titulo %}Comite de gestion de cambio{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Comite de Gestion de Cambio del Proyecto: <i>{{ proyecto.Nombre }}</i>{% endblock %}
+
+{% block contenido %}
+    {% if comite %}
+        <h1>{{ comite.pk }}</h1>
+    {% else %}
+        <h4><b>El proyecto aun no posee comite</b></h4>
+        <a href="{% url 'gestion.views.crear_comite' proyecto.id %}" class="btn btn-primary">Crear Comite</a>
+    {% endif %}
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+{% endblock %}
