@@ -1,0 +1,65 @@
+{% extends 'des_proyecto.html' %}
+{% block titulo %}Desarrollo de Fase{% endblock %}
+{% block botones %}
+    <li><a href="#" class="btn btn-default">Buscar Item</a></li>
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Items eliminados de la fase: {{ fase.Nombre }}{% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Creado por</th>
+                <th>Fecha de creacion</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista_items %}
+                <tr>
+                    <td>{{ item.Nombre }}</td>
+                    <td>{{ item.Usuario }}</td>
+                    <td>{{ item.Fecha }}</td>
+                    <td>
+                         <a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}"  class="btn btn-primary">Detalle</a>
+                    </td>
+                    <td>
+                        {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
+                            <div class="btn-group pull-right">
+                                <a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-warning">Historial</a>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
+                            <div class="btn-group pull-right">
+                                <a href="{% url 'desarrollo.views.conf_eliminar_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-success">Revivir</a>
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                <td>No hay items disponibles</td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% elif suceso == False %}
+            <div class="alert alert-danger">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+    {% if lista_items %}
+        <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
+        <img src="/static/media/grafoFaseActual.png">
+    {% endif %}
+{% endblock %}

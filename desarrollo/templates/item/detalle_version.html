@@ -1,33 +1,33 @@
-{% extends 'proyecto/fase/des_fase.html' %}
+{% extends 'des_fase.html' %}
 {% block titulo %}{{ item.Nombre }}{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'desarrollo.views.historial_item' fase.Proyecto.id fase.id item.field_dict.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
-{% block encabezado %}Detalle del item: {{ item.Nombre }}{% endblock %}
+{% block encabezado %}Detalle del item: {{ item.field_dict.Nombre }}{% endblock %}
 {% block contenido %}
     <dl class="dl-horizontal">
         <dt>Descripcion:</dt>
-        {% if item.Descripcion == "" %}
+        {% if item.field_dict.Descripcion == "" %}
             <dd>Este campo esta vacio</dd>
         {% else %}
-            <dd>{{ item.Descripcion }}</dd>
+            <dd>{{ item.field_dict.Descripcion }}</dd>
         {% endif %}
         <dt>Prioridad:</dt>
-        <dd>{{ item.Prioridad }}</dd>
+        <dd>{{ item.field_dict.Prioridad }}</dd>
         <dt>Costo Temporal:</dt>
-        <dd>{{ item.CostoTemporal }}</dd>
+        <dd>{{ item.field_dict.CostoTemporal }}</dd>
         <dt>Costo Unitario:</dt>
-        <dd>{{ item.CostoUnitario }}</dd>
+        <dd>{{ item.field_dict.CostoUnitario }}</dd>
         <dt>Estado:</dt>
-        <dd>{{ item.get_Estado_display }}</dd>
+        <dd>{{ item.field_dict.Estado }}</dd>
         <dt>Creado por:</dt>
-        <dd>{{ item.Usuario }}</dd>
+        <dd>{{ item.field_dict.Usuario }}</dd>
         <dt>Creado el:</dt>
-        <dd>{{ item.Fecha }}</dd>
+        <dd>{{ item.field_dict.Fecha }}</dd>
         <dt>Fase:</dt>
-        <dd>{{ item.Fase }}</dd>
+        <dd>{{ item.field_dict.Fase }}</dd>
         <dt>Tipo de Item:</dt>
-        <dd>{{ item.Tipo }}</dd>
+        <dd>{{ item.field_dict.Tipo }}</dd>
     </dl>
     <div class="col-lg-6">
         <table class="table table-bordered">
@@ -40,7 +40,7 @@
             <tbody>
                 {% for a in campos %}
                     <tr>
-                    <td>{{ a.atributo.Nombre }}</td>
+                    <td>{{ a.field_dict.atributo }}</td>
                     {% if a.atributo.Tipo == 'N' %}
                         <td>{{ a.numerico }}</td>
                     {% elif a.atributo.Tipo == 'C' %}
