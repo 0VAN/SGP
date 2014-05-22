@@ -7,7 +7,9 @@
     {% endif %}
 {% endblock %}
 {% block activo-des %}
-    hide
+    {% if not usuario_actor.esLider %}
+        hide
+    {% endif %}
 {% endblock %}
 {% block activo-gc %}
     active
@@ -41,9 +43,11 @@
                         <td>{{ proyecto.Nombre }}</td>
                         <td>{{ proyecto.Lider }}</td>
                         <td>{{ proyecto.get_Estado_display }}</td>
-                        <td class="btn-group">
-                            <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
-                        </td>
+                        {% if proyecto.get_Estado_display == "Pendiente" %}
+                            <td class="btn-group">
+                                <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
+                            </td>
+                        {% endif %}
                         <td>
                             <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
                         </td>

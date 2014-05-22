@@ -5,7 +5,7 @@
 {% block botones %}
     <li>
 
-           {% if proyecto.Lider == usuario_actor %}
+           {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
                 <a href="{% url 'administracion.views.crear_atributo' proyecto.id fase.id %}" class="btn btn-default">Crear atributo</a>
             {% else %}
                 <a class="btn btn-default" disabled="disabled">Crear atributo</a>
@@ -41,15 +41,19 @@
 
                             <ul class="dropdown-menu" role="'menu">
                                 <li><a href="{% url 'administracion.views.detalle_atributo' proyecto.id fase.id atributo.id %}">Detalle</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id fase.id atributo.id %}">Modificar</a></li>
+                                {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
+                                    <li><a href="{% url 'administracion.views.modificar_atributo' proyecto.id fase.id atributo.id %}">Modificar</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </td>
-                    <td>
-                         <div class="btn-group">
-                            <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id fase.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
-                        </div>
-                    </td>
+                    {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
+                        <td>
+                            <div class="btn-group">
+                                <a href="{% url 'administracion.views.confirmar_eliminar_atributo' proyecto.id fase.id atributo.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <tr class="warning">

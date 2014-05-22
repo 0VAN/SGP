@@ -2,7 +2,7 @@
 {% block titulo %}Desarrollo{% endblock %}
 
 {% block activo-admin %}
-    {% if not usuario_actor.accesoLiderProyecto %}
+    {% if not usuario_actor.esLider %}
         hide
     {% endif %}
 {% endblock %}
@@ -10,7 +10,7 @@
     active
 {% endblock %}
 {% block activo-gc %}
-    {% if not usuario_actor.accesoLiderProyecto %}
+    {% if not usuario_actor.esLider %}
         hide
     {% endif %}
 {% endblock %}
@@ -56,7 +56,7 @@
                         </div>
                     </td>
                 <td>
-                    {% if usuario_actor in proyecto.Usuarios.all %}
+                    {% if usuario_actor in proyecto.Usuarios.all and proyecto.get_Estado_display == "Activo" %}
                         <a href="{% url 'desarrollo.views.des_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Desarrollar</a>
                     {% endif %}
                 </td>

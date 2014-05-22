@@ -8,7 +8,16 @@
 
 {% block contenido %}
     {% if comite %}
-        <h1>{{ comite.pk }}</h1>
+        <h4>Integrantes:</h4>
+        <ol>
+            <li><h5>{{ comite.Usuario1 }}</h5></li>
+            {% if comite.Usuario2 %}
+                <li><h5>{{ comite.Usuario2 }}</h5></li>
+            {% endif %}
+            {% if comite.Usuario3 %}
+                <li><h5>{{ comite.Usuario3 }}</h5></li>
+            {% endif %}
+        </ol>
     {% else %}
         <h4><b>El proyecto aun no posee comite</b></h4>
         <a href="{% url 'gestion.views.crear_comite' proyecto.id %}" class="btn btn-primary">Crear Comite</a>
