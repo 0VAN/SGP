@@ -4,6 +4,11 @@ from gestion.models import *
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
+class ComiteForm(forms.ModelForm):
+    class Meta:
+        model = ComiteDeCambio
+        exclude = ['Usuario1','Proyecto']
+
 class LineBaseForm(forms.ModelForm):
     Items = forms.ModelMultipleChoiceField(queryset=Item.objects.all(),label=('Seleccionar Items'),
                                           widget=FilteredSelectMultiple(('Items'),False,))
