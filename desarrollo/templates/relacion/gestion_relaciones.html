@@ -7,7 +7,7 @@
         <li><a href="{% url 'desarrollo.views.asignar_antecesor_view' fase.Proyecto.id fase.id item.id %}" class="btn btn-default">Asignar antecesor</a></li>
     {% endif %}
 
-    {% if relacion != True %}
+    {% if relacion.padre != None or relacion.antecesor != None %}
         <li><a href="{% url 'desarrollo.views.eliminar_relacion_view' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-default">Eliminar Relacion</a></li>
     {% endif %}
     <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
@@ -17,30 +17,30 @@
 
 {% block contenido %}
     <dl class="dl-horizontal">
-        <dt>Relacion:</dt>
-        {% if relacion == False %}
-            <dd>El item no posee padre ni antecesor</dd>
-        {% else %}
-            {% if relacion.antecesor == None %}
-                <dd>Padre</dd>
-                <dt>Item:</dt>
+        <dt>Tipo de Relacion:</dt>
+
+            {% if relacion.padre != None %}
+                <dd>Hijo</dd>
+                <dt>Item Padre:</dt>
                 <dd>{{ relacion.padre.Nombre }}</dd>
-                <dt>Fase:</dt>
+                <dt>Fase del Padre:</dt>
                 <dd>{{ relacion.padre.Fase }}</dd>
                 <dt>Proyecto:</dt>
                 <dd>{{ relacion.padre.Fase.Proyecto }}</dd>
-            {% else %}
-                <dd>Antecesor</dd>
-                <dt>Item:</dt>
+            {% elif relacion.antecesor != None %}
+                <dd>Sucesor</dd>
+                <dt>Item Antecesor:</dt>
                 <dd>{{ relacion.antecesor.Nombre }}</dd>
-                <dt>Fase:</dt>
+                <dt>Fase del Antecesor:</dt>
                 <dd>{{ relacion.antecesor.Fase }}</dd>
                 <dt>Proyecto:</dt>
                 <dd>{{ relacion.antecesor.Fase.Proyecto }}</dd>
+            {% else %}
+                <dd>El item no posee padre ni antecesor</dd>
             {% endif %}
-        {% endif %}
 
     </dl>
+
     <div class="col-lg-4 table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -62,7 +62,7 @@
             </tbody>
         </table>
     </div>
-
+`
     <div class="col-lg-4 table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -85,12 +85,11 @@
         </table>
     </div>
 
-
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>
         {% elif suceso == False %}
-            <div class="alert alert-danger">{{ mensaje }}</div>
+            <div class="alert alert-danger pull-left">{{ mensaje }}</div>
         {% endif %}
     {% endblock mensaje %}
 {% endblock %}

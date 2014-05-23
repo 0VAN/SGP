@@ -23,7 +23,7 @@
         <tbody>
             {% for item in lista_items %}
                 <tr>
-                    <td>{{ item.Nombre }}</td>
+                    <td>{{ item.field_dict.Nombre }}</td>
                     <td>{{ item.Usuario }}</td>
                     <td>{{ item.Fecha }}</td>
                     <td>
@@ -39,7 +39,7 @@
                     <td>
                         {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
                             <div class="btn-group pull-right">
-                                <a href="{% url 'desarrollo.views.conf_eliminar_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-success">Revivir</a>
+                                <a href="{% url 'desarrollo.views.item_revivido' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-success">Revivir</a>
                             </div>
                         {% endif %}
                     </td>
@@ -58,8 +58,4 @@
             <div class="alert alert-danger">{{ mensaje }}</div>
         {% endif %}
     {% endblock mensaje %}
-    {% if lista_items %}
-        <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
-        <img src="/static/media/grafoFaseActual.png">
-    {% endif %}
 {% endblock %}

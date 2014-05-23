@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from desarrollo.forms import *
 import reversion
 from django.core.exceptions import *
+from django.db import IntegrityError
 import pydot
 from gestion.models import *
 from gestion.forms import *
@@ -216,37 +217,34 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
 
 def conf_eliminar_item(request, idProyecto, idFase, idItem):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=idProyecto)
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
-    return render_to_response(
+    lista_items = Item.objects.filter(Fase=fase)
+    if hijos(item) or sucesores(item):
+        return render_to_response(
+        'des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,
+         'mensaje': 'El item '+item.Nombre+' no se puede eliminar porque posee hijos o sucesores', 'suceso':False},
+        context_instance=RequestContext(request)
+        )
+    else:
+        return render_to_response(
         'item/conf_eliminar_item.html',
         {'usuario_actor': usuario, 'item': item, 'fase': fase},
         context_instance=RequestContext(request)
     )
 
-def eliminar(item):
-    lista_hijos = hijos(item)
-    lista_sucesores = sucesores(item)
-
-    for hijo in lista_hijos:
-        eliminar(hijo.item)
-
-    for sucesor in lista_sucesores:
-        eliminar(sucesor.item)
-
-    item.Estado = Item.ELIMINADO
-    item.save()
-
-    return True
-
-
 def eliminar_item(request, idProyecto, idFase, idItem):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=idProyecto)
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
-    eliminar(item)
+
+    relacion = Relacion.objects.get(item=item)
+    relacion.delete()
+    campos = Campo.objects.filter(item=item)
+    campos.delete()
+
+    item.delete()
     lista_items = Item.objects.filter(Fase=idFase).exclude(Estado=item.ELIMINADO)
     generar_grafo_fase(idFase)
     return render_to_response(
@@ -256,22 +254,58 @@ def eliminar_item(request, idProyecto, idFase, idItem):
         context_instance=RequestContext(request)
     )
 
-def revivir_item(request, idProyecto, idFase, idItem):
+def revivir_item(request, id_proyecto, id_fase):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=idProyecto)
-    fase = Fase.objects.get(pk=idFase)
-    item = Item.objects.get(pk=idItem)
-    eliminar(item)
-    lista_items = Item.objects.filter(Fase=idFase).exclude(Estado=item.ELIMINADO)
-    generar_grafo_fase(idFase)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_eliminados = reversion.get_deleted(Item)
+    lista_items =[]
+
+    for item in lista_eliminados:
+       for key,value in item.field_dict.iteritems():
+           if key == 'Fase' and value == int(id_fase):
+                lista_items.append(item)
+
+
+    return render_to_response('item/items_eliminados.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
+        context_instance=RequestContext(request))
+
+def item_revivido(request, id_proyecto,  id_fase, id_version):
+
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lista_eliminados = reversion.get_deleted(Item)
+    item = lista_eliminados.get(id=id_version)
+
+    id_revision = item.revision_id
+    item.revert()
+
+    lista_atributos_eliminados = reversion.get_deleted(Campo)
+    for atributo in lista_atributos_eliminados:
+        if atributo.revision_id == id_revision:
+            atributo.revert()
+
+    lista_relaciones_eliminadas = reversion.get_deleted(Relacion)
+
+    try:
+            relacion = lista_relaciones_eliminadas.get(revision_id=id_revision)
+            relacion.revert()
+    except IntegrityError:
+            relacion = Relacion.objects.create(item=Item.objects.get(pk=item.object_id))
+
+
+
+
+    mensaje= 'Item revivido'
+    lista_items = Item.objects.filter(Fase=id_fase)
+    generar_grafo_fase(id_fase)
+
     return render_to_response(
-        'item/item_exito.html',
-        {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,
-         'mensaje': 'El item '+item.Nombre+' se ha eliminado exitosamente'},
-        context_instance=RequestContext(request)
-    )
-
-
+                'des_fase.html',
+                {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':True},
+                context_instance=RequestContext(request)
+            )
 
 def generar_grafo_proyecto(id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -348,7 +382,7 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
                 print(version.id)
                 version.revert()
 
-    lista_version = reversion.get_unique_for_object(relacion)
+    lista_version = reversion.get_for_object(relacion)
     for version in lista_version:
         if version.revision_id == version_item:
             version.revert()
@@ -398,6 +432,7 @@ def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
     )
 
 
+
 @reversion.create_revision()
 def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
@@ -421,33 +456,23 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
-    try:
-        relacion = Relacion.objects.get(item=item)
-    except ObjectDoesNotExist:
-        relacion = False
+    relacion = Relacion.objects.get(item=item)
 
-    lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item).exclude(Estado=Item.ELIMINADO)
-    nueva_relacion = Relacion()
-    nueva_relacion.item = item
+    lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item)
     if request.method=='POST':
-        formulario = PadreForm(request.POST, instance=nueva_relacion)
+        formulario = PadreForm(request.POST, instance=relacion)
         if formulario.is_valid():
             if generaCiclo(id_item, request.POST['padre']):
                 suceso = False
                 mensaje = 'Error: Esta relacion genera un ciclo'
             else:
-                if(relacion != False):
-                    relacion2 = formulario.save(commit=False)
-                    relacion.padre = relacion2.padre
-                    relacion.antecesor = None
-                    relacion.save()
-                else:
-                    formulario.save()
-                    relacion = Relacion.objects.get(item=item)
+                formulario.save()
                 mensaje = 'Padre asignado exitosamente'
                 suceso = True
-                relacion = Relacion.objects.get(item=item)
-                item.save()
+
+            item.save()
+            for campo in Campo.objects.filter(item=item):
+                    campo.save()
             return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
@@ -482,32 +507,25 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    try:
-        relacion = Relacion.objects.get(item=item)
-    except ObjectDoesNotExist:
-        relacion = False
+    relacion = Relacion.objects.get(item=item)
+
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
         lista_items = Item.objects.filter(Fase=faseAnterior).exclude(Estado=Item.ELIMINADO)
-    nueva_relacion = Relacion()
-    nueva_relacion.item = item
+
     if request.method=='POST':
-        formulario = AntecesorForm(request.POST, instance=nueva_relacion)
+        formulario = AntecesorForm(request.POST, instance=relacion)
         if formulario.is_valid():
-            if relacion != False:
-                relacion2 = formulario.save(commit=False)
-                relacion.antecesor = relacion2.antecesor
-                relacion.padre = None
-                relacion.save()
-            else:
-                formulario.save()
-                relacion = Relacion.objects.get(item=item)
             formulario.save()
-            item.save()
-            mensaje = 'Antecesor asignado exitosamente'
-            suceso = True
-            relacion = Relacion.objects.get(item=item)
-            return render_to_response(
+
+        item.save()
+        for campo in Campo.objects.filter(item=item):
+            campo.save()
+
+        mensaje = 'Antecesor asignado exitosamente'
+        suceso = True
+        relacion = Relacion.objects.get(item=item)
+        return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso, 'item': item, 'relacion': relacion},
                 context_instance=RequestContext(request)
@@ -680,7 +698,6 @@ def eliminar_relacion_view(request, id_proyecto, id_fase, id_item):
 
 def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     relacion = Relacion.objects.get(item=item)
@@ -696,7 +713,6 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
 
 def finalizar_item_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     return render_to_response(
@@ -707,7 +723,6 @@ def finalizar_item_view(request, id_proyecto, id_fase, id_item):
 
 def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     item.Estado = item.FINALIZADO
@@ -721,14 +736,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
-def revivir_item(request, id_proyecto, id_fase):
-    usuario = request.user
-    proyecto = Proyecto.objects.get(pk=id_proyecto)
-    fase = Fase.objects.get(pk=id_fase)
-    lista_items = Item.objects.filter(Estado=Item.ELIMINADO)
-    return render_to_response('item/items_eliminados.html',
-        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
-        context_instance=RequestContext(request))
+
 
 def solicitud_cambio_view(request, id_proyecto, id_fase):
     usuario = request.user
