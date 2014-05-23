@@ -9,10 +9,8 @@
 
 {%  block botones %}
     <li>
-            {% if proyecto.Lider == usuario_actor %}
+            {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
                 <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
-            {% else %}
-                <a class="btn btn-default" disabled="disabled">Crear Fase</a>
             {% endif %}
     </li>
     <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
@@ -39,7 +37,8 @@
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Usuario }}</td>
                     <td>{{ fase.Fecha }}</td>
-                    <td>
+                    {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
+                        <td>
                             <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
                                 <span class="glyphicon glyphicon-chevron-up"></span>
 
@@ -47,7 +46,8 @@
                             <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
                                 <span class="glyphicon glyphicon-chevron-down"></span>
                             </a>
-                    </td>
+                        </td>
+                    {% endif %}
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -56,9 +56,15 @@
 
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'administracion.views.detalle_fase' proyecto.id fase.id %}">Detalle</a></li>
-                                <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url 'administracion.views.fase_asignar_usuarios' proyecto.id fase.id %}">Usuarios</a></li>
+                                {% if proyecto.Lider == usuario_actor %}
+                                    {% if proyecto.get_Estado_display == "Pendiente" %}
+                                        <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
+                                    {% endif %}
+                                    {% if proyecto.get_Estado_display == "Activo" %}
+                                        <li class="divider"></li>
+                                        <li><a href="{% url 'administracion.views.fase_asignar_usuarios' proyecto.id fase.id %}">Usuarios</a></li>
+                                    {% endif %}
+                                {% endif %}
                             </ul>
                         </div>
                     </td>
@@ -73,11 +79,13 @@
                             </ul>
                         </div>
                     </td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
-                        </div>
-                    </td>
+                    {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
+                        <td>
+                            <div class="btn-group">
+                                <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <tr class="warning">

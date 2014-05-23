@@ -441,7 +441,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_proyectos = Proyecto.objects.all().order_by('id')
 
-    if proyecto.Estado == 'P':
+    if proyecto.Estado == 'A':
         if request.method == 'POST':
             formulario = ProyectoAsignarUsuarioForm(request.POST, instance=proyecto)
             if formulario.is_valid():
@@ -468,11 +468,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
                                       {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha sido cancelado, ver detalles',
                                        'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
-    elif proyecto.Estado == 'A':
-            return render_to_response('proyecto/proyecto_error.html',
-                                      {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha iniciado, ver detalles',
-                                       'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
-                                      context_instance=RequestContext(request))
+
     elif proyecto.Estado == 'F':
             return render_to_response('proyecto/proyecto_error.html',
                                       {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha finalizado, ver detalles',
@@ -758,7 +754,7 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
     lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('id')
     fase = Fase.objects.get(pk=idFase)
 
-    if proyecto.Estado == 'P':
+    if proyecto.Estado == 'A':
         if request.method == 'POST':
             formulario = AsignarUsuarioFase(request.POST, instance=fase)
             if formulario.is_valid():
@@ -783,11 +779,6 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
     elif proyecto.Estado == 'C':
             return render_to_response('proyecto/fase/fases_error.html',
                                       {'mensaje': 'No puedes modificar los datos de la fase '+fase.Nombre + ' porque el proyecto ya ha sido cancelado, ver detalles',
-                                       'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
-                                      context_instance=RequestContext(request))
-    elif proyecto.Estado == 'A':
-            return render_to_response('proyecto/fase/fases_error.html',
-                                      {'mensaje': 'No puedes modificar los datos de la fase '+fase.Nombre + ' porque el proyecto ya ha iniciado, ver detalles',
                                        'usuario_actor': request.user, 'lista_fases': lista_fases, 'proyecto': proyecto},
                                       context_instance=RequestContext(request))
     elif proyecto.Estado == 'F':

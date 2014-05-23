@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block activo-des %}
+    {% if not usuario_actor.esLider %}
         hide
+    {% endif %}
 {% endblock %}
 
 {% block activo-gc %}
