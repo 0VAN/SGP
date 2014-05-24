@@ -1,0 +1,55 @@
+{% extends 'gestion.html' %}
+{% block titulo %}Solicitudes de Cambio{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Solicitudes de Cambio del proyecto: {% endblock %}
+
+{% block contenido %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Solicitado por</th>
+                <th>Fase</th>
+                <th>Fecha de solicitud</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for solicitud in lista_solicitudes %}
+                <tr>
+                    <td>{{ solicitud.nombre }}</td>
+                    <td>{{ solicitud.usuario }}</td>
+                    <td>{{ solicitud.fase }}</td>
+                    <td>{{ solicitud.fecha }}</td>
+                    <td>{{ solicitud.get_estado_display }}</td>
+                    <td>
+                        <a href="{% url 'gestion.views.detalle_solicitud_view' proyecto.id solicitud.id %}" type="button" class="btn btn-warning">Detalle</a>
+                    </td>
+                    {% if solicitud.get_estado_display == 'Aprobada' %}
+                        <td>
+                            <a href="{% url 'gestion.views.credencial_view' proyecto.id solicitud.id %}" type="button" class="btn btn-info">Crear Credencial</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                    <td>No hay solicitudes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+{% endblock %}

@@ -84,7 +84,7 @@
             </tbody>
         </table>
     </div>
-
+    <div class="col-lg-12">
     {% block mensaje %}
         {% if suceso == True %}
             <div class="alert alert-success">{{ mensaje }}</div>
@@ -92,4 +92,5 @@
             <div class="alert alert-danger pull-left">{{ mensaje }}</div>
         {% endif %}
     {% endblock mensaje %}
+    </div>
 {% endblock %}

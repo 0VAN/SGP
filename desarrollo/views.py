@@ -46,11 +46,20 @@ def des_proyecto(request, id_proyecto):
 
 def des_fase(request, id_proyecto, id_fase):
     generar_grafo_fase(id_fase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     lista_items = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
     return render_to_response('des_fase.html',
-        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados},
         context_instance=RequestContext(request))
 
 
@@ -624,13 +633,16 @@ def impacto_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     costo_m_atras = costo_monetario_atras(item)
     costo_m_adelante = costo_monetario_adelante(item)
+    costo_monetario_total = costo_m_atras + costo_m_adelante + item.CostoUnitario
     costo_t_atras = costo_temporal_atras(item)
     costo_t_adelante = costo_temporal_adelante(item)
+    costo_temporal_total = costo_t_atras + costo_t_adelante + item.CostoTemporal
     return render_to_response(
         'item/impacto.html',
         {'fase': fase, 'usuario': usuario, 'item': item, 'costo_monetario_atras': costo_m_atras,
          'costo_monetario_adelante': costo_m_adelante, 'costo_temporal_atras': costo_t_atras,
-         'costo_temporal_adelante': costo_t_adelante},
+         'costo_temporal_adelante': costo_t_adelante, 'costo_monetario_total': costo_monetario_total,
+         'costo_temporal_total': costo_temporal_total},
         context_instance=RequestContext(request)
     )
 
@@ -756,9 +768,23 @@ def solicitud_cambio_view(request, id_proyecto, id_fase):
         formulario.fields["items"].help_text = "Haga doble click en el item que desee agregar"
         if formulario.is_valid():
             formulario.save()
+            solicitud = SolicitudCambio.objects.last()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
+            comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+            voto1 = Voto()
+            voto1.solicitud =solicitud
+            voto1.usuario = comite.Usuario1
+            voto1.save()
+            voto2 = Voto()
+            voto2.solicitud =solicitud
+            voto2.usuario = comite.Usuario2
+            voto2.save()
+            voto3 = Voto()
+            voto3.solicitud =solicitud
+            voto3.usuario = comite.Usuario3
+            voto3.save()
             return render_to_response(
                 'des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
@@ -804,3 +830,5 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
          'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)
     )
+
+

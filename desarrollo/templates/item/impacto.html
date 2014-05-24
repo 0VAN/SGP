@@ -5,8 +5,14 @@
 {% endblock %}
 {% block encabezado %}Impacto del item: {{ item.Nombre }}{% endblock %}
 {% block contenido %}
-    <p>Costo Monetario hacia atras: {{ costo_monetario_atras }}</p>
-    <p>Costo Monetario hacia adelante: {{ costo_monetario_adelante }}</p>
-    <p>Costo Temporal hacia atras: {{ costo_temporal_atras }}</p>
-    <p>Cossto Temporal hacia adelante: {{ costo_temporal_adelante }}</p>
+    <div class="col-lg-5 text-center">
+        <ul class="list-group">
+        <li class="list-group-item">Costo Monetario hacia atras: {{ costo_monetario_atras }}</li>
+        <li class="list-group-item">Costo Monetario hacia adelante: {{ costo_monetario_adelante }}</li>
+        <li class="list-group-item">Costo Monetario Total: {{ costo_monetario_total }}</li>
+        <li class="list-group-item">Costo Temporal hacia atras: {{ costo_temporal_atras }}</li>
+        <li class="list-group-item">Costo Temporal hacia adelante: {{ costo_temporal_adelante }}</li>
+        <li class="list-group-item">Costo Temporal Total: {{ costo_temporal_total }}</li>
+        </ul>
+    </div>
 {% endblock %}

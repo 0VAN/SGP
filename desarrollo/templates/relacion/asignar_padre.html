@@ -5,6 +5,9 @@
 {% endblock %}
 {% block encabezado %}Asignar relacion del item: {{ item }}{% endblock %}
 {% block contenido %}
+    {% if relacion != False %}
+        <p>Al asignar el padre se elimina la relacion que poseia anteriormente</p>
+    {% endif %}
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table">
             <tr>

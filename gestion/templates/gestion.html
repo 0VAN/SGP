@@ -30,6 +30,7 @@
                 <th>Estado</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,11 @@
                             <td class="btn-group">
                                 <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
                             </td>
+                            {% if usuario_actor.integraComite %}
+                                <td>
+                                        <a href="{% url 'gestion.views.solicitudes_view' proyecto.id %}" class="btn btn-default">Solicitudes de Cambio</a>
+                                </td>
+                            {% endif %}
                             {% if usuario_actor == proyecto.Lider %}
                                 <td>
                                     <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>

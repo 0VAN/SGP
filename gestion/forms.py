@@ -35,3 +35,10 @@ class SolicitudCambioForm(MyForm):
         css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
         js = ('/static/js/jsi18n.js',)
+
+
+class CredencialForm(MyForm):
+
+    class Meta:
+        model = Credencial
+        exclude = ['solicitud', 'fechaCreacion']
