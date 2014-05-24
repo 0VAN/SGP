@@ -34,6 +34,7 @@
                 <th>Estado</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -43,14 +44,20 @@
                         <td>{{ proyecto.Nombre }}</td>
                         <td>{{ proyecto.Lider }}</td>
                         <td>{{ proyecto.get_Estado_display }}</td>
-                        {% if proyecto.get_Estado_display == "Pendiente" %}
+                        {% if proyecto.get_Estado_display == "Activo" %}
                             <td class="btn-group">
                                 <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
                             </td>
+                        {% else %}
+                            <td></td>
                         {% endif %}
+                        <td>
+                            <a href="{% url 'gestion.views.solicitudes_view' proyecto.id %}" class="btn btn-default">Solicitudes de Cambio</a>
+                        </td>
                         <td>
                             <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
                         </td>
+
                     </tr>
                {% endif %}
             {% empty %}
