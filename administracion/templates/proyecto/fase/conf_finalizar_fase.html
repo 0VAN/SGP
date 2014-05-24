@@ -10,7 +10,7 @@
 {% block contenido %}
     <p class="alert alert-danger">{{ mensaje }}</p>
     <p>
-        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.iniciar_fase' fase.Proyecto.id fase.id %}">Si</a>
+        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.finalizar_fase' fase.Proyecto.id fase.id %}">Si</a>
         <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_fases' fase.Proyecto.id %}">No</a>
     </p>
 {% endblock %}

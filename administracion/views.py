@@ -646,11 +646,70 @@ def confirmar_iniciar_fase(request, id_proyecto, id_fase):
         fase_anterior = Fase.objects.get(Proyecto=fase.Proyecto, Numero=(fase.Numero-1))
         if fase_anterior.Estado != Fase.FINALIZADA:
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
-                              'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
+                            'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
     else:
+        mensaje = 'Estas seguro que desea iniciar la fase '+fase.Nombre+' este cambio es irrevertible'
         return render_to_response('proyecto/fase/conf_iniciar_fase.html', {'usuario_actor': request.user, 'fase': fase
-                                ,'lista_fases': lista_fases}, context_instance=RequestContext(request))
+                                ,'lista_fases': lista_fases, 'mensaje':mensaje}, context_instance=RequestContext(request))
+
+
+def finalizar_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+
+    fase = Fase.objects.get(pk=id_fase)
+    fase.Estado = Fase.FINALIZADA
+    #fase.Fecha_inicio = timezone.now()
+    fase.save()
+    proyecto = fase.Proyecto
+
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    return render_to_response('proyecto/fase/fases_exito.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'Se ha finalizado a la fase '+fase.Nombre, 'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+
+def confirmar_finalizar_fase(request, id_proyecto, id_fase):
+
+    """
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+
+    fase = Fase.objects.get(pk=id_fase)
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    proyecto = fase.Proyecto
+    lista_items = Item.objects.filter(Fase=fase)
+
+    if fase.Proyecto.Estado == 'C':
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase': fase, 'proyecto':proyecto,
+                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque el proyecto ya ha sido cancelado, ver detalles',
+                              'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+    elif fase.Proyecto.Estado == 'F':
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque el proyecto ya ha finalizado, ver detalles',
+                              'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+    elif not lista_items:
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase porque no posee item alguno',
+                              'lista_fases': lista_fases}, context_instance=RequestContext(request))
+    else:
+        for item in lista_items:
+            if item.Estado != Item.VALIDADO:
+                return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque no todos los items estan en una linea base, ver detalles',
+                                'fase':fase,'proyecto':proyecto,
+                              'lista_fases': lista_fases}, context_instance=RequestContext(request))
+
+    mensaje = 'Estas seguro que desea finalizar la fase '+fase.Nombre+' este cambio es irrevertible'
+    return render_to_response('proyecto/fase/conf_finalizar_fase.html', {'usuario_actor': request.user, 'fase': fase
+                                ,'lista_fases': lista_fases, 'mensaje':mensaje}, context_instance=RequestContext(request))
 
 
 

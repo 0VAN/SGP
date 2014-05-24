@@ -83,10 +83,16 @@
                                 <a href="{% url 'administracion.views.confirmar_eliminar_fase' proyecto.id fase.id %}" type="button" class="btn btn-danger">Eliminar</a>
                             </div>
                         </td>
-                    {% elif proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Activo"  %}
+                    {% elif proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Activo" and fase.get_Estado_display == 'Pendiente'  %}
                          <td>
                             <div class="btn-group">
                                 <a href="{% url 'administracion.views.confirmar_iniciar_fase' proyecto.id fase.id %}" type="button" class="btn btn-success">Iniciar</a>
+                            </div>
+                        </td>
+                     {% elif proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Activo" and fase.get_Estado_display == 'Iniciada'  %}
+                         <td>
+                            <div class="btn-group">
+                                <a href="{% url 'administracion.views.confirmar_finalizar_fase' proyecto.id fase.id %}" type="button" class="btn btn-success">Finalizar</a>
                             </div>
                         </td>
                     {% endif %}
