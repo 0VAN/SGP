@@ -8,8 +8,12 @@ from desarrollo.forms import MyForm
 class ComiteForm(forms.ModelForm):
     class Meta:
         model = ComiteDeCambio
-        exclude = ['Usuario1','Proyecto']
-
+        exclude = ['Usuario1', 'Proyecto']
+        fields = ['Usuario2', 'Usuario3']
+        labels = {
+            'Usuario2': ('Integrante 2'),
+            'Usuario3': ('Integrante 3'),
+        }
 
 class LineBaseForm(MyForm):
     Items = forms.ModelMultipleChoiceField(queryset=Item.objects.all(),label=('Seleccionar Items'),

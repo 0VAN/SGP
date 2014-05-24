@@ -20,5 +20,7 @@
         <dd>{{ fase.Numero }}</dd>
         <dt>Creado el:</dt>
         <dd>{{ fase.Fecha }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ fase.get_Estado_display }}</dd>
     </dl>
 {% endblock %}

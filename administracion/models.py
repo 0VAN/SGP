@@ -214,6 +214,16 @@ class Fase(models.Model):
     Numero = models.PositiveIntegerField()
     Usuarios = models.ManyToManyField(User, related_name='Participantes_Fase')
 
+    PENDIENTE = 'PEN'
+    INICIADA = 'INI'
+    FINALIZADA = 'FIN'
+    ESTADO_CHOICES = (
+        (PENDIENTE, 'Pendiente'),
+        (INICIADA, 'Iniciada'),
+        (FINALIZADA, 'Finalizada'),
+    )
+    Estado = models.CharField(max_length=3, choices=ESTADO_CHOICES, default=PENDIENTE)
+
     def __unicode__(self):
         return self.Nombre
 

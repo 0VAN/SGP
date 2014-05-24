@@ -66,21 +66,21 @@ def crear_comite(request, id_proyecto):
     if request.method == 'POST':
         formulario = ComiteForm(request.POST, instance=comite)
         formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario2"].help_text = "Seleccione el usuario para el comite"
         formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].help_text = "Seleccione el usuario para el comite"
         if formulario.is_valid():
             formulario.save()
             return render_to_response('comite/gestion_comite.html',
         {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
         context_instance=RequestContext(request))
+        else:
+            return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
+                                                              'id_proyecto':id_proyecto},
+        context_instance=RequestContext(request))
 
     else:
         formulario = ComiteForm(instance=comite)
         formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario2"].label = "Integrante 2:"
         formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].label = "Integrante 3:"
         return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
                                                               'id_proyecto':id_proyecto},
         context_instance=RequestContext(request))

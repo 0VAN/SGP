@@ -29,11 +29,11 @@
         <dt>Tipo de Item:</dt>
         <dd>{{ item.Tipo }}</dd>
 
-        {% if relacion == False %}
+        {% if relacion.padre == relacion.antecesor %}
             <dt>Relacion: </dt>
             <dd>El item no posee padre ni antecesor</dd>
         {% else %}
-            {% if relacion.antecesor == None %}
+            {% if relacion.padre != None %}
                 <dt>Padre:</dt>
                 <dd>{{ relacion.padre.Nombre }} | fase: {{ item.Fase }} | proyecto: {{ item.Fase.Proyecto }}</dd>
             {% else %}

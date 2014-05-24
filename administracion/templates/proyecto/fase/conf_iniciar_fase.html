@@ -1,0 +1,17 @@
+{% extends 'proyecto/fase/adm-fases.html' %}
+{% block titulo %}Iniciar Fase{% endblock %}
+{% block encabezado %}Iniciar {{ fase.Nombre }}{% endblock %}
+{% block activo-admin %}active{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.administrar_fases' fase.Proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <p class="alert alert-danger">Esta seguro que desea dar inicio a la fase {{ fase.Nombre }}? Este cambio no podra
+    deshacerse</p>
+    <p>
+        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.iniciar_fase' fase.Proyecto.id fase.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.administrar_fases' fase.Proyecto.id %}">No</a>
+    </p>
+{% endblock %}

@@ -37,7 +37,7 @@ def des_proyecto(request, id_proyecto):
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
     lista_items = []
     for fase in lista_fases:
-        lista_items = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+        lista_items = Item.objects.filter(Fase=fase)
         if lista_items:
             break
     return render_to_response('des_proyecto.html',
@@ -48,7 +48,7 @@ def des_fase(request, id_proyecto, id_fase):
     generar_grafo_fase(id_fase)
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
-    lista_items = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+    lista_items = Item.objects.filter(Fase=fase)
     return render_to_response('des_fase.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
         context_instance=RequestContext(request))
@@ -96,7 +96,7 @@ def crear_item(request, id_proyecto, id_fase):
             for atributo in item.Tipo.Atributos.all():
                 campo = Campo.objects.create(item=item, tipoItem=item.Tipo, atributo=atributo)
                 campo.save()
-            lista_items = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+            lista_items = Item.objects.filter(Fase=fase)
             relacion = Relacion.objects.create(item=item)
             relacion.save()
             suceso = True
@@ -118,12 +118,14 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+    item.Version += 1
     formulario = ItemForm(request.POST, instance=item)
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     relacion = Relacion.objects.get(item=item)
+
     if formulario.is_valid():
         formulario.save()
-        lista_items = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+        lista_items = Item.objects.filter(Fase=fase)
         suceso = True
         relacion.save()
         mensaje = "El item se ha modificado exitosamente"
@@ -180,6 +182,7 @@ def completar_item(request, id_proyecto, id_fase, id_item):
                         a.save()
         suceso = True
         mensaje = "Atributos modificados exitosamente"
+        item.Version += 1
         item.save()
         relacion.save()
         lista_items = Item.objects.filter(Fase=fase)
@@ -201,16 +204,11 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
     campos = Campo.objects.filter(item=item)
-    try:
-        relacion = Relacion.objects.get(item=item)
-    except ObjectDoesNotExist:
-        relacion = False
-    lista_hijos = hijos(item)
-    lista_sucesores = sucesores(item)
+    relacion = Relacion.objects.get(item=item)
 
     return render_to_response(
         'item/detalle.html',
-        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase},   context_instance=RequestContext(request)
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
     )
 
 
@@ -245,7 +243,7 @@ def eliminar_item(request, idProyecto, idFase, idItem):
     campos.delete()
 
     item.delete()
-    lista_items = Item.objects.filter(Fase=idFase).exclude(Estado=item.ELIMINADO)
+    lista_items = Item.objects.filter(Fase=idFase)
     generar_grafo_fase(idFase)
     return render_to_response(
         'item/item_exito.html',
@@ -316,7 +314,7 @@ def generar_grafo_proyecto(id_proyecto):
     grafo.set_edge_defaults(color="blue", arrowhead="vee", weight="1")
     for fase in fases_proyecto:
         cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
-        items_fase = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+        items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
             cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                         , style="filled", fillcolor="white"))
@@ -337,7 +335,7 @@ def generar_grafo_fase(id_fase):
     grafo.set_node_defaults(shape="component")
     grafo.set_edge_defaults(arrowhead="vee", weight="0")
     cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
-    items_fase = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
+    items_fase = Item.objects.filter(Fase=fase)
     for item in items_fase:
         cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
         if Relacion.objects.filter(item=item):
@@ -359,16 +357,18 @@ def historial_item(request, id_proyecto, id_fase, id_item):
 
 def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
     item = Item.objects.get(pk=id_item)
+    version_antigua = item.Version
     fase = Fase.objects.get(pk=id_fase)
     usuario = request.user
     mensaje = 'Se ha reversionado el item '+str(item.Nombre)
     relacion = Relacion.objects.get(item=item)
     lista_atributos = Campo.objects.filter(item=item)
     lista_items = Item.objects.filter(Fase=id_fase)
+    version = item.Version
     id_version = int('0'+id_version)
     version_item = 0
 
-    lista_version = reversion.get_unique_for_object(item)
+    lista_version = reversion.get_for_object(item)
 
     for version in lista_version:
         if version.id == id_version:
@@ -376,10 +376,9 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
             version.revert()
 
     for atributo in lista_atributos:
-        lista_version = reversion.get_unique_for_object(atributo)
+        lista_version = reversion.get_for_object(atributo)
         for version in lista_version:
             if version.revision_id == version_item:
-                print(version.id)
                 version.revert()
 
     lista_version = reversion.get_for_object(relacion)
@@ -387,6 +386,10 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
         if version.revision_id == version_item:
             version.revert()
 
+    item = Item.objects.get(pk=id_item)
+    item.Version = version_antigua+1
+    item.save()
+    generar_grafo_fase(id_fase)
 
     return render_to_response(
                 'des_fase.html',
@@ -399,35 +402,36 @@ def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
     relacion = Relacion.objects.get(item=item)
-    lista_version = reversion.get_unique_for_object(item)
-    lista_atributos = Campo.objects.filter(item=item)
-    idn_version = int('0'+idVersion)
-    version_item = 0
-    campos = []
 
-    for version in lista_version:
+    lista_version_item = reversion.get_for_object(item)
+    lista_version_relacion = reversion.get_for_object(relacion)
+    lista_atributos = Campo.objects.filter(item=item)
+
+    idn_version = int('0'+idVersion)
+    revision_id = 0
+    campos = []
+    item_version = 0
+    relacion_version = 0
+
+    for version in lista_version_item:
         if version.id == idn_version:
-            item = version
-            version_item = version.revision_id
+            item_version = version
+            revision_id = version.revision_id
 
     for atributo in lista_atributos:
-        lista_version = reversion.get_unique_for_object(atributo)
+        lista_version = reversion.get_for_object(atributo)
         for version in lista_version:
-            if version.revision_id == version_item:
+            if version.revision_id == revision_id:
                 campos.append(version)
-    print(len(campos))
 
-    lista_version = reversion.get_unique_for_object(relacion)
-    for version in lista_version:
-        if version.revision_id == version_item:
-            print(version.id)
+    for version in lista_version_relacion:
+        if version.revision_id == revision_id:
+            relacion_version = version
 
-    print(relacion.item)
-    print(relacion.id)
 
     return render_to_response(
         'item/detalle_version.html',
-        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase},
+        {'usuario_actor': usuario, 'item': item, 'campo_version': campos,'fase':fase, 'item_version':item_version, 'relacion_version':relacion_version,'campos': lista_atributos, 'relacion': relacion},
         context_instance=RequestContext(request)
     )
 
@@ -470,6 +474,7 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
                 mensaje = 'Padre asignado exitosamente'
                 suceso = True
 
+            item.Version += 1
             item.save()
             for campo in Campo.objects.filter(item=item):
                     campo.save()
@@ -511,13 +516,14 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
 
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
-        lista_items = Item.objects.filter(Fase=faseAnterior).exclude(Estado=Item.ELIMINADO)
+        lista_items = Item.objects.filter(Fase=faseAnterior)
 
     if request.method=='POST':
         formulario = AntecesorForm(request.POST, instance=relacion)
         if formulario.is_valid():
             formulario.save()
 
+        item.Version += 1
         item.save()
         for campo in Campo.objects.filter(item=item):
             campo.save()
@@ -777,7 +783,7 @@ def desaprobar_view(request, id_proyecto, id_fase, id_item):
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     return render_to_response(
-        'proyecto/fase/item/desaprobar.html',
+        'item/desaprobar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
         context_instance=RequestContext(request)
     )
@@ -793,7 +799,7 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     mensaje = 'Item desaprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
     return render_to_response(
-        'proyecto/fase/des_fase.html',
+        'des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
          'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)

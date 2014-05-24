@@ -8,7 +8,7 @@ from django.contrib.auth.models import User, Group , timezone
 from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
-from django.core.exceptions import *
+from desarrollo.models import Item
 
 
 # Create your views here.
@@ -601,6 +601,57 @@ def crear_fase(request, id_proyecto):
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'operacion':'Ingrese los datos de la fase'},
                               context_instance=RequestContext(request))
+
+
+def iniciar_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    fase = Fase.objects.get(pk=id_fase)
+    fase.Estado = Fase.INICIADA
+    #fase.Fecha_inicio = timezone.now()
+    fase.save()
+    proyecto = fase.Proyecto
+
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    return render_to_response('proyecto/fase/fases_exito.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'Se ha dado inicio a la fase '+fase.Nombre, 'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+
+def confirmar_iniciar_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    fase = Fase.objects.get(pk=id_fase)
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    proyecto = fase.Proyecto
+
+    if fase.Proyecto.Estado == 'C':
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase': fase, 'proyecto':proyecto,
+                              'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque el proyecto ya ha sido cancelado, ver detalles',
+                              'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+    elif fase.Proyecto.Estado == 'F':
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque el proyecto ya ha finalizado, ver detalles',
+                              'lista_fases': lista_fases}
+                              ,context_instance=RequestContext(request))
+    elif fase.Numero > 1:
+        fase_anterior = Fase.objects.get(Proyecto=fase.Proyecto, Numero=(fase.Numero-1))
+        if fase_anterior.Estado != Fase.FINALIZADA:
+            return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
+                              'lista_fases': lista_fases}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('proyecto/fase/conf_iniciar_fase.html', {'usuario_actor': request.user, 'fase': fase
+                                ,'lista_fases': lista_fases}, context_instance=RequestContext(request))
+
 
 
 @user_passes_test(User.puede_consultar_fases, login_url="/iniciar_sesion")

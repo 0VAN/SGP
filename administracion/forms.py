@@ -132,7 +132,7 @@ class FaseForm(MyForm):
     """
     class Meta:
         model = Fase
-        exclude = ['Usuario', 'Proyecto', 'Numero', 'Usuarios']
+        exclude = ['Usuario', 'Proyecto', 'Numero', 'Usuarios', 'Estado']
 
 class AsignarUsuarioFase(MyForm):
     Usuarios = forms.ModelMultipleChoiceField(queryset=User.objects.all(),label=('Seleccionar Usuarios'),

@@ -1,42 +1,46 @@
 {% extends 'des_fase.html' %}
 {% block titulo %}Historial item{% endblock %}
-{% block encabezado %}Versiones del item {{ item.Nombre}}{% endblock %}
-{% block activo-admin %}active{% endblock %}
+{% block encabezado %}Versiones del item {{ item.Nombre}} {% endblock %}
 
 {%  block botones %}
     <li><a class="btn btn-default" href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
+    <div class="alert alert-info text-center">
+        <p>Version actual del item {{ item.Version }}</p>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <td>Nombre</td>
-                <td>Tipo</td>
-                <td>Descripcion</td>
-                <td>Fecha</td>
-                <td>Id en la tabla de versiones</td>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+                <th>Version</th>
             </tr>
         </thead>
         <tbody>
             {% for version in lista_versiones %}
-                <tr>
-                <td>{{ version.field_dict.Nombre }}</td>
-                <td>{{ version.field_dict.Tipo }}</td>
-                <td>{{ version.field_dict.Descripcion}}</td>
-                <td>{{ version.field_dict.Fecha }}</td>
-                <td>{{ version.revision_id }}</td>
-                <td>
-                    <div class="btn-group pull-right">
-                        <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Revertir a esta version</a>
-                    </div>
-                 </td>
-                 <td>
-                    <div class="btn-group pull-right">
-                        <a href="{% url "desarrollo.views.detalle_item_version" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Ver detalles</a>
-                    </div>
-                 </td>
-                </tr>
+                {% if version.field_dict.Version != item.Version %}
+                        <tr>
+                        <td>{{ version.field_dict.Nombre }}</td>
+                        <td>{{ version.field_dict.Tipo }}</td>
+                        <td>{{ version.field_dict.Descripcion}}</td>
+                        <td>{{ version.field_dict.Fecha }}</td>
+                        <td>{{ version.field_dict.Version }}</td>
+                          <td>
+                            <div class="btn-group pull-right">
+                                <a href="{% url "desarrollo.views.detalle_item_version" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-primary">Ver detalles</a>
+                            </div>
+                         </td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Revertir a esta version</a>
+                            </div>
+                         </td>
+                        </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>
