@@ -11,6 +11,8 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from functools import partial
 from datetime import date
 from django.forms import widgets
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
@@ -79,9 +81,9 @@ class ProyectoAsignarUsuarioForm(MyForm):
         exclude = ['Usuario', 'Estado', 'Lider', 'Nombre', 'Fecha_inicio', 'Fecha_finalizacion', 'Descripcion', 'nFases']
 
     class Media:
-        css = {'all':('/static/css/filteredselectwidget.css',),}
+        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/static/js/jsi18n.js',)
+        js = (BASE_DIR+'/static/js/jsi18n.js',)
 
 
 
@@ -142,9 +144,9 @@ class AsignarUsuarioFase(MyForm):
         exclude = ['Usuario','Proyecto','Numero','Descripcion','Fecha','Nombre']
 
     class Media:
-        css = {'all':('/static/css/filteredselectwidget.css',),}
+        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/static/js/jsi18n.js',)
+        js = (BASE_DIR+'/static/js/jsi18n.js',)
 
 
 class RolForm(MyForm):
@@ -161,9 +163,9 @@ class RolForm(MyForm):
         exclude = ['Usuario']
 
     class Media:
-        css = {'all':('/static/css/filteredselectwidget.css',),}
+        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/static/js/jsi18n.js',)
+        js = (BASE_DIR+'/static/js/jsi18n.js',)
 
 class AtributoForm(MyForm):
     """
@@ -189,14 +191,14 @@ class tipoItemForm(MyForm):
         exclude = ['Usuario','Fase']
 
     class Media:
-        css = {'all':('/static/css/filteredselectwidget.css',),}
+        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/static/js/jsi18n.js',)
+        js = (BASE_DIR+'/static/js/jsi18n.js',)
 
 class tipoItemImportar(forms.Form):
     tipos = forms.ModelMultipleChoiceField(queryset=TipoDeItem.objects.all(),label=('Seleccionar tipos'),
                                           widget=FilteredSelectMultiple(('Tipos'),False,))
     class Media:
-        css = {'all':('/static/css/filteredselectwidget.css',),}
+        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = ('/static/js/jsi18n.js',)
+        js = (BASE_DIR+'/static/js/jsi18n.js',)

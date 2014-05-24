@@ -1,0 +1,20 @@
+{% extends 'gestion_fase.html' %}
+{% block titulo %}Detalle de Linea Base{% endblock %}
+{% block encabezado %}Detalle de la Linea Base: {{ lineaBase.Nombre}}{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'gestion.views.gestion_fase' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <dl class="dl-horizontal">
+        <dt>Creado por:</dt>
+        <dd>{{ lineaBase.Usuario }}</dd>
+        <dt>Nombre de proyecto:</dt>
+        <dd>{{ fase.Proyecto.Nombre }}</dd>
+        <dt>Nombre de fase:</dt>
+        <dd>{{ fase.Nombre }}</dd>
+        <dt>Nombre de la Linea Base:</dt>
+        <dd>{{ lineaBase.Nombre }}</dd>
+    </dl>
+{% endblock %}

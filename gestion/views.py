@@ -128,7 +128,29 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
         {'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
         context_instance=RequestContext(request)
     )
+def detalle_lineaBase(request, id_proyecto, id_fase, id_lineaB):
+    """
 
+    :param request:
+    :param id_proyecto:
+    :return:
+
+    Vista detalle de proyecto
+
+    | Recibe un request y un id de proyecto y retorna una pagina web detalle_proyecto.html con los detalles
+    | de un proyecto
+
+    * Variables
+        -   usuario_actor: es el usuario que realiza la accion
+        -   proyecto: es el proyecto que sera visualizado en detalle
+    """
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    lineaBase =LineBase.objects.get(pk=id_lineaB)
+    return render_to_response('lineaBase_detalle.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto,'fase':fase,
+                                                         'lineaBase':lineaBase},
+                              context_instance=RequestContext(request))
 
 def solicitudes_view(request, id_proyecto):
     usuario = request.user

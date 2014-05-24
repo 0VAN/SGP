@@ -7,6 +7,8 @@ from django.db import IntegrityError
 import pydot
 from gestion.models import *
 from gestion.forms import *
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
@@ -333,7 +335,7 @@ def generar_grafo_proyecto(id_proyecto):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
         if relacion.antecesor:
             grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
-    grafo.write_png('static/media/grafoProyectoActual.png')
+    grafo.write_png(BASE_DIR+'/static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
     fase = Fase.objects.get(pk=id_fase)
@@ -354,7 +356,7 @@ def generar_grafo_fase(id_fase):
     for relacion in relaciones_fase:
         if relacion.padre:
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
-    grafo.write_png('static/media/grafoFaseActual.png')
+    grafo.write_png(BASE_DIR+'/static/media/grafoFaseActual.png')
 
 
 def historial_item(request, id_proyecto, id_fase, id_item):
