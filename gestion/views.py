@@ -291,6 +291,7 @@ def credencial_view(request, id_proyecto, id_solicitud):
         formulario = CredencialForm()
     return render_to_response(
         'solicitud/credencial.html',
-        {'formulario':formulario,'usuario_actor':usuario, 'solicitud':solicitud},
+        {'formulario': formulario, 'usuario_actor': usuario, 'solicitud': solicitud,
+         'proyecto': proyecto},
         context_instance=RequestContext(request)
     )

@@ -146,5 +146,6 @@ urlpatterns = patterns('',
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/$', 'gestion.views.detalle_solicitud_view'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/aprobar/$', 'gestion.views.aprobar_solicitud_view'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/desaprobar/$', 'gestion.views.desaprobar_solicitud_view'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/credencial/$', 'gestion.views.credencial_view'),
 )
 

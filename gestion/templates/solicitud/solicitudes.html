@@ -29,10 +29,12 @@
                     <td>
                         <a href="{% url 'gestion.views.detalle_solicitud_view' proyecto.id solicitud.id %}" type="button" class="btn btn-warning">Detalle</a>
                     </td>
-                    {% if solicitud.get_estado_display == 'Aprobada' %}
-                        <td>
-                            <a href="{% url 'gestion.views.credencial_view' proyecto.id solicitud.id %}" type="button" class="btn btn-info">Crear Credencial</a>
-                        </td>
+                    {% if solicitud.get_estado_display == 'Aceptada' %}
+                        {% if solicitud.items.first.Estado == 'VAL' %}
+                            <td>
+                                <a href="{% url 'gestion.views.credencial_view' proyecto.id solicitud.id %}" type="button" class="btn btn-info">Crear Credencial</a>
+                            </td>
+                        {% endif %}
                     {% endif %}
                 </tr>
             {% empty %}
