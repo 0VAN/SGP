@@ -80,9 +80,11 @@
 
 {"pk": 61, "model": "auth.permission", "fields": {"codename": "add_campo", "name": "Can add campo", "content_type": 13}},
 
+
 {"pk": 1, "model": "auth.group", "fields": {"name": "Administrador", "permissions": [10, 11, 12, 19, 20, 31, 33]}},
 {"pk": 2, "model": "auth.group", "fields": {"name": "Lider de Proyecto", "permissions": [7, 8, 9, 11, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36]}},
 {"pk": 3, "model": "auth.group", "fields": {"name": "Desarrollador", "permissions": [33,34,35,36,37]}},
+{"pk": 4, "model": "auth.group", "fields": {"name": "Integrante de Comite", "permissions": []}},
 
 {"pk": 1, "model": "auth.user", "fields": {"username": "sgp", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": true, "is_staff": true, "last_login": "2014-04-20T17:55:08.342Z", "groups": [1], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}},
 {"pk": 2, "model": "auth.user", "fields": {"username": "lider", "first_name": "", "last_name": "", "is_active": true, "direccion": null, "is_superuser": false, "is_staff": false, "last_login": "2014-04-20T17:55:08.342Z", "groups": [2], "observacion": null, "user_permissions": [], "password": "pbkdf2_sha256$12000$dCuiKL7mrFKY$9XFhqw0+lFe07dYxav5jcx8xKG/1poly3F/88wlpKuw=", "telefono": null, "email": "", "date_joined": "2014-04-20T17:54:29.616Z"}},
