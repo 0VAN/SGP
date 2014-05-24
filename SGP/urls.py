@@ -96,6 +96,7 @@ urlpatterns = patterns('',
 ###############################################URL DESARROLLO###########################################################
     url(r'^desarrollo/$', 'desarrollo.views.desarrollo'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/$', 'desarrollo.views.des_proyecto'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/detalle/$', 'desarrollo.views.detalle_proyecto'),
 
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'desarrollo.views.des_fase'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/detalle/$', 'desarrollo.views.detalle_fase'),
@@ -124,7 +125,7 @@ urlpatterns = patterns('',
 
 
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/eliminados/$', 'desarrollo.views.revivir_item'),
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)versiones/(?P<id_version>\d+)/$', 'desarrollo.views.item_revivido'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.item_revivido'),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/impacto/$', 'desarrollo.views.impacto_view'),
@@ -146,6 +147,10 @@ urlpatterns = patterns('',
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/comite/nuevo/$', 'gestion.views.crear_comite'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'gestion.views.gestion_fase'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/lineaBase$', 'gestion.views.crear_lineaBase_view'),
-
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/$', 'gestion.views.solicitudes_view'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/$', 'gestion.views.detalle_solicitud_view'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/aprobar/$', 'gestion.views.aprobar_solicitud_view'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/desaprobar/$', 'gestion.views.desaprobar_solicitud_view'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/credencial/$', 'gestion.views.credencial_view'),
 )
 

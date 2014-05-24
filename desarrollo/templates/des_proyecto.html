@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <td>Nombre</td>
-                <td>Usuario</td>
+                <td>Estado</td>
                 <td>Fecha</td>
                 <td></td>
             </tr>
@@ -20,15 +20,15 @@
             {% for fase in lista_fases %}
                 <tr>
                     <td>{{ fase.Nombre }}</td>
-                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.get_Estado_display }}</td>
                     <td>{{ fase.Fecha }}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="{% url 'desarrollo.views.detalle_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Detalle</a>
+                            <a href="{% url 'desarrollo.views.detalle_fase' proyecto.id fase.id %}" type="button" class="btn btn-default">Detalle</a>
                         </div>
                     </td>
                 <td>
-                    {% if usuario_actor in fase.Usuarios.all %}
+                    {% if usuario_actor in fase.Usuarios.all and fase.get_Estado_display != 'Pendiente'%}
                         <a href="{% url 'desarrollo.views.des_fase' proyecto.id fase.id %}" type="button" class="btn btn-success">Desarrollar</a>
                     {% endif %}
                 </td>

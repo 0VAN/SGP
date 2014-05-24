@@ -1,7 +1,7 @@
 {% extends 'gestion.html' %}
 {% block titulo %}Gestion de Proyecto{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Solicitudes de Cambio</a> </li>
+
     <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Usuario</th>
+                <th>Estado</th>
                 <th>Fecha</th>
                 <th></th>
             </tr>
@@ -21,11 +21,13 @@
             {% for fase in lista_fases %}
                 <tr>
                     <td>{{ fase.Nombre }}</td>
-                    <td>{{ fase.Usuario }}</td>
+                    <td>{{ fase.get_Estado_display }}</td>
                     <td>{{ fase.Fecha }}</td>
-                    <td>
-                        <a href="{% url 'gestion.views.gestion_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Lineas Base</a>
-                    </td>
+                    {% if fase.get_Estado_display == 'Iniciada'%}
+                        <td>
+                            <a href="{% url 'gestion.views.gestion_fase' proyecto.id fase.id %}" type="button" class="btn btn-primary">Lineas Base</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <p>No hay fases disponibles</p>

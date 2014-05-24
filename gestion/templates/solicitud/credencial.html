@@ -1,0 +1,25 @@
+{% extends 'solicitud/solicitudes.html' %}
+{% block titulo %}Crear Credencial{% endblock %}
+{% block botones %}
+    <li><a class="btn btn-default" href="{% url 'gestion.views.solicitudes_view' proyecto.id %}">Volver</a></li>
+{% endblock %}
+{% block encabezado%}
+    Crear Credencial
+    <script type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/javascript" src="/static/js/jsi18n.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker();
+    });
+    </script>
+    {{ formulario.media }}
+    {{ formulario.media }}
+{% endblock %}
+{% block contenido %}
+    <form id="formulario" method="post" action="">{% csrf_token %}
+        <table class="table">{{ formulario }}</table>
+        <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
+    </form>
+{% endblock %}

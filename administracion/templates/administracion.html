@@ -7,9 +7,7 @@
 {% endblock %}
 
 {% block activo-des %}
-    {% if not usuario_actor.esLider %}
         hide
-    {% endif %}
 {% endblock %}
 
 {% block activo-gc %}
@@ -19,8 +17,7 @@
 {% endblock %}
 
 {% block usuario%} {{ usuario_actor.get_username }} {% endblock %}
-{% block encabezado %}
-{% endblock %}
+{% block encabezado %}Proyectos{% endblock %}
 
 {% block botones %}
     <li>
@@ -47,4 +44,72 @@
 {% endblock %}
 
 {% block contenido %}
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Lider</th>
+                <th>Estado</th>
+                <th>Fecha de ultima modifificacion</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proyecto in lista_proyectos %}
+                <tr>
+                    <td>{{ proyecto.Nombre }}</td>
+                    <td>{{ proyecto.Lider }}</td>
+                    <td><b><i>{{ proyecto.get_Estado_display }}</i></b></td>
+                    <td>{{ proyecto.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'administracion.views.detalle_proyecto' proyecto.id %}">Detalles</a></li>
+                                {% if usuario_actor == proyecto.Lider %}
+                                    {% if proyecto.get_Estado_display == "Pendiente" %}
+                                        <li><a href="{% url 'administracion.views.modificar_proyecto_lider' proyecto.id %}">Modificar</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
+                                    {% endif %}
+                                {% elif usuario_actor.esAdministrador %}
+                                     <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </td>
+                    {% if usuario_actor == proyecto.Lider %}
+                        {% if proyecto.get_Estado_display == "Activo" %}
+                            <td>
+                                <a href="{% url 'administracion.views.proyecto_asignar_usuarios' proyecto.id %}" type="button" class="btn btn-primary">Asignar usuarios</a>
+                            </td>
+                        {% endif %}
+                        <td>
+                            <a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-warning">Fases</a>
+                        </td>
+                        {% if proyecto.get_Estado_display == "Pendiente" %}
+                            <td>
+                                <a href="{% url 'administracion.views.confirmar_eliminar_proyecto' proyecto.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        {% endif %}
+                    {% elif usuario_actor.puede_consultar_fases %}
+                        <td></td>
+                        <td><a href="{% url 'administracion.views.administrar_fases' proyecto.id %}" class="btn btn-warning">Fases</a></td>
+                        <td></td>
+                    {% else %}
+                        <td></td><td></td><td></td>
+                    {% endif %}
+                </tr>
+            {% empty %}
+                <tr class="warning">
+                <td>No hay proyectos disponibles</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

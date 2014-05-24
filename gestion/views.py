@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, RequestContext, get_object_or_4
 from django.contrib.auth.decorators import login_required
 from gestion.models import *
 from gestion.forms import *
+from django.contrib.auth.models import Group
 # Create your views here.
 @login_required(login_url='/iniciar_sesion')
 def gestion(request):
@@ -68,7 +69,16 @@ def crear_comite(request, id_proyecto):
         formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
         formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
         if formulario.is_valid():
+            rolComite = Group.objects.get(name="Integrante de Comite")
             formulario.save()
+            usuario.groups.add(rolComite)
+            usuario.save()
+            usuario2 = User.objects.get(pk=request.POST["Usuario2"])
+            usuario2.groups.add(rolComite)
+            usuario2.save()
+            usuario3 = User.objects.get(pk=request.POST["Usuario3"])
+            usuario3.groups.add(rolComite)
+            usuario3.save()
             return render_to_response('comite/gestion_comite.html',
         {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
         context_instance=RequestContext(request))
@@ -114,6 +124,174 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
         formulario.fields["Items"].queryset = lista_items
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
     return render_to_response(
-        'lineaBase_form.html',{'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
+        'lineaBase_form.html',
+        {'formulario':formulario,'usuario_actor':usuario, 'fase':fase},
+        context_instance=RequestContext(request)
+    )
+
+
+def solicitudes_view(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
+    return render_to_response(
+        'solicitud/solicitudes.html',
+        {'usuario_actor':usuario, 'proyecto':proyecto, 'lista_solicitudes': lista_solicitudes},
+        context_instance=RequestContext(request)
+    )
+
+def detalle_solicitud_view(request, id_proyecto, id_solicitud):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    votos_aceptados = 0
+    votos_rechazados = 0
+
+    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
+    if voto1.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto1.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
+    if voto2.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto2.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
+    if voto3.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto3.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto = Voto.objects.get(usuario=usuario, solicitud=solicitud)
+    return render_to_response(
+        'solicitud/detalle_solicitud.html',
+        {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud,
+         'voto':voto, 'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+        context_instance=RequestContext(request)
+    )
+
+
+def aprobar_solicitud_view(request, id_proyecto, id_solicitud):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    voto = Voto.objects.get(usuario=usuario, solicitud=solicitud)
+    voto.estado = Voto.ACEPTADO
+    voto.save()
+    suceso = True
+    mensaje = 'Voto aprobado'
+    votos_aceptados = 0
+    votos_rechazados = 0
+
+    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
+    if voto1.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto1.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
+    if voto2.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto2.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
+    if voto3.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto3.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    total_votos = votos_aceptados + votos_rechazados
+    if total_votos == 3:
+        if votos_aceptados > votos_rechazados:
+            solicitud.estado = SolicitudCambio.ACEPTADA
+        else:
+            solicitud.estado = SolicitudCambio.RECHAZADA
+        solicitud.save()
+    return render_to_response(
+        'solicitud/detalle_solicitud.html',
+        {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+        context_instance=RequestContext(request)
+    )
+
+
+def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    voto = Voto.objects.get(usuario=usuario, solicitud=solicitud)
+    voto.estado = Voto.RECHAZADO
+    voto.save()
+    suceso = True
+    mensaje = 'Voto desaprobado'
+    votos_aceptados = 0
+    votos_rechazados = 0
+
+    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
+    if voto1.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto1.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
+    if voto2.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto2.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
+    if voto3.estado == Voto.ACEPTADO:
+        votos_aceptados += 1
+    elif voto3.estado == Voto.RECHAZADO:
+        votos_rechazados += 1
+
+    total_votos = votos_aceptados + votos_rechazados
+    if total_votos == 3:
+        if votos_aceptados > votos_rechazados:
+            solicitud.estado = SolicitudCambio.ACEPTADA
+        else:
+            solicitud.estado = SolicitudCambio.RECHAZADA
+        solicitud.save()
+    return render_to_response(
+        'solicitud/detalle_solicitud.html',
+        {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+        context_instance=RequestContext(request)
+    )
+
+
+def credencial_view(request, id_proyecto, id_solicitud):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    credencial = Credencial()
+    credencial.solicitud = solicitud
+    if request.method == 'POST':
+        formulario = CredencialForm(request.POST, instance=credencial)
+        if formulario.is_valid():
+            formulario.save()
+            lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
+            for item in solicitud.items.all():
+                item.Estado = Item.REVISION
+                item.save()
+            return render_to_response(
+                'solicitud/solicitudes.html',
+                {'usuario_actor':usuario, 'proyecto':proyecto, 'lista_solicitudes': lista_solicitudes},
+                context_instance=RequestContext(request)
+            )
+    else:
+        formulario = CredencialForm()
+    return render_to_response(
+        'solicitud/credencial.html',
+        {'formulario': formulario, 'usuario_actor': usuario, 'solicitud': solicitud,
+         'proyecto': proyecto},
         context_instance=RequestContext(request)
     )

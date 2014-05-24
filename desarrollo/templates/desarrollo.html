@@ -10,7 +10,7 @@
     active
 {% endblock %}
 {% block activo-gc %}
-    {% if not usuario_actor.esLider %}
+    {% if not usuario_actor.esLider and not usuario_actor.integraComite %}
         hide
     {% endif %}
 {% endblock %}
@@ -50,7 +50,7 @@
 
                             <ul class="dropdown-menu" role="'menu">
 
-                                <li><a href="{% url "administracion.views.detalle_proyecto" proyecto.id %}">Detalle</a></li>
+                                <li><a href="{% url "desarrollo.views.detalle_proyecto" proyecto.id %}">Detalle</a></li>
                                 <li class="divider"></li>
                             </ul>
                         </div>

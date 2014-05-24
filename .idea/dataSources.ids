@@ -2222,6 +2222,7 @@
       <column name="Proyecto_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="Fecha" sqlType="timestamptz" length="35" precision="6" nullable="false" jdbcType="93"/>
       <column name="Numero" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Estado" sqlType="varchar" length="3" precision="0" nullable="false" jdbcType="12"/>
       <primary-key name="administracion_fase_pkey" columns="id"/>
       <foreign-key name="administracion_fase_Proyecto_id_fkey" columns="Proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="administracion_fase_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -2483,6 +2484,7 @@
       <exported-key name="gestion_comitedecambio_Usuario3_id_fkey" table="gestion_comitedecambio" schema="public" catalog="sgpdb" columns="Usuario3_id"/>
       <exported-key name="gestion_linebase_Usuario_id_fkey" table="gestion_linebase" schema="public" catalog="sgpdb" columns="Usuario_id"/>
       <exported-key name="gestion_solicitudcambio_usuario_id_fkey" table="gestion_solicitudcambio" schema="public" catalog="sgpdb" columns="usuario_id"/>
+      <exported-key name="gestion_voto_usuario_id_fkey" table="gestion_voto" schema="public" catalog="sgpdb" columns="usuario_id"/>
       <exported-key name="reversion_revision_user_id_fkey" table="reversion_revision" schema="public" catalog="sgpdb" columns="user_id"/>
       <index name="auth_user_username_key" unique="true" columns="username"/>
       <index name="auth_user_username_like" unique="false" columns="username"/>
@@ -2751,6 +2753,27 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
+    <table name="gestion_credencial" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9jcmVkZW5jaWFsX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="solicitud_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="fechaCreacion" sqlType="date" length="13" precision="0" nullable="false" jdbcType="91"/>
+      <column name="fechaFinalizacion" sqlType="date" length="13" precision="0" nullable="false" jdbcType="91"/>
+      <primary-key name="gestion_credencial_pkey" columns="id"/>
+      <foreign-key name="gestion_credencial_solicitud_id_fkey" columns="solicitud_id" ref-table="gestion_solicitudcambio" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="gestion_credencial_solicitud_id" unique="false" columns="solicitud_id"/>
+    </table>
+    <table name="gestion_credencial_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="gestion_linebase" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9saW5lYmFzZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="Nombre" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12"/>
@@ -2812,7 +2835,9 @@
       <foreign-key name="gestion_solicitudcambio_fase_id_fkey" columns="fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="gestion_solicitudcambio_proyecto_id_fkey" columns="proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="gestion_solicitudcambio_usuario_id_fkey" columns="usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="gestion_credencial_solicitud_id_fkey" table="gestion_credencial" schema="public" catalog="sgpdb" columns="solicitud_id"/>
       <exported-key name="solicitudcambio_id_refs_id_94df8bcb" table="gestion_solicitudcambio_items" schema="public" catalog="sgpdb" columns="solicitudcambio_id"/>
+      <exported-key name="gestion_voto_solicitud_id_fkey" table="gestion_voto" schema="public" catalog="sgpdb" columns="solicitud_id"/>
       <index name="gestion_solicitudcambio_fase_id" unique="false" columns="fase_id"/>
       <index name="gestion_solicitudcambio_proyecto_id" unique="false" columns="proyecto_id"/>
       <index name="gestion_solicitudcambio_usuario_id" unique="false" columns="usuario_id"/>
@@ -2841,6 +2866,29 @@
       <index name="gestion_solicitudcambio_items_solicitudcambio_id" unique="false" columns="solicitudcambio_id"/>
     </table>
     <table name="gestion_solicitudcambio_items_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="gestion_voto" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl92b3RvX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="solicitud_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="usuario_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="estado" sqlType="varchar" length="1" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="gestion_voto_pkey" columns="id"/>
+      <foreign-key name="gestion_voto_usuario_id_fkey" columns="usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="gestion_voto_solicitud_id_fkey" columns="solicitud_id" ref-table="gestion_solicitudcambio" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="gestion_voto_solicitud_id" unique="false" columns="solicitud_id"/>
+      <index name="gestion_voto_usuario_id" unique="false" columns="usuario_id"/>
+    </table>
+    <table name="gestion_voto_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>

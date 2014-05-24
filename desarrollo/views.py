@@ -46,15 +46,21 @@ def des_proyecto(request, id_proyecto):
 
 def des_fase(request, id_proyecto, id_fase):
     generar_grafo_fase(id_fase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     lista_items = Item.objects.filter(Fase=fase)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
     return render_to_response('des_fase.html',
-        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados},
         context_instance=RequestContext(request))
-
-
-
 
 
 @reversion.create_revision()
@@ -185,6 +191,7 @@ def completar_item(request, id_proyecto, id_fase, id_item):
         item.Version += 1
         item.save()
         relacion.save()
+        generar_grafo_fase(id_fase)
         lista_items = Item.objects.filter(Fase=fase)
         return render_to_response(
             'des_fase.html',
@@ -337,7 +344,10 @@ def generar_grafo_fase(id_fase):
     cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
     items_fase = Item.objects.filter(Fase=fase)
     for item in items_fase:
-        cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+        if item.Estado == "FIN":
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="green"))
+        else:
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
         if Relacion.objects.filter(item=item):
             relaciones_fase.append(Relacion.objects.get(item=item))
     grafo.add_subgraph(cluster)
@@ -390,6 +400,7 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
     item.Version = version_antigua+1
     item.save()
     generar_grafo_fase(id_fase)
+
 
     return render_to_response(
                 'des_fase.html',
@@ -478,6 +489,7 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
             item.save()
             for campo in Campo.objects.filter(item=item):
                     campo.save()
+            generar_grafo_fase(id_fase)
             return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
@@ -531,6 +543,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
         mensaje = 'Antecesor asignado exitosamente'
         suceso = True
         relacion = Relacion.objects.get(item=item)
+        generar_grafo_fase(id_fase)
         return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso, 'item': item, 'relacion': relacion},
@@ -612,6 +625,12 @@ def detalle_fase(request, id_proyecto, id_fase):
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
+def detalle_proyecto(request, id_proyecto):
+    usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    return render_to_response('detalle_proyecto_des.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
+                              context_instance=RequestContext(request))
+
 def sucesores(item):
     sucesores = Relacion.objects.filter(antecesor=item)
     return sucesores
@@ -627,13 +646,16 @@ def impacto_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     costo_m_atras = costo_monetario_atras(item)
     costo_m_adelante = costo_monetario_adelante(item)
+    costo_monetario_total = costo_m_atras + costo_m_adelante + item.CostoUnitario
     costo_t_atras = costo_temporal_atras(item)
     costo_t_adelante = costo_temporal_adelante(item)
+    costo_temporal_total = costo_t_atras + costo_t_adelante + item.CostoTemporal
     return render_to_response(
         'item/impacto.html',
         {'fase': fase, 'usuario': usuario, 'item': item, 'costo_monetario_atras': costo_m_atras,
          'costo_monetario_adelante': costo_m_adelante, 'costo_temporal_atras': costo_t_atras,
-         'costo_temporal_adelante': costo_t_adelante},
+         'costo_temporal_adelante': costo_t_adelante, 'costo_monetario_total': costo_monetario_total,
+         'costo_temporal_total': costo_temporal_total},
         context_instance=RequestContext(request)
     )
 
@@ -711,6 +733,7 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     relacion = False
     suceso = True
     mensaje = 'Relacion eliminada con exito'
+    generar_grafo_fase(id_fase)
     return render_to_response(
         'relacion/gestion_relaciones.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'relacion': relacion},
@@ -736,6 +759,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     suceso = True
     mensaje = 'Item aprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
+    generar_grafo_fase(id_fase)
     return render_to_response(
         'des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'lista_items': lista_items},
@@ -757,9 +781,23 @@ def solicitud_cambio_view(request, id_proyecto, id_fase):
         formulario.fields["items"].help_text = "Haga doble click en el item que desee agregar"
         if formulario.is_valid():
             formulario.save()
+            solicitud = SolicitudCambio.objects.last()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
+            comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+            voto1 = Voto()
+            voto1.solicitud =solicitud
+            voto1.usuario = comite.Usuario1
+            voto1.save()
+            voto2 = Voto()
+            voto2.solicitud =solicitud
+            voto2.usuario = comite.Usuario2
+            voto2.save()
+            voto3 = Voto()
+            voto3.solicitud =solicitud
+            voto3.usuario = comite.Usuario3
+            voto3.save()
             return render_to_response(
                 'des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
@@ -798,9 +836,12 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     suceso = True
     mensaje = 'Item desaprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
+    generar_grafo_fase(id_fase)
     return render_to_response(
         'des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
          'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)
     )
+
+

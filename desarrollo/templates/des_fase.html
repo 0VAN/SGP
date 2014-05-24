@@ -4,7 +4,9 @@
     <li><a href="{% url 'desarrollo.views.crear_item' fase.Proyecto.id fase.id %}" class="btn btn-default">Crear Item</a></li>
     <li><a href="#" class="btn btn-default">Buscar Item</a></li>
     <li><a href="{% url 'desarrollo.views.revivir_item' fase.Proyecto.id fase.id %}" class="btn btn-default">Revivir Item</a></li>
-    <li><a href="{% url 'desarrollo.views.solicitud_cambio_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Solicitud de Cambio</a></li>
+    {% if comite != False and validados != False %}
+        <li><a href="{% url 'desarrollo.views.solicitud_cambio_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Solicitud de Cambio</a></li>
+    {% endif %}
     <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" class="btn btn-default">Volver</a> </li>
 {% endblock %}
 
@@ -25,9 +27,13 @@
         </thead>
         <tbody>
             {% for item in lista_items %}
-                <tr>
+                {% if item.Estado == 'FIN' %}
+                    <tr class="success">
+                {% else %}
+                    <tr>
+                {% endif %}
                     <td>{{ item.Nombre }}</td>
-                    <td>{{ item.get_Estado_display }}</td>
+                    <td><b><i>{{ item.get_Estado_display }}</i></b></td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">

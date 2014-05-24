@@ -33,7 +33,8 @@ def administracion(request):
         -   usuario_actor: es el usuario que realiza la accion
     """
     usuario_actor = request.user
-    ctx = {'usuario_actor':usuario_actor}
+    lista_proyectos = Proyecto.objects.all()
+    ctx = {'usuario_actor':usuario_actor,'lista_proyectos':lista_proyectos}
     return render_to_response('administracion.html', ctx, context_instance=RequestContext(request))
 ########################################################################################################################
 #############################################Vistas de Administracion de Usuarios#######################################
@@ -444,6 +445,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
     if proyecto.Estado == 'A':
         if request.method == 'POST':
             formulario = ProyectoAsignarUsuarioForm(request.POST, instance=proyecto)
+            formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1).exclude(pk=request.user.pk)
             if formulario.is_valid():
                 formulario.save()
                 return render_to_response('proyecto/proyecto_exito.html',
@@ -458,7 +460,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
                                , 'usuario_actor': request.user}, context_instance=RequestContext(request))
         else:
             formulario = ProyectoAsignarUsuarioForm(instance=proyecto)
-            formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1)
+            formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1).exclude(pk=request.user.pk)
             formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar al proyecto"
             return render_to_response('proyecto/crear_proyecto.html',
                               {'formulario': formulario, 'operacion': 'Usuarios que participaran en el proyecto '+proyecto.Nombre
@@ -648,9 +650,9 @@ def confirmar_iniciar_fase(request, id_proyecto, id_fase):
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
                             'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
-    else:
-        mensaje = 'Estas seguro que desea iniciar la fase '+fase.Nombre+' este cambio es irrevertible'
-        return render_to_response('proyecto/fase/conf_iniciar_fase.html', {'usuario_actor': request.user, 'fase': fase
+
+    mensaje = 'Estas seguro que desea iniciar la fase '+fase.Nombre+' este cambio es irrevertible'
+    return render_to_response('proyecto/fase/conf_iniciar_fase.html', {'usuario_actor': request.user, 'fase': fase
                                 ,'lista_fases': lista_fases, 'mensaje':mensaje}, context_instance=RequestContext(request))
 
 
@@ -698,7 +700,7 @@ def confirmar_finalizar_fase(request, id_proyecto, id_fase):
                               ,context_instance=RequestContext(request))
     elif not lista_items:
         return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
-                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase porque no posee item alguno',
+                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque no posee item alguno',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
     else:
         for item in lista_items:

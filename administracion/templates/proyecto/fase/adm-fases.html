@@ -23,6 +23,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Fecha de ultima modificacion</th>
+                <th>Estado</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -35,6 +36,8 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ fase.Nombre }}</td>
                     <td>{{ fase.Fecha }}</td>
+                    <td>{{ fase.get_Estado_display }}</td>
+
                     {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
                         <td>
                             <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
@@ -92,7 +95,7 @@
                      {% elif proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Activo" and fase.get_Estado_display == 'Iniciada'  %}
                          <td>
                             <div class="btn-group">
-                                <a href="{% url 'administracion.views.confirmar_finalizar_fase' proyecto.id fase.id %}" type="button" class="btn btn-success">Finalizar</a>
+                                <a href="{% url 'administracion.views.confirmar_finalizar_fase' proyecto.id fase.id %}" type="button" class="btn btn-warning">Finalizar</a>
                             </div>
                         </td>
                     {% endif %}

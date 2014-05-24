@@ -1,6 +1,6 @@
 from django.db import models
-from desarrollo.models import *
-from administracion.models import *
+from desarrollo.models import Item
+from administracion.models import User, Proyecto, Fase
 # Create your models here.
 
 class LineBase(models.Model):
@@ -15,8 +15,9 @@ class ComiteDeCambio(models.Model):
     Usuario2 = models.ForeignKey(User, related_name="Usuario2")
     Usuario3 = models.ForeignKey(User, related_name="Usuario3")
     Proyecto = models.ForeignKey(Proyecto)
+
     def __unicode__(self):
-        return self.Nombre
+        return "Comite de Cambio del proyecto " + self.Proyecto
 
 
 class SolicitudCambio(models.Model):
@@ -36,3 +37,30 @@ class SolicitudCambio(models.Model):
         (RECHAZADA, 'Rechazada'),
     )
     estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=PROCESO)
+
+    def __unicode__(self):
+        return self.nombre
+
+
+
+class Voto(models.Model):
+    solicitud = models.ForeignKey(SolicitudCambio)
+    usuario = models.ForeignKey(User)
+    PROCESO = 'P'
+    ACEPTADO = 'A'
+    RECHAZADO = 'R'
+    ESTADO_CHOICES = (
+        (PROCESO, 'En proceso'),
+        (ACEPTADO, 'Aceptado'),
+        (RECHAZADO, 'Rechazado'),
+    )
+    estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=PROCESO)
+
+
+class Credencial(models.Model):
+    solicitud = models.ForeignKey(SolicitudCambio)
+    fechaCreacion = models.DateField(auto_now_add=True, verbose_name='Fecha de creacion')
+    fechaFinalizacion = models.DateField(verbose_name='Fecha de finalizacion')
+
+    def __unicode__(self):
+        return 'Credencial de la solicitud aprobada: ' + self.solicitud.nombre
