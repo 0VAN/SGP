@@ -10,7 +10,7 @@
     active
 {% endblock %}
 {% block activo-gc %}
-    {% if not usuario_actor.esLider %}
+    {% if not usuario_actor.esLider and not usuario_actor.integraComite %}
         hide
     {% endif %}
 {% endblock %}

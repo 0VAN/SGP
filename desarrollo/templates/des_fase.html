@@ -25,9 +25,13 @@
         </thead>
         <tbody>
             {% for item in lista_items %}
-                <tr>
+                {% if item.Estado == 'FIN' %}
+                    <tr class="success">
+                {% else %}
+                    <tr>
+                {% endif %}
                     <td>{{ item.Nombre }}</td>
-                    <td>{{ item.get_Estado_display }}</td>
+                    <td><b><i>{{ item.get_Estado_display }}</i></b></td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">

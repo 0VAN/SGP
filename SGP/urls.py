@@ -120,7 +120,7 @@ urlpatterns = patterns('',
 
 
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/eliminados/$', 'desarrollo.views.revivir_item'),
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)versiones/(?P<id_version>\d+)/$', 'desarrollo.views.item_revivido'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/versiones/(?P<id_version>\d+)/$', 'desarrollo.views.item_revivido'),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/impacto/$', 'desarrollo.views.impacto_view'),

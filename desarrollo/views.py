@@ -54,9 +54,6 @@ def des_fase(request, id_proyecto, id_fase):
         context_instance=RequestContext(request))
 
 
-
-
-
 @reversion.create_revision()
 def crear_item(request, id_proyecto, id_fase):
     usuario = request.user
@@ -182,6 +179,7 @@ def completar_item(request, id_proyecto, id_fase, id_item):
         mensaje = "Atributos modificados exitosamente"
         item.save()
         relacion.save()
+        generar_grafo_fase(id_fase)
         lista_items = Item.objects.filter(Fase=fase)
         return render_to_response(
             'des_fase.html',
@@ -339,7 +337,10 @@ def generar_grafo_fase(id_fase):
     cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
     items_fase = Item.objects.filter(Fase=fase).exclude(Estado=Item.ELIMINADO)
     for item in items_fase:
-        cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+        if item.Estado == "FIN":
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="green"))
+        else:
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
         if Relacion.objects.filter(item=item):
             relaciones_fase.append(Relacion.objects.get(item=item))
     grafo.add_subgraph(cluster)
@@ -387,7 +388,7 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
         if version.revision_id == version_item:
             version.revert()
 
-
+    generar_grafo_fase(id_fase)
     return render_to_response(
                 'des_fase.html',
                 {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':True},
@@ -473,6 +474,7 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
             item.save()
             for campo in Campo.objects.filter(item=item):
                     campo.save()
+            generar_grafo_fase(id_fase)
             return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
@@ -525,6 +527,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
         mensaje = 'Antecesor asignado exitosamente'
         suceso = True
         relacion = Relacion.objects.get(item=item)
+        generar_grafo_fase(id_fase)
         return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario':usuario, 'fase':fase, 'mensaje':mensaje, 'suceso':suceso, 'item': item, 'relacion': relacion},
@@ -705,6 +708,7 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     relacion = False
     suceso = True
     mensaje = 'Relacion eliminada con exito'
+    generar_grafo_fase(id_fase)
     return render_to_response(
         'relacion/gestion_relaciones.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'relacion': relacion},
@@ -730,6 +734,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     suceso = True
     mensaje = 'Item aprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
+    generar_grafo_fase(id_fase)
     return render_to_response(
         'des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'lista_items': lista_items},
@@ -777,7 +782,7 @@ def desaprobar_view(request, id_proyecto, id_fase, id_item):
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     return render_to_response(
-        'proyecto/fase/item/desaprobar.html',
+        'item/desaprobar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
         context_instance=RequestContext(request)
     )
@@ -792,8 +797,9 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     suceso = True
     mensaje = 'Item desaprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
+    generar_grafo_fase(id_fase)
     return render_to_response(
-        'proyecto/fase/des_fase.html',
+        'des_fase.html',
         {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
          'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)

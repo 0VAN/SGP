@@ -1,5 +1,5 @@
 from django.db import models
-from administracion.models import *
+from administracion.models import Fase, Proyecto, Atributo, TipoDeItem
 from django.contrib.auth.models import User
 import reversion
 

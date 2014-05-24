@@ -1,7 +1,6 @@
 
 from django.db import models
 from django.contrib.auth.models import User, Group, Permission
-
 from django.utils import six
 
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
@@ -9,8 +8,6 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True)
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
 Group.add_to_class('Usuario', models.ForeignKey(User, null=True))
 Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
-
-
 
 
 def tienePermiso(self, permiso):
@@ -45,6 +42,14 @@ def esAdministrador(self):
                 return True
     return False
 User.add_to_class('esAdministrador', esAdministrador)
+
+def integraComite(self):
+    rol='Integrante de Comite'
+    for grupo in self.groups.all():
+        if grupo.name ==rol:
+                return True
+    return False
+User.add_to_class('integraComite', integraComite)
 
 ########################################################################################################################
 #########################PERMISOS SOBRE USUARIOS########################################################################

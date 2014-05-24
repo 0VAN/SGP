@@ -6,11 +6,7 @@
         hide
     {% endif %}
 {% endblock %}
-{% block activo-des %}
-    {% if not usuario_actor.esLider %}
-        hide
-    {% endif %}
-{% endblock %}
+
 {% block activo-gc %}
     active
 {% endblock %}
@@ -38,19 +34,21 @@
         </thead>
         <tbody>
             {% for proyecto in lista_proyectos %}
-               {% if usuario_actor == proyecto.Lider %}
+               {% if usuario_actor == proyecto.Lider or usuario_actor in proyecto.Usuarios.all %}
                     <tr>
                         <td>{{ proyecto.Nombre }}</td>
                         <td>{{ proyecto.Lider }}</td>
                         <td>{{ proyecto.get_Estado_display }}</td>
-                        {% if proyecto.get_Estado_display == "Pendiente" %}
+                        {% if proyecto.get_Estado_display == "Activo" %}
                             <td class="btn-group">
                                 <a href="{% url 'gestion.views.gestion_comite' proyecto.id %}" type="button" class="btn btn-success">Comite de cambio</a>
                             </td>
+                            {% if usuario_actor == proyecto.Lider %}
+                                <td>
+                                    <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
+                                </td>
+                            {% endif %}
                         {% endif %}
-                        <td>
-                            <a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-primary">Fases</a>
-                        </td>
                     </tr>
                {% endif %}
             {% empty %}

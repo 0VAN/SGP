@@ -70,7 +70,14 @@ def crear_comite(request, id_proyecto):
         formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
         formulario.fields["Usuario3"].help_text = "Seleccione el usuario para el comite"
         if formulario.is_valid():
+            rolComite = Group.objects.get(name="Integrante de Comite")
             formulario.save()
+            usuario2 = User.objects.get(pk=request.POST["Usuario2"])
+            usuario2.groups.add(rolComite)
+            usuario2.save()
+            usuario3 = User.objects.get(pk=request.POST["Usuario3"])
+            usuario3.groups.add(rolComite)
+            usuario3.save()
             return render_to_response('comite/gestion_comite.html',
         {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
         context_instance=RequestContext(request))

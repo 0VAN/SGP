@@ -1,6 +1,6 @@
 from django.db import models
-from desarrollo.models import *
-from administracion.models import *
+from desarrollo.models import Item
+from administracion.models import User, Proyecto, Fase
 # Create your models here.
 
 class LineBase(models.Model):
