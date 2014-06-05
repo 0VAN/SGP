@@ -192,26 +192,17 @@ def detalle_solicitud_view(request, id_proyecto, id_solicitud):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
     comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
-
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
     voto = Voto.objects.get(usuario=usuario, solicitud=solicitud)
     return render_to_response(
@@ -232,29 +223,20 @@ def aprobar_solicitud_view(request, id_proyecto, id_solicitud):
     voto.save()
     suceso = True
     mensaje = 'Voto aprobado'
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
 
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    total_votos = votos_aceptados + votos_rechazados
-    if total_votos == 3:
+    if votos_restantes == 0:
         if votos_aceptados > votos_rechazados:
             solicitud.estado = SolicitudCambio.ACEPTADA
         else:
@@ -278,29 +260,20 @@ def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
     voto.save()
     suceso = True
     mensaje = 'Voto desaprobado'
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
 
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    total_votos = votos_aceptados + votos_rechazados
-    if total_votos == 3:
+    if votos_restantes == 0:
         if votos_aceptados > votos_rechazados:
             solicitud.estado = SolicitudCambio.ACEPTADA
         else:

@@ -66,7 +66,9 @@
 
                                 <ul class="dropdown-menu" role="'menu">
                                     <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Atributos</a></li>
-                                    <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}">Relaciones</a></li>
+                                    {% if item.Estado != 'SOL' %}
+                                        <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}">Relaciones</a></li>
+                                    {% endif %}
                                     <li><a href="{% url 'desarrollo.views.gestion_archivos_view' fase.Proyecto.id fase.id item.id %}">Archivos</a></li>
                                 </ul>
                             </div>

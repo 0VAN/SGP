@@ -815,18 +815,11 @@ def solicitud_cambio_view(request, id_proyecto, id_fase):
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
             comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
-            voto1 = Voto()
-            voto1.solicitud =solicitud
-            voto1.usuario = comite.Usuario1
-            voto1.save()
-            voto2 = Voto()
-            voto2.solicitud =solicitud
-            voto2.usuario = comite.Usuario2
-            voto2.save()
-            voto3 = Voto()
-            voto3.solicitud =solicitud
-            voto3.usuario = comite.Usuario3
-            voto3.save()
+            for miembro in comite.Miembros.all():
+                voto = Voto()
+                voto.solicitud = solicitud
+                voto.usuario = miembro
+                voto.save()
             return render_to_response(
                 'des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
