@@ -530,7 +530,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
 
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
-        lista_items = Item.objects.filter(Fase=faseAnterior)
+        lista_items = Item.objects.filter(Fase=faseAnterior).filter(Estado=Item.VALIDADO)
 
     if request.method=='POST':
         formulario = AntecesorForm(request.POST, instance=relacion)
@@ -746,6 +746,29 @@ def finalizar_item_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+    relacion = Relacion.objects.get(item=item)
+    lista_items = Item.objects.filter(Fase=fase)
+    if relacion.padre != None:
+        if relacion.padre.Estado != Item.VALIDADO or relacion.padre.Estado != Item.FINALIZADO:
+            suceso = False
+            mensaje = 'El item no puede ser aprobado ya que su padre todavia no ha sido aprobado'
+
+            return render_to_response(
+                'des_fase.html',
+                {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+                 'mensaje': mensaje, 'lista_items': lista_items},
+                context_instance=RequestContext(request)
+            )
+
+    if posee_antecesor(item) == False:
+        suceso = False
+        mensaje = 'El item no posee antecesor directo ni indirecto, por lo tanto no puede ser aprobado'
+        return render_to_response(
+            'des_fase.html',
+            {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+             'mensaje': mensaje, 'lista_items': lista_items},
+            context_instance=RequestContext(request)
+        )
     return render_to_response(
         'item/finalizar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
@@ -756,6 +779,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+
     item.Estado = item.FINALIZADO
     item.save()
     suceso = True
@@ -784,6 +808,9 @@ def solicitud_cambio_view(request, id_proyecto, id_fase):
         if formulario.is_valid():
             formulario.save()
             solicitud = SolicitudCambio.objects.last()
+            for item in solicitud.items:
+                item.Estado = Item.SOLICITUD
+                item.save()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
@@ -846,4 +873,17 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
+
+def posee_antecesor(item):
+    relacion = Relacion.objects.get(item=item)
+    if relacion.antecesor != None:
+        return True
+    while relacion != False:
+        if relacion.antecesor != None:
+            return True
+        try:
+            relacion = Relacion.objects.get(item=relacion.padre)
+        except ObjectDoesNotExist:
+            relacion = False
+    return False
 

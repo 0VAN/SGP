@@ -40,11 +40,11 @@
 
                     {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == "Pendiente" %}
                         <td>
-                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
+                            <a class="btn btn-default btn-sm" href="{% url 'administracion.views.ordenar_fase_subir' fase.id %}" >
                                 <span class="glyphicon glyphicon-chevron-up"></span>
 
                             </a>
-                            <a class="btn btn-default" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
+                            <a class="btn btn-default btn-sm" href="{% url 'administracion.views.ordenar_fase_bajar' fase.id %}" >
                                 <span class="glyphicon glyphicon-chevron-down"></span>
                             </a>
                         </td>

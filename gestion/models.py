@@ -11,13 +11,8 @@ class LineBase(models.Model):
     Fase = models.ForeignKey(Fase)
 
 class ComiteDeCambio(models.Model):
-    Usuario1 = models.ForeignKey(User, related_name="Usuario1")
-    Usuario2 = models.ForeignKey(User, related_name="Usuario2")
-    Usuario3 = models.ForeignKey(User, related_name="Usuario3")
+    Miembros = models.ManyToManyField(User)
     Proyecto = models.ForeignKey(Proyecto)
-
-    def __unicode__(self):
-        return "Comite de Cambio del proyecto " + self.Proyecto
 
 
 class SolicitudCambio(models.Model):

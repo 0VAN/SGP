@@ -44,10 +44,13 @@ def gestion_comite(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     comite = False
+    miembros = None
     if tiene_comite(id_proyecto):
         comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+        miembros = comite.Miembros.all()
+    print miembros
     return render_to_response('comite/gestion_comite.html',
-        {'usuario_actor': usuario, 'proyecto':proyecto, 'comite':comite},
+        {'usuario_actor': usuario, 'proyecto':proyecto, 'comite':comite, 'miembros': miembros},
         context_instance=RequestContext(request))
 
 def tiene_comite(id_proyecto):
@@ -63,37 +66,58 @@ def tiene_comite(id_proyecto):
 def crear_comite(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    comite = ComiteDeCambio(Usuario1=usuario, Proyecto=proyecto)
+    comite_instancia = ComiteDeCambio(Proyecto=proyecto)
+
     if request.method == 'POST':
-        formulario = ComiteForm(request.POST, instance=comite)
-        formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
+        formulario = ComiteForm(request.POST, instance=comite_instancia)
+        formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
         if formulario.is_valid():
+            print 'paso'
             rolComite = Group.objects.get(name="Integrante de Comite")
-            formulario.save()
-            usuario.groups.add(rolComite)
-            usuario.save()
-            usuario2 = User.objects.get(pk=request.POST["Usuario2"])
-            usuario2.groups.add(rolComite)
-            usuario2.save()
-            usuario3 = User.objects.get(pk=request.POST["Usuario3"])
-            usuario3.groups.add(rolComite)
-            usuario3.save()
-            return render_to_response('comite/gestion_comite.html',
-        {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
-        context_instance=RequestContext(request))
+            comite = formulario.save()
+            cantidad = comite.Miembros.all().count()
+            print cantidad % 2
+            if (cantidad % 2) != 0:
+                print 'entro'
+                suceso = False
+                mensaje = 'El comite debe tener un numero impar de miembros'
+                comite.delete()
+                formulario = ComiteForm(instance=comite_instancia)
+                formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
+                return render_to_response(
+                    'comite/crear_comite.html',
+                    {'formulario':formulario, 'usuario_actor': usuario, 'id_proyecto': id_proyecto,
+                     'suceso': suceso, 'mensaje': mensaje},
+                    context_instance=RequestContext(request)
+                )
+            comite.Miembros.add(usuario)
+
+            for user in comite.Miembros.all():
+                user.groups.add(rolComite)
+                user.save()
+
+            comite.save()
+            miembros = comite.Miembros.all()
+            return render_to_response(
+                'comite/gestion_comite.html',
+                {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
+                context_instance=RequestContext(request)
+            )
         else:
-            return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
-                                                              'id_proyecto':id_proyecto},
-        context_instance=RequestContext(request))
+            return render_to_response(
+                'comite/crear_comite.html',
+                {'formulario':formulario,'usuario_actor': usuario, 'id_proyecto': id_proyecto},
+                context_instance=RequestContext(request)
+            )
 
     else:
-        formulario = ComiteForm(instance=comite)
-        formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
-        return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
-                                                              'id_proyecto':id_proyecto},
-        context_instance=RequestContext(request))
+        formulario = ComiteForm(instance=comite_instancia)
+        formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
+        return render_to_response(
+            'comite/crear_comite.html',
+            {'formulario':formulario,'usuario_actor': usuario, 'id_proyecto':id_proyecto},
+            context_instance=RequestContext(request)
+        )
 
 
 def crear_lineaBase_view(request, id_proyecto, id_fase):
