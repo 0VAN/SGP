@@ -1,10 +1,10 @@
-{% extends 'proyecto/administrar_proyecto.html' %}
+{% extends 'administracion.html' %}
 {% block titulo %}Iniciar Proyecto{% endblock %}
 {% block encabezado %}Iniciar {{ proyecto.Nombre }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
@@ -12,6 +12,6 @@
     deshacerse</p>
     <p>
         <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.iniciar_proyecto' proyecto.id %}">Si</a>
-        <a class="btn btn-default btn-lg" href="/administracion/proyectos/">No</a>
+        <a class="btn btn-default btn-lg" href="/administracion/">No</a>
     </p>
 {% endblock %}

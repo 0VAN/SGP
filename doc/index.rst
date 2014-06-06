@@ -11,8 +11,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   sesion.rst
    administracion.rst
-
+   gestion.rst
+   desarrollo.rst
 
 
 Indices and tables

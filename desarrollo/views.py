@@ -5,8 +5,8 @@ import reversion
 from django.core.exceptions import *
 from django.db import IntegrityError
 import pydot
-from gestion.models import *
 from gestion.forms import *
+from gestion.models import *
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -742,15 +742,16 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
-def finalizar_item_view(request, id_proyecto, id_fase, id_item):
+def aprobar_item_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     return render_to_response(
         'item/finalizar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
-        context_instance=RequestContext(request)
-    )
+        context_instance=RequestContext(request))
+
+
 
 def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
@@ -846,4 +847,17 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
         context_instance=RequestContext(request)
     )
 
+
+def solicitudes_de_cambio_view(request, id_proyecto, id_fase):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase  = Fase.objects.get(pk=id_fase)
+    solicitudes = SolicitudCambio.objects.filter(usuario=usuario)
+    return render_to_response('solicitudes.html', {'usuario':usuario, 'proyecto':proyecto, 'fase':fase,'solicitudes':solicitudes},
+        context_instance=RequestContext(request))
+
+def detalle_solicitud(request, id_proyecto, id_fase, id_solicitud):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase  = Fase.objects.get(pk=id_fase)
 

@@ -1,4 +1,4 @@
-{% extends 'proyecto/administrar_proyecto.html' %}
+{% extends 'administracion.html' %}
 {% block titulo %}Formulario Proyecto{% endblock %}
 
 {% block encabezado %}
@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block botones %}
-    <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}

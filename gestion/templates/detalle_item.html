@@ -1,7 +1,7 @@
-{% extends 'des_fase.html' %}
+{% extends 'gestion_fase.html' %}
 {% block titulo %}{{ item.Nombre }}{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+           <li><a href="{% url 'gestion.views.gestion_proyecto' fase.Proyecto.id%}" type="button" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block encabezado %}Detalle del item: {{ item.Nombre }}{% endblock %}
 {% block contenido %}

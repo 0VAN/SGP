@@ -1,4 +1,4 @@
-{% extends 'proyecto/administrar_proyecto.html' %}
+{% extends 'administracion.html' %}
 
 {% block titulo %}Administracion de Fases{% endblock %}
 
@@ -13,7 +13,7 @@
                 <a href="{% url 'administracion.views.crear_fase' proyecto.id %}" class="btn btn-default">Crear Fase</a>
             {% endif %}
     </li>
-    <li><a href="/administracion/proyectos/" class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/" class="btn btn-default">Volver</a></li>
 
 {% endblock %}
 {% block contenido %}

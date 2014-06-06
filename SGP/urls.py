@@ -37,7 +37,6 @@ urlpatterns = patterns('',
     url(r'^administracion/usuarios/detalle/(?P<id_usuario_p>\d+)/$', 'administracion.views.detalle_usuario'),
 
 ###############################################URL PROYECTO#############################################################
-    url(r'^administracion/proyectos/$', 'administracion.views.administrar_proyecto'),
     url(r'^administracion/proyectos/nuevo/$', 'administracion.views.nuevo_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/detalle/$', 'administracion.views.detalle_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/iniciar/$', 'administracion.views.confirmar_iniciar_proyecto'),
@@ -130,13 +129,15 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/impacto/$', 'desarrollo.views.impacto_view'),
 
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/aprobar/$', 'desarrollo.views.finalizar_item_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/aprobar/$',
+        'desarrollo.views.aprobar_item_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/aprobado/$', 'desarrollo.views.item_finalizado_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/desaprobar/$', 'desarrollo.views.desaprobar_view'),
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/desaprobado/$', 'desarrollo.views.desaprobado_view'),
 
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/cambio/$', 'desarrollo.views.solicitud_cambio_view'),
-
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/$', 'desarrollo.views.solicitudes_de_cambio_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/nuevo/$', 'desarrollo.views.solicitud_cambio_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/detalle/$', 'desarrollo.views.solicitud_cambio_view'),
 
 ########################################################################################################################
 #####################################URL GESTION DE CAMBIOS#############################################################
@@ -146,8 +147,13 @@ urlpatterns = patterns('',
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/comite/$', 'gestion.views.gestion_comite'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/comite/nuevo/$', 'gestion.views.crear_comite'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'gestion.views.gestion_fase'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/detalle/$', 'gestion.views.detalle_fase'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/detalle/item/(?P<id_item>\d+)/$', 'gestion.views.detalle_item'),
+
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/lineaBase$', 'gestion.views.crear_lineaBase_view'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/lineaBase/(?P<id_lineaB>\d+)/detalle/$', 'gestion.views.detalle_lineaBase'),
+    url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/lineaBase/(?P<id_lineaB>\d+)/detalle/item/(?P<id_item>\d+)/$',
+        'gestion.views.detalle_item_validados'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/$', 'gestion.views.solicitudes_view'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/$', 'gestion.views.detalle_solicitud_view'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/solicitudes/(?P<id_solicitud>\d+)/aprobar/$', 'gestion.views.aprobar_solicitud_view'),

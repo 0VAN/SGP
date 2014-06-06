@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sesion.forms &mdash; documentación de SGP - 2</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="documentación de SGP - 2" href="../../index.html" />
+    <link rel="up" title="Código de módulo" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li><a href="../../index.html">documentación de SGP - 2</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Código de módulo</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Código fuente para sesion.forms</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;alx&#39;</span>
+<span class="c"># -*- encoding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">ReadOnlyPasswordHashField</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<div class="viewcode-block" id="UsuarioGestionForm"><a class="viewcode-back" href="../../sesion.html#sesion.forms.UsuarioGestionForm">[documentos]</a><span class="k">class</span> <span class="nc">UsuarioGestionForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formluario para la modificacion de usuarios</span>
+<span class="sd">    Hereda de forms.ModelForm y utiliza la clase user para</span>
+<span class="sd">    agregar ciertos campos a la hora de la modificacion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">RegexField</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Nombre de usuario&quot;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s">r&quot;^[\w.@+-]+$&quot;</span><span class="p">,</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Required. 30 characters or fewer. Letters, digits and &quot;</span>
+                      <span class="s">&quot;@/./+/-/_ only.&quot;</span><span class="p">),</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span>
+            <span class="s">&#39;invalid&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;This value may contain only letters, numbers and &quot;</span>
+                         <span class="s">&quot;@/./+/-/_ characters.&quot;</span><span class="p">)})</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">ReadOnlyPasswordHashField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Contraseña&quot;</span><span class="p">),</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;Las contraseñas no se almacenan en bruto, así que no hay manera de ver la contraseña del usuario,&quot;</span>
+                   <span class="s">&quot; pero se puede cambiar mediante &lt;a href=</span><span class="se">\&quot;</span><span class="s">password/</span><span class="se">\&quot;</span><span class="s">&gt;este formulario&lt;/a&gt;. &quot;</span><span class="p">))</span>
+<div class="viewcode-block" id="UsuarioGestionForm.Meta"><a class="viewcode-back" href="../../sesion.html#sesion.forms.UsuarioGestionForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;username&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;first_name&#39;</span><span class="p">,</span> <span class="s">&#39;last_name&#39;</span><span class="p">,</span> <span class="s">&#39;telefono&#39;</span><span class="p">,</span> <span class="s">&#39;direccion&#39;</span><span class="p">)</span>
+        <span class="n">fieldsets</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span> <span class="bp">None</span><span class="p">,</span>               <span class="p">{</span><span class="s">&#39;fields&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;username&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span><span class="p">]}),</span>
+        <span class="p">(</span><span class="s">&#39;Informacion personal&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;fields&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;first_name&#39;</span><span class="p">,</span> <span class="s">&#39;last_name&#39;</span><span class="p">,</span> <span class="s">&#39;telefono&#39;</span><span class="p">,</span> <span class="s">&#39;direccion&#39;</span><span class="p">],</span> <span class="s">&#39;classes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;collapse&#39;</span><span class="p">]}),</span>
+        <span class="p">]</span>
+</div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">UsuarioGestionForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;user_permissions&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">queryset</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s">&#39;content_type&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UsuarioGestionForm.clean_password"><a class="viewcode-back" href="../../sesion.html#sesion.forms.UsuarioGestionForm.clean_password">[documentos]</a>    <span class="k">def</span> <span class="nf">clean_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="c"># Regardless of what the user provides, return the initial value.</span>
+            <span class="c"># This is done here, rather than on the field, because the</span>
+            <span class="c"># field does not have access to the initial value</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">]</span>
+</div>
+    <span class="n">widgets</span> <span class="o">=</span> <span class="p">{}</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li><a href="../../index.html">documentación de SGP - 2</a> &raquo;</li>
+          <li><a href="../index.html" >Código de módulo</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

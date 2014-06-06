@@ -1,6 +1,46 @@
-{% extends 'proyecto/fase/detallefase.html' %}
-{% block activo-admin %}hidden{% endblock %}
-{% block activo-des %}active{% endblock %}
-{% block botones %}
-    <li><a href="{% url 'desarrollo.views.des_proyecto' fase.Proyecto.id %}" type="button" class="btn btn-default">Volver</a></li>
+{% extends 'gestion_fase.html' %}
+{% block titulo %}Detalle de Fase{% endblock %}
+{% block encabezado %}Detalle de la fase: {{ fase.Nombre}}{% endblock %}
+
+{%  block botones %}
+            <li><a href="{% url 'gestion.views.gestion_proyecto' proyecto.id %}" type="button" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block contenido %}
+    <dl class="dl-horizontal">
+        <dt>Creado por:</dt>
+        <dd>{{ fase.Usuario }}</dd>
+        <dt>Nombre de proyecto:</dt>
+        <dd>{{ fase.Proyecto.Nombre }}</dd>
+        <dt>Nombre de fase:</dt>
+        <dd>{{ fase.Nombre }}</dd>
+        <dt>Descripcion:</dt>
+        <dd>{{ fase.Descripcion }}</dd>
+        <dt>Fase Numero:</dt>
+        <dd>{{ fase.Numero }}</dd>
+        <dt>Creado el:</dt>
+        <dd>{{ fase.Fecha }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ fase.get_Estado_display }}</dd>
+    </dl>
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista_item %}
+                    <tr>
+                        <td><a href="{% url 'gestion.views.detalle_item' proyecto.id fase.id item.id %}">{{ item.Nombre  }}</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td><p>Esta fase no posee item alguno</p></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

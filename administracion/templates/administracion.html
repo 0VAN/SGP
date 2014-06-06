@@ -21,8 +21,8 @@
 
 {% block botones %}
     <li>
-        {% if usuario_actor.puede_consultar_proyectos or usuario_actor.puede_consultar_fases %}
-            <a href="/administracion/proyectos" class="btn btn-default">Administrar Proyectos</a>
+        {% if usuario_actor.puede_crear_proyecto%}
+            <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
         {% endif %}
     </li>
     <li>
@@ -112,4 +112,6 @@
             {% endfor %}
         </tbody>
     </table>
+    {% block mensaje %}{% endblock %}
+
 {% endblock %}

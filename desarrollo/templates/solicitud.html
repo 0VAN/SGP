@@ -1,7 +1,7 @@
 {% extends 'des_fase.html' %}
 {% block titulo %}Solicitud de Cambio{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" type="button" class="btn btn-default">Volver</a></li>
+        <li><a href="{% url 'desarrollo.views.solicitudes_de_cambio_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Volver</a></li>
 {% endblock %}
 {% block encabezado %}
     Solicitar cambio

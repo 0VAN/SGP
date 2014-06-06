@@ -55,18 +55,34 @@
 <span id="formularios"></span><h2>Formularios<a class="headerlink" href="#module-administracion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="class">
 <dt id="administracion.forms.AsignarRol">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">AsignarRol</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#AsignarRol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AsignarRol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">AsignarRol</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#AsignarRol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AsignarRol" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Formulario para la asignacion de roles a los usuarios
 Hereda del forms.ModelForm y utiliza la clase user
 para agregar ciertos campos de la clase a la hora de la asignacion</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="administracion.forms.AtributoForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">AtributoForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#AtributoForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AtributoForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Formulario para el la creacion de atributos
+Hereda de forms.ModelForm y utiliza la clase Group para
+agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="administracion.forms.FaseForm">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">FaseForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#FaseForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FaseForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">FaseForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#FaseForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FaseForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Formulario para el la creacion de fases
 Hereda de forms.ModelForm y utiliza la clase Fase para
 agregar ciertos campos a la hora de la creacion/modificacion</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.ProyectoAsignarUsuarioForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">ProyectoAsignarUsuarioForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#ProyectoAsignarUsuarioForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoAsignarUsuarioForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Formulario para la creacion de proyectos en el sistema
+Hereda de ModelForm y utiliza la clase Proyecto
+para agregar ciertos campos de la clase a la hora de la creacion</p>
 </dd></dl>
 
 <dl class="class">
@@ -78,27 +94,19 @@ para agregar ciertos campos de la clase a la hora de la creacion</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="administracion.forms.RolForm">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">RolForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#RolForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RolForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Formulario para el la creacion de roles
-Hereda de forms.ModelForm y utiliza la clase Group para
-agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
+<dt id="administracion.forms.ProyectoFormLider">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">ProyectoFormLider</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#ProyectoFormLider"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoFormLider" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Formulario para la creacion de proyectos en el sistema
+Hereda de ModelForm y utiliza la clase Proyecto
+para agregar ciertos campos de la clase a la hora de la creacion</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="administracion.forms.UsuarioDelForm">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioDelForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioDelForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioDelForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioDelForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioDelForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioDelForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Formulario para el la eliminacion logica del usuario
 Hereda de forms.ModelForm y utiliza la clase user para
 agregar ciertos campos a la hora de la eliminacion</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="administracion.forms.UsuarioForm">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">UsuarioForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#UsuarioForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Formulario para la creacion de usuarios
-Hereda del formulario UserCreationForm y utiliza la clase user
-para agregar ciertos campos de la clase a la hora de la creacion</p>
 </dd></dl>
 
 <dl class="class">
@@ -109,9 +117,19 @@ Hereda de forms.ModelForm y utiliza la clase user para
 agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="administracion.forms.tipoItemForm">
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">tipoItemForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#tipoItemForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.tipoItemForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-administracion.models">
 <span id="modelos"></span><h2>Modelos<a class="headerlink" href="#module-administracion.models" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.models.Atributo">
+<em class="property">class </em><tt class="descclassname">administracion.models.</tt><tt class="descname">Atributo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#Atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
 <dt id="administracion.models.Fase">
 <em class="property">class </em><tt class="descclassname">administracion.models.</tt><tt class="descname">Fase</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#Fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -163,6 +181,12 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dl>
 </dd></dl>
 
+<dl class="class">
+<dt id="administracion.models.TipoDeItem">
+<em class="property">class </em><tt class="descclassname">administracion.models.</tt><tt class="descname">TipoDeItem</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/models.html#TipoDeItem"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.TipoDeItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>TipoDeItem(id, Nombre, Usuario_id, Fecha, Fase_id)</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-administracion.views">
 <span id="vistas"></span><h2>Vistas<a class="headerlink" href="#module-administracion.views" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -198,8 +222,23 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="administracion.views.administrar_atributo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_atributo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="administracion.views.administrar_credencial">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_credencial</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_credencial"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_credencial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_credencial</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_credencial"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_credencial" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -284,6 +323,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.administrar_tipoItem">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_tipoItem</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_tipoItem"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_tipoItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -379,23 +438,166 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="administracion.views.cerrar_sesion">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">cerrar_sesion</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#cerrar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.cerrar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.views.confirmar_eliminar_atributo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_eliminar_atributo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_eliminar_atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_eliminar_atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
 </tr>
 </tbody>
 </table>
-<p>Vista para cerrar la sesion de un ususario</p>
-<div class="line-block">
-<div class="line">Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al</div>
-<div class="line">usuario a la pagina web &#8216;/&#8217; (raiz) donde se solicita el inicio de sesion de un usuario</div>
-</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_eliminar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_eliminar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_eliminar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_eliminar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_eliminar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_eliminar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_eliminar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_eliminar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_eliminar_rol">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_eliminar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_eliminar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_eliminar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idRol</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_eliminar_tipo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_eliminar_tipo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_eliminar_tipo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_eliminar_tipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_finalizar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_finalizar_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_finalizar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_finalizar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_iniciar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_iniciar_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_iniciar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_iniciar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_iniciar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_iniciar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_iniciar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_iniciar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -411,13 +613,13 @@ agregar ciertos campos a la hora de la modificacion</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">creacion-fase.html</p>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">fase_form.html</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Vista crear fase</p>
-<p>Recibe como parametros un request y un id de proyecto y retorna la pagina web creacion-fase.html</p>
+<p>Recibe como parametros un request y un id de proyecto y retorna la pagina web fase_form.html</p>
 <ul>
 <li><dl class="first docutils">
 <dt>Variables</dt>
@@ -442,6 +644,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.crear_tipoItem">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">crear_tipoItem</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#crear_tipoItem"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.crear_tipoItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -477,6 +699,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dl>
 </li>
 </ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.detalle_atributo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_atributo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idRol</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -574,6 +816,27 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="administracion.views.detalle_tipoItem">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_tipoItem</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_tipoItem"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_tipoItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_tipo</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="administracion.views.detalle_usuario">
 <tt class="descclassname">administracion.views.</tt><tt class="descname">detalle_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#detalle_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.detalle_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
@@ -606,6 +869,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="administracion.views.eliminar_atributo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_atributo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idRol</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="administracion.views.eliminar_fase">
 <tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
@@ -615,6 +898,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
 <li><strong>request</strong> &#8211; </li>
 <li><strong>idFase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.eliminar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
 <li><strong>id_proyecto</strong> &#8211; </li>
 </ul>
 </td>
@@ -647,47 +950,141 @@ agregar ciertos campos a la hora de la modificacion</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="administracion.views.iniciar_sesion">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">iniciar_sesion</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#iniciar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.iniciar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><dl class="method">
-<dt>
-<tt class="descname">Vista de inicio de sesion</tt></dt>
+<dt id="administracion.views.eliminar_tipo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">eliminar_tipo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#eliminar_tipo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.eliminar_tipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_tipo</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.fase_asignar_usuarios">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">fase_asignar_usuarios</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#fase_asignar_usuarios"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.fase_asignar_usuarios" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.finalizar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">finalizar_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#finalizar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.finalizar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.iniciar_fase">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">iniciar_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#iniciar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.iniciar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.iniciar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">iniciar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#iniciar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.iniciar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.listar_roles">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">listar_roles</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#listar_roles"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.listar_roles" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body">iniciar_sesion.html</td>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
-<div class="line-block">
-<div class="line">Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y</div>
-<div class="line">su existencia en el sistema.</div>
-</div>
-<ul>
-<li><p class="first">Si el usuario inicia sesion con exito, retorna iniciar_sesion.html</p>
-</li>
-<li><p class="first">Si el usuario esta inactivo, retorna no_activo.html</p>
-</li>
-<li><p class="first">Si el usuario no exite en el sistema, retorna sesion_error.html</p>
-</li>
-<li><dl class="first docutils">
-<dt>Variables</dt>
-<dd><ul class="first last simple">
-<li>formulario: es el formulario que el usuario debe completar para iniciar sesion</li>
-<li>usuario_actor: es el usuario que realiza la accion</li>
-<li>clave: es la clave secreta introducida por el usuario_actor</li>
-<li>acceso: contiene el resultado de la funcion authenticate que lleva como parametro
-el par(usuario, contrasenha) verificando su existencia y estado en el sistema</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
 </dd></dl>
 
+<dl class="function">
+<dt id="administracion.views.modificar_atributo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_atributo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_atributo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_atributo</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -700,6 +1097,46 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
 <li><strong>request</strong> &#8211; </li>
 <li><strong>idFase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.modificar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.modificar_proyecto_lider">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_proyecto_lider</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_proyecto_lider"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_proyecto_lider" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
 <li><strong>id_proyecto</strong> &#8211; </li>
 </ul>
 </td>
@@ -732,35 +1169,24 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 </dd></dl>
 
 <dl class="function">
-<dt id="administracion.views.modificar_usuario">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.views.modificar_tipo">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">modificar_tipo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#modificar_tipo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.modificar_tipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_tipo</strong> &#8211; </li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
 </tr>
 </tbody>
 </table>
-<p>Vista de modificacion de nuevo usuario</p>
-<div class="line-block">
-<div class="line">Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar</div>
-<div class="line">los datos el usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</div>
-</div>
-<ul>
-<li><dl class="first docutils">
-<dt>Variables</dt>
-<dd><ul class="first last simple">
-<li>usuario_actor: es el usuario que realiza la accion</li>
-<li>formulario: es el fomrulario que debe completar el usuario_actor</li>
-<li>lista_usuarios: es la lista de usuarios existentes en el sistema</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
 </dd></dl>
 
 <dl class="function">
@@ -779,7 +1205,7 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 <p>Vista nuevo proyecto</p>
 <div class="line-block">
 <div class="line">Recibe como parametro un request y retorna la pagina web crear_proyecto.html donde se debe</div>
-<div class="line">completar los datos del proyecto y luego crear_proyecto_exito.html si se completo debidamente</div>
+<div class="line">completar los datos del proyecto y luego proyecto_exito.html si se completo debidamente</div>
 <div class="line">el formulario</div>
 </div>
 <ul>
@@ -797,31 +1223,15 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 </dd></dl>
 
 <dl class="function">
-<dt id="administracion.views.vista_asignar_rol">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_asignar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_asignar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_asignar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="administracion.views.vista_eliminar_fase">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_eliminar_fase</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_eliminar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_eliminar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.views.ordenar_fase_bajar">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">ordenar_fase_bajar</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#ordenar_fase_bajar"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.ordenar_fase_bajar" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
 <li><strong>request</strong> &#8211; </li>
-<li><strong>idFase</strong> &#8211; </li>
-<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -833,15 +1243,35 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 </dd></dl>
 
 <dl class="function">
-<dt id="administracion.views.vista_eliminar_rol">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">vista_eliminar_rol</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#vista_eliminar_rol"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.vista_eliminar_rol" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.views.ordenar_fase_subir">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">ordenar_fase_subir</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#ordenar_fase_subir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.ordenar_fase_subir" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
 <li><strong>request</strong> &#8211; </li>
-<li><strong>idRol</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.proyecto_asignar_usuarios">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">proyecto_asignar_usuarios</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#proyecto_asignar_usuarios"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.proyecto_asignar_usuarios" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
 </ul>
 </td>
 </tr>

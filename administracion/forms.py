@@ -81,9 +81,9 @@ class ProyectoAsignarUsuarioForm(MyForm):
         exclude = ['Usuario', 'Estado', 'Lider', 'Nombre', 'Fecha_inicio', 'Fecha_finalizacion', 'Descripcion', 'nFases']
 
     class Media:
-        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = (BASE_DIR+'/static/js/jsi18n.js',)
+        js = ('/static/js/jsi18n.js',)
 
 
 
@@ -141,12 +141,12 @@ class AsignarUsuarioFase(MyForm):
                                           widget=FilteredSelectMultiple(('Usuarios'),False,))
     class Meta:
         model = Fase
-        exclude = ['Usuario','Proyecto','Numero','Descripcion','Fecha','Nombre']
+        exclude = ['Usuario','Proyecto','Numero','Descripcion','Fecha','Nombre','Estado']
 
     class Media:
-        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = (BASE_DIR+'/static/js/jsi18n.js',)
+        js = ('/static/js/jsi18n.js',)
 
 
 class RolForm(MyForm):
@@ -191,14 +191,14 @@ class tipoItemForm(MyForm):
         exclude = ['Usuario','Fase']
 
     class Media:
-        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = (BASE_DIR+'/static/js/jsi18n.js',)
+        js = ('/static/js/jsi18n.js',)
 
 class tipoItemImportar(forms.Form):
     tipos = forms.ModelMultipleChoiceField(queryset=TipoDeItem.objects.all(),label=('Seleccionar tipos'),
                                           widget=FilteredSelectMultiple(('Tipos'),False,))
     class Media:
-        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = (BASE_DIR+'/static/js/jsi18n.js',)
+        js = ('/static/js/jsi18n.js',)

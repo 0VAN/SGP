@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sesion package &mdash; documentación de SGP - 2</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="documentación de SGP - 2" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sesion-package">
+<h1>sesion package<a class="headerlink" href="#sesion-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-sesion.admin">
+<span id="sesion-admin-module"></span><h2>sesion.admin module<a class="headerlink" href="#module-sesion.admin" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-sesion.forms">
+<span id="sesion-forms-module"></span><h2>sesion.forms module<a class="headerlink" href="#module-sesion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="sesion.forms.UsuarioGestionForm">
+<em class="property">class </em><tt class="descclassname">sesion.forms.</tt><tt class="descname">UsuarioGestionForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<p>Formluario para la modificacion de usuarios
+Hereda de forms.ModelForm y utiliza la clase user para
+agregar ciertos campos a la hora de la modificacion</p>
+<dl class="class">
+<dt id="sesion.forms.UsuarioGestionForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.Meta.fields">
+<tt class="descname">fields</tt><em class="property"> = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion')</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.Meta.fieldsets">
+<tt class="descname">fieldsets</tt><em class="property"> = [(None, {'fields': ['username', 'password']}), ('Informacion personal', {'fields': ['email', 'first_name', 'last_name', 'telefono', 'direccion'], 'classes': ['collapse']})]</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.fieldsets" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.base_fields">
+<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5c72fd0&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5c72890&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x5d221d0&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x5c74650&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x5c74350&gt;, 'telefono': &lt;django.forms.fields.IntegerField object at 0x5d22410&gt;, 'direccion': &lt;django.forms.fields.CharField object at 0x5d22110&gt;}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sesion.forms.UsuarioGestionForm.clean_password">
+<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">clean_password</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm.clean_password"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.clean_password" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.declared_fields">
+<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5c72fd0&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5c72890&gt;}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.media">
+<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sesion.forms.UsuarioGestionForm.widgets">
+<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">widgets</tt><em class="property"> = {}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.widgets" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sesion.models">
+<span id="sesion-models-module"></span><h2>sesion.models module<a class="headerlink" href="#module-sesion.models" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-sesion.tests">
+<span id="sesion-tests-module"></span><h2>sesion.tests module<a class="headerlink" href="#module-sesion.tests" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-sesion.views">
+<span id="sesion-views-module"></span><h2>sesion.views module<a class="headerlink" href="#module-sesion.views" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="function">
+<dt id="sesion.views.cerrar_sesion">
+<tt class="descclassname">sesion.views.</tt><tt class="descname">cerrar_sesion</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/sesion/views.html#cerrar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.views.cerrar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Vista para cerrar la sesion de un ususario</p>
+<div class="line-block">
+<div class="line">Recibe como parametro un request y llama a la funcion logout con tal parametro, redirigiendo al</div>
+<div class="line">usuario a la pagina web &#8216;/&#8217; (raiz) donde se solicita el inicio de sesion de un usuario</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sesion.views.gestion_usuario">
+<tt class="descclassname">sesion.views.</tt><tt class="descname">gestion_usuario</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/sesion/views.html#gestion_usuario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.views.gestion_usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Vista de modificacion de nuevo usuario</p>
+<div class="line-block">
+<div class="line">Recibe como parametro un request y retorna la pagina web form_usuario.html donde se debe completar</div>
+<div class="line">los datos el usuario y luego operacion_usuario_exito.html si se completo debidamente el formulario</div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Variables</dt>
+<dd><ul class="first last simple">
+<li>usuario_actor: es el usuario que realiza la accion</li>
+<li>formulario: es el fomrulario que debe completar el usuario_actor</li>
+<li>lista_usuarios: es la lista de usuarios existentes en el sistema</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="sesion.views.iniciar_sesion">
+<tt class="descclassname">sesion.views.</tt><tt class="descname">iniciar_sesion</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/sesion/views.html#iniciar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.views.iniciar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="method">
+<dt>
+<tt class="descname">Vista de inicio de sesion</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body">iniciar_sesion.html</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Recibe como parametro un request y retorna diferentes paginas web segun el estado del usuario y</div>
+<div class="line">su existencia en el sistema.</div>
+</div>
+<ul>
+<li><p class="first">Si el usuario inicia sesion con exito, retorna iniciar_sesion.html</p>
+</li>
+<li><p class="first">Si el usuario esta inactivo, retorna no_activo.html</p>
+</li>
+<li><p class="first">Si el usuario no exite en el sistema, retorna sesion_error.html</p>
+</li>
+<li><dl class="first docutils">
+<dt>Variables</dt>
+<dd><ul class="first last simple">
+<li>formulario: es el formulario que el usuario debe completar para iniciar sesion</li>
+<li>usuario_actor: es el usuario que realiza la accion</li>
+<li>clave: es la clave secreta introducida por el usuario_actor</li>
+<li>acceso: contiene el resultado de la funcion authenticate que lleva como parametro
+el par(usuario, contrasenha) verificando su existencia y estado en el sistema</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sesion">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sesion" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sesion package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sesion.admin">sesion.admin module</a></li>
+<li><a class="reference internal" href="#module-sesion.forms">sesion.forms module</a></li>
+<li><a class="reference internal" href="#module-sesion.models">sesion.models module</a></li>
+<li><a class="reference internal" href="#module-sesion.tests">sesion.tests module</a></li>
+<li><a class="reference internal" href="#module-sesion.views">sesion.views module</a></li>
+<li><a class="reference internal" href="#module-sesion">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/sesion.txt"
+           rel="nofollow">Mostrar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

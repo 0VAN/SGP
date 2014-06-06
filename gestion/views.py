@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, RequestContext, get_object_or_4
 from django.contrib.auth.decorators import login_required
 from gestion.models import *
 from gestion.forms import *
+from desarrollo.models import *
 from django.contrib.auth.models import Group
 # Create your views here.
 @login_required(login_url='/iniciar_sesion')
@@ -148,8 +149,9 @@ def detalle_lineaBase(request, id_proyecto, id_fase, id_lineaB):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
     lineaBase =LineBase.objects.get(pk=id_lineaB)
+    lista_items = lineaBase.Items.all()
     return render_to_response('lineaBase_detalle.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto,'fase':fase,
-                                                         'lineaBase':lineaBase},
+                                                         'lineaBase':lineaBase, 'lista_item':lista_items},
                               context_instance=RequestContext(request))
 
 def solicitudes_view(request, id_proyecto):
@@ -316,4 +318,58 @@ def credencial_view(request, id_proyecto, id_solicitud):
         {'formulario': formulario, 'usuario_actor': usuario, 'solicitud': solicitud,
          'proyecto': proyecto},
         context_instance=RequestContext(request)
+    )
+
+def detalle_item_validados(request, id_proyecto, id_fase, id_lineaB, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    campos = Campo.objects.filter(item=item)
+    relacion = Relacion.objects.get(item=item)
+
+    return render_to_response(
+        'detalle_item.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
+    )
+
+
+
+def detalle_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param idFase:
+    :param id_proyecto:
+    :return:
+
+    Vista detalle fase
+
+    | Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web
+    | detallefase.html que muestra en detalle la informacion de dicha fase
+
+    * Variables
+        -   usuario_actor: usuario que realiza la accion
+        -   proyecto: es el proyecto cuyas fases se desea administrar
+        -   fases: indica que la fase correpondera a un proyecto especifico
+    """
+    usuario_actor = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_item = Item.objects.filter(Fase=fase)
+    return render_to_response('detalle_fase_gc.html',
+                              {'usuario': usuario_actor, 'fase': fase, 'proyecto':proyecto, 'lista_item':lista_item},
+                              context_instance=RequestContext(request))
+
+def detalle_item(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    campos = Campo.objects.filter(item=item)
+    relacion = Relacion.objects.get(item=item)
+
+    return render_to_response(
+        'detalle_item.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
     )

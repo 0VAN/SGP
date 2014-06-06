@@ -33,7 +33,7 @@ def administracion(request):
         -   usuario_actor: es el usuario que realiza la accion
     """
     usuario_actor = request.user
-    lista_proyectos = Proyecto.objects.all()
+    lista_proyectos = Proyecto.objects.all().order_by('id')
     ctx = {'usuario_actor':usuario_actor,'lista_proyectos':lista_proyectos}
     return render_to_response('administracion.html', ctx, context_instance=RequestContext(request))
 ########################################################################################################################
@@ -161,25 +161,7 @@ def cambioEstado_usuario_form(request, id_usuario_p):
 ########################################################################################################################
 ###########################################Vistas de Administrar Proyecto###############################################
 ########################################################################################################################
-@user_passes_test(User.puede_consultar_proyectos, login_url="/iniciar_sesion")
-def administrar_proyecto(request):
-    """
 
-    :param request:
-    :return:
-
-    Vista administrar proyecto
-
-    Recibe como parametro un request y retorna la pagina web administrar_proyecto.html
-
-    * Varaibles
-        -   lista_proyectos: es la lista de proyectos existentes en el sistema
-        -   usuario_actor: es el usuario que realiza la accion
-    """
-    lista_proyectos = Proyecto.objects.all().order_by('id')
-    usuario_actor = request.user
-    return render_to_response('proyecto/administrar_proyecto.html',
-                              {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario_actor}, context_instance=RequestContext(request))
 
 @user_passes_test( User.puede_agregar_proyectos , login_url="/iniciar_sesion")
 def nuevo_proyecto(request):
@@ -499,7 +481,7 @@ def administrar_fases(request, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto)
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     return render_to_response('proyecto/fase/adm-fases.html',
                               {'usuario_actor': usuario_actor, 'lista_fases': lista_fases, 'proyecto': proyecto}
                               , context_instance=RequestContext(request))
@@ -515,7 +497,7 @@ def ordenar_fase_subir(request, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=fase.Proyecto.id)
-    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id)
+    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id).order_by('Numero')
     if fase.Proyecto.Estado == 'P':
         fase.ordenar_fase_subir()
         return administrar_fases(request,fase.Proyecto.id)
@@ -536,7 +518,7 @@ def ordenar_fase_bajar(request, id_fase):
     usuario_actor = request.user
     fase = Fase.objects.get(pk=id_fase)
     proyecto = Proyecto.objects.get(pk=fase.Proyecto.id)
-    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id)
+    lista_fases = Fase.objects.filter(Proyecto=fase.Proyecto.id).order_by('Numero')
     if fase.Proyecto.Estado == 'P':
         fase.ordenar_fase_bajar()
         return administrar_fases(request,fase.Proyecto.id)
@@ -566,7 +548,7 @@ def crear_fase(request, id_proyecto):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase(Usuario= usuario_actor, Proyecto=proyecto)
-    lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('Numero')
     if proyecto.Estado == 'A':
                 return render_to_response('proyecto/fase/fases_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
@@ -618,7 +600,7 @@ def iniciar_fase(request, id_proyecto, id_fase):
     fase.save()
     proyecto = fase.Proyecto
 
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     return render_to_response('proyecto/fase/fases_exito.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
                               'mensaje': 'Se ha dado inicio a la fase '+fase.Nombre, 'lista_fases': lista_fases}
                               ,context_instance=RequestContext(request))
@@ -631,7 +613,7 @@ def confirmar_iniciar_fase(request, id_proyecto, id_fase):
     :return:
     """
     fase = Fase.objects.get(pk=id_fase)
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     proyecto = fase.Proyecto
 
     if fase.Proyecto.Estado == 'C':
@@ -646,7 +628,13 @@ def confirmar_iniciar_fase(request, id_proyecto, id_fase):
                               ,context_instance=RequestContext(request))
     elif fase.Numero > 1:
         fase_anterior = Fase.objects.get(Proyecto=fase.Proyecto, Numero=(fase.Numero-1))
-        if fase_anterior.Estado != Fase.FINALIZADA:
+        lista_item = Item.objects.filter(Fase=fase_anterior).filter(Estado=Item.VALIDADO)
+        if not lista_item:
+            return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                            'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no posee ningun item en linea base',
+                              'lista_fases': lista_fases}, context_instance=RequestContext(request))
+
+    elif not fase.Usuarios.exists():
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
                             'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
@@ -670,7 +658,7 @@ def finalizar_fase(request, id_proyecto, id_fase):
     fase.save()
     proyecto = fase.Proyecto
 
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     return render_to_response('proyecto/fase/fases_exito.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
                               'mensaje': 'Se ha finalizado a la fase '+fase.Nombre, 'lista_fases': lista_fases}
                               ,context_instance=RequestContext(request))
@@ -684,7 +672,7 @@ def confirmar_finalizar_fase(request, id_proyecto, id_fase):
     """
 
     fase = Fase.objects.get(pk=id_fase)
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     proyecto = fase.Proyecto
     lista_items = Item.objects.filter(Fase=fase)
 
@@ -703,9 +691,9 @@ def confirmar_finalizar_fase(request, id_proyecto, id_fase):
                               'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque no posee item alguno',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
     else:
-        for item in lista_items:
-            if item.Estado != Item.VALIDADO:
-                return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque no todos los items estan en una linea base, ver detalles',
+        fase_anterior = Fase.objects.get(Proyecto=fase.Proyecto, Numero=(fase.Numero-1))
+        if not fase_anterior.FINALIZADA:
+            return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque no todos los items estan en una linea base, ver detalles',
                                 'fase':fase,'proyecto':proyecto,
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
 
@@ -751,7 +739,7 @@ def modificar_fase(request, idFase, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     fase = Fase.objects.get(pk=idFase)
 
     if proyecto.Estado == 'A':
@@ -798,7 +786,7 @@ def confirmar_eliminar_fase(request, idFase, id_proyecto):
     """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     if proyecto.Estado == 'A':
             return render_to_response('proyecto/fase/fases_error.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
@@ -838,7 +826,7 @@ def eliminar_fase(request, idFase, id_proyecto):
     fase_nombre = fase.Nombre
     reordenar(proyecto.id, fase.Numero)
     fase.delete()
-    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
 
     return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
@@ -863,7 +851,7 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
     :return:
     '''
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=proyecto).order_by('Numero')
     fase = Fase.objects.get(pk=idFase)
 
     if proyecto.Estado == 'A':

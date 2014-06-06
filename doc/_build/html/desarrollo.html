@@ -1,0 +1,828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Modulo de desarrollo &mdash; documentación de SGP - 2</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="documentación de SGP - 2" href="index.html" />
+    <link rel="prev" title="Modulo de Gestion de Cambio" href="gestion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="gestion.html" title="Modulo de Gestion de Cambio"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="modulo-de-desarrollo">
+<h1>Modulo de desarrollo<a class="headerlink" href="#modulo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-desarrollo.admin">
+<span id="desarrollo-admin-module"></span><h2>desarrollo.admin module<a class="headerlink" href="#module-desarrollo.admin" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-desarrollo.forms">
+<span id="desarrollo-forms-module"></span><h2>desarrollo.forms module<a class="headerlink" href="#module-desarrollo.forms" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="desarrollo.forms.AntecesorForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">AntecesorForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#AntecesorForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.AntecesorForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#desarrollo.forms.MyForm" title="desarrollo.forms.MyForm"><tt class="xref py py-class docutils literal"><span class="pre">desarrollo.forms.MyForm</span></tt></a></p>
+<dl class="class">
+<dt id="desarrollo.forms.AntecesorForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#AntecesorForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.AntecesorForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="desarrollo.forms.AntecesorForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['padre', 'item', 'estado']</em><a class="headerlink" href="#desarrollo.forms.AntecesorForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.AntecesorForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#desarrollo.forms.AntecesorForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Relacion</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.AntecesorForm.base_fields">
+<tt class="descclassname">AntecesorForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'antecesor': &lt;django.forms.models.ModelChoiceField object at 0x44fcad0&gt;}</em><a class="headerlink" href="#desarrollo.forms.AntecesorForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.AntecesorForm.declared_fields">
+<tt class="descclassname">AntecesorForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.AntecesorForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.AntecesorForm.media">
+<tt class="descclassname">AntecesorForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.AntecesorForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.forms.ArchivoForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">ArchivoForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#ArchivoForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ArchivoForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#desarrollo.forms.MyForm" title="desarrollo.forms.MyForm"><tt class="xref py py-class docutils literal"><span class="pre">desarrollo.forms.MyForm</span></tt></a></p>
+<dl class="class">
+<dt id="desarrollo.forms.ArchivoForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#ArchivoForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ArchivoForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="desarrollo.forms.ArchivoForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['item']</em><a class="headerlink" href="#desarrollo.forms.ArchivoForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ArchivoForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#desarrollo.forms.ArchivoForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Archivo</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ArchivoForm.base_fields">
+<tt class="descclassname">ArchivoForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'archivo': &lt;django.forms.fields.FileField object at 0x44fcb50&gt;}</em><a class="headerlink" href="#desarrollo.forms.ArchivoForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ArchivoForm.declared_fields">
+<tt class="descclassname">ArchivoForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.ArchivoForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ArchivoForm.media">
+<tt class="descclassname">ArchivoForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.ArchivoForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.forms.ItemForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">ItemForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#ItemForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ItemForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#desarrollo.forms.MyForm" title="desarrollo.forms.MyForm"><tt class="xref py py-class docutils literal"><span class="pre">desarrollo.forms.MyForm</span></tt></a></p>
+<p>Formulario para la creacion de items
+Hereda de forms.ModelForm y utiliza la clase Group para
+agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
+<dl class="class">
+<dt id="desarrollo.forms.ItemForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#ItemForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="desarrollo.forms.ItemForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']</em><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ItemForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Item</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ItemForm.base_fields">
+<tt class="descclassname">ItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x44ec450&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x44ec350&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x44ec490&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x44ec390&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x44ec410&gt;, 'Tipo': &lt;django.forms.models.ModelChoiceField object at 0x44fc210&gt;}</em><a class="headerlink" href="#desarrollo.forms.ItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ItemForm.declared_fields">
+<tt class="descclassname">ItemForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.ItemForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ItemForm.media">
+<tt class="descclassname">ItemForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.ItemForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.forms.ModItemForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">ModItemForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#ModItemForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ModItemForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#desarrollo.forms.MyForm" title="desarrollo.forms.MyForm"><tt class="xref py py-class docutils literal"><span class="pre">desarrollo.forms.MyForm</span></tt></a></p>
+<p>Formulario para la creacion de items
+Hereda de forms.ModelForm y utiliza la clase Group para
+agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
+<dl class="class">
+<dt id="desarrollo.forms.ModItemForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#ModItemForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="desarrollo.forms.ModItemForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo']</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ModItemForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Item</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ModItemForm.base_fields">
+<tt class="descclassname">ModItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x44fc090&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x44fc050&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x44fc310&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x44fc590&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x44fc610&gt;}</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ModItemForm.declared_fields">
+<tt class="descclassname">ModItemForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.ModItemForm.media">
+<tt class="descclassname">ModItemForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.ModItemForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.forms.MyForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">MyForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#MyForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.MyForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
+<dl class="attribute">
+<dt id="desarrollo.forms.MyForm.base_fields">
+<tt class="descname">base_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.MyForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.MyForm.declared_fields">
+<tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.MyForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.MyForm.error_css_class">
+<tt class="descname">error_css_class</tt><em class="property"> = 'list-group-item-danger'</em><a class="headerlink" href="#desarrollo.forms.MyForm.error_css_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.MyForm.media">
+<tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.MyForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.forms.PadreForm">
+<em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">PadreForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#PadreForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.PadreForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#desarrollo.forms.MyForm" title="desarrollo.forms.MyForm"><tt class="xref py py-class docutils literal"><span class="pre">desarrollo.forms.MyForm</span></tt></a></p>
+<dl class="class">
+<dt id="desarrollo.forms.PadreForm.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#PadreForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.PadreForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="desarrollo.forms.PadreForm.Meta.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['antecesor', 'item', 'estado']</em><a class="headerlink" href="#desarrollo.forms.PadreForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.PadreForm.Meta.model">
+<tt class="descname">model</tt><a class="headerlink" href="#desarrollo.forms.PadreForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">Relacion</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.PadreForm.base_fields">
+<tt class="descclassname">PadreForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'padre': &lt;django.forms.models.ModelChoiceField object at 0x44fc8d0&gt;}</em><a class="headerlink" href="#desarrollo.forms.PadreForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.PadreForm.declared_fields">
+<tt class="descclassname">PadreForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {}</em><a class="headerlink" href="#desarrollo.forms.PadreForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.forms.PadreForm.media">
+<tt class="descclassname">PadreForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#desarrollo.forms.PadreForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="desarrollo-models-module">
+<h2>desarrollo.models module<a class="headerlink" href="#desarrollo-models-module" title="Enlazar permanentemente con este título">¶</a></h2>
+<span class="target" id="module-desarrollo.models"></span><dl class="class">
+<dt id="desarrollo.models.Archivo">
+<em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Archivo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Archivo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Archivo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Archivo(id, archivo, item_id)</p>
+<dl class="exception">
+<dt id="desarrollo.models.Archivo.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#desarrollo.models.Archivo.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="desarrollo.models.Archivo.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Archivo.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#desarrollo.models.Archivo.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Archivo.item">
+<tt class="descclassname">Archivo.</tt><tt class="descname">item</tt><a class="headerlink" href="#desarrollo.models.Archivo.item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Archivo.objects">
+<tt class="descclassname">Archivo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44ec210&gt;</em><a class="headerlink" href="#desarrollo.models.Archivo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.models.Campo">
+<em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Campo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Campo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Campo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Campo(id, item_id, tipoItem_id, atributo_id, fecha, numerico, longitud, precision, logico, cadena, mail, hora)</p>
+<dl class="exception">
+<dt id="desarrollo.models.Campo.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#desarrollo.models.Campo.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="desarrollo.models.Campo.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Campo.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#desarrollo.models.Campo.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Campo.atributo">
+<tt class="descclassname">Campo.</tt><tt class="descname">atributo</tt><a class="headerlink" href="#desarrollo.models.Campo.atributo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Campo.item">
+<tt class="descclassname">Campo.</tt><tt class="descname">item</tt><a class="headerlink" href="#desarrollo.models.Campo.item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Campo.objects">
+<tt class="descclassname">Campo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e98d0&gt;</em><a class="headerlink" href="#desarrollo.models.Campo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Campo.tipoItem">
+<tt class="descclassname">Campo.</tt><tt class="descname">tipoItem</tt><a class="headerlink" href="#desarrollo.models.Campo.tipoItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.models.Item">
+<em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Item(id, Nombre, Descripcion, Prioridad, CostoTemporal, CostoUnitario, Estado, Usuario_id, Fecha, Fase_id, Tipo_id, Version)</p>
+<dl class="attribute">
+<dt id="desarrollo.models.Item.CONSTRUCCION">
+<tt class="descname">CONSTRUCCION</tt><em class="property"> = 'CON'</em><a class="headerlink" href="#desarrollo.models.Item.CONSTRUCCION" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="desarrollo.models.Item.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#desarrollo.models.Item.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.ESTADO_CHOICES">
+<tt class="descclassname">Item.</tt><tt class="descname">ESTADO_CHOICES</tt><em class="property"> = (('CON', 'Construccion'), ('VAL', 'Validado'), ('FIN', 'Finalizado'), ('REV', 'Revision'))</em><a class="headerlink" href="#desarrollo.models.Item.ESTADO_CHOICES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.FINALIZADO">
+<tt class="descclassname">Item.</tt><tt class="descname">FINALIZADO</tt><em class="property"> = 'FIN'</em><a class="headerlink" href="#desarrollo.models.Item.FINALIZADO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.Fase">
+<tt class="descclassname">Item.</tt><tt class="descname">Fase</tt><a class="headerlink" href="#desarrollo.models.Item.Fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="desarrollo.models.Item.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Item.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#desarrollo.models.Item.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.REVISION">
+<tt class="descclassname">Item.</tt><tt class="descname">REVISION</tt><em class="property"> = 'REV'</em><a class="headerlink" href="#desarrollo.models.Item.REVISION" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.Tipo">
+<tt class="descclassname">Item.</tt><tt class="descname">Tipo</tt><a class="headerlink" href="#desarrollo.models.Item.Tipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.Usuario">
+<tt class="descclassname">Item.</tt><tt class="descname">Usuario</tt><a class="headerlink" href="#desarrollo.models.Item.Usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.VALIDADO">
+<tt class="descclassname">Item.</tt><tt class="descname">VALIDADO</tt><em class="property"> = 'VAL'</em><a class="headerlink" href="#desarrollo.models.Item.VALIDADO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.antecesor">
+<tt class="descclassname">Item.</tt><tt class="descname">antecesor</tt><a class="headerlink" href="#desarrollo.models.Item.antecesor" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.archivo_set">
+<tt class="descclassname">Item.</tt><tt class="descname">archivo_set</tt><a class="headerlink" href="#desarrollo.models.Item.archivo_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.campo_set">
+<tt class="descclassname">Item.</tt><tt class="descname">campo_set</tt><a class="headerlink" href="#desarrollo.models.Item.campo_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="desarrollo.models.Item.get_Estado_display">
+<tt class="descclassname">Item.</tt><tt class="descname">get_Estado_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Item.get_Estado_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="desarrollo.models.Item.get_next_by_Fecha">
+<tt class="descclassname">Item.</tt><tt class="descname">get_next_by_Fecha</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Item.get_next_by_Fecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="desarrollo.models.Item.get_previous_by_Fecha">
+<tt class="descclassname">Item.</tt><tt class="descname">get_previous_by_Fecha</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Item.get_previous_by_Fecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.item">
+<tt class="descclassname">Item.</tt><tt class="descname">item</tt><a class="headerlink" href="#desarrollo.models.Item.item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.objects">
+<tt class="descclassname">Item.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e9090&gt;</em><a class="headerlink" href="#desarrollo.models.Item.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.padre">
+<tt class="descclassname">Item.</tt><tt class="descname">padre</tt><a class="headerlink" href="#desarrollo.models.Item.padre" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="desarrollo.models.Relacion">
+<em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Relacion</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Relacion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Relacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Relacion(id, padre_id, antecesor_id, item_id)</p>
+<dl class="exception">
+<dt id="desarrollo.models.Relacion.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#desarrollo.models.Relacion.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="desarrollo.models.Relacion.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Relacion.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#desarrollo.models.Relacion.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.antecesor">
+<tt class="descclassname">Relacion.</tt><tt class="descname">antecesor</tt><a class="headerlink" href="#desarrollo.models.Relacion.antecesor" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.item">
+<tt class="descclassname">Relacion.</tt><tt class="descname">item</tt><a class="headerlink" href="#desarrollo.models.Relacion.item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>ACTIVO = &#8216;A&#8217;
+ELIMINADO = &#8216;E&#8217;</p>
+<dl class="docutils">
+<dt>ESTADO_CHOICES = (</dt>
+<dd>(ACTIVO, &#8216;Activo&#8217;),
+(ELIMINADO, &#8216;Eliminado&#8217;),</dd>
+</dl>
+<p>)
+estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.objects">
+<tt class="descclassname">Relacion.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e9e50&gt;</em><a class="headerlink" href="#desarrollo.models.Relacion.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.padre">
+<tt class="descclassname">Relacion.</tt><tt class="descname">padre</tt><a class="headerlink" href="#desarrollo.models.Relacion.padre" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-desarrollo.tests">
+<span id="desarrollo-tests-module"></span><h2>desarrollo.tests module<a class="headerlink" href="#module-desarrollo.tests" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-desarrollo.views">
+<span id="desarrollo-views-module"></span><h2>desarrollo.views module<a class="headerlink" href="#module-desarrollo.views" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="function">
+<dt id="desarrollo.views.agregar_archivo_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">agregar_archivo_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#agregar_archivo_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.agregar_archivo_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.asignar_antecesor_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">asignar_antecesor_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#asignar_antecesor_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.asignar_antecesor_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.asignar_padre_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">asignar_padre_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#asignar_padre_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.asignar_padre_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.completar_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">completar_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#completar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.completar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.conf_eliminar_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">conf_eliminar_item</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#conf_eliminar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.conf_eliminar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.costo_monetario_adelante">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_monetario_adelante</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_monetario_adelante"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_monetario_adelante" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.costo_monetario_atras">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_monetario_atras</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_monetario_atras"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_monetario_atras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.costo_temporal_adelante">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_temporal_adelante</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_temporal_adelante"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_temporal_adelante" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.costo_temporal_atras">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_temporal_atras</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_temporal_atras"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_temporal_atras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.crear_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">crear_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#crear_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.crear_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.des_fase">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">des_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#des_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.des_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.des_proyecto">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">des_proyecto</tt><big>(</big><em>request</em>, <em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#des_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.des_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.desaprobado_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">desaprobado_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#desaprobado_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.desaprobado_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.desaprobar_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">desaprobar_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#desaprobar_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.desaprobar_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.desarrollo">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">desarrollo</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#desarrollo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.desarrollo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Vista que muestra el contenido privado del modulo de desarrollo</p>
+<div class="line-block">
+<div class="line">Recibe como parametro un request y retorna la pagina web desarrollo.html donde se muestra la</div>
+<div class="line">lista de proyectos del sistema si el usuario posee los permisos correspondientes</div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Variables</dt>
+<dd><ul class="first last simple">
+<li>lista_proyectos: es la lista de proyectos existentes en el sistema</li>
+<li>usuario: es el usuario logueado</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.detalle_fase">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Vista detalle fase</p>
+<div class="line-block">
+<div class="line">Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web</div>
+<div class="line">detallefase.html que muestra en detalle la informacion de dicha fase</div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Variables</dt>
+<dd><ul class="first last simple">
+<li>usuario_actor: usuario que realiza la accion</li>
+<li>proyecto: es el proyecto cuyas fases se desea administrar</li>
+<li>fases: indica que la fase correpondera a un proyecto especifico</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.detalle_item_version">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_item_version</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em>, <em>idVersion</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_item_version"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_item_version" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.detalle_item_vista">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_item_vista</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_item_vista"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_item_vista" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.detalle_proyecto">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_proyecto</tt><big>(</big><em>request</em>, <em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.eliminar_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">eliminar_item</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#eliminar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.eliminar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.eliminar_relacion_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">eliminar_relacion_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#eliminar_relacion_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.eliminar_relacion_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.finalizar_item_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">finalizar_item_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#finalizar_item_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.finalizar_item_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.generaCiclo">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">generaCiclo</tt><big>(</big><em>id_item</em>, <em>id_padre</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generaCiclo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generaCiclo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.generar_grafo_fase">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_fase</tt><big>(</big><em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.generar_grafo_proyecto">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_proyecto</tt><big>(</big><em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.gestion_archivos_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">gestion_archivos_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#gestion_archivos_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.gestion_archivos_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.gestion_relacion_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">gestion_relacion_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#gestion_relacion_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.gestion_relacion_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.hijos">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">hijos</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#hijos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.hijos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.historial_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">historial_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#historial_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.historial_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.impacto_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">impacto_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#impacto_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.impacto_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.item_finalizado_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">item_finalizado_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#item_finalizado_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.item_finalizado_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.item_revivido">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">item_revivido</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_version</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#item_revivido"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.item_revivido" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.mod_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">mod_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#mod_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.mod_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.relacion_eliminada_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">relacion_eliminada_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#relacion_eliminada_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.relacion_eliminada_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.reversion_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">reversion_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em>, <em>id_version</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#reversion_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.reversion_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.revivir_item">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">revivir_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#revivir_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.revivir_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.solicitud_cambio_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">solicitud_cambio_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#solicitud_cambio_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.solicitud_cambio_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.sucesores">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">sucesores</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#sucesores"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.sucesores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-desarrollo">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Modulo de desarrollo</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-desarrollo.admin">desarrollo.admin module</a></li>
+<li><a class="reference internal" href="#module-desarrollo.forms">desarrollo.forms module</a></li>
+<li><a class="reference internal" href="#desarrollo-models-module">desarrollo.models module</a></li>
+<li><a class="reference internal" href="#module-desarrollo.tests">desarrollo.tests module</a></li>
+<li><a class="reference internal" href="#module-desarrollo.views">desarrollo.views module</a></li>
+<li><a class="reference internal" href="#module-desarrollo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="gestion.html"
+                        title="capítulo anterior">Modulo de Gestion de Cambio</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/desarrollo.txt"
+           rel="nofollow">Mostrar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="right" >
+          <a href="gestion.html" title="Modulo de Gestion de Cambio"
+             >anterior</a> |</li>
+        <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alexis Ojeda - Rodrigo Ferreira - Juan Figueredo.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -1,10 +1,10 @@
-{% extends 'proyecto/administrar_proyecto.html' %}
+{% extends 'administracion.html' %}
 {% block titulo %}Detalle de Proyecto{% endblock %}
 {% block encabezado %}Detalle del proyecto: {{ proyecto.Nombre}}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/proyectos" class="btn btn-default">Volver</a></li>
+    <li><a href="/administracion/" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
     <dl class="dl-horizontal">
