@@ -133,7 +133,7 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
     lista_items = lista_items.filter(Estado=Item.FINALIZADO)
     lineabase = LineaBase(Fase=fase, Usuario=usuario)
     if request.method == 'POST':
-        formulario = LineBaseForm(request.POST, instance=lineabase)
+        formulario = LineaBaseForm(request.POST, instance=lineabase)
         formulario.fields["Items"].queryset = lista_items
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
         if formulario.is_valid():
@@ -149,7 +149,7 @@ def crear_lineaBase_view(request, id_proyecto, id_fase):
             )
 
     else:
-        formulario = LineBaseForm(instance=lineabase)
+        formulario = LineaBaseForm(instance=lineabase)
         formulario.fields["Items"].queryset = lista_items
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
     return render_to_response(

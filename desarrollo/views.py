@@ -8,6 +8,9 @@ import pydot
 from gestion.forms import *
 from gestion.models import *
 import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
     """
@@ -70,7 +73,7 @@ def des_fase(request, id_proyecto, id_fase):
     return render_to_response('des_fase.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
          'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
-         'p_desaprobar':p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
          'p_solicitar_cambio':p_solicitar_cambio},
         context_instance=RequestContext(request))
 
@@ -78,6 +81,7 @@ def des_fase(request, id_proyecto, id_fase):
 @reversion.create_revision()
 def crear_item(request, id_proyecto, id_fase):
     usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
     item = Item(Usuario=usuario, Fase=fase, Version=1)
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
@@ -120,11 +124,28 @@ def crear_item(request, id_proyecto, id_fase):
             suceso = True
             mensaje = "El item se ha creado exitosamente, no olvides completar los atributos"
             generar_grafo_fase(id_fase)
-            return render_to_response(
-                'des_fase.html',
-                {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
-                context_instance=RequestContext(request)
-            )
+            p_consultar = usuario.tienePermisoProyecto("consulta_item",id_proyecto)
+            p_revivir = usuario.tienePermisoProyecto("revive_item",id_proyecto)
+            p_aprobar = usuario.tienePermisoProyecto("aprueba_item",id_proyecto)
+            p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item",id_proyecto)
+            p_eliminar_item = usuario.tienePermisoProyecto("delete_item",id_proyecto)
+            p_gestionar_item = usuario.tienePermisoProyecto("change_item",id_proyecto)
+            p_crear_item = usuario.tienePermisoProyecto("add_item",id_proyecto)
+            p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item",id_proyecto)
+            try:
+                comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+            except ObjectDoesNotExist:
+                comite = False
+            items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+            if items_validados == None:
+                items_validados = True
+
+            return render_to_response('des_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+                 'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+                 'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+                 'p_solicitar_cambio':p_solicitar_cambio, 'suceso': suceso, 'mensaje': mensaje},
+                context_instance=RequestContext(request))
     else:
         formulario = ItemForm(instance=item)
     return render_to_response('item/crear_item.html',
@@ -199,12 +220,27 @@ def mod_item(request, id_proyecto, id_fase, id_item):
         relacion.save()
         mensaje = "El item se ha modificado exitosamente"
         generar_grafo_fase(id_fase)
-        return render_to_response(
-            'des_fase.html',
-            {'usuario_actor' :usuario, 'fase': fase, 'lista_items': lista_items,
-             'mensaje': mensaje, 'suceso': suceso},
-            context_instance=RequestContext(request)
-        )
+        p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+        p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+        p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+        p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+        p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+        p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+        p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+        p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+        try:
+            comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+        except ObjectDoesNotExist:
+            comite = False
+        items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+        if items_validados == None:
+            items_validados = True
+        return render_to_response('des_fase.html',
+            {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+             'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+             'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+             'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+            context_instance=RequestContext(request))
     else:
         formulario1 = ModItemForm(instance=item)
     return render_to_response(
@@ -320,12 +356,29 @@ def eliminar_item(request, idProyecto, idFase, idItem):
     item.delete()
     lista_items = Item.objects.filter(Fase=idFase)
     generar_grafo_fase(idFase)
-    return render_to_response(
-        'item/item_exito.html',
-        {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,
-         'mensaje': 'El item '+item.Nombre+' se ha eliminado exitosamente'},
-        context_instance=RequestContext(request)
-    )
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", idProyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", idProyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item",idProyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item",idProyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item",idProyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item",idProyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item",idProyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item",idProyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    mensaje = 'El item '+item.Nombre+' se ha eliminado exitosamente'
+    suceso = True
+    return render_to_response('des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request))
 
 def revivir_item(request, id_proyecto, id_fase):
     usuario = request.user
@@ -369,16 +422,31 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
 
 
 
-
+    suceso = True
     mensaje= 'Item revivido'
     lista_items = Item.objects.filter(Fase=id_fase)
     generar_grafo_fase(id_fase)
-
-    return render_to_response(
-                'des_fase.html',
-                {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':True},
-                context_instance=RequestContext(request)
-            )
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    return render_to_response('des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request))
 
 def generar_grafo_proyecto(id_proyecto):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -533,13 +601,30 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
     item.Version = version_antigua+1
     item.save()
     generar_grafo_fase(id_fase)
+    suceso = True
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    return render_to_response('des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request)
+    )
 
-
-    return render_to_response(
-                'des_fase.html',
-                {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':True},
-                context_instance=RequestContext(request)
-            )
 
 def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
     usuario = request.user
@@ -885,23 +970,53 @@ def aprobar_item_view(request, id_proyecto, id_fase, id_item):
         if relacion.padre.Estado != Item.VALIDADO and relacion.padre.Estado != Item.FINALIZADO:
             suceso = False
             mensaje = 'El item no puede ser aprobado ya que su padre todavia no ha sido aprobado'
-
-            return render_to_response(
-                'des_fase.html',
-                {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
-                 'mensaje': mensaje, 'lista_items': lista_items},
+            p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+            p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+            p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+            p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+            p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+            p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+            p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+            p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+            try:
+                comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+            except ObjectDoesNotExist:
+                comite = False
+            items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+            if items_validados == None:
+                items_validados = True
+            return render_to_response('des_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+                 'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+                 'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+                 'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
                 context_instance=RequestContext(request)
             )
     if fase.Numero != 1:
         if posee_antecesor(item) == False:
             suceso = False
             mensaje = 'El item no posee antecesor directo ni indirecto, por lo tanto no puede ser aprobado'
-            return render_to_response(
-                'des_fase.html',
-                {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
-                 'mensaje': mensaje, 'lista_items': lista_items},
-                context_instance=RequestContext(request)
-            )
+            p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+            p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+            p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+            p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+            p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+            p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+            p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+            p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+            try:
+                comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+            except ObjectDoesNotExist:
+                comite = False
+            items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+            if items_validados == None:
+                items_validados = True
+            return render_to_response('des_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+                 'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+                 'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+                 'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+                context_instance=RequestContext(request))
     return render_to_response(
         'item/finalizar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
@@ -920,11 +1035,28 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     mensaje = 'Item aprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
     generar_grafo_fase(id_fase)
-    return render_to_response(
-        'des_fase.html',
-        {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso, 'mensaje': mensaje, 'lista_items': lista_items},
-        context_instance=RequestContext(request)
-    )
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    return render_to_response('des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request))
+
 
 
 
@@ -954,12 +1086,27 @@ def solicitud_crear_view(request, id_proyecto, id_fase):
                 voto.solicitud = solicitud
                 voto.usuario = miembro
                 voto.save()
-            return render_to_response(
-                'des_fase.html',
+            p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+            p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+            p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+            p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+            p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+            p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+            p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+            p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+            try:
+                comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+            except ObjectDoesNotExist:
+                comite = False
+            items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+            if items_validados == None:
+                items_validados = True
+            return render_to_response('des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-                 'suceso': suceso, 'mensaje': mensaje},
-                context_instance=RequestContext(request)
-            )
+                 'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+                 'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+                 'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+                context_instance=RequestContext(request))
 
     else:
         formulario = SolicitudCambioForm(instance=solicitud)
@@ -993,12 +1140,27 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     mensaje = 'Item desaprobado exitosamente'
     lista_items = Item.objects.filter(Fase=fase)
     generar_grafo_fase(id_fase)
-    return render_to_response(
-        'des_fase.html',
-        {'usuario_actor': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
-         'mensaje': mensaje, 'lista_items': lista_items},
-        context_instance=RequestContext(request)
-    )
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    return render_to_response('des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request))
 
 
 def solicitudes_de_cambio_view(request, id_proyecto, id_fase):
@@ -1045,12 +1207,27 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
         suceso = False
         mensaje = 'No se puede revisar el item porque el padre aun no se ha modificado'
         lista_items = Item.objects.filter(Fase=fase)
-        return render_to_response(
-            'des_fase.html',
+        p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+        p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+        p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+        p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+        p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+        p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+        p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+        p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+        try:
+            comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+        except ObjectDoesNotExist:
+            comite = False
+        items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+        if items_validados == None:
+            items_validados = True
+        return render_to_response('des_fase.html',
             {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-             'mensaje': mensaje, 'suceso': suceso},
-            context_instance=RequestContext(request)
-        )
+             'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+             'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+             'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+            context_instance=RequestContext(request))
     solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
     boolean = False
     for solicitud in solicitudes:
@@ -1084,9 +1261,25 @@ def item_revisado_vista(request, id_proyecto, id_fase, id_item):
     suceso = True
     mensaje = 'El item ha sido revisado'
     lista_items = Item.objects.filter(Fase=fase)
-    return render_to_response(
-        'des_fase.html',
+    p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
+    try:
+        comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+    except ObjectDoesNotExist:
+        comite = False
+    items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+    if items_validados == None:
+        items_validados = True
+    return render_to_response('des_fase.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-         'mensaje': mensaje, 'suceso': suceso},
-        context_instance=RequestContext(request)
-    )
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio, 'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request))
+

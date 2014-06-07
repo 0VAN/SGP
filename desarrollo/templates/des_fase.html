@@ -45,20 +45,21 @@
                                     Opciones <span class="caret"></span>
                                 </button>
 
-                            <ul class="dropdown-menu" role="menu">
-                                {% if p_consultar %}
-                                    <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
-                                {% endif %}
-                                {% if item.Estado == 'CON' or item.Estado == 'CRE' %}
-                                    {% if p_gestionar_item %}
-                                        <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% if p_consultar %}
+                                        <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
                                     {% endif %}
-                                {% endif %}
-                                {% if p_consultar %}
-                                    <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
-                                {% endif %}
-                            </ul>
-                        </div>
+                                    {% if item.Estado == 'CON' or item.Estado == 'CRE' %}
+                                        {% if p_gestionar_item %}
+                                            <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if p_consultar %}
+                                        <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
                     </td>
                     <td>
                         {% if item.Estado == 'CON' and p_aprobar %}
