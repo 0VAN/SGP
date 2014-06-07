@@ -18,6 +18,38 @@
     {{ formulario.media }}
 {% endblock %}
 {% block contenido %}
+    <dl class="dl-horizontal">
+        <dt>Nombre:</dt>
+        <dd>{{ solicitud.nombre }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ solicitud.usuario }}</dd>
+        <dt>Fase:</dt>
+        <dd>{{ solicitud.fase }}</dd>
+        <dt>Proyecto</dt>
+        <dd>{{ solicitud.proyecto }}</dd>
+        <dt>Motivo:</dt>
+        <dd>{{ solicitud.motivo }}</dd>
+        <dt>Fecha:</dt>
+        <dd>{{ solicitud.fecha }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ solicitud.get_estado_display }}</dd>
+    </dl>
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in solicitud.items.all %}
+                    <tr>
+                        <td>{{ item }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table">{{ formulario }}</table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>

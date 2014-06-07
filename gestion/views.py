@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, RequestContext, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from gestion.models import *
+from desarrollo.models import *
 from gestion.forms import *
 from desarrollo.models import *
 from django.contrib.auth.models import Group
@@ -23,8 +24,11 @@ def gestion(request):
     """
     lista_proyectos = Proyecto.objects.all()
     usuario = request.user
-    return render_to_response('gestion.html', {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario},
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'gestion.html',
+        {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario},
+        context_instance=RequestContext(request)
+    )
 def gestion_proyecto(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -45,10 +49,13 @@ def gestion_comite(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     comite = False
+    miembros = None
     if tiene_comite(id_proyecto):
         comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+        miembros = comite.Miembros.all()
+    print miembros
     return render_to_response('comite/gestion_comite.html',
-        {'usuario_actor': usuario, 'proyecto':proyecto, 'comite':comite},
+        {'usuario_actor': usuario, 'proyecto':proyecto, 'comite':comite, 'miembros': miembros},
         context_instance=RequestContext(request))
 
 def tiene_comite(id_proyecto):
@@ -64,37 +71,58 @@ def tiene_comite(id_proyecto):
 def crear_comite(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    comite = ComiteDeCambio(Usuario1=usuario, Proyecto=proyecto)
+    comite_instancia = ComiteDeCambio(Proyecto=proyecto)
+
     if request.method == 'POST':
-        formulario = ComiteForm(request.POST, instance=comite)
-        formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
+        formulario = ComiteForm(request.POST, instance=comite_instancia)
+        formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
         if formulario.is_valid():
+            print 'paso'
             rolComite = Group.objects.get(name="Integrante de Comite")
-            formulario.save()
-            usuario.groups.add(rolComite)
-            usuario.save()
-            usuario2 = User.objects.get(pk=request.POST["Usuario2"])
-            usuario2.groups.add(rolComite)
-            usuario2.save()
-            usuario3 = User.objects.get(pk=request.POST["Usuario3"])
-            usuario3.groups.add(rolComite)
-            usuario3.save()
-            return render_to_response('comite/gestion_comite.html',
-        {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
-        context_instance=RequestContext(request))
+            comite = formulario.save()
+            cantidad = comite.Miembros.all().count()
+            print cantidad % 2
+            if (cantidad % 2) != 0:
+                print 'entro'
+                suceso = False
+                mensaje = 'El comite debe tener un numero impar de miembros'
+                comite.delete()
+                formulario = ComiteForm(instance=comite_instancia)
+                formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
+                return render_to_response(
+                    'comite/crear_comite.html',
+                    {'formulario':formulario, 'usuario_actor': usuario, 'id_proyecto': id_proyecto,
+                     'suceso': suceso, 'mensaje': mensaje},
+                    context_instance=RequestContext(request)
+                )
+            comite.Miembros.add(usuario)
+
+            for user in comite.Miembros.all():
+                user.groups.add(rolComite)
+                user.save()
+
+            comite.save()
+            miembros = comite.Miembros.all()
+            return render_to_response(
+                'comite/gestion_comite.html',
+                {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite, 'miembros': miembros},
+                context_instance=RequestContext(request)
+            )
         else:
-            return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
-                                                              'id_proyecto':id_proyecto},
-        context_instance=RequestContext(request))
+            return render_to_response(
+                'comite/crear_comite.html',
+                {'formulario':formulario,'usuario_actor': usuario, 'id_proyecto': id_proyecto},
+                context_instance=RequestContext(request)
+            )
 
     else:
-        formulario = ComiteForm(instance=comite)
-        formulario.fields["Usuario2"].queryset = proyecto.Usuarios.all()
-        formulario.fields["Usuario3"].queryset = proyecto.Usuarios.all()
-        return render_to_response('comite/crear_comite.html',{'formulario':formulario,'usuario_actor': usuario,
-                                                              'id_proyecto':id_proyecto},
-        context_instance=RequestContext(request))
+        formulario = ComiteForm(instance=comite_instancia)
+        formulario.fields["Miembros"].queryset = proyecto.Usuarios.all()
+        return render_to_response(
+            'comite/crear_comite.html',
+            {'formulario':formulario,'usuario_actor': usuario, 'id_proyecto':id_proyecto},
+            context_instance=RequestContext(request)
+        )
 
 
 def crear_lineaBase_view(request, id_proyecto, id_fase):
@@ -157,7 +185,17 @@ def detalle_lineaBase(request, id_proyecto, id_fase, id_lineaB):
 def solicitudes_view(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    if tiene_comite(id_proyecto):
+        comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    else:
+        lista_proyectos = Proyecto.objects.all()
+        suceso = False
+        mensaje = 'Primero debe crear un comite de cambio'
+        return render_to_response(
+            'gestion.html',
+            {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario, 'suceso': suceso, 'mensaje': mensaje},
+            context_instance=RequestContext(request)
+        )
     lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
     return render_to_response(
         'solicitud/solicitudes.html',
@@ -170,32 +208,24 @@ def detalle_solicitud_view(request, id_proyecto, id_solicitud):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
     comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
-
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
     voto = Voto.objects.get(usuario=usuario, solicitud=solicitud)
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud,
-         'voto':voto, 'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'voto':voto, 'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados,
+         'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -210,29 +240,20 @@ def aprobar_solicitud_view(request, id_proyecto, id_solicitud):
     voto.save()
     suceso = True
     mensaje = 'Voto aprobado'
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
 
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    total_votos = votos_aceptados + votos_rechazados
-    if total_votos == 3:
+    if votos_restantes == 0:
         if votos_aceptados > votos_rechazados:
             solicitud.estado = SolicitudCambio.ACEPTADA
         else:
@@ -241,7 +262,7 @@ def aprobar_solicitud_view(request, id_proyecto, id_solicitud):
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
-         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados, 'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -256,29 +277,20 @@ def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
     voto.save()
     suceso = True
     mensaje = 'Voto desaprobado'
+    votos = Voto.objects.filter(solicitud=solicitud)
     votos_aceptados = 0
     votos_rechazados = 0
+    votos_restantes = 0
+    for voto in votos:
+        if voto.estado == voto.ACEPTADO:
+            votos_aceptados+=1
+        elif voto.estado == voto.RECHAZADO:
+            votos_rechazados+=1
+        elif voto.estado == voto.PROCESO:
+            votos_restantes+=1
 
-    voto1 = Voto.objects.get(usuario=comite.Usuario1, solicitud=solicitud)
-    if voto1.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto1.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
 
-    voto2 = Voto.objects.get(usuario=comite.Usuario2, solicitud=solicitud)
-    if voto2.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto2.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    voto3 = Voto.objects.get(usuario=comite.Usuario3, solicitud=solicitud)
-    if voto3.estado == Voto.ACEPTADO:
-        votos_aceptados += 1
-    elif voto3.estado == Voto.RECHAZADO:
-        votos_rechazados += 1
-
-    total_votos = votos_aceptados + votos_rechazados
-    if total_votos == 3:
+    if votos_restantes == 0:
         if votos_aceptados > votos_rechazados:
             solicitud.estado = SolicitudCambio.ACEPTADA
         else:
@@ -287,7 +299,7 @@ def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
-         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados, 'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -304,8 +316,14 @@ def credencial_view(request, id_proyecto, id_solicitud):
             formulario.save()
             lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
             for item in solicitud.items.all():
-                item.Estado = Item.REVISION
+                item.Estado = Item.CREDENCIAL
                 item.save()
+                relaciones = Relacion.objects.filter(padre=item)
+                for relacion in relaciones:
+                    relacion.item.Estado = Item.REVISION
+                    relacion.item.save()
+
+
             return render_to_response(
                 'solicitud/solicitudes.html',
                 {'usuario_actor':usuario, 'proyecto':proyecto, 'lista_solicitudes': lista_solicitudes},

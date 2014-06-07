@@ -26,6 +26,8 @@
         <dd>{{ votos_aceptados }}</dd>
         <dt>Votos en contra:</dt>
         <dd>{{ votos_rechazados }}</dd>
+        <dt>Votos restantes:</dt>
+        <dd>{{ votos_restantes }}</dd>
     </dl>
     <div class="col-lg-4 table-responsive">
         <table class="table table-bordered">
@@ -36,9 +38,15 @@
             </thead>
             <tbody>
                 {% for item in solicitud.items.all %}
+<<<<<<< HEAD
                     <td class="text-center">
                         <a title="Haz click para mas detalles del item" href="{% url 'gestion.views.detalle_item' proyecto.id solicitud.fase.id item.id %}" type="button" class="btn btn-info">{{ item.Nombre  }}</a>
                         </td>
+=======
+                    <tr>
+                        <td>{{ item }}</td>
+                    </tr>
+>>>>>>> juanfran
                 {% endfor %}
             </tbody>
         </table>

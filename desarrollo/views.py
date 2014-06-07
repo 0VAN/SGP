@@ -125,12 +125,63 @@ def mod_item(request, id_proyecto, id_fase, id_item):
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     item.Version += 1
-    formulario = ItemForm(request.POST, instance=item)
+
     lista_tipos = TipoDeItem.objects.filter(Fase=fase)
     relacion = Relacion.objects.get(item=item)
+    campos = Campo.objects.filter(item=item)
+    if item.Estado == Item.CREDENCIAL:
+        solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
+        boolean = False
+        for solicitud in solicitudes:
+            if solicitud.items.all().filter(pk=id_item):
+                boolean = True
 
-    if formulario.is_valid():
-        formulario.save()
+        if boolean == False:
+            suceso = False
+            mensaje = 'Usted no posee permiso para modificar este item'
+            lista_items = Item.objects.filter(Fase=fase)
+            return render_to_response(
+                'des_fase.html',
+                {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+                 'mensaje': mensaje, 'suceso': suceso},
+                context_instance=RequestContext(request)
+            )
+
+    if item.Estado == Item.CREDENCIAL:
+        item.Estado = Item.VALIDADO
+    formulario1 = ModItemForm(request.POST, instance=item)
+    if formulario1.is_valid():
+        for a in campos:
+            for key, value in request.POST.iteritems():
+                if a.atributo.Nombre == key:
+                    if a.atributo.Tipo == Atributo.NUMERICO:
+                        a.numerico = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.CADENA:
+                        a.cadena = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.FECHA:
+                        a.fecha = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.TEXTO:
+                        a.texto = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.LOGICO:
+                        if value=="1":
+                            a.logico = None
+                        elif value=="2":
+                            a.logico = True
+                        elif value=="3":
+                            a.logico = False
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.MAIL:
+                        a.mail = value
+                        a.save()
+                    elif a.atributo.Tipo == Atributo.HORA:
+                        a.hora = value
+                        a.save()
+
+        formulario1.save()
         lista_items = Item.objects.filter(Fase=fase)
         suceso = True
         relacion.save()
@@ -138,14 +189,16 @@ def mod_item(request, id_proyecto, id_fase, id_item):
         generar_grafo_fase(id_fase)
         return render_to_response(
             'des_fase.html',
-            {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
+            {'usuario_actor' :usuario, 'fase': fase, 'lista_items': lista_items,
+             'mensaje': mensaje, 'suceso': suceso},
             context_instance=RequestContext(request)
         )
     else:
-        formulario = ItemForm(instance=item)
+        formulario1 = ModItemForm(instance=item)
     return render_to_response(
         'item/mod_item.html',
-        {'usuario_actor':usuario, 'item':item, 'fase':fase, 'formulario':formulario, 'lista_tipos': lista_tipos},
+        {'usuario_actor': usuario, 'item': item, 'fase': fase, 'formulario': formulario1,
+         'lista_tipos': lista_tipos, 'campos': campos},
         context_instance=RequestContext(request)
     )
 
@@ -213,12 +266,11 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     campos = Campo.objects.filter(item=item)
     relacion = Relacion.objects.get(item=item)
     lista_hijos = hijos(item)
-    lista_sucesores = sucesores(item)
-    #arreglado
+    lista_sucesores =sucesores(item)
     return render_to_response(
         'item/detalle.html',
         {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
-         'hijos':lista_hijos, 'sucesores':lista_sucesores},
+         'hijs': lista_hijos, 'sucesores': lista_sucesores},
         context_instance=RequestContext(request)
     )
 
@@ -531,7 +583,7 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
 
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
-        lista_items = Item.objects.filter(Fase=faseAnterior)
+        lista_items = Item.objects.filter(Fase=faseAnterior).filter(Estado=Item.VALIDADO)
 
     if request.method=='POST':
         formulario = AntecesorForm(request.POST, instance=relacion)
@@ -747,6 +799,30 @@ def aprobar_item_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+    relacion = Relacion.objects.get(item=item)
+    lista_items = Item.objects.filter(Fase=fase)
+    if relacion.padre != None:
+        print relacion.padre.Estado
+        if relacion.padre.Estado != Item.VALIDADO and relacion.padre.Estado != Item.FINALIZADO:
+            suceso = False
+            mensaje = 'El item no puede ser aprobado ya que su padre todavia no ha sido aprobado'
+
+            return render_to_response(
+                'des_fase.html',
+                {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+                 'mensaje': mensaje, 'lista_items': lista_items},
+                context_instance=RequestContext(request)
+            )
+    if fase.Numero != 1:
+        if posee_antecesor(item) == False:
+            suceso = False
+            mensaje = 'El item no posee antecesor directo ni indirecto, por lo tanto no puede ser aprobado'
+            return render_to_response(
+                'des_fase.html',
+                {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+                 'mensaje': mensaje, 'lista_items': lista_items},
+                context_instance=RequestContext(request)
+            )
     return render_to_response(
         'item/finalizar.html',
         {'usuario': usuario, 'fase': fase, 'item': item},
@@ -758,6 +834,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
+
     item.Estado = item.FINALIZADO
     item.save()
     suceso = True
@@ -786,22 +863,18 @@ def solicitud_crear_view(request, id_proyecto, id_fase):
         if formulario.is_valid():
             formulario.save()
             solicitud = SolicitudCambio.objects.last()
+            for item in solicitud.items.all():
+                item.Estado = Item.SOLICITUD
+                item.save()
             lista_items = Item.objects.filter(Fase=fase)
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
             comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
-            voto1 = Voto()
-            voto1.solicitud =solicitud
-            voto1.usuario = comite.Usuario1
-            voto1.save()
-            voto2 = Voto()
-            voto2.solicitud =solicitud
-            voto2.usuario = comite.Usuario2
-            voto2.save()
-            voto3 = Voto()
-            voto3.solicitud =solicitud
-            voto3.usuario = comite.Usuario3
-            voto3.save()
+            for miembro in comite.Miembros.all():
+                voto = Voto()
+                voto.solicitud = solicitud
+                voto.usuario = miembro
+                voto.save()
             return render_to_response(
                 'des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
@@ -866,3 +939,75 @@ def detalle_solicitud(request, id_proyecto, id_fase, id_solicitud):
     return render_to_response('detalle_solicitud_des.html',{'usuario_actor':usuario, 'proyecto':proyecto, 'fase':fase,'solicitud':solicitud, 'lista_item':lista_item}
                               ,context_instance=RequestContext(request))
 
+def posee_antecesor(item):
+    relacion = Relacion.objects.get(item=item)
+    if relacion.antecesor != None:
+        return True
+    while relacion != False:
+        if relacion.antecesor != None:
+            return True
+        try:
+            relacion = Relacion.objects.get(item=relacion.padre)
+        except ObjectDoesNotExist:
+            relacion = False
+    return False
+
+def revisar_item_vista(request, id_proyecto, id_fase, id_item):
+
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    campos = Campo.objects.filter(item=item)
+    relacion = Relacion.objects.get(item=item)
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
+    if relacion.padre.Estado != Item.VALIDADO:
+        suceso = False
+        mensaje = 'No se puede revisar el item porque el padre aun no se ha modificado'
+        lista_items = Item.objects.filter(Fase=fase)
+        return render_to_response(
+            'des_fase.html',
+            {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+             'mensaje': mensaje, 'suceso': suceso},
+            context_instance=RequestContext(request)
+        )
+    solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
+    boolean = False
+    for solicitud in solicitudes:
+        if solicitud.items.all().filter(pk=relacion.padre.id):
+            boolean = True
+
+    if boolean == False:
+        suceso = False
+        mensaje = 'Usted no posee permiso para modificar este item'
+        lista_items = Item.objects.filter(Fase=fase)
+        return render_to_response(
+            'des_fase.html',
+            {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+             'mensaje': mensaje, 'suceso': suceso},
+            context_instance=RequestContext(request)
+        )
+
+    return render_to_response(
+        'item/revisar.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
+         'hijos': lista_hijos, 'sucesores': lista_sucesores},
+        context_instance=RequestContext(request)
+    )
+
+def item_revisado_vista(request, id_proyecto, id_fase, id_item):
+    usuario = request.user
+    fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_item)
+    item.Estado = Item.FINALIZADO
+    item.save()
+    suceso = True
+    mensaje = 'El item ha sido revisado'
+    lista_items = Item.objects.filter(Fase=fase)
+    return render_to_response(
+        'des_fase.html',
+        {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
+         'mensaje': mensaje, 'suceso': suceso},
+        context_instance=RequestContext(request)
+    )

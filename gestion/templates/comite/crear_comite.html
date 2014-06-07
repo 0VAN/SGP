@@ -12,8 +12,16 @@
 {% endblock %}
 
 {% block contenido %}
+    <p>Usted es parte del comite</p>
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table">{{ formulario }}</table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% elif suceso == False %}
+            <div class="alert alert-danger">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
 {% endblock %}
