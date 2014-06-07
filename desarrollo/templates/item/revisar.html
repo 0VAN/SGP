@@ -1,0 +1,125 @@
+{% extends 'des_fase.html' %}
+{% block titulo %}{{ item.Nombre }}{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block encabezado %}Detalle del item: {{ item.Nombre }}{% endblock %}
+{% block contenido %}
+    <dl class="dl-horizontal">
+        <dt>Descripcion:</dt>
+        {% if item.Descripcion == "" %}
+            <dd>Este campo esta vacio</dd>
+        {% else %}
+            <dd>{{ item.Descripcion }}</dd>
+        {% endif %}
+        <dt>Prioridad:</dt>
+        <dd>{{ item.Prioridad }}</dd>
+        <dt>Costo Temporal:</dt>
+        <dd>{{ item.CostoTemporal }}</dd>
+        <dt>Costo Unitario:</dt>
+        <dd>{{ item.CostoUnitario }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ item.get_Estado_display }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ item.Usuario }}</dd>
+        <dt>Creado el:</dt>
+        <dd>{{ item.Fecha }}</dd>
+        <dt>Fase:</dt>
+        <dd>{{ item.Fase }}</dd>
+        <dt>Tipo de Item:</dt>
+        <dd>{{ item.Tipo }}</dd>
+
+        {% if relacion.padre == relacion.antecesor %}
+            <dt>Relacion: </dt>
+            <dd>El item no posee padre ni antecesor</dd>
+        {% else %}
+            {% if relacion.padre != None %}
+                <dt>Padre:</dt>
+                <dd>{{ relacion.padre.Nombre }} | fase: {{ item.Fase }} | proyecto: {{ item.Fase.Proyecto }}</dd>
+            {% else %}
+                <dt>Antecesor:</dt>
+                <dd>{{ relacion.antecesor.Nombre }} | fase: {{ item.Fase }} | proyecto: {{ item.Fase.Proyecto }}</dd>
+            {% endif %}
+        {% endif %}
+
+    </dl>
+    <div class="col-lg-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Atributo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in campos %}
+                    <tr>
+                    <td>{{ a.atributo.Nombre }}</td>
+                    {% if a.atributo.Tipo == 'N' %}
+                        <td>{{ a.numerico }}</td>
+                    {% elif a.atributo.Tipo == 'C' %}
+                        <td>{{ a.cadena }}</td>
+                    {% elif a.atributo.Tipo == 'F' %}
+                        <td>{{ a.fecha }}</td>
+                    {% elif a.atributo.Tipo == 'M' %}
+                        <td>{{ a.mail }}</td>
+                    {% elif a.atributo.Tipo == 'L' %}
+                        <td>{{ a.logico }}</td>
+                    {% elif a.atributo.Tipo == 'H' %}
+                        <td>{{ a.hora }}</td>
+                    {% elif a.atributo.Tipo == 'T' %}
+                        <td>{{ a.texto }}</td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-pull-3"></div>
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Hijos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in hijos %}
+                    <tr>
+                        <td>{{ a.item }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No posee hijos</td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sucesores</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in sucesores %}
+                    <tr>
+                        <td>{{ a.item }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No posee sucesores</td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-12">
+    <a href="{% url 'desarrollo.views.item_revisado_vista' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-success">Revisado</a>
+    </div>
+{% endblock %}

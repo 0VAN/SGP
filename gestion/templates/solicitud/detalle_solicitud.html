@@ -26,6 +26,8 @@
         <dd>{{ votos_aceptados }}</dd>
         <dt>Votos en contra:</dt>
         <dd>{{ votos_rechazados }}</dd>
+        <dt>Votos restantes:</dt>
+        <dd>{{ votos_restantes }}</dd>
     </dl>
     <div class="col-lg-4 table-responsive">
         <table class="table table-bordered">
@@ -35,9 +37,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for a in solicitud.items.all %}
+                {% for item in solicitud.items.all %}
                     <tr>
-                        <td>{{ a }}</td>
+                        <td>{{ item }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

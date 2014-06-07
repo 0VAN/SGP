@@ -42,10 +42,10 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{% url 'desarrollo.views.detalle_item_vista' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
-                                {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
+                                {% if item.Estado == 'CON' or item.Estado == 'CRE' %}
                                     <li><a href="{% url 'desarrollo.views.mod_item' fase.Proyecto.id fase.id item.id %}">Modificar</a></li>
-                                    <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
                                 {% endif %}
+                                <li><a href="{% url 'desarrollo.views.impacto_view' fase.Proyecto.id fase.id item.id %}">Calcular Impacto</a></li>
                             </ul>
                         </div>
                     </td>
@@ -58,14 +58,13 @@
 
                     </td>
                     <td>
-                        {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
+                        {% if item.Estado == 'CON' %}
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
                                     Gestionar <span class="caret"></span>
                                 </button>
 
                                 <ul class="dropdown-menu" role="'menu">
-                                    <li><a href="{% url 'desarrollo.views.completar_item' fase.Proyecto.id fase.id item.id %}">Atributos</a></li>
                                     {% if item.Estado != 'SOL' %}
                                         <li><a href="{% url 'desarrollo.views.gestion_relacion_view' fase.Proyecto.id fase.id item.id %}">Relaciones</a></li>
                                     {% endif %}
@@ -81,10 +80,14 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if item.Estado != 'VAL' and item.Estado != 'FIN' %}
+                        {% if item.Estado == 'CON' %}
                             <a href="{% url 'desarrollo.views.conf_eliminar_item' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-danger btn-sm">Eliminar</a>
                         {% endif %}
+                        {% if item.Estado == 'REV' %}
+                            <a href="{% url 'desarrollo.views.revisar_item_vista' fase.Proyecto.id fase.id item.id %}" type="button" class="btn btn-warning btn-sm">Revisar</a>
+                        {% endif %}
                     </td>
+
                 </tr>
             {% empty %}
                 <tr class="warning">

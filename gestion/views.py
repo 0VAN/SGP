@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, RequestContext, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from gestion.models import *
+from desarrollo.models import *
 from gestion.forms import *
 from django.contrib.auth.models import Group
 # Create your views here.
@@ -22,8 +23,11 @@ def gestion(request):
     """
     lista_proyectos = Proyecto.objects.all()
     usuario = request.user
-    return render_to_response('gestion.html', {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario},
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'gestion.html',
+        {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario},
+        context_instance=RequestContext(request)
+    )
 def gestion_proyecto(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -100,7 +104,7 @@ def crear_comite(request, id_proyecto):
             miembros = comite.Miembros.all()
             return render_to_response(
                 'comite/gestion_comite.html',
-                {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite},
+                {'usuario_actor': usuario, 'proyecto': proyecto, 'comite': comite, 'miembros': miembros},
                 context_instance=RequestContext(request)
             )
         else:
@@ -179,7 +183,17 @@ def detalle_lineaBase(request, id_proyecto, id_fase, id_lineaB):
 def solicitudes_view(request, id_proyecto):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    if tiene_comite(id_proyecto):
+        comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
+    else:
+        lista_proyectos = Proyecto.objects.all()
+        suceso = False
+        mensaje = 'Primero debe crear un comite de cambio'
+        return render_to_response(
+            'gestion.html',
+            {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario, 'suceso': suceso, 'mensaje': mensaje},
+            context_instance=RequestContext(request)
+        )
     lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
     return render_to_response(
         'solicitud/solicitudes.html',
@@ -208,7 +222,8 @@ def detalle_solicitud_view(request, id_proyecto, id_solicitud):
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud,
-         'voto':voto, 'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'voto':voto, 'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados,
+         'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -245,7 +260,7 @@ def aprobar_solicitud_view(request, id_proyecto, id_solicitud):
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
-         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados, 'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -282,7 +297,7 @@ def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
     return render_to_response(
         'solicitud/detalle_solicitud.html',
         {'usuario_actor':usuario, 'proyecto':proyecto, 'solicitud':solicitud, 'voto':voto,
-         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados},
+         'votos_aceptados': votos_aceptados, 'votos_rechazados': votos_rechazados, 'votos_restantes': votos_restantes},
         context_instance=RequestContext(request)
     )
 
@@ -299,8 +314,14 @@ def credencial_view(request, id_proyecto, id_solicitud):
             formulario.save()
             lista_solicitudes = SolicitudCambio.objects.filter(proyecto=proyecto)
             for item in solicitud.items.all():
-                item.Estado = Item.REVISION
+                item.Estado = Item.CREDENCIAL
                 item.save()
+                relaciones = Relacion.objects.filter(padre=item)
+                for relacion in relaciones:
+                    relacion.item.Estado = Item.REVISION
+                    relacion.item.save()
+
+
             return render_to_response(
                 'solicitud/solicitudes.html',
                 {'usuario_actor':usuario, 'proyecto':proyecto, 'lista_solicitudes': lista_solicitudes},

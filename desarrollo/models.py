@@ -14,12 +14,14 @@ class Item(models.Model):
     FINALIZADO = 'FIN'
     REVISION = 'REV'
     SOLICITUD = 'SOL'
+    CREDENCIAL = 'CRE'
     ESTADO_CHOICES = (
         (CONSTRUCCION, 'Construccion'),
         (VALIDADO, 'Validado'),
         (FINALIZADO, 'Aprobado'),
         (REVISION, 'Revision'),
         (SOLICITUD, 'En solicitud de cambio'),
+        (CREDENCIAL, 'En credencial'),
     )
 
     Nombre = models.CharField(max_length=30, unique=True)

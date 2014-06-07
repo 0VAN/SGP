@@ -137,6 +137,9 @@ urlpatterns = patterns('',
 
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/cambio/$', 'desarrollo.views.solicitud_cambio_view'),
 
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/revisar/$', 'desarrollo.views.revisar_item_vista'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/revisado/$', 'desarrollo.views.item_revisado_vista'),
+
 
 ########################################################################################################################
 #####################################URL GESTION DE CAMBIOS#############################################################
