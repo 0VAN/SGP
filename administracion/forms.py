@@ -160,7 +160,7 @@ class RolForm(MyForm):
     """
     class Meta:
         model = Group
-        exclude = ['Usuario']
+        exclude = ['Usuario','Proyecto']
 
     class Media:
         css = {'all':('/static/css/filteredselectwidget.css',),}

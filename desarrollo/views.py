@@ -57,9 +57,21 @@ def des_fase(request, id_proyecto, id_fase):
     items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
     if items_validados == None:
         items_validados = True
+
+    p_consultar = usuario.tienePermisoProyecto("consulta_item",id_proyecto)
+    p_revivir = usuario.tienePermisoProyecto("revive_item",id_proyecto)
+    p_aprobar = usuario.tienePermisoProyecto("aprueba_item",id_proyecto)
+    p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item",id_proyecto)
+    p_eliminar_item = usuario.tienePermisoProyecto("delete_item",id_proyecto)
+    p_gestionar_item = usuario.tienePermisoProyecto("change_item",id_proyecto)
+    p_crear_item = usuario.tienePermisoProyecto("add_item",id_proyecto)
+    p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item",id_proyecto)
+
     return render_to_response('des_fase.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-         'comite': comite, 'validados': items_validados},
+         'comite': comite, 'validados': items_validados, 'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar':p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+         'p_solicitar_cambio':p_solicitar_cambio},
         context_instance=RequestContext(request))
 
 
@@ -376,7 +388,8 @@ def generar_grafo_proyecto(id_proyecto):
     grafo.set_node_defaults(shape="record")
     grafo.set_edge_defaults(color="blue", arrowhead="vee", weight="1")
     for fase in fases_proyecto:
-        cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
+        nombreFase = fase.Nombre.replace(" ", "_")
+        cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
             cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
@@ -397,13 +410,17 @@ def generar_grafo_fase(id_fase):
     grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
     grafo.set_node_defaults(shape="component")
     grafo.set_edge_defaults(arrowhead="vee", weight="0")
-    cluster = pydot.Cluster(graph_name=fase.Nombre,label=fase.Nombre, style='filled',color='lightgrey')
+    nombreFase = fase.Nombre.replace(" ", "_")
+    cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase, style='filled',color='lightgrey')
     items_fase = Item.objects.filter(Fase=fase)
     for item in items_fase:
-        if item.Estado == "FIN":
+        if item.Estado == "VAL":
             cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="green"))
         else:
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+            if item.Estado == "FIN":
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="blue"))
+            else:
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
         if Relacion.objects.filter(item=item):
             relaciones_fase.append(Relacion.objects.get(item=item))
     grafo.add_subgraph(cluster)
@@ -412,13 +429,73 @@ def generar_grafo_fase(id_fase):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
     grafo.write_png('static/media/grafoFaseActual.png')
 
+def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
+    id = int(id_item)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
+    relaciones_proyecto = []
+    grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
+    grafo.set_node_defaults(shape="record")
+    grafo.set_edge_defaults(color="blue", arrowhead="vee", weight="1")
+    for fase in fases_proyecto:
+        nombreFase = fase.Nombre.replace(" ", "_")
+        cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
+        items_fase = Item.objects.filter(Fase=fase)
+        for item in items_fase:
+            if item.pk == id:
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="green"))
+            else:
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="white"))
+            if Relacion.objects.filter(item=item):
+                relaciones_proyecto.append(Relacion.objects.get(item=item))
+        grafo.add_subgraph(cluster)
+    for relacion in relaciones_proyecto:
+        if relacion.padre:
+            grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
+        if relacion.antecesor:
+            grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
+    grafo.write_png(BASE_DIR+'/static/media/grafoImpactoUnitario.png')
+
+def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
+    id = int(id_item)
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
+    relaciones_proyecto = []
+    grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
+    grafo.set_node_defaults(shape="record")
+    grafo.set_edge_defaults(color="blue", arrowhead="vee", weight="1")
+    for fase in fases_proyecto:
+        nombreFase = fase.Nombre.replace(" ", "_")
+        cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
+        items_fase = Item.objects.filter(Fase=fase)
+        for item in items_fase:
+            if item.pk == id:
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
+                                        , style="filled", fillcolor="green"))
+            else:
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
+                                        , style="filled", fillcolor="white"))
+            if Relacion.objects.filter(item=item):
+                relaciones_proyecto.append(Relacion.objects.get(item=item))
+        grafo.add_subgraph(cluster)
+    for relacion in relaciones_proyecto:
+        if relacion.padre:
+            grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoTemporal,color="blue"))
+        if relacion.antecesor:
+            grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoTemporal,color="green"))
+    grafo.write_png(BASE_DIR+'/static/media/grafoImpactoTemporal.png')
+
 
 def historial_item(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
+    usuario = request.user
     lista_versiones = reversion.get_for_object(item)
+    p_reversionar_item = usuario.tienePermisoProyecto("reversiona_item",id_proyecto)
     return render_to_response('item/historial_item.html', {'lista_versiones': lista_versiones, 'item':item,
                                                                             'proyecto':Proyecto.objects.get(pk=id_proyecto),
-                                                                            'fase': Fase.objects.get(pk=id_fase)},
+                                                                            'fase': Fase.objects.get(pk=id_fase), 'p_reversionar_item':p_reversionar_item},
                               context_instance=RequestContext(request))
 
 def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
@@ -705,6 +782,8 @@ def impacto_view(request, id_proyecto, id_fase, id_item):
     costo_t_atras = costo_temporal_atras(item)
     costo_t_adelante = costo_temporal_adelante(item)
     costo_temporal_total = costo_t_atras + costo_t_adelante + item.CostoTemporal
+    generar_grafo_calculo_impacto_costo_temporal(id_proyecto,id_item)
+    generar_grafo_calculo_impacto_costo_unitario(id_proyecto,id_item)
     return render_to_response(
         'item/impacto.html',
         {'fase': fase, 'usuario': usuario, 'item': item, 'costo_monetario_atras': costo_m_atras,

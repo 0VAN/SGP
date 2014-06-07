@@ -65,14 +65,14 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/(?P<idFase>\d+)/eliminado/$', 'administracion.views.eliminar_fase'),
 
 ################################################URL ROL#################################################################
-    url(r'^administracion/roles/$', 'administracion.views.administrar_roles'),
-    url(r'^administracion/roles/nuevo/$', 'administracion.views.crear_rol'),
-    url(r'^administracion/roles/asignar/(?P<id_usuario>\d+)/$', 'administracion.views.asignar_rol'),
-    url(r'^administracion/roles/listar/$', 'administracion.views.listar_roles'),
-    url(r'^administracion/roles/listar/(?P<idRol>\d+)/detalle/$', 'administracion.views.detalle_rol'),
-    url(r'^administracion/roles/listar/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
-    url(r'^administracion/roles/listar/(?P<idRol>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_rol'),
-    url(r'^administracion/roles/listar/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/$', 'administracion.views.administrar_roles'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/nuevo/$', 'administracion.views.crear_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/asignar/(?P<id_usuario>\d+)/$', 'administracion.views.asignar_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/listar/$', 'administracion.views.listar_roles'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/listar/(?P<idRol>\d+)/detalle/$', 'administracion.views.detalle_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/listar/(?P<idRol>\d+)/modificar/$', 'administracion.views.modificar_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/listar/(?P<idRol>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_rol'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/roles/listar/(?P<idRol>\d+)/eliminado/$', 'administracion.views.eliminar_rol'),
 
 ###############################################URL CREDENCIAL###########################################################
     url(r'^administracion/credenciales/$', 'administracion.views.administrar_credencial'),

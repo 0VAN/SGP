@@ -14,7 +14,7 @@ class ComiteForm(forms.ModelForm):
         model = ComiteDeCambio
         exclude = ['Proyecto']
 
-class LineBaseForm(MyForm):
+class LineaBaseForm(MyForm):
     Items = forms.ModelMultipleChoiceField(queryset=Item.objects.all(),label=('Seleccionar Items'),
                                           widget=FilteredSelectMultiple(('Items'),False,))
     class Meta:

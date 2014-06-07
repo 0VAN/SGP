@@ -1,0 +1,53 @@
+{% extends 'proyecto/rol/administrar_rol.html' %}
+
+{% block encabezado %}Roles <small>Haz click en opciones para interactuar con un rol</small>{% endblock %}
+
+{%  block botones %}
+    <li><a href="{% url 'administracion.views.administrar_roles' proyecto.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+{% block contenido %}
+
+    {% if usuario_actor.puede_consultar_roles %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha y hora de la ultima modificacion</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            {% for rol in roles %}
+                <tr>
+                    <td>{{ rol }}</td>
+                    <td>{{ rol.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_rol' proyecto.id rol.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_rol' proyecto.id rol.id %}">Modificar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_rol' proyecto.id rol.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                <td class="warning">No hay roles disponibles</td>
+                <td class="warning"></td>
+                <td class="warning"></td>
+                <td class="warning"></td>
+                <td class="warning"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% block mensaje %}{% endblock %}
+{% endblock %}
