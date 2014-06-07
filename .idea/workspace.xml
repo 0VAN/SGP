@@ -2,357 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e30d3a9-0a60-4295-836a-2bc47d7a8e5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.doctrees/SGP.doctree" afterPath="$PROJECT_DIR$/doc/.doctrees/SGP.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/SGP.doctree" afterPath="$PROJECT_DIR$/doc/_build/doctrees/SGP.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.doctrees/administracion.doctree" afterPath="$PROJECT_DIR$/doc/.doctrees/administracion.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/administracion.doctree" afterPath="$PROJECT_DIR$/doc/_build/doctrees/administracion.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/ajax-loader.gif" afterPath="$PROJECT_DIR$/doc/_build/html/_static/ajax-loader.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/ajax-loader.gif" afterPath="$PROJECT_DIR$/doc/_static/ajax-loader.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/alert_info_32.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/alert_info_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/alert_warning_32.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/alert_warning_32.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/animated-overlay.gif" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/animated-overlay.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bg-page.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bg-page.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bullet_orange.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bullet_orange.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment-bright.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/comment-bright.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/comment-bright.png" afterPath="$PROJECT_DIR$/doc/_static/comment-bright.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment-close.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/comment-close.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/comment-close.png" afterPath="$PROJECT_DIR$/doc/_static/comment-close.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/comment.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/comment.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/comment.png" afterPath="$PROJECT_DIR$/doc/_static/comment.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/contents.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/contents.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/darkmetal.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/darkmetal.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/dialog-note.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/dialog-note.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/dialog-seealso.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/dialog-seealso.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/dialog-todo.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/dialog-todo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/dialog-topic.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/dialog-topic.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/dialog-warning.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/dialog-warning.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/down-pressed.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/down-pressed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/down-pressed.png" afterPath="$PROJECT_DIR$/doc/_static/down-pressed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/down.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/down.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/down.png" afterPath="$PROJECT_DIR$/doc/_static/down.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/environment.pickle" afterPath="$PROJECT_DIR$/doc/_build/doctrees/environment.pickle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/file.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/file.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/file.png" afterPath="$PROJECT_DIR$/doc/_static/file.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/footerbg.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/footerbg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/img/glyphicons-halflings-white.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/img/glyphicons-halflings-white.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/img/glyphicons-halflings.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/img/glyphicons-halflings.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/media/grafoFaseActual.png" afterPath="$PROJECT_DIR$/static/media/grafoFaseActual.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/checkoutTag.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/entornoDesarrollo.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/superScript.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/SGP.wsgi" afterPath="$PROJECT_DIR$/conf/SGP.wsgi" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/media/grafoProyectoActual.png" afterPath="$PROJECT_DIR$/static/media/grafoProyectoActual.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/headerbg.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/headerbg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.doctrees/index.doctree" afterPath="$PROJECT_DIR$/doc/.doctrees/index.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/index.doctree" afterPath="$PROJECT_DIR$/doc/_build/doctrees/index.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/logo.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.doctrees/manage.doctree" afterPath="$PROJECT_DIR$/doc/.doctrees/manage.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/manage.doctree" afterPath="$PROJECT_DIR$/doc/_build/doctrees/manage.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/metal.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/metal.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/middlebg.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/middlebg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/minus.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/minus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/minus.png" afterPath="$PROJECT_DIR$/doc/_static/minus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.doctrees/modules.doctree" afterPath="$PROJECT_DIR$/doc/.doctrees/modules.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/doctrees/modules.doctree" afterPath="$PROJECT_DIR$/doc/_build/doctrees/modules.doctree" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/navigation.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/navigation.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/objects.inv" afterPath="$PROJECT_DIR$/doc/_build/html/objects.inv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/plus.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/plus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/plus.png" afterPath="$PROJECT_DIR$/doc/_static/plus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/transparent.gif" afterPath="$PROJECT_DIR$/doc/_build/html/_static/transparent.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_flat_10_000000_40x100.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_222222_256x240.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_222222_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_228ef1_256x240.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_228ef1_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ef8c08_256x240.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ef8c08_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ffd27a_256x240.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ffd27a_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ffffff_256x240.png" afterPath="$PROJECT_DIR$/static/css/ui-lightness/images/ui-icons_ffffff_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/up-pressed.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/up-pressed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/up-pressed.png" afterPath="$PROJECT_DIR$/doc/_static/up-pressed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/up.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/up.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/up.png" afterPath="$PROJECT_DIR$/doc/_static/up.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/watermark.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/watermark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/watermark_blur.png" afterPath="$PROJECT_DIR$/doc/_build/html/_static/watermark_blur.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/.buildinfo" afterPath="$PROJECT_DIR$/doc/_build/html/.buildinfo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/LICENSE" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Makefile" afterPath="$PROJECT_DIR$/doc/Makefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/PKG-INFO" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/PKG-INFO" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/README" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/README" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/SGP.html" afterPath="$PROJECT_DIR$/doc/_build/html/SGP.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/SGP.iml" afterPath="$PROJECT_DIR$/.idea/SGP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/SGP.rst" afterPath="$PROJECT_DIR$/doc/SGP.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/SGP.txt" afterPath="$PROJECT_DIR$/doc/_build/html/_sources/SGP.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_sources/SGP.txt" afterPath="$PROJECT_DIR$/doc/_sources/SGP.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fixtures/Usuarios.json" afterPath="$PROJECT_DIR$/fixtures/Usuarios.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/__init__.py" afterPath="$PROJECT_DIR$/SGP/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/__init__.py" afterPath="$PROJECT_DIR$/administracion/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/__init__.py" afterPath="$PROJECT_DIR$/desarrollo/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/__init__.py" afterPath="$PROJECT_DIR$/gestion/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/__init__.py" afterPath="$PROJECT_DIR$/sesion/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/admin.py" afterPath="$PROJECT_DIR$/administracion/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/admin.py" afterPath="$PROJECT_DIR$/desarrollo/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/admin.py" afterPath="$PROJECT_DIR$/gestion/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/admin.py" afterPath="$PROJECT_DIR$/sesion/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/administracion.html" afterPath="$PROJECT_DIR$/administracion/templates/administracion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/administracion.html" afterPath="$PROJECT_DIR$/doc/_build/html/administracion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/administracion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/administracion.rst" afterPath="$PROJECT_DIR$/doc/administracion.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/administracion.txt" afterPath="$PROJECT_DIR$/doc/_build/html/_sources/administracion.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_sources/administracion.txt" afterPath="$PROJECT_DIR$/doc/_sources/administracion.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/administrar_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/administrar_atributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html" afterPath="$PROJECT_DIR$/administracion/templates/credencial/administrar_credencial.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/administrar_rol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/administrar_tipoItem.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/administrar_tipoItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/archivo/agregar_archivo.html" afterPath="$PROJECT_DIR$/desarrollo/templates/archivo/agregar_archivo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/relacion/asignar_antecesor.html" afterPath="$PROJECT_DIR$/desarrollo/templates/relacion/asignar_antecesor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/relacion/asignar_padre.html" afterPath="$PROJECT_DIR$/desarrollo/templates/relacion/asignar_padre.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/asignar_rol_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/asignar_rol_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_error.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_form.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/atributo_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/basic.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/basic.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/basic.css" afterPath="$PROJECT_DIR$/doc/_static/basic.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bootstrap-datepicker.js" afterPath="$PROJECT_DIR$/static/js/bootstrap-datepicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap-responsive.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-sphinx.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-sphinx.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-sphinx.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-sphinx.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/static/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap.css" afterPath="$PROJECT_DIR$/static/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/js/bootstrap.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/js/bootstrap.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bootstrap.js" afterPath="$PROJECT_DIR$/static/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/amelia/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/amelia/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cerulean/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cerulean/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cosmo/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cosmo/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cyborg/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/cyborg/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/flatly/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/flatly/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/journal/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/journal/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/readable/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/readable/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/simplex/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/simplex/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/slate/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/slate/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/spacelab/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/spacelab/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/spruce/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/spruce/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/superhero/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/superhero/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/united/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-2.3.2/united/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/amelia/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/amelia/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cerulean/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cerulean/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cosmo/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cosmo/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cupid/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cupid/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cyborg/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/cyborg/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/flatly/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/flatly/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/journal/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/journal/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/lumen/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/lumen/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/readable/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/readable/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/simplex/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/simplex/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/slate/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/slate/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/spacelab/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/spacelab/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/superhero/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/superhero/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/united/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/united/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/yeti/bootstrap.min.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/yeti/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-2.3.2/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/com_item.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/com_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/conf.py" afterPath="$PROJECT_DIR$/doc/conf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/conf_eliminar_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/conf_eliminar_atributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_eliminar_fase.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_eliminar_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/conf_eliminar_item.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/conf_eliminar_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/conf_eliminar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/conf_eliminar_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/conf_eliminar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/conf_eliminar_rol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/conf_eliminar_tipo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/conf_eliminar_tipo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_finalizar_fase.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_finalizar_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_iniciar_fase.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_iniciar_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/conf_iniciar_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/conf_iniciar_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/config.json" afterPath="$PROJECT_DIR$/static/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/comite/crear_comite.html" afterPath="$PROJECT_DIR$/gestion/templates/comite/crear_comite.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/crear_item.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/crear_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/crear_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/crear_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/crear_rol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/solicitud/credencial.html" afterPath="$PROJECT_DIR$/gestion/templates/solicitud/credencial.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/datosIniciales.json" afterPath="$PROJECT_DIR$/scripts/datosIniciales.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/default.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/default.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/administrar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/administrar_rol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/asignar_rol_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/asignar_rol_exito.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/conf_eliminar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/conf_eliminar_rol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/crear_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/crear_rol.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/des_fase.html" afterPath="$PROJECT_DIR$/desarrollo/templates/des_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/des_proyecto.html" afterPath="$PROJECT_DIR$/desarrollo/templates/des_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/desaprobar.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/desaprobar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" afterPath="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/detalle.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/detalle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/detalle_atributo.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/detalle_atributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/detalle_fase.html" afterPath="$PROJECT_DIR$/desarrollo/templates/detalle_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/detalle_proyecto_des.html" afterPath="$PROJECT_DIR$/desarrollo/templates/detalle_proyecto_des.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/solicitud/detalle_solicitud.html" afterPath="$PROJECT_DIR$/gestion/templates/solicitud/detalle_solicitud.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/detalle_tipoItem.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/detalle_tipoItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/detalle_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/detalle_version.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/detalle_version.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/detallerol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/detallerol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/doctools.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/doctools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/doctools.js" afterPath="$PROJECT_DIR$/doc/_static/doctools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/dot_parser.py" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/dot_parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/dot_parser.py" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/dot_parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/relacion/eliminar.html" afterPath="$PROJECT_DIR$/desarrollo/templates/relacion/eliminar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/epub.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/epub.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fase_form.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fase_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_error.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/filteredselectwidget.css" afterPath="$PROJECT_DIR$/static/css/filteredselectwidget.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/finalizar.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/finalizar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/form.html" afterPath="$PROJECT_DIR$/desarrollo/templates/form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/form_asignar.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/form_asignar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/form_usuario_mod.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/form_usuario_mod.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/forms.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/forms.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_modules/administracion/forms.html" afterPath="$PROJECT_DIR$/doc/_modules/administracion/forms.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/detallerol.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/detallerol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/form_asignar.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/form_asignar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/forms.py" afterPath="$PROJECT_DIR$/administracion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/forms.py" afterPath="$PROJECT_DIR$/desarrollo/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/forms.py" afterPath="$PROJECT_DIR$/gestion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/forms.py" afterPath="$PROJECT_DIR$/sesion/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/genindex.html" afterPath="$PROJECT_DIR$/doc/_build/html/genindex.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/gestion.html" afterPath="$PROJECT_DIR$/gestion/templates/gestion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/archivo/gestion_archivos.html" afterPath="$PROJECT_DIR$/desarrollo/templates/archivo/gestion_archivos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/comite/gestion_comite.html" afterPath="$PROJECT_DIR$/gestion/templates/comite/gestion_comite.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/gestion_exito.html" afterPath="$PROJECT_DIR$/sesion/templates/gestion_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/gestion_exito_pass.html" afterPath="$PROJECT_DIR$/sesion/templates/gestion_exito_pass.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/gestion_fase.html" afterPath="$PROJECT_DIR$/gestion/templates/gestion_fase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/gestion_proyecto.html" afterPath="$PROJECT_DIR$/gestion/templates/gestion_proyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/relacion/gestion_relaciones.html" afterPath="$PROJECT_DIR$/desarrollo/templates/relacion/gestion_relaciones.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/gestion_usuario.html" afterPath="$PROJECT_DIR$/sesion/templates/gestion_usuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootstrap-3.1.0/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/doc/_build/html/_static/bootswatch-3.1.0/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/haiku.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/haiku.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/historial_item.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/historial_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/ie6.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/ie6.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/impacto.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/impacto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/index.html" afterPath="$PROJECT_DIR$/doc/_build/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/index.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_modules/index.html" afterPath="$PROJECT_DIR$/doc/_modules/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index.rst" afterPath="$PROJECT_DIR$/doc/index.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/index.txt" afterPath="$PROJECT_DIR$/doc/_build/html/_sources/index.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_sources/index.txt" afterPath="$PROJECT_DIR$/doc/_sources/index.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/iniciar_sesion.html" afterPath="$PROJECT_DIR$/sesion/templates/iniciar_sesion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/item_exito.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/item_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/items_eliminados.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/items_eliminados.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jquery-1.10.2.js" afterPath="$PROJECT_DIR$/static/js/jquery-1.10.2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/js/jquery-1.11.0.min.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/js/jquery-1.11.0.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/js/jquery-fix.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/js/jquery-fix.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/jquery-ui-1.10.4.custom.css" afterPath="$PROJECT_DIR$/static/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jquery-ui-1.10.4.custom.js" afterPath="$PROJECT_DIR$/static/js/jquery-ui-1.10.4.custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" afterPath="$PROJECT_DIR$/static/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jquery-ui-1.10.4.custom.min.js" afterPath="$PROJECT_DIR$/static/js/jquery-ui-1.10.4.custom.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/jquery.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/jquery.js" afterPath="$PROJECT_DIR$/doc/_static/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jsi18n.js" afterPath="$PROJECT_DIR$/static/js/jsi18n.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/lineaBase_form.html" afterPath="$PROJECT_DIR$/gestion/templates/lineaBase_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/listar_roles.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/listar_roles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/manage.html" afterPath="$PROJECT_DIR$/doc/_build/html/manage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/manage.rst" afterPath="$PROJECT_DIR$/doc/manage.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/manage.txt" afterPath="$PROJECT_DIR$/doc/_build/html/_sources/manage.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_sources/manage.txt" afterPath="$PROJECT_DIR$/doc/_sources/manage.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html" afterPath="$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/listar_roles.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/listar_roles.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/item/mod_item.html" afterPath="$PROJECT_DIR$/desarrollo/templates/item/mod_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/models.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/models.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_modules/administracion/models.html" afterPath="$PROJECT_DIR$/doc/_modules/administracion/models.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/models.py" afterPath="$PROJECT_DIR$/administracion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/models.py" afterPath="$PROJECT_DIR$/desarrollo/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/models.py" afterPath="$PROJECT_DIR$/gestion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/models.py" afterPath="$PROJECT_DIR$/sesion/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/modificar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/modificar_rol.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/modules.html" afterPath="$PROJECT_DIR$/doc/_build/html/modules.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/modules.rst" afterPath="$PROJECT_DIR$/doc/modules.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_sources/modules.txt" afterPath="$PROJECT_DIR$/doc/_build/html/_sources/modules.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_sources/modules.txt" afterPath="$PROJECT_DIR$/doc/_sources/modules.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/nature.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/nature.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/nature.css" afterPath="$PROJECT_DIR$/doc/_static/nature.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/no_activo.html" afterPath="$PROJECT_DIR$/sesion/templates/no_activo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/usuario/operacion_usuario_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/usuario/operacion_usuario_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/poblacion.json" afterPath="$PROJECT_DIR$/scripts/poblacion.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/print.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/print.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_error.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/proyecto_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/prueba.html" afterPath="$PROJECT_DIR$/templates/prueba.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/py-modindex.html" afterPath="$PROJECT_DIR$/doc/_build/html/py-modindex.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/pydot.py" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/pydot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/pydot.py" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/build/lib.linux-x86_64-2.7/pydot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/pygments.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/pygments.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/pygments.css" afterPath="$PROJECT_DIR$/doc/_static/pygments.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/pyramid.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/pyramid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/rol/rol_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/rol/rol_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/scrolls.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/scrolls.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/search.html" afterPath="$PROJECT_DIR$/doc/_build/html/search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/searchindex.js" afterPath="$PROJECT_DIR$/doc/_build/html/searchindex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/searchtools.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/searchtools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/searchtools.js" afterPath="$PROJECT_DIR$/doc/_static/searchtools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/sesion_error.html" afterPath="$PROJECT_DIR$/sesion/templates/sesion_error.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/modificar_rol.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/modificar_rol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/rol/rol_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/rol/rol_exito.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/settings.py" afterPath="$PROJECT_DIR$/SGP/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herramientas/pydot-1.0.28/setup.py" afterPath="$PROJECT_DIR$/herramientas/pydot-1.0.28/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/sidebar.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/sidebar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/signin.css" afterPath="$PROJECT_DIR$/static/css/signin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/templates/solicitud.html" afterPath="$PROJECT_DIR$/desarrollo/templates/solicitud.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/templates/solicitud/solicitudes.html" afterPath="$PROJECT_DIR$/gestion/templates/solicitud/solicitudes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/sphinxdoc.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/sphinxdoc.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/styles.css" afterPath="$PROJECT_DIR$/static/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/tests.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/tests.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_modules/administracion/tests.html" afterPath="$PROJECT_DIR$/doc/_modules/administracion/tests.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/tests.py" afterPath="$PROJECT_DIR$/administracion/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/tests.py" afterPath="$PROJECT_DIR$/desarrollo/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/tests.py" afterPath="$PROJECT_DIR$/gestion/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/tests.py" afterPath="$PROJECT_DIR$/sesion/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/theme_extras.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/theme_extras.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_error.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_exito.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_exito.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_form.html" afterPath="$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/tipoItem_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/traditional.css" afterPath="$PROJECT_DIR$/doc/_build/html/_static/traditional.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/underscore.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/underscore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/underscore.js" afterPath="$PROJECT_DIR$/doc/_static/underscore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/templates/sin_permisos.html" afterPath="$PROJECT_DIR$/sesion/templates/sin_permisos.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/urls.py" afterPath="$PROJECT_DIR$/SGP/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/views.html" afterPath="$PROJECT_DIR$/doc/_build/html/_modules/administracion/views.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_modules/administracion/views.html" afterPath="$PROJECT_DIR$/doc/_modules/administracion/views.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/administracion/views.py" afterPath="$PROJECT_DIR$/administracion/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desarrollo/views.py" afterPath="$PROJECT_DIR$/desarrollo/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestion/views.py" afterPath="$PROJECT_DIR$/gestion/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sesion/views.py" afterPath="$PROJECT_DIR$/sesion/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_build/html/_static/websupport.js" afterPath="$PROJECT_DIR$/doc/_build/html/_static/websupport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/_static/websupport.js" afterPath="$PROJECT_DIR$/doc/_static/websupport.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGP/wsgi.py" afterPath="$PROJECT_DIR$/SGP/wsgi.py" />
     </list>
     <ignored path="SGP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -375,95 +58,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="detallefase.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
+      <file leaf-file-name="superScript.sh" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/superScript.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="927" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="558">
-              <folding>
-                <marker date="1400919723608" expanded="true" signature="420:913" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lineaBase_detalle.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="326" selection-end="326" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="450">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="desarrollo.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="47" selection-start="1791" selection-end="1903" vertical-scroll-proportion="-20.333334" vertical-offset="669" max-vertical-offset="1554">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="datosIniciales.json" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/datosIniciales.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="26405" selection-start="46743" selection-end="46743" vertical-scroll-proportion="0.9028832" vertical-offset="1187" max-vertical-offset="1944">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGP/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="81" selection-start="13514" selection-end="13514" vertical-scroll-proportion="0.0" vertical-offset="2140" max-vertical-offset="2862">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gestion_proyecto.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/templates/gestion_proyecto.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="96" selection-start="899" selection-end="964" vertical-scroll-proportion="-14.851851" vertical-offset="85" max-vertical-offset="756">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lineaBase_form.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/templates/lineaBase_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="432">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gestion_fase.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/templates/gestion_fase.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="115" selection-start="1200" selection-end="1200" vertical-scroll-proportion="-6.703704" vertical-offset="323" max-vertical-offset="1026">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="78" selection-start="6590" selection-end="6590" vertical-scroll-proportion="0.0" vertical-offset="2709" max-vertical-offset="7150">
-              <folding>
-                <element signature="e#0#82#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestion/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="10" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+            <state line="39" column="16" selection-start="1242" selection-end="1242" vertical-scroll-proportion="2.7866666" vertical-offset="493" max-vertical-offset="810">
               <folding />
             </state>
           </provider>
@@ -482,52 +80,64 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/desarrollo/templates/des_fase.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/item/finalizar.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/solicitud.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/item/items_eliminados.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/item/conf_eliminar_item.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/relacion/gestion_relaciones.html" />
-        <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/administrar_atributo.html" />
-        <option value="$PROJECT_DIR$/gestion/forms.py" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/item/detalle.html" />
         <option value="$PROJECT_DIR$/desarrollo/templates/item/detalle_version.html" />
         <option value="$PROJECT_DIR$/desarrollo/models.py" />
-        <option value="$PROJECT_DIR$/administracion/models.py" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/conf_eliminar_proyecto.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_iniciar_fase.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_finalizar_fase.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/item/historial_item.html" />
         <option value="$PROJECT_DIR$/scripts/poblacion.json" />
         <option value="$PROJECT_DIR$/scripts/baseDeDatos.sh" />
-        <option value="$PROJECT_DIR$/administracion/templates/administracion.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/detalle_proyecto_des.html" />
-        <option value="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
         <option value="$PROJECT_DIR$/desarrollo/templates/detalle_proyecto_des.html" />
         <option value="$PROJECT_DIR$/gestion/templates/gestion_proyecto.html" />
         <option value="$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html" />
-        <option value="$PROJECT_DIR$/administracion/views.py" />
         <option value="$PROJECT_DIR$/desarrollo/templates/des_proyecto.html" />
         <option value="$PROJECT_DIR$/gestion/templates/gestion.html" />
-        <option value="$PROJECT_DIR$/desarrollo/views.py" />
-        <option value="$PROJECT_DIR$/administracion/forms.py" />
         <option value="$PROJECT_DIR$/administracion/templates/rol/crear_rol.html" />
-        <option value="$PROJECT_DIR$/SGP/settings.py" />
-        <option value="$PROJECT_DIR$/gestion/models.py" />
         <option value="$PROJECT_DIR$/gestion/views.py" />
         <option value="$PROJECT_DIR$/gestion/templates/gestion_fase.html" />
-        <option value="$PROJECT_DIR$/SGP/urls.py" />
         <option value="$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html" />
+        <option value="$PROJECT_DIR$/sesion/templates/sin_permisos.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/administracion.html" />
+        <option value="$PROJECT_DIR$/SGP/urls.py" />
+        <option value="$PROJECT_DIR$/administracion/forms.py" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/asignar_rol_exito.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/rol_exito.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/modificar_rol.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/form_asignar.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/detallerol.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/administrar_rol.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/crear_rol.html" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/conf_eliminar_rol.html" />
+        <option value="$PROJECT_DIR$/gestion/models.py" />
+        <option value="$PROJECT_DIR$/gestion/forms.py" />
+        <option value="$PROJECT_DIR$/administracion/templates/proyecto/rol/listar_roles.html" />
+        <option value="$PROJECT_DIR$/sesion/views.py" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/desarrollo.html" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/item/impacto.html" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/des_fase.html" />
+        <option value="$PROJECT_DIR$/administracion/models.py" />
+        <option value="$PROJECT_DIR$/desarrollo/templates/item/historial_item.html" />
+        <option value="$PROJECT_DIR$/desarrollo/views.py" />
         <option value="$PROJECT_DIR$/scripts/datosIniciales.json" />
+        <option value="$PROJECT_DIR$/administracion/views.py" />
+        <option value="$PROJECT_DIR$/SGP/settingsProduccion.py" />
+        <option value="$PROJECT_DIR$/SGP/settings.py" />
+        <option value="$PROJECT_DIR$/conf/SGP.conf" />
+        <option value="$PROJECT_DIR$/SGP.wsgi" />
+        <option value="$PROJECT_DIR$/scripts/entornoDesarrollo.sh" />
+        <option value="$PROJECT_DIR$/scripts/abrirDocumentacion.sh" />
+        <option value="$PROJECT_DIR$/scripts/checkoutTag.sh" />
+        <option value="$PROJECT_DIR$/scripts/superScript.sh" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1855" />
-    <option name="height" value="1056" />
+    <option name="y" value="52" />
+    <option name="width" value="1360" />
+    <option name="height" value="692" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -555,6 +165,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -583,20 +194,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -611,137 +208,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gestion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gestion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desarrollo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desarrollo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proyecto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proyecto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fase" />
+              <option name="myItemId" value="conf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -761,12 +228,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="database.main" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -782,10 +248,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/SGP" />
+      <recent name="$PROJECT_DIR$/sesion/templates" />
       <recent name="$PROJECT_DIR$/administracion/templates/proyecto" />
       <recent name="$PROJECT_DIR$/administracion/templates/proyecto/fase" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/conf" />
+      <recent name="$PROJECT_DIR$/administracion/templates/proyecto" />
       <recent name="$PROJECT_DIR$/desarrollo/templates" />
       <recent name="$PROJECT_DIR$/administracion/templates/proyecto/fase" />
     </key>
@@ -809,6 +279,17 @@
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="SGP" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
@@ -977,7 +458,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="SGP.settings" />
       </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="SDK_HOME" value="/usr/bin/python2" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -1026,20 +507,40 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="0" y="52" width="1360" height="692" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21458334" sideWeight="0.4997236" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.8238255" sideWeight="0.4997236" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26091763" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28767124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33645833" sideWeight="0.5002764" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28020832" sideWeight="0.4997236" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2852349" sideWeight="0.4997236" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1087,388 +588,283 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/reversion/revisions.py">
+    <entry file="file://$PROJECT_DIR$/sesion/templates/iniciar_sesion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="545" column="8" selection-start="21060" selection-end="21060" vertical-scroll-proportion="0.11796733" vertical-offset="9439" max-vertical-offset="10476" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="553" />
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/reversion/__init__.py">
+    <entry file="file://$PROJECT_DIR$/sesion/templates/sin_permisos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="45" selection-start="1724" selection-end="1724" vertical-scroll-proportion="0.7765958" vertical-offset="408" max-vertical-offset="972" />
+        <state line="3" column="86" selection-start="140" selection-end="140" vertical-scroll-proportion="0.14477211" vertical-offset="0" max-vertical-offset="373" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/item_exito.html">
+    <entry file="file://$PROJECT_DIR$/sesion/templates/no_activo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="198" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/items_eliminados.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="26" selection-start="2569" selection-end="2569" vertical-scroll-proportion="-39.333332" vertical-offset="0" max-vertical-offset="1188" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/mod_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="24" selection-start="1676" selection-end="1676" vertical-scroll-proportion="1.0425894" vertical-offset="0" max-vertical-offset="828" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/conf_eliminar_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="21" selection-start="501" selection-end="501" vertical-scroll-proportion="0.36797273" vertical-offset="0" max-vertical-offset="587" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/relacion/gestion_relaciones.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="36" selection-start="1121" selection-end="1121" vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="1800">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/tipoItem/administrar_tipoItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1242">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/atributo/administrar_atributo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="72" selection-start="1456" selection-end="1456" vertical-scroll-proportion="-13.333333" vertical-offset="270" max-vertical-offset="1278">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2070" column="8" selection-start="45501" selection-end="45501" vertical-scroll-proportion="0.3322034" vertical-offset="37046" max-vertical-offset="44424" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/detalle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="22" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.5275862" vertical-offset="378" max-vertical-offset="2286" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/detalle_version.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="23" selection-start="1528" selection-end="1528" vertical-scroll-proportion="0.42192692" vertical-offset="339" max-vertical-offset="1242" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/finalizar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="378" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="458" selection-end="458" vertical-scroll-proportion="0.2516129" vertical-offset="0" max-vertical-offset="930" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/conf_iniciar_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/conf_eliminar_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="21" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="396">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_eliminar_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="232" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="432">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_error.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="180">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_iniciar_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="44" selection-start="383" selection-end="435" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="378">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/conf_finalizar_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="92" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="378">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/poblacion.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="56" selection-start="2" selection-end="448" vertical-scroll-proportion="0.03130435" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="73" selection-start="350" selection-end="350" vertical-scroll-proportion="-5.5609756" vertical-offset="3510" max-vertical-offset="5508">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/historial_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="150" selection-end="150" vertical-scroll-proportion="-0.5652174" vertical-offset="397" max-vertical-offset="972">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/baseDeDatos.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="150" selection-end="150" vertical-scroll-proportion="2.0" vertical-offset="216" max-vertical-offset="2160">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="21" selection-start="455" selection-end="455" vertical-scroll-proportion="20.0" vertical-offset="810" max-vertical-offset="1638">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/detalle_proyecto_des.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28" selection-start="213" selection-end="213" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="576">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="50" selection-start="1272" selection-end="1272" vertical-scroll-proportion="-13.37037" vertical-offset="323" max-vertical-offset="2106">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/detalle_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/des_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="102" selection-start="1187" selection-end="1187" vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="900">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/des_fase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="436" selection-end="436" vertical-scroll-proportion="-4.0" vertical-offset="0" max-vertical-offset="1980">
-          <folding>
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919728648" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestion/templates/gestion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="10" selection-start="208" selection-end="208" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="1350">
-          <folding>
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400925105380" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="9" column="10" selection-start="208" selection-end="208" vertical-scroll-proportion="14.0" vertical-offset="540" max-vertical-offset="1350" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/models.py">
+    <entry file="file://$PROJECT_DIR$/administracion/templates/administracion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1548">
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="31" column="9" selection-start="842" selection-end="842" vertical-scroll-proportion="0.64094955" vertical-offset="342" max-vertical-offset="2070" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/adm-fases.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="50" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.99723756" vertical-offset="323" max-vertical-offset="2106" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_error.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/fases_exito.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="402" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="33" selection-start="634" selection-end="634" vertical-scroll-proportion="0.74585634" vertical-offset="0" max-vertical-offset="558" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/fase_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="79" selection-start="232" selection-end="294" vertical-scroll-proportion="0.29834256" vertical-offset="0" max-vertical-offset="396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/rol_exito.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="325" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/asignar_rol_exito.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="350" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/modificar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="320" selection-end="320" vertical-scroll-proportion="0.44751382" vertical-offset="0" max-vertical-offset="468" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/detallerol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="214" selection-end="214" vertical-scroll-proportion="0.19889502" vertical-offset="0" max-vertical-offset="504" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/administrar_proyecto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="76" selection-start="1053" selection-end="1053" vertical-scroll-proportion="-0.95548964" vertical-offset="934" max-vertical-offset="1674" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/administrar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="248" selection-end="248" vertical-scroll-proportion="-0.6666667" vertical-offset="54" max-vertical-offset="1206" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="23" selection-start="7121" selection-end="7121" vertical-scroll-proportion="0.0" vertical-offset="3081" max-vertical-offset="3780">
-          <folding>
-            <element signature="e#26#60#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="162" column="38" selection-start="5709" selection-end="5709" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="3564" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/rol/crear_rol.html">
+    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="39" selection-start="167" selection-end="167" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="450">
+        <state line="66" column="51" selection-start="5010" selection-end="5010" vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="2862" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/form_asignar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="66" selection-start="406" selection-end="406" vertical-scroll-proportion="0.49723756" vertical-offset="0" max-vertical-offset="362" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/crear_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="8" selection-start="290" selection-end="290" vertical-scroll-proportion="0.5116279" vertical-offset="0" max-vertical-offset="450" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/conf_eliminar_rol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="103" selection-start="615" selection-end="615" vertical-scroll-proportion="0.60465115" vertical-offset="0" max-vertical-offset="432" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestion/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="74" selection-start="7530" selection-end="7530" vertical-scroll-proportion="7.516908" vertical-offset="2" max-vertical-offset="5850" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestion/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="11" selection-start="158" selection-end="158" vertical-scroll-proportion="0.1264637" vertical-offset="0" max-vertical-offset="1260" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestion/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="427" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestion/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="34" selection-start="1061" selection-end="1061" vertical-scroll-proportion="1.0538641" vertical-offset="162" max-vertical-offset="1080" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="8" selection-start="723" selection-end="723" vertical-scroll-proportion="0.33333334" vertical-offset="96" max-vertical-offset="1674" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="6" selection-start="3590" selection-end="3590" vertical-scroll-proportion="-0.2039801" vertical-offset="1558" max-vertical-offset="9234" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/pydot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1753" column="8" selection-start="51983" selection-end="51983" vertical-scroll-proportion="0.33333334" vertical-offset="31327" max-vertical-offset="36720">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/rol/listar_roles.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="20.444445" vertical-offset="552" max-vertical-offset="1224">
-          <folding>
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1400919681472" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state line="10" column="42" selection-start="430" selection-end="430" vertical-scroll-proportion="0.3887689" vertical-offset="0" max-vertical-offset="1044" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="508" selection-end="508" vertical-scroll-proportion="-0.9438445" vertical-offset="833" max-vertical-offset="1296" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/administrar_usuario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sesion/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="50" selection-start="2606" selection-end="2606" vertical-scroll-proportion="0.95530725" vertical-offset="684" max-vertical-offset="2106" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/impacto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="29" selection-start="1350" selection-end="1350" vertical-scroll-proportion="1.1629213" vertical-offset="0" max-vertical-offset="576">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SGP/settings.py">
+    <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/form_usuario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="13" selection-start="2294" selection-end="2294" vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="2088">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/templates/usuario/form_usuario_mod.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/des_proyecto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="65" selection-start="1573" selection-end="1630" vertical-scroll-proportion="1.9213483" vertical-offset="54" max-vertical-offset="900" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desarrollo/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="4" selection-start="747" selection-end="747" vertical-scroll-proportion="-0.59090906" vertical-offset="666" max-vertical-offset="1494" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/desarrollo/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="377" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15390">
+        <state line="548" column="7" selection-start="23894" selection-end="23897" vertical-scroll-proportion="0.33231708" vertical-offset="9593" max-vertical-offset="16650">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administracion/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="0" selection-start="10789" selection-end="11493" vertical-scroll-proportion="0.0" vertical-offset="3888" max-vertical-offset="26946">
-          <folding>
-            <element signature="e#26#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="10" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+        <state line="1053" column="49" selection-start="54353" selection-end="54353" vertical-scroll-proportion="0.7279597" vertical-offset="18503" max-vertical-offset="27108">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administracion/templates/proyecto/fase/detallefase.html">
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/des_fase.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="927" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="558">
-          <folding>
-            <marker date="1400919723608" expanded="true" signature="420:913" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="78" selection-start="6590" selection-end="6590" vertical-scroll-proportion="0.0" vertical-offset="2709" max-vertical-offset="7150">
-          <folding>
-            <element signature="e#0#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/templates/lineaBase_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590">
+        <state line="92" column="95" selection-start="5222" selection-end="5222" vertical-scroll-proportion="3.8964705" vertical-offset="0" max-vertical-offset="2178">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/templates/gestion_fase.html">
+    <entry file="file://$PROJECT_DIR$/desarrollo/templates/item/historial_item.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="115" selection-start="1200" selection-end="1200" vertical-scroll-proportion="-6.703704" vertical-offset="323" max-vertical-offset="1026">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SGP/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="81" selection-start="13514" selection-end="13514" vertical-scroll-proportion="0.0" vertical-offset="2140" max-vertical-offset="2862">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/templates/gestion_proyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="96" selection-start="899" selection-end="964" vertical-scroll-proportion="-14.851851" vertical-offset="85" max-vertical-offset="756">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestion/templates/lineaBase_detalle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="326" selection-end="326" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="450">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/templates/desarrollo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="47" selection-start="1791" selection-end="1903" vertical-scroll-proportion="-20.333334" vertical-offset="669" max-vertical-offset="1554">
-          <folding />
-        </state>
+        <state line="39" column="32" selection-start="1669" selection-end="1669" vertical-scroll-proportion="1.6517648" vertical-offset="0" max-vertical-offset="1008" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/datosIniciales.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="26405" selection-start="46743" selection-end="46743" vertical-scroll-proportion="0.9028832" vertical-offset="1187" max-vertical-offset="1944">
+        <state line="83" column="58" selection-start="8523" selection-end="8523" vertical-scroll-proportion="0.5552941" vertical-offset="1258" max-vertical-offset="2070" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="58" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.44911504" vertical-offset="211" max-vertical-offset="5886">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGP/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="424" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/SGP.wsgi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="21" selection-start="42" selection-end="42" vertical-scroll-proportion="0.08181818" vertical-offset="0" max-vertical-offset="440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/SGP.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="35" selection-start="54" selection-end="54" vertical-scroll-proportion="0.04639175" vertical-offset="0" max-vertical-offset="388">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGP/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="37" selection-start="2463" selection-end="2463" vertical-scroll-proportion="0.0" vertical-offset="1659" max-vertical-offset="2106">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/abrirDocumentacion.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="34" selection-start="46" selection-end="46" vertical-scroll-proportion="0.03846154" vertical-offset="0" max-vertical-offset="468">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/entornoDesarrollo.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="26" selection-start="0" selection-end="1178" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/checkoutTag.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="76" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/superScript.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="16" selection-start="1242" selection-end="1242" vertical-scroll-proportion="2.7866666" vertical-offset="493" max-vertical-offset="810">
           <folding />
         </state>
       </provider>

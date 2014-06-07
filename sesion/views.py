@@ -54,6 +54,8 @@ def iniciar_sesion(request):
                         return gestion(request)
                     elif request.user.esAdministrador():
                         return administracion(request)
+                    else:
+                        return desarrollo(request)
                 else:
                     return render_to_response('no_activo.html', context_instance=RequestContext(request))
             else:

@@ -1,24 +1,24 @@
-{% extends 'administracion.html' %}
+{% extends 'proyecto/administrar_proyecto.html' %}
 {% block titulo %}Administrar roles{% endblock %}
 {% block encabezado %}Lista de usuarios <small>Haz click en asignar rol para asignar un rol a un usuario</small>{% endblock %}
 
 {% block botones %}
     <li>
         {% if usuario_actor.puede_agregar_roles %}
-            <a href="/administracion/roles/nuevo" class="btn btn-default">Crear Rol</a>
+            <a href="{% url 'administracion.views.crear_rol' proyecto.id %}" class="btn btn-default">Crear Rol</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Crear Rol</a>
         {% endif %}
     </li>
     <li>
         {% if usuario_actor.puede_consultar_roles %}
-            <a href="/administracion/roles/listar" class="btn btn-default">Listar Roles</a>
+            <a href="{% url 'administracion.views.listar_roles' proyecto.id %}" class="btn btn-default">Listar Roles</a>
         {% else %}
             <a class="btn btn-default" disabled="disabled">Listar Roles</a>
         {% endif %}
     </li>
     <li>
-        <a href="/administracion" class="btn btn-default">Volver</a>
+        <a href="/administracion/proyectos" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 
@@ -33,7 +33,6 @@
             </tr>
         </thead>
         {% for usuario in lista_usuarios %}
-           {% if not usuario.esAdministrador and not usuario.esLider %}
                     {% if usuario.is_active %}
                         <tr>
                             <td>{{ usuario.username }}</td>
@@ -44,7 +43,7 @@
                                 {% endfor %}
                             </td>
                             <td>
-                                <a href="{% url "administracion.views.asignar_rol" usuario.id %}" class="btn btn-primary">Asignar Rol </a>
+                                <a href="{% url "administracion.views.asignar_rol" proyecto.id usuario.id %}" class="btn btn-primary">Asignar Rol </a>
                             </td>
                         </tr>
                     {% else %}
@@ -54,7 +53,6 @@
                             <td>{{ usuario.get_groups }}</td>
                         </tr>
                     {% endif %}
-           {% endif %}
         {% empty %}
             <p>No hay usuarios registrados aun</p>
         {% endfor %}

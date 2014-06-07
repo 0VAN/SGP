@@ -1,4 +1,4 @@
-{% extends 'rol/administrar_rol.html' %}
+{% extends 'proyecto/rol/administrar_rol.html' %}
 {% block titulo %}Modificacion de Rol{% endblock %}
 
 {% block encabezado %}Modificacion de {{ rol.name }}
@@ -10,7 +10,7 @@
 
 {%  block botones %}
     <li>
-        <a href="/administracion/roles/listar" class="btn btn-default">Volver</a>
+        <a href="{% url 'administracion.views.listar_roles' proyecto.id %}" class="btn btn-default">Volver</a>
     </li>
 {% endblock %}
 {% block contenido %}

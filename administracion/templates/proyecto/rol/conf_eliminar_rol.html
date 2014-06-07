@@ -1,18 +1,18 @@
-{% extends 'rol/administrar_rol.html' %}
+{% extends 'proyecto/rol/administrar_rol.html' %}
 {% block titulo %}Eliminar Rol{% endblock %}
 {% block encabezado %}Eliminar {{ rol.name }}{% endblock %}
 {% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/roles/listar" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.listar_roles' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
 {% block contenido %}
     <p class="alert alert-danger">Esta seguro que desea eliminar el rol {{ rol.name }}? Este cambio no podra
     deshacerse</p>
     <p>
-        <a  class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_rol' rol.id %}">Si</a>
-        <a class="btn btn-default btn-lg" href="/administracion/roles/listar">No</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'administracion.views.eliminar_rol' proyecto.id rol.id %}">Si</a>
+        <a class="btn btn-default btn-lg" href="{% url 'administracion.views.listar_roles' proyecto.id %}">No</a>
     </p>
 
 

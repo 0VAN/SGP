@@ -19,11 +19,11 @@ class ComiteForm(forms.ModelForm):
             'Usuario3': ('Integrante 3'),
         }
 
-class LineBaseForm(MyForm):
+class LineaBaseForm(MyForm):
     Items = forms.ModelMultipleChoiceField(queryset=Item.objects.all(),label=('Seleccionar Items'),
                                           widget=FilteredSelectMultiple(('Items'),False,))
     class Meta:
-        model = LineBase
+        model = LineaBase
         exclude = ['Usuario','Fecha','Fase']
 
     class Media:

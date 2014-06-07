@@ -453,7 +453,7 @@ def proyecto_asignar_usuarios(request, id_proyecto):
                                        'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
             else:
-                formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1)
+                formulario.fields["Usuarios"].queryset = User.objects.exclude(pk=1).exclude(pk=request.user.pk)
                 formulario.fields["Usuarios"].help_text = "Haga doble click en el Usuario que desee agregar al proyecto"
                 return render_to_response('proyecto/crear_proyecto.html',
                               {'formulario': formulario, 'operacion': 'Usuarios que participaran en el proyecto '+proyecto.Nombre
@@ -903,60 +903,65 @@ def fase_asignar_usuarios(request, id_proyecto, idFase):
 ###########################################Vistas de administracion de Rol##############################################
 ########################################################################################################################
 @user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
-def administrar_roles(request):
+def administrar_roles(request, id_proyecto):
     """
 
     :param request:
     :return:
     """
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     usuario_actor = request.user
-    lista_usuarios = User.objects.all()
-    return render_to_response('rol/administrar_rol.html',
-                              {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios}
+    lista_usuarios = proyecto.Usuarios.all().order_by('pk')
+    return render_to_response('proyecto/rol/administrar_rol.html',
+                              {'usuario_actor': usuario_actor, 'lista_usuarios': lista_usuarios, 'proyecto':proyecto}
                               , context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
-def listar_roles(request):
+def listar_roles(request, id_proyecto):
     """
 
     :param request:
     :return:
     """
     usuario_actor = request.user
-    roles = Group.objects.all()
-    return render_to_response('rol/listar_roles.html',
-                              {'usuario_actor': usuario_actor, 'roles': roles}
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    roles = Group.objects.filter(Proyecto=proyecto)
+    return render_to_response('proyecto/rol/listar_roles.html',
+                              {'usuario_actor': usuario_actor, 'roles': roles, 'proyecto':proyecto}
                               , context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_agregar_roles, login_url="/iniciar_sesion")
-def crear_rol(request):
+def crear_rol(request, id_proyecto):
     """
 
     :param request:
     :return:
     """
     mensaje="Rol creado con exito"
+    proyecto= Proyecto.objects.get(pk=id_proyecto)
     usuario_actor = request.user
-    lista_usuarios = User.objects.all()
-    rol = Group(Usuario=usuario_actor)
-    roles = Group.objects.all()
+    lista_usuarios = proyecto.Usuarios
+    rol = Group(Usuario=usuario_actor, Proyecto=proyecto)
+    roles = Group.objects.filter(Proyecto=proyecto)
     if request.method == 'POST':
         formulario = RolForm(request.POST, instance=rol)
+        formulario.fields["permissions"].queryset = Permission.objects.filter(content_type=12)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('rol/rol_exito.html',
+            return render_to_response('proyecto/rol/rol_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor,
-                                       'lista_usuarios': lista_usuarios, 'roles': roles},
+                                       'lista_usuarios': lista_usuarios, 'roles': roles, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
-    return render_to_response('rol/crear_rol.html',
+        formulario.fields["permissions"].queryset = Permission.objects.filter(content_type=12)
+    return render_to_response('proyecto/rol/crear_rol.html',
                               {'formulario': formulario, 'operacion': 'Ingrese los datos del rol a crear',
-                               'usuario_actor': usuario_actor},
+                               'usuario_actor': usuario_actor, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_consultar_roles, login_url="/iniciar_sesion")
-def detalle_rol(request, idRol):
+def detalle_rol(request, id_proyecto, idRol):
     """
 
     :param request:
@@ -964,14 +969,15 @@ def detalle_rol(request, idRol):
     :return:
     """
     usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     rol = Group.objects.get(pk=idRol)
     lista_permisos = rol.permissions.all()
-    return render_to_response('rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol,
-                                                      'lista_permisos': lista_permisos},
+    return render_to_response('proyecto/rol/detallerol.html', {'usuario_actor': usuario_actor, 'rol': rol,
+                                                      'lista_permisos': lista_permisos, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_modificar_roles, login_url="/iniciar_sesion")
-def modificar_rol(request, idRol):
+def modificar_rol(request, id_proyecto, idRol):
     """
 
     :param request:
@@ -980,24 +986,27 @@ def modificar_rol(request, idRol):
     """
     usuario_actor = request.user
     rol = Group.objects.get(pk=idRol)
-    roles = Group.objects.all().order_by('id')
-    lista_usuarios = User.objects.all()
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    roles = Group.objects.filter(Proyecto=proyecto).order_by('id')
+    lista_usuarios = proyecto.Usuarios.all()
     formulario = RolForm(request.POST, instance=rol)
+    formulario.fields["permissions"].queryset = Permission.objects.filter(content_type=12)
     if formulario.is_valid():
         formulario.save()
         mensaje = 'El rol ha sido modificado exitosamente'
-        return render_to_response('rol/rol_exito.html',
+        return render_to_response('proyecto/rol/rol_exito.html',
                                       {'mensaje': mensaje, 'usuario_actor': usuario_actor,
-                                       'lista_usuarios': lista_usuarios, 'roles': roles},
+                                       'lista_usuarios': lista_usuarios, 'roles': roles, 'proyecto':proyecto},
                                       context_instance=RequestContext(request))
     else:
         formulario = RolForm(instance=rol)
-    return render_to_response('rol/modificar_rol.html',
-                              {'usuario_actor': usuario_actor, 'rol': rol, 'formulario': formulario},
+        formulario.fields["permissions"].queryset = Permission.objects.filter(content_type=12)
+    return render_to_response('proyecto/rol/modificar_rol.html',
+                              {'usuario_actor': usuario_actor, 'rol': rol, 'formulario': formulario, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_eliminar_roles, login_url="/iniciar_sesion")
-def confirmar_eliminar_rol(request, idRol):
+def confirmar_eliminar_rol(request, id_proyecto, idRol):
     """
 
     :param request:
@@ -1005,12 +1014,13 @@ def confirmar_eliminar_rol(request, idRol):
     :return:
     """
     usuario_actor = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
     rol = Group.objects.get(pk=idRol)
-    return render_to_response('rol/conf_eliminar_rol.html', {'usuario_actor': usuario_actor, 'rol': rol},
+    return render_to_response('proyecto/rol/conf_eliminar_rol.html', {'usuario_actor': usuario_actor, 'rol': rol, 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_eliminar_roles, login_url="/iniciar_sesion")
-def eliminar_rol(request, idRol):
+def eliminar_rol(request, id_proyecto, idRol):
     """
 
     :param request:
@@ -1020,14 +1030,15 @@ def eliminar_rol(request, idRol):
     rol = Group.objects.get(pk=idRol)
     rol.delete()
     usuario_actor = request.user
-    roles = Group.objects.all().order_by('id')
-    return render_to_response('rol/rol_exito.html',
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    roles = Group.objects.filter(Proyecto=proyecto).order_by('id')
+    return render_to_response('proyecto/rol/rol_exito.html',
                               {'usuario_actor': usuario_actor, 'roles': roles,
-                               'mensaje':'El rol ha sido eliminado con exito'},
+                               'mensaje':'El rol ha sido eliminado con exito', 'proyecto':proyecto},
                               context_instance=RequestContext(request))
 
 @user_passes_test(User.puede_modificar_usuarios, login_url="/iniciar_sesion")
-def asignar_rol(request, id_usuario):
+def asignar_rol(request, id_proyecto, id_usuario):
     """
     :param request:
     :param idRol:
@@ -1035,20 +1046,27 @@ def asignar_rol(request, id_usuario):
     """
     usuario_actor = request.user
     usuario = User.objects.get(pk=id_usuario)
-    lista_usuarios = User.objects.all()
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    roles = list(usuario.groups.all().exclude(Proyecto=proyecto))
+    lista_usuarios = proyecto.Usuarios.all().order_by('pk')
 
     if request.method == 'POST':
         formulario = AsignarRol(request.POST, instance=usuario)
+        formulario.fields["groups"].queryset = Group.objects.filter(Proyecto=proyecto)
         if formulario.is_valid():
-           formulario.save()
-           return render_to_response('rol/asignar_rol_exito.html',
+            formulario.save()
+            for rol in roles:
+                usuario.groups.add(rol)
+            usuario.save()
+            return render_to_response('proyecto/rol/asignar_rol_exito.html',
                                      {'mensaje': 'Rol asignado con exito', 'usuario_actor': usuario_actor,
-                                      'lista_usuarios': lista_usuarios}, context_instance=RequestContext(request))
+                                      'lista_usuarios': lista_usuarios,'proyecto':proyecto}, context_instance=RequestContext(request))
     else:
         formulario = AsignarRol(instance=usuario)
-    return render(request, 'rol/form_asignar.html', {'formulario': formulario,
+        formulario.fields["groups"].queryset = Group.objects.filter(Proyecto=proyecto)
+    return render(request, 'proyecto/rol/form_asignar.html', {'formulario': formulario,
                                                  'operacion': 'Seleccione el rol que desea asignar al usuario',
-                                                 'usuario_actor': usuario_actor, 'usuario': usuario},
+                                                 'usuario_actor': usuario_actor, 'usuario': usuario, 'proyecto':proyecto},
                   context_instance=RequestContext(request))
 
 

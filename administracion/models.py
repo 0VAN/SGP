@@ -6,6 +6,7 @@ from django.utils import six
 User.add_to_class('direccion', models.TextField(null=True, blank=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('observacion', models.TextField(null=True, blank=True))
+
 Group.add_to_class('Usuario', models.ForeignKey(User, null=True))
 Group.add_to_class('Fecha', models.DateTimeField(auto_now=True, null=True))
 
@@ -17,6 +18,15 @@ def tienePermiso(self, permiso):
                 return True
     return False
 User.add_to_class('tienePermiso', tienePermiso)
+
+def tienePermisoProyecto(self, permisoCodename, id_proyecto):
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    for grupo in self.groups.filter(Proyecto=proyecto):
+        for permisoUsuario in grupo.permissions.all():
+            if permisoUsuario.codename == permisoCodename:
+                return True
+    return False
+User.add_to_class('tienePermisoProyecto', tienePermisoProyecto)
 
 def esDesarrollador(self):
     rol='Desarrollador'
@@ -42,6 +52,12 @@ def esAdministrador(self):
                 return True
     return False
 User.add_to_class('esAdministrador', esAdministrador)
+
+def esVisitante(self):
+    if self.puede_consultar_atributos() or self.puede_consultar_fases() or self.puede_consultar_proyectos() or self.puede_consultar_roles() or self.puede_consultar_tipodeitem() or self.puede_consultar_usuarios():
+        return True
+    return False
+User.add_to_class('esVisitante', esVisitante)
 
 def integraComite(self):
     rol='Integrante de Comite'
@@ -199,6 +215,8 @@ class Proyecto(models.Model):
     def __unicode__(self):
         return self.Nombre
 
+Group.add_to_class('Proyecto', models.ForeignKey(Proyecto, null=True))
+
 class Fase(models.Model):
     """
     Clase Fase:
@@ -300,3 +318,7 @@ class TipoDeItem(models.Model):
             six.text_type(self.Fase.Nombre),
             six.text_type(self.Fase.Proyecto.Nombre))
 
+def permission_unicode(self):
+    return  u'%s' % (self.name)
+
+Permission.__unicode__ = permission_unicode

@@ -1,9 +1,9 @@
-{% extends 'rol/administrar_rol.html' %}
+{% extends 'proyecto/rol/administrar_rol.html' %}
 
 {% block encabezado %}Roles <small>Haz click en opciones para interactuar con un rol</small>{% endblock %}
 
 {%  block botones %}
-    <li><a href="/administracion/roles/" class="btn btn-default">Volver</a></li>
+    <li><a href="{% url 'administracion.views.administrar_roles' proyecto.id %}" class="btn btn-default">Volver</a></li>
 {% endblock %}
 {% block contenido %}
 
@@ -12,40 +12,33 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Usuario creador</th>
                     <th>Fecha y hora de la ultima modificacion</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
-
-          {% if roles|length > 2 %}
             {% for rol in roles %}
-              {% if rol.pk > 2 %}
-                    <tr>
-                        <td>{{ rol }}</td>
-                        <td>{{ rol.Usuario }}</td>
-                        <td>{{ rol.Fecha }}</td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    Opciones <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="'menu">
-                                    <li><a href="{% url 'administracion.views.detalle_rol' rol.id %}">Detalle</a></li>
-                                    <li><a href="{% url 'administracion.views.modificar_rol' rol.id %}">Modificar</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="{% url 'administracion.views.confirmar_eliminar_rol' rol.id %}" type="button" class="btn btn-danger">Eliminar</a>
-                            </div>
-                        </td>
-                    </tr>
-              {% endif %}
-            {% endfor %}
-          {% else %}
+                <tr>
+                    <td>{{ rol }}</td>
+                    <td>{{ rol.Fecha }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Opciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="'menu">
+                                <li><a href="{% url 'administracion.views.detalle_rol' proyecto.id rol.id %}">Detalle</a></li>
+                                <li><a href="{% url 'administracion.views.modificar_rol' proyecto.id rol.id %}">Modificar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{% url 'administracion.views.confirmar_eliminar_rol' proyecto.id rol.id %}" type="button" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
                 <tr>
                 <td class="warning">No hay roles disponibles</td>
                 <td class="warning"></td>
@@ -53,7 +46,7 @@
                 <td class="warning"></td>
                 <td class="warning"></td>
                 </tr>
-          {% endif %}
+            {% endfor %}
         </table>
     {% endif %}
     {% block mensaje %}{% endblock %}
