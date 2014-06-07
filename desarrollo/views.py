@@ -973,7 +973,7 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
              'mensaje': mensaje, 'suceso': suceso},
             context_instance=RequestContext(request)
         )
-    
+
     return render_to_response(
         'item/revisar.html',
         {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
