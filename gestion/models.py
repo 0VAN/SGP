@@ -3,7 +3,7 @@ from desarrollo.models import Item
 from administracion.models import User, Proyecto, Fase
 # Create your models here.
 
-class LineBase(models.Model):
+class LineaBase(models.Model):
     Nombre = models.CharField(max_length=30)
     Fecha = models.DateTimeField(auto_now=True)
     Usuario = models.ForeignKey(User)

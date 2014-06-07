@@ -19,13 +19,13 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Items</th>
+                    <th class="text-center">Items</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in lista_item %}
                     <tr>
-                        <td><a href="{% url 'gestion.views.detalle_item_validados' proyecto.id fase.id lineaBase.id item.id %}">{{ item.Nombre  }}</a></td>
+                        <td class="text-center"><a title="Haz click para mas detalles del item" class="btn btn-info" href="{% url 'gestion.views.detalle_item_validados' proyecto.id fase.id lineaBase.id item.id %}">{{ item.Nombre  }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

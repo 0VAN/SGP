@@ -46,6 +46,8 @@ urlpatterns = patterns('',
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/usuarios/$', 'administracion.views.proyecto_asignar_usuarios'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminar/$', 'administracion.views.confirmar_eliminar_proyecto'),
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/eliminado/$', 'administracion.views.eliminar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/finalizar/$', 'administracion.views.confirmar_finalizar_proyecto'),
+    url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/finalizado/$', 'administracion.views.finalizar_proyecto_view'),
 
 ################################################URL FASE################################################################
     url(r'^administracion/proyectos/(?P<id_proyecto>\d+)/fases/$', 'administracion.views.administrar_fases'),
@@ -136,8 +138,9 @@ urlpatterns = patterns('',
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/item/(?P<id_item>\d+)/desaprobado/$', 'desarrollo.views.desaprobado_view'),
 
     url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/$', 'desarrollo.views.solicitudes_de_cambio_view'),
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/nuevo/$', 'desarrollo.views.solicitud_cambio_view'),
-    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/detalle/$', 'desarrollo.views.solicitud_cambio_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/nuevo/$',
+        'desarrollo.views.solicitud_crear_view'),
+    url(r'^desarrollo/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/solicitud/detalle/(?P<id_solicitud>\d+)/$', 'desarrollo.views.detalle_solicitud'),
 
 ########################################################################################################################
 #####################################URL GESTION DE CAMBIOS#############################################################

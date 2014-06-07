@@ -8,8 +8,6 @@ import pydot
 from gestion.forms import *
 from gestion.models import *
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 @login_required(login_url='/iniciar_sesion')
 def desarrollo(request):
     """
@@ -214,10 +212,14 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     item = Item.objects.get(pk=idItem)
     campos = Campo.objects.filter(item=item)
     relacion = Relacion.objects.get(item=item)
-
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
+    #arreglado
     return render_to_response(
         'item/detalle.html',
-        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
+         'hijos':lista_hijos, 'sucesores':lista_sucesores},
+        context_instance=RequestContext(request)
     )
 
 
@@ -335,7 +337,7 @@ def generar_grafo_proyecto(id_proyecto):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
         if relacion.antecesor:
             grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
-    grafo.write_png(BASE_DIR+'/static/media/grafoProyectoActual.png')
+    grafo.write_png('static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
     fase = Fase.objects.get(pk=id_fase)
@@ -356,7 +358,7 @@ def generar_grafo_fase(id_fase):
     for relacion in relaciones_fase:
         if relacion.padre:
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
-    grafo.write_png(BASE_DIR+'/static/media/grafoFaseActual.png')
+    grafo.write_png('static/media/grafoFaseActual.png')
 
 
 def historial_item(request, id_proyecto, id_fase, id_item):
@@ -450,7 +452,6 @@ def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
 
 
 
-@reversion.create_revision()
 def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     item = Item.objects.get(pk=id_item)
@@ -771,7 +772,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
 
 
 
-def solicitud_cambio_view(request, id_proyecto, id_fase):
+def solicitud_crear_view(request, id_proyecto, id_fase):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -825,7 +826,7 @@ def desaprobar_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     return render_to_response(
         'item/desaprobar.html',
-        {'usuario': usuario, 'fase': fase, 'item': item},
+        {'usuario_actor': usuario, 'fase': fase, 'item': item},
         context_instance=RequestContext(request)
     )
 
@@ -842,7 +843,7 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     generar_grafo_fase(id_fase)
     return render_to_response(
         'des_fase.html',
-        {'usuario': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
+        {'usuario_actor': usuario, 'fase': fase, 'item': item, 'suceso': suceso,
          'mensaje': mensaje, 'lista_items': lista_items},
         context_instance=RequestContext(request)
     )
@@ -853,11 +854,15 @@ def solicitudes_de_cambio_view(request, id_proyecto, id_fase):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase  = Fase.objects.get(pk=id_fase)
     solicitudes = SolicitudCambio.objects.filter(usuario=usuario)
-    return render_to_response('solicitudes.html', {'usuario':usuario, 'proyecto':proyecto, 'fase':fase,'solicitudes':solicitudes},
+    return render_to_response('solicitudes.html', {'usuario_actor':usuario, 'proyecto':proyecto, 'fase':fase,'solicitudes':solicitudes},
         context_instance=RequestContext(request))
 
 def detalle_solicitud(request, id_proyecto, id_fase, id_solicitud):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase  = Fase.objects.get(pk=id_fase)
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    lista_item = solicitud.items
+    return render_to_response('detalle_solicitud_des.html',{'usuario_actor':usuario, 'proyecto':proyecto, 'fase':fase,'solicitud':solicitud, 'lista_item':lista_item}
+                              ,context_instance=RequestContext(request))
 

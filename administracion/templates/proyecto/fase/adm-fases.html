@@ -61,7 +61,7 @@
                                     {% if proyecto.get_Estado_display == "Pendiente" %}
                                         <li><a href="{% url 'administracion.views.modificar_fase' proyecto.id fase.id %}">Modificar</a></li>
                                     {% endif %}
-                                    {% if proyecto.get_Estado_display == "Activo" %}
+                                    {% if proyecto.get_Estado_display == "Activo" and fase.get_Estado_display != 'Finalizada'%}
                                         <li class="divider"></li>
                                         <li><a href="{% url 'administracion.views.fase_asignar_usuarios' proyecto.id fase.id %}">Usuarios</a></li>
                                     {% endif %}

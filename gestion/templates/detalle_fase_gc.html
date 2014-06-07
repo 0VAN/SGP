@@ -1,4 +1,4 @@
-{% extends 'gestion_fase.html' %}
+{% extends 'gestion.html' %}
 {% block titulo %}Detalle de Fase{% endblock %}
 {% block encabezado %}Detalle de la fase: {{ fase.Nombre}}{% endblock %}
 
@@ -27,13 +27,15 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Items</th>
+                    <th class="text-center">Items</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in lista_item %}
                     <tr>
-                        <td><a href="{% url 'gestion.views.detalle_item' proyecto.id fase.id item.id %}">{{ item.Nombre  }}</a></td>
+                        <td class="text-center">
+                            <a title="Haz click para mas detalles del item" href="{% url 'gestion.views.detalle_item' proyecto.id fase.id item.id %}" type="button" class="btn btn-info">{{ item.Nombre  }}</a>
+                        </td>
                     </tr>
                 {% empty %}
                     <tr>

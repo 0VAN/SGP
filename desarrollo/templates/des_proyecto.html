@@ -40,6 +40,6 @@
     </table>
     {% if lista_items %}
         <h3>Grafo del proyecto: <i>{{ proyecto.Nombre }}</i></h3>
-        <a title="Haz click para ver la imagen en su tamano original" target="_blank" href="/static/media/grafoProyectoActual.png"><img src="/static/media/grafoProyectoActual.png" class="img-responsive"></a>
+        <a title="Haz click para ver la imagen en su tamano original" target="_blank" href="{{ STATIC_URL }}media/grafoProyectoActual.png"><img src="{{ STATIC_URL }}media/grafoProyectoActual.png" class="img-responsive"></a>
     {% endif %}
 {% endblock %}

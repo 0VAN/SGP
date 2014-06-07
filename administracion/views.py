@@ -9,6 +9,7 @@ from administracion.models import Proyecto, Fase, Atributo, TipoDeItem
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
 from desarrollo.models import Item
+from django.db import IntegrityError
 
 
 # Create your views here.
@@ -274,7 +275,16 @@ def confirmar_iniciar_proyecto(request, id_proyecto):
                               'lista_proyectos': lista_proyectos}
                               ,context_instance=RequestContext(request))
     else:
-        return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
+        lista_fase = Fase.objects.filter(Proyecto=proyecto)
+        for fase in lista_fase:
+            lista_tipo = TipoDeItem.objects.filter(Fase=fase)
+            if not lista_tipo.exists():
+                return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
+                              'mensaje': 'No puedes iniciar el proyecto '+proyecto.Nombre + ' porque la fase '+fase.Nombre+' no tiene tipo de item algun',
+                              'lista_proyectos': lista_proyectos}
+                              ,context_instance=RequestContext(request))
+
+    return render_to_response('proyecto/conf_iniciar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
                                 ,'lista_proyectos': lista_proyectos}, context_instance=RequestContext(request))
 
 
@@ -458,6 +468,43 @@ def proyecto_asignar_usuarios(request, id_proyecto):
                                       {'mensaje': 'No puedes modificar los datos del proyecto '+proyecto.Nombre + ' porque ya ha finalizado, ver detalles',
                                        'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
                                       context_instance=RequestContext(request))
+def confirmar_finalizar_proyecto(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    lista_proyectos = Proyecto.objects.all().order_by('id')
+    lista_fases = Fase.objects.filter(Proyecto=proyecto)
+
+    if lista_fases.exclude(Estado=Fase.FINALIZADA).exists():
+        return render_to_response('proyecto/proyecto_error.html', {'usuario_actor':request.user, 'proyecto':proyecto,
+                              'mensaje': 'No puedes cancelar el proyecto '+proyecto.Nombre + ' porque no todas sus bases han finalizado',
+                              'lista_proyectos': lista_proyectos}
+                              ,context_instance=RequestContext(request))
+    else:
+        return render_to_response('proyecto/conf_finalizar_proyecto.html', {'usuario_actor': request.user, 'proyecto': proyecto
+                                , 'lista_proyectos': lista_proyectos}, context_instance=RequestContext(request))
+
+
+def finalizar_proyecto_view(request, id_proyecto):
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    usuario = request.user
+    lista_proyectos =  Proyecto.objects.all().order_by('id')
+    proyecto.Estado = 'F'
+    proyecto.save()
+    return render_to_response('proyecto/proyecto_exito.html',
+                                      {'mensaje': 'Se ha finalizado el proyecto '+proyecto.Nombre,
+                                       'usuario_actor': request.user, 'lista_proyectos': lista_proyectos},
+                                      context_instance=RequestContext(request))
+
+
+
+
 ########################################################################################################################
 ###########################################Vistas de administracion de Fase#############################################
 ########################################################################################################################
@@ -569,22 +616,30 @@ def crear_fase(request, id_proyecto):
         formulario = FaseForm(request.POST, instance=fase)
         if formulario.is_valid():
             proyecto.nFases += 1
-            proyecto.save()
             fase.Numero = proyecto.nFases
             formulario = FaseForm(request.POST, instance=fase)
-            formulario.save()
+            try:
+                formulario.save()
+            except IntegrityError:
+                mensaje= 'No se puede crear la fase con el nombre elegido ya que esta siendo usado por otra'
+                return render_to_response('proyecto/fase/fase_form.html',
+                              {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,'error':True,'mensaje':mensaje,
+                               'operacion':'Ingrese los datos de la fase'},
+                              context_instance=RequestContext(request))
+
+            proyecto.save()
             fase_nombre = str(request.POST['Nombre'])
             return render_to_response('proyecto/fase/fases_exito.html',
                               {'usuario_actor': usuario_actor, 'proyecto': proyecto, 'lista_fases': lista_fases,
                                'mensaje': 'Se ha creado la fase '+fase_nombre+' exitosamente'},
                               context_instance=RequestContext(request))
-
     else:
         formulario = FaseForm(instance=fase)
-        return render_to_response('proyecto/fase/fase_form.html',
+    return render_to_response('proyecto/fase/fase_form.html',
                               {'usuario_actor': usuario_actor, 'formulario': formulario, 'proyecto': proyecto,
                                'operacion':'Ingrese los datos de la fase'},
                               context_instance=RequestContext(request))
+
 
 
 def iniciar_fase(request, id_proyecto, id_fase):
@@ -631,12 +686,12 @@ def confirmar_iniciar_fase(request, id_proyecto, id_fase):
         lista_item = Item.objects.filter(Fase=fase_anterior).filter(Estado=Item.VALIDADO)
         if not lista_item:
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
-                            'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no posee ningun item en linea base',
+                            'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque la fase anterior no posee ningun item en linea base',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
 
     elif not fase.Usuarios.exists():
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
-                            'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque la fase anterior no ha finalizado, ver detalles',
+                            'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque la fase anterior no has asignado ningun usuario a ella',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
 
     mensaje = 'Estas seguro que desea iniciar la fase '+fase.Nombre+' este cambio es irrevertible'
@@ -686,11 +741,17 @@ def confirmar_finalizar_fase(request, id_proyecto, id_fase):
                               'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque el proyecto ya ha finalizado, ver detalles',
                               'lista_fases': lista_fases}
                               ,context_instance=RequestContext(request))
-    elif not lista_items:
+
+    elif not lista_items.exists():
         return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
                               'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque no posee item alguno',
                               'lista_fases': lista_fases}, context_instance=RequestContext(request))
-    else:
+
+    elif lista_items.exclude(Estado=Item.VALIDADO).exists():
+        return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase':fase,'proyecto':proyecto,
+                              'mensaje': 'No puedes finalizar la fase '+fase.Nombre + ' porque no posee item alguno en lina base',
+                              'lista_fases': lista_fases}, context_instance=RequestContext(request))
+    elif fase.Numero > 1:
         fase_anterior = Fase.objects.get(Proyecto=fase.Proyecto, Numero=(fase.Numero-1))
         if not fase_anterior.FINALIZADA:
             return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'mensaje': 'No puedes iniciar la fase '+fase.Nombre + ' porque no todos los items estan en una linea base, ver detalles',

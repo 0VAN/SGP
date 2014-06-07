@@ -21,7 +21,7 @@
 
 {% block botones %}
     <li>
-        {% if usuario_actor.puede_crear_proyecto%}
+        {% if usuario_actor.puede_agregar_proyectos %}
             <a href="/administracion/proyectos/nuevo" class="btn btn-default">Crear Proyecto</a>
         {% endif %}
     </li>
@@ -50,7 +50,7 @@
                 <th>Nombre</th>
                 <th>Lider</th>
                 <th>Estado</th>
-                <th>Fecha de ultima modifificacion</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -63,10 +63,9 @@
                     <td>{{ proyecto.Nombre }}</td>
                     <td>{{ proyecto.Lider }}</td>
                     <td><b><i>{{ proyecto.get_Estado_display }}</i></b></td>
-                    <td>{{ proyecto.Fecha }}</td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
@@ -74,9 +73,14 @@
                                 {% if usuario_actor == proyecto.Lider %}
                                     {% if proyecto.get_Estado_display == "Pendiente" %}
                                         <li><a href="{% url 'administracion.views.modificar_proyecto_lider' proyecto.id %}">Modificar</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}">Iniciar</a></li>
-                                    {% endif %}
+                                        <td>
+                                             <a href="{% url 'administracion.views.confirmar_iniciar_proyecto' proyecto.id %}" type="button" class="btn btn-success">Iniciar</a>
+                                        </td>
+                                    {% elif proyecto.get_Estado_display == 'Activo' %}
+                                        <td>
+                                             <a href="{% url 'administracion.views.confirmar_finalizar_proyecto' proyecto.id %}" type="button" class="btn btn-success">Finalizar</a>
+                                        </td>
+                                    {% endif%}
                                 {% elif usuario_actor.esAdministrador %}
                                      <li><a href="{% url 'administracion.views.modificar_proyecto' proyecto.id %}">Modificar</a></li>
                                 {% endif %}

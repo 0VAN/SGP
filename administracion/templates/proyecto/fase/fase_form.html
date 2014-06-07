@@ -13,4 +13,9 @@
         <table class="table"><p>{{ formulario }}</p></table>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
+    {% block mensaje %}
+        {% if error %}
+            <div class="alert alert-danger">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock %}
 {% endblock %}

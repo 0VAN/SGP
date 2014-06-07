@@ -1,0 +1,58 @@
+{% extends 'solicitudes.html' %}
+{% block titulo %}Detalle de la solicitud{% endblock %}
+{% block botones %}
+    <li><a href="{% url 'desarrollo.views.solicitudes_de_cambio_view' proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+{% endblock %}
+
+{% block encabezado %}Detalle de la solicitud: {{ solicitud }}{% endblock %}
+
+{% block contenido %}
+    <dl class="dl-horizontal">
+        <dt>Nombre:</dt>
+        <dd>{{ solicitud.nombre }}</dd>
+        <dt>Creado por:</dt>
+        <dd>{{ solicitud.usuario }}</dd>
+        <dt>Fase:</dt>
+        <dd>{{ solicitud.fase }}</dd>
+        <dt>Proyecto</dt>
+        <dd>{{ solicitud.proyecto }}</dd>
+        <dt>Motivo:</dt>
+        <dd>{{ solicitud.motivo }}</dd>
+        <dt>Fecha:</dt>
+        <dd>{{ solicitud.fecha }}</dd>
+        <dt>Estado:</dt>
+        <dd>{{ solicitud.get_estado_display }}</dd>
+    </dl>
+    <div class="col-lg-4 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in solicitud.items.all %}
+                    <tr>
+                        <td class="text-center">
+                            <a title="Haz click para mas detalles del item" href="{% url 'desarrollo.views.detalle_item_vista' proyecto.id fase.id item.id %}" type="button" class="btn btn-info">{{ item.Nombre  }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-lg-12">
+    {% if voto.estado == 'P' %}
+        <a href="{% url 'gestion.views.aprobar_solicitud_view' proyecto.id solicitud.id %}" class="btn btn-success btn-lg" >Aprobar</a>
+        <a href="{% url 'gestion.views.desaprobar_solicitud_view' proyecto.id solicitud.id %}" class="btn btn-danger btn-lg">Desaprobar</a>
+    {% endif %}
+    {% block mensaje %}
+        {% if suceso == True %}
+            <div class="alert alert-success">{{ mensaje }}</div>
+        {% elif suceso == False %}
+            <div class="alert alert-danger pull-left">{{ mensaje }}</div>
+        {% endif %}
+    {% endblock mensaje %}
+    </div>
+{% endblock %}

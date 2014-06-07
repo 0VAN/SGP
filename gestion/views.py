@@ -36,7 +36,7 @@ def gestion_proyecto(request, id_proyecto):
 def gestion_fase(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
-    lista_lineaBase = LineBase.objects.filter(Fase=fase)
+    lista_lineaBase = LineaBase.objects.filter(Fase=fase)
     return render_to_response('gestion_fase.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_lineabase': lista_lineaBase},
         context_instance=RequestContext(request))
@@ -100,17 +100,17 @@ def crear_comite(request, id_proyecto):
 def crear_lineaBase_view(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
-    lista_lineaBase = LineBase.objects.filter(Fase=fase)
+    lista_lineaBase = LineaBase.objects.filter(Fase=fase)
     lista_items = Item.objects.filter(Fase=fase)
     lista_items = lista_items.filter(Estado=Item.FINALIZADO)
-    lineabase = LineBase(Fase=fase, Usuario=usuario)
+    lineabase = LineaBase(Fase=fase, Usuario=usuario)
     if request.method == 'POST':
         formulario = LineBaseForm(request.POST, instance=lineabase)
         formulario.fields["Items"].queryset = lista_items
         formulario.fields["Items"].help_text = "Haga doble click en el item que desee agregar"
         if formulario.is_valid():
             formulario.save()
-            lineabase = LineBase.objects.last()
+            lineabase = LineaBase.objects.last()
             for item in lineabase.Items.all():
                 item.Estado = item.VALIDADO
                 item.save()
@@ -148,7 +148,7 @@ def detalle_lineaBase(request, id_proyecto, id_fase, id_lineaB):
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
-    lineaBase =LineBase.objects.get(pk=id_lineaB)
+    lineaBase =LineaBase.objects.get(pk=id_lineaB)
     lista_items = lineaBase.Items.all()
     return render_to_response('lineaBase_detalle.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto,'fase':fase,
                                                          'lineaBase':lineaBase, 'lista_item':lista_items},
@@ -358,7 +358,7 @@ def detalle_fase(request, id_proyecto, id_fase):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     lista_item = Item.objects.filter(Fase=fase)
     return render_to_response('detalle_fase_gc.html',
-                              {'usuario': usuario_actor, 'fase': fase, 'proyecto':proyecto, 'lista_item':lista_item},
+                              {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto, 'lista_item':lista_item},
                               context_instance=RequestContext(request))
 
 def detalle_item(request, id_proyecto, id_fase, id_item):

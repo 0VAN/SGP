@@ -163,9 +163,9 @@ class RolForm(MyForm):
         exclude = ['Usuario']
 
     class Media:
-        css = {'all':(BASE_DIR+'/static/css/filteredselectwidget.css',),}
+        css = {'all':('/static/css/filteredselectwidget.css',),}
         # jsi18n is required by the widget
-        js = (BASE_DIR+'/static/js/jsi18n.js',)
+        js = ('/static/js/jsi18n.js',)
 
 class AtributoForm(MyForm):
     """

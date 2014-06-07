@@ -1,7 +1,7 @@
 {% extends 'des_proyecto.html' %}
 {% block titulo %}Desarrollo de Fase{% endblock %}
 {% block botones %}
-   <li><a href="{% url 'desarrollo.views.solicitud_cambio_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Crear Solicitud</a></li>
+   <li><a href="{% url 'desarrollo.views.solicitud_crear_view' fase.Proyecto.id fase.id %}" class="btn btn-default" type="button">Crear Solicitud</a></li>
    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" type="button" class="btn btn-default">Volver</a></li>
 {% endblock %}
 
@@ -22,15 +22,21 @@
         </thead>
         <tbody>
             {% for solicitud in solicitudes %}
+                 <td>{{ solicitud.nombre }}</td>
+                 <td>{{ solicitud.get_estado_display }}</td>
+                 <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
                                 Opciones <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url 'desarrollo.views.detalle_solicitud' fase.Proyecto.id fase.id item.id %}">Detalle</a></li>
+                                <li><a href="{% url 'desarrollo.views.detalle_solicitud' fase.Proyecto.id fase.id solicitud.id %}">Detalle</a></li>
                             </ul>
                         </div>
-                    </td>
+                 </td>
+            {% empty %}
+                <td>No hay solicitudes de cambio disponebles</td>
             {% endfor %}
         </tbody>
+    </table>
 {% endblock %}
