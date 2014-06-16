@@ -22,20 +22,22 @@
         </thead>
         <tbody>
             {% for solicitud in solicitudes %}
-                 <td>{{ solicitud.nombre }}</td>
-                 <td>{{ solicitud.get_estado_display }}</td>
-                 <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
-                                Opciones <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url 'desarrollo.views.detalle_solicitud' fase.Proyecto.id fase.id solicitud.id %}">Detalle</a></li>
-                            </ul>
-                        </div>
-                 </td>
+                <tr>
+                     <td>{{ solicitud.nombre }}</td>
+                     <td>{{ solicitud.get_estado_display }}</td>
+                     <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+                                    Opciones <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'desarrollo.views.detalle_solicitud' fase.Proyecto.id fase.id solicitud.id %}">Detalle</a></li>
+                                </ul>
+                            </div>
+                     </td>
+                </tr>
             {% empty %}
-                <td>No hay solicitudes de cambio disponebles</td>
+                <td>No hay solicitudes de cambio disponibles</td>
             {% endfor %}
         </tbody>
     </table>

@@ -318,7 +318,7 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     return render_to_response(
         'item/detalle.html',
         {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
-         'hijs': lista_hijos, 'sucesores': lista_sucesores},
+         'hijos': lista_hijos, 'sucesores': lista_sucesores},
         context_instance=RequestContext(request)
     )
 
@@ -470,7 +470,7 @@ def generar_grafo_proyecto(id_proyecto):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
         if relacion.antecesor:
             grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
-    grafo.write_png('static/media/grafoProyectoActual.png')
+    grafo.write_png(BASE_DIR + '/static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
     fase = Fase.objects.get(pk=id_fase)
@@ -495,7 +495,7 @@ def generar_grafo_fase(id_fase):
     for relacion in relaciones_fase:
         if relacion.padre:
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
-    grafo.write_png('static/media/grafoFaseActual.png')
+    grafo.write_png(BASE_DIR + '/static/media/grafoFaseActual.png')
 
 def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
     id = int(id_item)

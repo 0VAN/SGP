@@ -391,3 +391,30 @@ def detalle_item(request, id_proyecto, id_fase, id_item):
         'detalle_item.html',
         {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
     )
+
+def solicitud_item(request, id_proyecto, id_solicitud, id_item):
+    usuario = request.user
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    proyecto = solicitud.proyecto
+    fase = solicitud.fase
+    item = Item.objects.get(pk=id_item)
+    campos = Campo.objects.filter(item=item)
+    relacion = Relacion.objects.get(item=item)
+    lista_hijos = hijos(item)
+    lista_sucesores = sucesores(item)
+
+    return render_to_response(
+        'solicitud/item_solicitud.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
+         'hijos': lista_hijos, 'sucesores': lista_sucesores, 'solicitud': solicitud},
+        context_instance=RequestContext(request)
+    )
+
+
+def sucesores(item):
+    sucesores = Relacion.objects.filter(antecesor=item)
+    return sucesores
+
+def hijos(item):
+    hijos = Relacion.objects.filter(padre=item)
+    return hijos
