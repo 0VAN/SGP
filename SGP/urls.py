@@ -152,6 +152,7 @@ urlpatterns = patterns('',
 ########################################################################################################################
     url(r'^gestion/$', 'gestion.views.gestion'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/$', 'gestion.views.gestion_proyecto'),
+    url(r'^gestion/reporte/(?P<id_proyecto>\d+)/$', 'gestion.views.reporte_proyecto'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/comite/$', 'gestion.views.gestion_comite'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/comite/nuevo/$', 'gestion.views.crear_comite'),
     url(r'^gestion/proyecto/(?P<id_proyecto>\d+)/fase/(?P<id_fase>\d+)/$', 'gestion.views.gestion_fase'),

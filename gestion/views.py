@@ -418,3 +418,17 @@ def sucesores(item):
 def hijos(item):
     hijos = Relacion.objects.filter(padre=item)
     return hijos
+
+def reporte_proyecto(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases = Fase.objects.filter(Proyecto=proyecto)
+    items = Item.objects.all()
+
+    campos = Campo.objects.all()
+    return render_to_response(
+        'reporte.html',
+        {'usuario_actor': usuario, 'campos': campos, 'fases':fases, 'proyecto': proyecto,
+         'items': items},
+        context_instance=RequestContext(request)
+    )

@@ -60,6 +60,7 @@
                                 </td>
                             {% endif %}
                         {% endif %}
+                        <td><a href="{% url 'gestion.views.reporte_proyecto' proyecto.id %}" class="btn btn-default">Reporte</a></td>
                     </tr>
                {% endif %}
             {% empty %}

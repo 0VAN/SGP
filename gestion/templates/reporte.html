@@ -1,0 +1,36 @@
+{% extends 'gestion.html' %}
+{% block titulo %}Reporte de Proyecto{% endblock %}
+
+{% block botones %}
+    <li><a href="{% url 'gestion.views.gestion' %}" class="btn btn-default">Volver</a> </li>
+{% endblock %}
+
+{% block encabezado %}Reporte del proyecto: {{ proyecto.Nombre }} {% endblock %}
+
+{% block contenido %}
+    {% for fase in fases %}
+        <h4>Fase: {{ fase }}</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>C. Temporal</th>
+                    <th>C. Unitario</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                {% if item.Fase == fase %}
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>{{ item.CostoTemporal }}</td>
+                        <td>{{ item.CostoUnitario }}</td>
+                        <td>{{ item.Tipo.Nombre }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
