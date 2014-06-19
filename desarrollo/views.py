@@ -465,19 +465,24 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
 
     item.save()
     relacion.save()
-    #Seteamos las relaciones de los hijos del item a ELIMINADO#
+    #Seteamos las relaciones de los hijos del item a ACTIVO#
     lista_hijo = hijos(item)
     for hijo in lista_hijo:
         #agregar el control de ciclo
-        hijo.estado = Relacion.ACTIVO
-        hijo.save()
+        if hijo.item.condicion == Item.ACTIVO:
+            hijo.estado = Relacion.ACTIVO
+            hijo.save()
+            if generaCiclo(hijo.item.id,item.id):
+                hijo.estado = Relacion.ELIMINADO
+                hijo.save()
 
-    #Seteamos las relaciones de los sucesores del item a ELIMINADO#
+    #Seteamos las relaciones de los sucesores del item a ACTIVO#
     lista_sucesores = sucesores(item)
     for sucesor in lista_sucesores:
         #agregar el control de ciclo
-        sucesor.estado = Relacion.ACTIVO
-        sucesor.save()
+        if sucesor.item.condicion == Item.ACTIVO:
+            sucesor.estado = Relacion.ACTIVO
+            sucesor.save()
 
 
 
