@@ -78,6 +78,18 @@ class Relacion(models.Model):
     )
     estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)
 
+    def estado_padre(self):
+        if self.padre:
+            if self.padre.condicion == 'A':
+                return True
+        return False
+
+    def estado_antecesor(self):
+        if self.antecesor:
+            if self.antecesor.condicion == "A":
+                return True
+        return False
+
 reversion.register(Relacion)
 
 class Archivo(models.Model):

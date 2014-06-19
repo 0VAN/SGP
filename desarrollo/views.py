@@ -518,26 +518,27 @@ def generar_grafo_proyecto(id_proyecto):
         cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
-            if item.Estado == "VAL":
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="#8AD4FF"))
-            elif item.Estado == "FIN":
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="#1EED40"))
-            elif item.Estado == "REV":
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="#F7F245"))
-            elif item.Estado == "CRE":
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="#FC8702"))
-            else:
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="white"))
-            if Relacion.objects.filter(item=item):
-                # r_temporal = Relacion.objects.get(item=item)
-                # if r_temporal.estado == "A"
-                #   relaciones_proyecto.append(r_temporal)
-                relaciones_proyecto.append(Relacion.objects.get(item=item))
+            if item.condicion == "A":
+                if item.Estado == "VAL":
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="#8AD4FF"))
+                elif item.Estado == "FIN":
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="#1EED40"))
+                elif item.Estado == "REV":
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="#F7F245"))
+                elif item.Estado == "CRE":
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="#FC8702"))
+                else:
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="white"))
+                if Relacion.objects.filter(item=item):
+                    # r_temporal = Relacion.objects.get(item=item)
+                    # if r_temporal.estado == "A"
+                    #   relaciones_proyecto.append(r_temporal)
+                    relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -556,21 +557,22 @@ def generar_grafo_fase(id_fase):
     cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase, style='filled',color='lightgrey')
     items_fase = Item.objects.filter(Fase=fase)
     for item in items_fase:
-        if item.Estado == "VAL":
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#8AD4FF")) # azul claro
-        elif item.Estado == "FIN":
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#1EED40")) # verde claro
-        elif item.Estado == "REV":
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#F7F245")) # amarillo claro
-        elif item.Estado == "CRE":
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#FC8702")) # naranja claro
-        else:
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
-        if Relacion.objects.filter(item=item):
-            # r_temporal = Relacion.objects.get(item=item)
-            # if r_temporal.estado == "A"
-            #   relaciones_fase.append(r_temporal)
-            relaciones_fase.append(Relacion.objects.get(item=item))
+        if item.condicion == "A":
+            if item.Estado == "VAL":
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#8AD4FF")) # azul claro
+            elif item.Estado == "FIN":
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#1EED40")) # verde claro
+            elif item.Estado == "REV":
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#F7F245")) # amarillo claro
+            elif item.Estado == "CRE":
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#FC8702")) # naranja claro
+            else:
+                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+            if Relacion.objects.filter(item=item):
+                # r_temporal = Relacion.objects.get(item=item)
+                # if r_temporal.estado == "A"
+                #   relaciones_fase.append(r_temporal)
+                relaciones_fase.append(Relacion.objects.get(item=item))
     grafo.add_subgraph(cluster)
     for relacion in relaciones_fase:
         if relacion.padre:
@@ -590,17 +592,18 @@ def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
         cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
-            if item.pk == id:
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="green"))
-            else:
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
-                                        , style="filled", fillcolor="white"))
-            if Relacion.objects.filter(item=item):
-                # r_temporal = Relacion.objects.get(item=item)
-                # if r_temporal.estado == "A"
-                #   relaciones_proyecto.append(r_temporal)
-                relaciones_proyecto.append(Relacion.objects.get(item=item))
+            if item.condicion == "A":
+                if item.pk == id:
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="green"))
+                else:
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                            , style="filled", fillcolor="white"))
+                if Relacion.objects.filter(item=item):
+                    # r_temporal = Relacion.objects.get(item=item)
+                    # if r_temporal.estado == "A"
+                    #   relaciones_proyecto.append(r_temporal)
+                    relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -622,17 +625,18 @@ def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
         cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
-            if item.pk == id:
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
-                                        , style="filled", fillcolor="green"))
-            else:
-                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
-                                        , style="filled", fillcolor="white"))
-            if Relacion.objects.filter(item=item):
-                # r_temporal = Relacion.objects.get(item=item)
-                # if r_temporal.estado == "A"
-                #   relaciones_proyecto.append(r_temporal)
-                relaciones_proyecto.append(Relacion.objects.get(item=item))
+            if item.condicion == "A":
+                if item.pk == id:
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
+                                            , style="filled", fillcolor="green"))
+                else:
+                    cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
+                                            , style="filled", fillcolor="white"))
+                if Relacion.objects.filter(item=item):
+                    # r_temporal = Relacion.objects.get(item=item)
+                    # if r_temporal.estado == "A"
+                    #   relaciones_proyecto.append(r_temporal)
+                    relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -882,8 +886,6 @@ def agregar_archivo_view(request, id_proyecto, id_fase, id_item):
     archivo.item = item
     if request.method == 'POST':
         formulario = ArchivoForm(request.POST, request.FILES or None, instance=archivo)
-
-        print formulario.is_valid()
         if formulario.is_valid():
             formulario.save()
             mensaje = 'Archivo asignado exitosamente'
@@ -1053,7 +1055,6 @@ def aprobar_item_view(request, id_proyecto, id_fase, id_item):
     relacion = Relacion.objects.get(item=item)
     lista_items = Item.objects.filter(Fase=fase)
     if relacion.padre != None:
-        print relacion.padre.Estado
         if relacion.padre.Estado != Item.VALIDADO and relacion.padre.Estado != Item.FINALIZADO:
             suceso = False
             mensaje = 'El item no puede ser aprobado ya que su padre todavia no ha sido aprobado'
