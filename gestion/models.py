@@ -26,10 +26,12 @@ class SolicitudCambio(models.Model):
     PROCESO = 'P'
     ACEPTADA = 'A'
     RECHAZADA = 'R'
+    EJECUTADA = 'E'
     ESTADO_CHOICES = (
         (PROCESO, 'En proceso'),
         (ACEPTADA, 'Aceptada'),
         (RECHAZADA, 'Rechazada'),
+        (EJECUTADA, 'Ejecutada'),
     )
     estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=PROCESO)
 
