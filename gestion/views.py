@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, RequestContext, get_object_or_4
 from django.contrib.auth.decorators import login_required
 from gestion.models import *
 from desarrollo.models import *
+
 from gestion.forms import *
 from desarrollo.models import *
 from django.contrib.auth.models import Group
@@ -303,7 +304,6 @@ def desaprobar_solicitud_view(request, id_proyecto, id_solicitud):
         context_instance=RequestContext(request)
     )
 
-
 def credencial_view(request, id_proyecto, id_solicitud):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -322,7 +322,6 @@ def credencial_view(request, id_proyecto, id_solicitud):
                 for relacion in relaciones:
                     relacion.item.Estado = Item.REVISION
                     relacion.item.save()
-
 
             return render_to_response(
                 'solicitud/solicitudes.html',
