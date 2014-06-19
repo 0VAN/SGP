@@ -376,6 +376,18 @@ def eliminar_item(request, idProyecto, idFase, idItem):
     item.condicion = Item.ELIMINADO
     item.save()
 
+    #Seteamos las relaciones de los hijos del item a ELIMINADO#
+    lista_hijo = hijos(item)
+    for hijo in lista_hijo:
+        hijo.estado = Relacion.ELIMINADO
+        hijo.save()
+
+    #Seteamos las relaciones de los sucesores del item a ELIMINADO#
+    lista_sucesores = sucesores(item)
+    for sucesor in lista_sucesores:
+        sucesor.estado = Relacion.ELIMINADO
+        sucesor.save()
+
     lista_items = Item.objects.filter(Fase=idFase).exclude(condicion=Item.ELIMINADO)
     generar_grafo_fase(idFase)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", idProyecto)
@@ -452,6 +464,22 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
 
     item.save()
     relacion.save()
+    #Seteamos las relaciones de los hijos del item a ELIMINADO#
+    lista_hijo = hijos(item)
+    for hijo in lista_hijo:
+        #agregar el control de ciclo
+        hijo.estado = Relacion.ACTIVO
+        hijo.save()
+
+    #Seteamos las relaciones de los sucesores del item a ELIMINADO#
+    lista_sucesores = sucesores(item)
+    for sucesor in lista_sucesores:
+        #agregar el control de ciclo
+        sucesor.estado = Relacion.ACTIVO
+        sucesor.save()
+
+
+
     suceso = True
     mensaje= 'Item revivido'
     lista_items = Item.objects.filter(Fase=id_fase).exclude(condicion=Item.ELIMINADO)
@@ -490,9 +518,25 @@ def generar_grafo_proyecto(id_proyecto):
         cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
-            cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+            if item.Estado == "VAL":
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="#8AD4FF"))
+            elif item.Estado == "FIN":
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="#1EED40"))
+            elif item.Estado == "REV":
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="#F7F245"))
+            elif item.Estado == "CRE":
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
+                                        , style="filled", fillcolor="#FC8702"))
+            else:
+                cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                         , style="filled", fillcolor="white"))
             if Relacion.objects.filter(item=item):
+                # r_temporal = Relacion.objects.get(item=item)
+                # if r_temporal.estado == "A"
+                #   relaciones_proyecto.append(r_temporal)
                 relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
@@ -513,13 +557,19 @@ def generar_grafo_fase(id_fase):
     items_fase = Item.objects.filter(Fase=fase)
     for item in items_fase:
         if item.Estado == "VAL":
-            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="green"))
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#8AD4FF")) # azul claro
+        elif item.Estado == "FIN":
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#1EED40")) # verde claro
+        elif item.Estado == "REV":
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#F7F245")) # amarillo claro
+        elif item.Estado == "CRE":
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="#FC8702")) # naranja claro
         else:
-            if item.Estado == "FIN":
-                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="blue"))
-            else:
-                cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
+            cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
         if Relacion.objects.filter(item=item):
+            # r_temporal = Relacion.objects.get(item=item)
+            # if r_temporal.estado == "A"
+            #   relaciones_fase.append(r_temporal)
             relaciones_fase.append(Relacion.objects.get(item=item))
     grafo.add_subgraph(cluster)
     for relacion in relaciones_fase:
@@ -547,6 +597,9 @@ def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
                 cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                         , style="filled", fillcolor="white"))
             if Relacion.objects.filter(item=item):
+                # r_temporal = Relacion.objects.get(item=item)
+                # if r_temporal.estado == "A"
+                #   relaciones_proyecto.append(r_temporal)
                 relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
@@ -576,6 +629,9 @@ def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
                 cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
                                         , style="filled", fillcolor="white"))
             if Relacion.objects.filter(item=item):
+                # r_temporal = Relacion.objects.get(item=item)
+                # if r_temporal.estado == "A"
+                #   relaciones_proyecto.append(r_temporal)
                 relaciones_proyecto.append(Relacion.objects.get(item=item))
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:

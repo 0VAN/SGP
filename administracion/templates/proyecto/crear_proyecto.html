@@ -5,12 +5,33 @@
     {{ operacion }}
     <script type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui-1.10.4.custom.js"></script>
-    <script type="text/javascript" src="/static/js/jsi18n.js"></script>
-
+    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.10.4.custom.css">
     <script>
-    $(document).ready(function() {
-        $('.datepicker').datepicker();
-    });
+    $(function(){
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $(id_Fecha_inicio).datepicker({
+          onRender: function(date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+          }
+          checkin.hide();
+          $(id_Fecha_finalizacion)[0].focus();
+        }).data('datepicker');
+        var checkout = $(id_Fecha_finalizacion).datepicker({
+          onRender: function(date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          checkout.hide();
+        }).data('datepicker');
+		});
     </script>
     {{ formulario.media }}
     {{ formulario.media }}
@@ -22,6 +43,9 @@
 {% block contenido %}
     <form id="formulario" method="post" action="">{% csrf_token %}
         <table class="table">{{ formulario }}</table>
+        <br>
+        <br>
+        <br>
         <p><input class="btn btn-default" type="submit" value="Confirmar"></p>
     </form>
 {% endblock %}
