@@ -1245,14 +1245,30 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
         if solicitud.items.all().filter(pk=relacion.padre.id):
             boolean = True
 
+    solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.EJECUTADA, fase=fase)
+    for solicitud in solicitudes:
+        if solicitud.items.all().filter(pk=relacion.padre.id):
+            boolean = True
+
     if boolean == False:
         suceso = False
         mensaje = 'Usted no posee permiso para modificar este item'
         lista_items = Item.objects.filter(Fase=fase)
+        p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+        p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+        p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+        p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+        p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+        p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+        p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+        p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
         return render_to_response(
             'des_fase.html',
             {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-             'mensaje': mensaje, 'suceso': suceso},
+             'mensaje': mensaje, 'suceso': suceso, 'p_consultar':p_consultar, 'p_revivir':p_revivir,
+             'p_aprobar':p_aprobar, 'p_desaprobar': p_desaprobar, 'p_eliminar_item': p_eliminar_item,
+             'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+             'p_solicitar_cambio':p_solicitar_cambio},
             context_instance=RequestContext(request)
         )
 

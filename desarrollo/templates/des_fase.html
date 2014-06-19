@@ -120,4 +120,7 @@
         <h3>Grafo de la fase:  <i>{{ fase.Nombre }}</i></h3>
         <a title="Haz click para ver la imagen en su tamano original" target="_blank" href="/static/media/grafoFaseActual.png"><img src="/static/media/grafoFaseActual.png" class="img-responsive" alt=""></a>
     {% endif %}
+    {% if comite == False %}
+        <div class="alert alert-info">Para crear una solicitud debe existir un comite de cambios</div>
+    {% endif %}
 {% endblock %}
