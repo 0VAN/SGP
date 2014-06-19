@@ -47,3 +47,5 @@ class CredencialForm(forms.ModelForm):
     class Meta:
         model = Credencial
         exclude = ['solicitud', 'fechaCreacion']
+    class Media:
+        css = {'all':('/static/css/datepicker.css',),}

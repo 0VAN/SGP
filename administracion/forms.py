@@ -49,6 +49,8 @@ class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto
         exclude = ['Usuario', 'Estado', 'Usuarios', 'nFases']
+    class Media:
+        css = {'all':('/static/css/datepicker.css',),}
 
 
 class ProyectoFormLider(MyForm):
