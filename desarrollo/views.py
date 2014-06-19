@@ -441,7 +441,8 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
     item = Item.objects.get(pk=id_version)
     relacion = Relacion.objects.get(item=item)
     item.condicion = Item.ACTIVO
-    relacion.estado = Relacion.ACTIVO
+    if relacion.estado_padre() or relacion.estado_antecesor():
+        relacion.estado = Relacion.ACTIVO
     """
     lista_eliminados = reversion.get_deleted(Item)
     item = lista_eliminados.get(id=id_version)
@@ -518,11 +519,11 @@ def generar_grafo_proyecto(id_proyecto):
         cluster = pydot.Cluster(graph_name=nombreFase,label=nombreFase,style='filled',color='lightgrey')
         items_fase = Item.objects.filter(Fase=fase)
         for item in items_fase:
-            if item.condicion == "A":
-                if item.Estado == "VAL":
+            if item.condicion == Item.ACTIVO:
+                if item.Estado == Item.VALIDADO:
                     cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                             , style="filled", fillcolor="#8AD4FF"))
-                elif item.Estado == "FIN":
+                elif item.Estado == Item.FINALIZADO:
                     cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                             , style="filled", fillcolor="#1EED40"))
                 elif item.Estado == "REV":
@@ -535,10 +536,9 @@ def generar_grafo_proyecto(id_proyecto):
                     cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                             , style="filled", fillcolor="white"))
                 if Relacion.objects.filter(item=item):
-                    # r_temporal = Relacion.objects.get(item=item)
-                    # if r_temporal.estado == "A"
-                    #   relaciones_proyecto.append(r_temporal)
-                    relaciones_proyecto.append(Relacion.objects.get(item=item))
+                    r_temporal = Relacion.objects.get(item=item)
+                    if r_temporal.estado == Relacion.ACTIVO:
+                        relaciones_proyecto.append(r_temporal)
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -569,10 +569,9 @@ def generar_grafo_fase(id_fase):
             else:
                 cluster.add_node(pydot.Node(name=item.Nombre, style="filled", fillcolor="white"))
             if Relacion.objects.filter(item=item):
-                # r_temporal = Relacion.objects.get(item=item)
-                # if r_temporal.estado == "A"
-                #   relaciones_fase.append(r_temporal)
-                relaciones_fase.append(Relacion.objects.get(item=item))
+                    r_temporal = Relacion.objects.get(item=item)
+                    if r_temporal.estado == Relacion.ACTIVO:
+                        relaciones_fase.append(r_temporal)
     grafo.add_subgraph(cluster)
     for relacion in relaciones_fase:
         if relacion.padre:
@@ -600,10 +599,9 @@ def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
                     cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>Costo $: %d"%(item.Nombre,item.CostoUnitario)
                                             , style="filled", fillcolor="white"))
                 if Relacion.objects.filter(item=item):
-                    # r_temporal = Relacion.objects.get(item=item)
-                    # if r_temporal.estado == "A"
-                    #   relaciones_proyecto.append(r_temporal)
-                    relaciones_proyecto.append(Relacion.objects.get(item=item))
+                    r_temporal = Relacion.objects.get(item=item)
+                    if r_temporal.estado == Relacion.ACTIVO:
+                        relaciones_proyecto.append(r_temporal)
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -633,10 +631,9 @@ def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
                     cluster.add_node(pydot.Node(name=item.Nombre, label = "<f0>%s|<f1>C. Temporal: %d"%(item.Nombre, item.CostoTemporal)
                                             , style="filled", fillcolor="white"))
                 if Relacion.objects.filter(item=item):
-                    # r_temporal = Relacion.objects.get(item=item)
-                    # if r_temporal.estado == "A"
-                    #   relaciones_proyecto.append(r_temporal)
-                    relaciones_proyecto.append(Relacion.objects.get(item=item))
+                    r_temporal = Relacion.objects.get(item=item)
+                    if r_temporal.estado == Relacion.ACTIVO:
+                        relaciones_proyecto.append(r_temporal)
         grafo.add_subgraph(cluster)
     for relacion in relaciones_proyecto:
         if relacion.padre:
@@ -779,25 +776,29 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
     relacion = Relacion.objects.get(item=item)
+    itemTemp = None
+    if relacion.padre:
+        itemTemp = Item.objects.get(pk=relacion.padre.pk)
     relacion.estado = Relacion.ACTIVO
-
     lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item).exclude(condicion=Item.ELIMINADO)
     if request.method=='POST':
         formulario = PadreForm(request.POST, instance=relacion)
         if formulario.is_valid():
             if generaCiclo(id_item, request.POST['padre']):
                 suceso = False
-                mensaje = 'Error: Esta relacion genera un ciclo'
+                padre = Item.objects.get(pk=int(request.POST['padre']))
+                mensaje = 'Error: El item '+padre.Nombre+' no puede ser padre del item '+item.Nombre+' , porque la relacion genera un ciclo'
+                relacion.padre = itemTemp
+                relacion.estado = Relacion.ELIMINADO
             else:
                 formulario.save()
                 mensaje = 'Padre asignado exitosamente'
                 suceso = True
-
-            item.Version += 1
-            item.save()
-            for campo in Campo.objects.filter(item=item):
-                    campo.save()
-            generar_grafo_fase(id_fase)
+                item.Version += 1
+                item.save()
+                for campo in Campo.objects.filter(item=item):
+                        campo.save()
+                generar_grafo_fase(id_fase)
             return render_to_response(
                 'relacion/gestion_relaciones.html',
                 {'usuario': usuario, 'fase': fase, 'mensaje': mensaje, 'suceso': suceso, 'item': item,
@@ -819,7 +820,7 @@ def generaCiclo(id_item,id_padre):
         if itemPadre.pk == id_item:
             return True
         try:
-            relacion = Relacion.objects.get(item=itemPadre)
+            relacion = Relacion.objects.get(item=itemPadre,estado=Relacion.ACTIVO)
             itemPadre = relacion.padre
         except:
             return False
@@ -1039,6 +1040,7 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     relacion = Relacion.objects.get(item=item)
     relacion.padre = None
     relacion.antecesor = None
+    relacion.estado = Relacion.ELIMINADO
     relacion.save()
     suceso = True
     mensaje = 'Relacion eliminada con exito'
