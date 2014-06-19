@@ -60,7 +60,17 @@
                                 </td>
                             {% endif %}
                         {% endif %}
-                        <td><a href="{% url 'gestion.views.reporte_proyecto' proyecto.id %}" class="btn btn-default">Reporte</a></td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                    Reporte <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'gestion.views.reporte_proyecto' proyecto.id %}">Proyecto</a></li>
+                                    <li><a href="{% url 'gestion.views.reporte_solicitud' proyecto.id %}">Solicitudes</a></li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                {% endif %}
             {% empty %}

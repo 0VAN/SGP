@@ -154,6 +154,7 @@ def crear_item(request, id_proyecto, id_fase):
 
 @reversion.create_revision()
 def mod_item(request, id_proyecto, id_fase, id_item):
+    boolean_solicitud = False
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -181,6 +182,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
             )
 
     if item.Estado == Item.CREDENCIAL:
+        boolean_solicitud = True
         item.Estado = Item.VALIDADO
     formulario1 = ModItemForm(request.POST, instance=item)
     if formulario1.is_valid():
@@ -215,6 +217,15 @@ def mod_item(request, id_proyecto, id_fase, id_item):
                         a.save()
 
         formulario1.save()
+        if boolean_solicitud == True:
+            solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
+            for solicitud in solicitudes:
+                if solicitud.items.all().filter(pk=id_item):
+                    print solicitud.items.all().count()
+                    print solicitud.items.filter(Estado=Item.VALIDADO).count()
+                    if solicitud.items.all().count() == solicitud.items.filter(Estado=Item.VALIDADO).count():
+                        solicitud.estado = SolicitudCambio.EJECUTADA
+                        solicitud.save()
         lista_items = Item.objects.filter(Fase=fase)
         suceso = True
         relacion.save()

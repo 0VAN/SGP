@@ -1,0 +1,55 @@
+{% extends 'basereporte.html' %}
+{% block titulo %}Reporte de Proyecto{% endblock %}
+
+{% block encabezado %}Solicitudes de cambio del proyecto: {{ proyecto.Nombre }} {% endblock %}
+
+{% block contenido %}
+
+    <p>{{ proyecto.Descripcion }}</p>
+    {% for solicitud in solicitudes %}
+        <h2>Solicitud: {{ solicitud }}</h2>
+        <p><b>Usuario: </b>{{ solicitud.usuario }}</p>
+        <p><b>Estado: </b>{{ solicitud.get_estado_display }}</p>
+        {% for voto in votos %}
+            {% if voto.solicitud == solicitud %}
+                {% if voto.get_estado_display == 'En Proceso' %}
+                    <p>El lider aun no ha votado</p>
+                {% else %}
+                    <p>El lider ha votado</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Linea base</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for linea in lineasBase %}
+                    {% for item2 in linea.Items.all %}
+                        {% for item1 in solicitud.items.all %}
+                            {% if item1 == item2 %}
+                                <tr>
+                                    <td>{{ item1 }}</td>
+                                    <td>{{ linea.Nombre }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+        </table>
+
+    {% endfor %}
+{% endblock %}

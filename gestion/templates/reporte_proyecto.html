@@ -4,14 +4,15 @@
 {% block encabezado %}Reporte del proyecto: {{ proyecto.Nombre }} {% endblock %}
 
 {% block contenido %}
-    {{ proyecto.de }}
+
+    <p>{{ proyecto.Descripcion }}</p>
     {% for fase in fases %}
         <h4>Fase: {{ fase }}</h4>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Item</th>
+                    <th>Id del item</th>
+                    <th>Nombre del item</th>
                     <th>Tipo de item</th>
                     <th>Padre/Antecesor</th>
                     <th>Version</th>

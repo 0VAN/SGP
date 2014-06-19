@@ -5,6 +5,13 @@ from desarrollo.models import *
 from gestion.forms import *
 from desarrollo.models import *
 from django.contrib.auth.models import Group
+import cStringIO as StringIO
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+from cgi import escape
+
 # Create your views here.
 @login_required(login_url='/iniciar_sesion')
 def gestion(request):
@@ -425,11 +432,38 @@ def reporte_proyecto(request, id_proyecto):
     fases = Fase.objects.filter(Proyecto=proyecto)
     items = Item.objects.all()
     relaciones = Relacion.objects.all()
-
-    campos = Campo.objects.all()
-    return render_to_response(
-        'reporte.html',
-        {'usuario_actor': usuario, 'fases':fases, 'proyecto': proyecto,
-         'items': items, 'relaciones': relaciones},
-        context_instance=RequestContext(request)
+    return render_to_pdf(
+        'reporte_proyecto.html',
+        {
+            'fases': fases,
+            'proyecto': proyecto,
+            'items': items,
+            'relaciones': relaciones,
+        }
     )
+
+def reporte_solicitud(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitudes = SolicitudCambio.objects.all().filter(proyecto=proyecto)
+    lineasBase = LineaBase.objects.all()
+    votos = Voto.objects.all().filter(usuario=proyecto.Lider)
+    return render_to_pdf(
+        'reporte_solicitud.html',
+        {
+            'proyecto': proyecto,
+            'solicitudes': solicitudes,
+            'lineasBase': lineasBase,
+            'votos': votos,
+        }
+    )
+
+def render_to_pdf(template_src, context_dic):
+    template = get_template(template_src)
+    context = Context(context_dic)
+    html = template.render(context)
+    result = StringIO.StringIO()
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
