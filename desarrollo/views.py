@@ -52,7 +52,7 @@ def des_fase(request, id_proyecto, id_fase):
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     try:
         comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
     except ObjectDoesNotExist:
@@ -118,7 +118,7 @@ def crear_item(request, id_proyecto, id_fase):
             for atributo in item.Tipo.Atributos.all():
                 campo = Campo.objects.create(item=item, tipoItem=item.Tipo, atributo=atributo)
                 campo.save()
-            lista_items = Item.objects.filter(Fase=fase)
+            lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
             relacion = Relacion.objects.create(item=item)
             relacion.save()
             suceso = True
@@ -172,7 +172,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
         if boolean == False:
             suceso = False
             mensaje = 'Usted no posee permiso para modificar este item'
-            lista_items = Item.objects.filter(Fase=fase)
+            lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
             return render_to_response(
                 'des_fase.html',
                 {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
@@ -215,7 +215,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
                         a.save()
 
         formulario1.save()
-        lista_items = Item.objects.filter(Fase=fase)
+        lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
         suceso = True
         relacion.save()
         mensaje = "El item se ha modificado exitosamente"
@@ -293,7 +293,7 @@ def completar_item(request, id_proyecto, id_fase, id_item):
         item.save()
         relacion.save()
         generar_grafo_fase(id_fase)
-        lista_items = Item.objects.filter(Fase=fase)
+        lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
         return render_to_response(
             'des_fase.html',
             {'usuario_actor':usuario, 'fase':fase, 'lista_items':lista_items, 'mensaje':mensaje, 'suceso':suceso},
@@ -328,16 +328,37 @@ def conf_eliminar_item(request, idProyecto, idFase, idItem):
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
+    """
     if hijos(item) or sucesores(item):
+        mensaje = 'El item '+item.Nombre+' no se puede eliminar porque posee hijos o sucesores'
+        suceso = False
+        generar_grafo_fase(idFase)
+        p_consultar = usuario.tienePermisoProyecto("consulta_item", idProyecto)
+        p_revivir = usuario.tienePermisoProyecto("revive_item", idProyecto)
+        p_aprobar = usuario.tienePermisoProyecto("aprueba_item",idProyecto)
+        p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item",idProyecto)
+        p_eliminar_item = usuario.tienePermisoProyecto("delete_item",idProyecto)
+        p_gestionar_item = usuario.tienePermisoProyecto("change_item",idProyecto)
+        p_crear_item = usuario.tienePermisoProyecto("add_item",idProyecto)
+        p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item",idProyecto)
+        try:
+            comite = ComiteDeCambio.objects.get(Proyecto=fase.Proyecto.id)
+        except ObjectDoesNotExist:
+            comite = False
+        items_validados = Item.objects.filter(Fase=fase).filter(Estado=Item.VALIDADO)
+        if items_validados == None:
+            items_validados = True
+
         return render_to_response(
         'des_fase.html',
-        {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,
-         'mensaje': 'El item '+item.Nombre+' no se puede eliminar porque posee hijos o sucesores', 'suceso':False},
-        context_instance=RequestContext(request)
+        {'usuario_actor': usuario, 'fase': fase,'lista_items':lista_items,'p_consultar':p_consultar, 'p_revivir':p_revivir, 'p_aprobar':p_aprobar,
+         'p_desaprobar': p_desaprobar, 'p_eliminar_item':p_eliminar_item, 'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,'comite': comite, 'validados': items_validados,
+         'p_solicitar_cambio':p_solicitar_cambio,'mensaje': mensaje, 'suceso':suceso}, context_instance=RequestContext(request)
         )
     else:
-        return render_to_response(
+    """
+    return render_to_response(
         'item/conf_eliminar_item.html',
         {'usuario_actor': usuario, 'item': item, 'fase': fase},
         context_instance=RequestContext(request)
@@ -349,12 +370,13 @@ def eliminar_item(request, idProyecto, idFase, idItem):
     item = Item.objects.get(pk=idItem)
 
     relacion = Relacion.objects.get(item=item)
-    relacion.delete()
-    campos = Campo.objects.filter(item=item)
-    campos.delete()
+    relacion.estado = Relacion.ELIMINADO
+    relacion.save()
 
-    item.delete()
-    lista_items = Item.objects.filter(Fase=idFase)
+    item.condicion = Item.ELIMINADO
+    item.save()
+
+    lista_items = Item.objects.filter(Fase=idFase).exclude(condicion=Item.ELIMINADO)
     generar_grafo_fase(idFase)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", idProyecto)
     p_revivir = usuario.tienePermisoProyecto("revive_item", idProyecto)
@@ -383,14 +405,17 @@ def eliminar_item(request, idProyecto, idFase, idItem):
 def revivir_item(request, id_proyecto, id_fase):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ACTIVO)
+
+    """
     lista_eliminados = reversion.get_deleted(Item)
-    lista_items =[]
+    lista_items=[]
 
     for item in lista_eliminados:
        for key,value in item.field_dict.iteritems():
            if key == 'Fase' and value == int(id_fase):
                 lista_items.append(item)
-
+    """
 
     return render_to_response('item/items_eliminados.html',
         {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items},
@@ -401,6 +426,11 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
+    item = Item.objects.get(pk=id_version)
+    relacion = Relacion.objects.get(item=item)
+    item.condicion = Item.ACTIVO
+    relacion.estado = Relacion.ACTIVO
+    """
     lista_eliminados = reversion.get_deleted(Item)
     item = lista_eliminados.get(id=id_version)
 
@@ -413,18 +443,18 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
             atributo.revert()
 
     lista_relaciones_eliminadas = reversion.get_deleted(Relacion)
-
     try:
             relacion = lista_relaciones_eliminadas.get(revision_id=id_revision)
             relacion.revert()
     except IntegrityError:
             relacion = Relacion.objects.create(item=Item.objects.get(pk=item.object_id))
+    """
 
-
-
+    item.save()
+    relacion.save()
     suceso = True
     mensaje= 'Item revivido'
-    lista_items = Item.objects.filter(Fase=id_fase)
+    lista_items = Item.objects.filter(Fase=id_fase).exclude(condicion=Item.ELIMINADO)
     generar_grafo_fase(id_fase)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
     p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
@@ -470,7 +500,7 @@ def generar_grafo_proyecto(id_proyecto):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
         if relacion.antecesor:
             grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
-    grafo.write_png('static/media/grafoProyectoActual.png')
+    grafo.write_png(BASE_DIR+'/static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
     fase = Fase.objects.get(pk=id_fase)
@@ -495,7 +525,7 @@ def generar_grafo_fase(id_fase):
     for relacion in relaciones_fase:
         if relacion.padre:
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
-    grafo.write_png('static/media/grafoFaseActual.png')
+    grafo.write_png(BASE_DIR+'/static/media/grafoFaseActual.png')
 
 def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
     id = int(id_item)
@@ -948,8 +978,9 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     relacion = Relacion.objects.get(item=item)
-    relacion.delete()
-    relacion = False
+    relacion.padre = None
+    relacion.antecesor = None
+    relacion.save()
     suceso = True
     mensaje = 'Relacion eliminada con exito'
     generar_grafo_fase(id_fase)
@@ -1256,8 +1287,13 @@ def item_revisado_vista(request, id_proyecto, id_fase, id_item):
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
-    item.Estado = Item.FINALIZADO
-    item.save()
+    lista_version = reversion.get_for_object(item)
+    version_Revisado = lista_version.first()
+    for version in lista_version:
+        if version.revision_id < version_Revisado.revision_id:
+            version.revert()
+            break
+
     suceso = True
     mensaje = 'El item ha sido revisado'
     lista_items = Item.objects.filter(Fase=fase)

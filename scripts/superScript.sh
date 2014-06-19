@@ -2,7 +2,7 @@
 
 echo "Tags SGP"
 PS3='Seleccione el tag a descargar: '
-options=("1.0" "1.1" "1.2" "1.3" "1.4" "Salir")
+options=("1.0" "1.1" "1.2" "1.3" "1.4" "1.5" "Salir")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -28,6 +28,10 @@ do
             break
             ;;
         "${options[5]}")
+            tag="1.5"
+            break
+            ;;
+        "${options[6]}")
             exit
             ;;
         *) echo Opcion no valida;;
@@ -58,6 +62,8 @@ sudo cp -r /usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/ /
 echo -e "\nHacemos checkout del Tag"
 cd /var/www/SGP/
 sudo git checkout -f $tag
+cd /var/www/SGP/scripts/
+sudo ./baseDeDatos.sh
 echo -e "\nActivando los sitios [SGP] en Apache"
 sudo a2ensite SGP.conf
 

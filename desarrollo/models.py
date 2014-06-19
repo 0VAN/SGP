@@ -35,6 +35,14 @@ class Item(models.Model):
     Fase = models.ForeignKey(Fase)
     Tipo = models.ForeignKey(TipoDeItem)
     Version = models.IntegerField()
+    ACTIVO = 'A'
+    ELIMINADO = 'E'
+
+    CONDICION_CHOICES = (
+        (ACTIVO, 'Activo'),
+        (ELIMINADO, 'Eliminado'),
+    )
+    condicion = models.CharField(max_length=1, choices=CONDICION_CHOICES, default=ACTIVO)
 
     def __unicode__(self):
         return self.Nombre
@@ -58,10 +66,9 @@ class Campo(models.Model):
 reversion.register(Campo)
 
 class Relacion(models.Model):
-    padre = models.ForeignKey(Item, null=True, related_name='padre')
-    antecesor = models.ForeignKey(Item, null=True, related_name='antecesor')
+    padre = models.ForeignKey(Item, null=True, related_name='padre',on_delete=models.SET_NULL)
+    antecesor = models.ForeignKey(Item, null=True, related_name='antecesor',on_delete=models.SET_NULL)
     item = models.ForeignKey(Item, null=True, related_name='item')
-    """
     ACTIVO = 'A'
     ELIMINADO = 'E'
 
@@ -70,7 +77,7 @@ class Relacion(models.Model):
         (ELIMINADO, 'Eliminado'),
     )
     estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)
-    """
+
 reversion.register(Relacion)
 
 class Archivo(models.Model):

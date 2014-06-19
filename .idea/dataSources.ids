@@ -2197,10 +2197,10 @@
       <foreign-key name="administracion_atributo_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="administracion_tipodeitem_Atributos_atributo_id_fkey" table="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" columns="atributo_id"/>
       <exported-key name="desarrollo_campo_atributo_id_fkey" table="desarrollo_campo" schema="public" catalog="sgpdb" columns="atributo_id"/>
-      <index name="administracion_atributo_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
-      <index name="administracion_atributo_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
-      <index name="administracion_atributo_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
-      <index name="administracion_atributo_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="administracion_atributo_Nombre_key" unique="true" columns="Nombre"/>
+      <index name="administracion_atributo_Fase_id" unique="false" columns="Fase_id"/>
+      <index name="administracion_atributo_Nombre_like" unique="false" columns="Nombre"/>
+      <index name="administracion_atributo_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
     <table name="administracion_atributo_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
@@ -2230,11 +2230,11 @@
       <exported-key name="fase_id_refs_id_faeba2de" table="administracion_fase_Usuarios" schema="public" catalog="sgpdb" columns="fase_id"/>
       <exported-key name="administracion_tipodeitem_Fase_id_fkey" table="administracion_tipodeitem" schema="public" catalog="sgpdb" columns="Fase_id"/>
       <exported-key name="desarrollo_item_Fase_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Fase_id"/>
-      <exported-key name="gestion_linebase_Fase_id_fkey" table="gestion_linebase" schema="public" catalog="sgpdb" columns="Fase_id"/>
+      <exported-key name="gestion_lineabase_Fase_id_fkey" table="gestion_lineabase" schema="public" catalog="sgpdb" columns="Fase_id"/>
       <exported-key name="gestion_solicitudcambio_fase_id_fkey" table="gestion_solicitudcambio" schema="public" catalog="sgpdb" columns="fase_id"/>
-      <index name="administracion_fase_Nombre_Proyecto_id_key" unique="true" columns="&quot;Nombre&quot;,&quot;Proyecto_id&quot;"/>
-      <index name="administracion_fase_Proyecto_id" unique="false" columns="&quot;Proyecto_id&quot;"/>
-      <index name="administracion_fase_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="administracion_fase_Nombre_Proyecto_id_key" unique="true" columns="Nombre,Proyecto_id"/>
+      <index name="administracion_fase_Proyecto_id" unique="false" columns="Proyecto_id"/>
+      <index name="administracion_fase_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
     <table name="administracion_fase_Usuarios" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX2Zhc2VfVXN1YXJpb3NfaWRfc2VxIic6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
@@ -2287,12 +2287,13 @@
       <foreign-key name="administracion_proyecto_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="administracion_fase_Proyecto_id_fkey" table="administracion_fase" schema="public" catalog="sgpdb" columns="Proyecto_id"/>
       <exported-key name="proyecto_id_refs_id_c591bdf1" table="administracion_proyecto_Usuarios" schema="public" catalog="sgpdb" columns="proyecto_id"/>
+      <exported-key name="Proyecto_id_refs_id_86410919" table="auth_group" schema="public" catalog="sgpdb" columns="Proyecto_id"/>
       <exported-key name="gestion_comitedecambio_Proyecto_id_fkey" table="gestion_comitedecambio" schema="public" catalog="sgpdb" columns="Proyecto_id"/>
       <exported-key name="gestion_solicitudcambio_proyecto_id_fkey" table="gestion_solicitudcambio" schema="public" catalog="sgpdb" columns="proyecto_id"/>
-      <index name="administracion_proyecto_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
-      <index name="administracion_proyecto_Lider_id" unique="false" columns="&quot;Lider_id&quot;"/>
-      <index name="administracion_proyecto_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
-      <index name="administracion_proyecto_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="administracion_proyecto_Nombre_key" unique="true" columns="Nombre"/>
+      <index name="administracion_proyecto_Lider_id" unique="false" columns="Lider_id"/>
+      <index name="administracion_proyecto_Nombre_like" unique="false" columns="Nombre"/>
+      <index name="administracion_proyecto_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
     <table name="administracion_proyecto_Usuarios" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX3Byb3llY3RvX1VzdWFyaW9zX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
@@ -2341,8 +2342,8 @@
       <exported-key name="tipodeitem_id_refs_id_0753f024" table="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" columns="tipodeitem_id"/>
       <exported-key name="desarrollo_campo_tipoItem_id_fkey" table="desarrollo_campo" schema="public" catalog="sgpdb" columns="tipoItem_id"/>
       <exported-key name="desarrollo_item_Tipo_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Tipo_id"/>
-      <index name="administracion_tipodeitem_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
-      <index name="administracion_tipodeitem_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="administracion_tipodeitem_Fase_id" unique="false" columns="Fase_id"/>
+      <index name="administracion_tipodeitem_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
     <table name="administracion_tipodeitem_Atributos" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImFkbWluaXN0cmFjaW9uX3RpcG9kZWl0ZW1fQXRyaWJ1dG9zX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
@@ -2384,12 +2385,15 @@
       <column name="name" sqlType="varchar" precision="80" scale="0" nullable="false" jdbcType="12"/>
       <column name="Usuario_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="Fecha" sqlType="timestamptz" precision="35" scale="6" nullable="true" jdbcType="93"/>
+      <column name="Proyecto_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="auth_group_pkey" columns="id"/>
+      <foreign-key name="Proyecto_id_refs_id_86410919" columns="Proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="Usuario_id_refs_id_4cead74f" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="group_id_refs_id_f4b32aac" table="auth_group_permissions" schema="public" catalog="sgpdb" columns="group_id"/>
       <exported-key name="auth_user_groups_group_id_fkey" table="auth_user_groups" schema="public" catalog="sgpdb" columns="group_id"/>
       <index name="auth_group_name_key" unique="true" columns="name"/>
-      <index name="auth_group_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="auth_group_Proyecto_id" unique="false" columns="Proyecto_id"/>
+      <index name="auth_group_Usuario_id" unique="false" columns="Usuario_id"/>
       <index name="auth_group_name_like" unique="false" columns="name"/>
     </table>
     <table name="auth_group_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
@@ -2479,10 +2483,8 @@
       <exported-key name="user_id_refs_id_4dc23c39" table="auth_user_user_permissions" schema="public" catalog="sgpdb" columns="user_id"/>
       <exported-key name="desarrollo_item_Usuario_id_fkey" table="desarrollo_item" schema="public" catalog="sgpdb" columns="Usuario_id"/>
       <exported-key name="user_id_refs_id_c0d12874" table="django_admin_log" schema="public" catalog="sgpdb" columns="user_id"/>
-      <exported-key name="gestion_comitedecambio_Usuario1_id_fkey" table="gestion_comitedecambio" schema="public" catalog="sgpdb" columns="Usuario1_id"/>
-      <exported-key name="gestion_comitedecambio_Usuario2_id_fkey" table="gestion_comitedecambio" schema="public" catalog="sgpdb" columns="Usuario2_id"/>
-      <exported-key name="gestion_comitedecambio_Usuario3_id_fkey" table="gestion_comitedecambio" schema="public" catalog="sgpdb" columns="Usuario3_id"/>
-      <exported-key name="gestion_linebase_Usuario_id_fkey" table="gestion_linebase" schema="public" catalog="sgpdb" columns="Usuario_id"/>
+      <exported-key name="gestion_comitedecambio_Miembros_user_id_fkey" table="gestion_comitedecambio_Miembros" schema="public" catalog="sgpdb" columns="user_id"/>
+      <exported-key name="gestion_lineabase_Usuario_id_fkey" table="gestion_lineabase" schema="public" catalog="sgpdb" columns="Usuario_id"/>
       <exported-key name="gestion_solicitudcambio_usuario_id_fkey" table="gestion_solicitudcambio" schema="public" catalog="sgpdb" columns="usuario_id"/>
       <exported-key name="gestion_voto_usuario_id_fkey" table="gestion_voto" schema="public" catalog="sgpdb" columns="usuario_id"/>
       <exported-key name="reversion_revision_user_id_fkey" table="reversion_revision" schema="public" catalog="sgpdb" columns="user_id"/>
@@ -2586,7 +2588,7 @@
       <foreign-key name="desarrollo_campo_item_id_fkey" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="desarrollo_campo_atributo_id" unique="false" columns="atributo_id"/>
       <index name="desarrollo_campo_item_id" unique="false" columns="item_id"/>
-      <index name="desarrollo_campo_tipoItem_id" unique="false" columns="&quot;tipoItem_id&quot;"/>
+      <index name="desarrollo_campo_tipoItem_id" unique="false" columns="tipoItem_id"/>
     </table>
     <table name="desarrollo_campo_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
@@ -2622,13 +2624,13 @@
       <exported-key name="desarrollo_relacion_antecesor_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="antecesor_id"/>
       <exported-key name="desarrollo_relacion_item_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="item_id"/>
       <exported-key name="desarrollo_relacion_padre_id_fkey" table="desarrollo_relacion" schema="public" catalog="sgpdb" columns="padre_id"/>
-      <exported-key name="item_id_refs_id_ab61f247" table="gestion_linebase_Items" schema="public" catalog="sgpdb" columns="item_id"/>
+      <exported-key name="item_id_refs_id_d4f52075" table="gestion_lineabase_Items" schema="public" catalog="sgpdb" columns="item_id"/>
       <exported-key name="item_id_refs_id_f71492e3" table="gestion_solicitudcambio_items" schema="public" catalog="sgpdb" columns="item_id"/>
-      <index name="desarrollo_item_Nombre_key" unique="true" columns="&quot;Nombre&quot;"/>
-      <index name="desarrollo_item_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
-      <index name="desarrollo_item_Nombre_like" unique="false" columns="&quot;Nombre&quot;"/>
-      <index name="desarrollo_item_Tipo_id" unique="false" columns="&quot;Tipo_id&quot;"/>
-      <index name="desarrollo_item_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <index name="desarrollo_item_Nombre_key" unique="true" columns="Nombre"/>
+      <index name="desarrollo_item_Fase_id" unique="false" columns="Fase_id"/>
+      <index name="desarrollo_item_Nombre_like" unique="false" columns="Nombre"/>
+      <index name="desarrollo_item_Tipo_id" unique="false" columns="Tipo_id"/>
+      <index name="desarrollo_item_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
     <table name="desarrollo_item_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
@@ -2727,19 +2729,34 @@
     </table>
     <table name="gestion_comitedecambio" schema="public" catalog="sgpdb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9jb21pdGVkZWNhbWJpb19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
-      <column name="Usuario1_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="Usuario2_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="Usuario3_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Proyecto_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="gestion_comitedecambio_pkey" columns="id"/>
       <foreign-key name="gestion_comitedecambio_Proyecto_id_fkey" columns="Proyecto_id" ref-table="administracion_proyecto" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="gestion_comitedecambio_Usuario1_id_fkey" columns="Usuario1_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="gestion_comitedecambio_Usuario2_id_fkey" columns="Usuario2_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="gestion_comitedecambio_Usuario3_id_fkey" columns="Usuario3_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="gestion_comitedecambio_Proyecto_id" unique="false" columns="&quot;Proyecto_id&quot;"/>
-      <index name="gestion_comitedecambio_Usuario1_id" unique="false" columns="&quot;Usuario1_id&quot;"/>
-      <index name="gestion_comitedecambio_Usuario2_id" unique="false" columns="&quot;Usuario2_id&quot;"/>
-      <index name="gestion_comitedecambio_Usuario3_id" unique="false" columns="&quot;Usuario3_id&quot;"/>
+      <exported-key name="comitedecambio_id_refs_id_2283c81a" table="gestion_comitedecambio_Miembros" schema="public" catalog="sgpdb" columns="comitedecambio_id"/>
+      <index name="gestion_comitedecambio_Proyecto_id" unique="false" columns="Proyecto_id"/>
+    </table>
+    <table name="gestion_comitedecambio_Miembros" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImdlc3Rpb25fY29taXRlZGVjYW1iaW9fTWllbWJyb3NfaWRfc2VxIic6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="comitedecambio_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="gestion_comitedecambio_Miembros_pkey" columns="id"/>
+      <foreign-key name="gestion_comitedecambio_Miembros_user_id_fkey" columns="user_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="comitedecambio_id_refs_id_2283c81a" columns="comitedecambio_id" ref-table="gestion_comitedecambio" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="gestion_comitedecambio_Miembros_comitedecambio_id_user_id_key" unique="true" columns="comitedecambio_id,user_id"/>
+      <index name="gestion_comitedecambio_Miembros_comitedecambio_id" unique="false" columns="comitedecambio_id"/>
+      <index name="gestion_comitedecambio_Miembros_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="gestion_comitedecambio_Miembros_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
     <table name="gestion_comitedecambio_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
@@ -2774,31 +2791,31 @@
       <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="gestion_linebase" schema="public" catalog="sgpdb" type="TABLE">
-      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9saW5lYmFzZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+    <table name="gestion_lineabase" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VzdGlvbl9saW5lYWJhc2VfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
       <column name="Nombre" sqlType="varchar" precision="30" scale="0" nullable="false" jdbcType="12"/>
       <column name="Fecha" sqlType="timestamptz" precision="35" scale="6" nullable="false" jdbcType="93"/>
       <column name="Usuario_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Fase_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="gestion_linebase_pkey" columns="id"/>
-      <foreign-key name="gestion_linebase_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="gestion_linebase_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="linebase_id_refs_id_22043ed8" table="gestion_linebase_Items" schema="public" catalog="sgpdb" columns="linebase_id"/>
-      <index name="gestion_linebase_Fase_id" unique="false" columns="&quot;Fase_id&quot;"/>
-      <index name="gestion_linebase_Usuario_id" unique="false" columns="&quot;Usuario_id&quot;"/>
+      <primary-key name="gestion_lineabase_pkey" columns="id"/>
+      <foreign-key name="gestion_lineabase_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="gestion_lineabase_Usuario_id_fkey" columns="Usuario_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="lineabase_id_refs_id_8d1f2033" table="gestion_lineabase_Items" schema="public" catalog="sgpdb" columns="lineabase_id"/>
+      <index name="gestion_lineabase_Fase_id" unique="false" columns="Fase_id"/>
+      <index name="gestion_lineabase_Usuario_id" unique="false" columns="Usuario_id"/>
     </table>
-    <table name="gestion_linebase_Items" schema="public" catalog="sgpdb" type="TABLE">
-      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImdlc3Rpb25fbGluZWJhc2VfSXRlbXNfaWRfc2VxIic6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
-      <column name="linebase_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    <table name="gestion_lineabase_Items" schema="public" catalog="sgpdb" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnImdlc3Rpb25fbGluZWFiYXNlX0l0ZW1zX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="lineabase_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="item_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="gestion_linebase_Items_pkey" columns="id"/>
-      <foreign-key name="item_id_refs_id_ab61f247" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="linebase_id_refs_id_22043ed8" columns="linebase_id" ref-table="gestion_linebase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="gestion_linebase_Items_linebase_id_item_id_key" unique="true" columns="linebase_id,item_id"/>
-      <index name="gestion_linebase_Items_item_id" unique="false" columns="item_id"/>
-      <index name="gestion_linebase_Items_linebase_id" unique="false" columns="linebase_id"/>
+      <primary-key name="gestion_lineabase_Items_pkey" columns="id"/>
+      <foreign-key name="item_id_refs_id_d4f52075" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="lineabase_id_refs_id_8d1f2033" columns="lineabase_id" ref-table="gestion_lineabase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="gestion_lineabase_Items_lineabase_id_item_id_key" unique="true" columns="lineabase_id,item_id"/>
+      <index name="gestion_lineabase_Items_item_id" unique="false" columns="item_id"/>
+      <index name="gestion_lineabase_Items_lineabase_id" unique="false" columns="lineabase_id"/>
     </table>
-    <table name="gestion_linebase_Items_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+    <table name="gestion_lineabase_Items_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
@@ -2810,7 +2827,7 @@
       <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
-    <table name="gestion_linebase_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
+    <table name="gestion_lineabase_id_seq" schema="public" catalog="sgpdb" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>

@@ -1,7 +1,6 @@
 {% extends 'des_fase.html' %}
 {% block titulo %}Eliminar Item{% endblock %}
 {% block encabezado %}Eliminar {{ item.Nombre }}{% endblock %}
-{% block activo-admin %}active{% endblock %}
 
 {%  block botones %}
     <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id%}" class="btn btn-default">Volver</a></li>
