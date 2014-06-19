@@ -775,8 +775,9 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
     relacion = Relacion.objects.get(item=item)
+    relacion.estado = Relacion.ACTIVO
 
-    lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item)
+    lista_items = Item.objects.filter(Fase=fase).exclude(pk=id_item).exclude(condicion=Item.ELIMINADO)
     if request.method=='POST':
         formulario = PadreForm(request.POST, instance=relacion)
         if formulario.is_valid():

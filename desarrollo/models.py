@@ -73,10 +73,10 @@ class Relacion(models.Model):
     ELIMINADO = 'E'
 
     ESTADO_CHOICES = (
-        (ACTIVO, 'Activo'),
-        (ELIMINADO, 'Eliminado'),
+        (ACTIVO, 'Activa'),
+        (ELIMINADO, 'Inactiva'),
     )
-    estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)
+    estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ELIMINADO)
 
 reversion.register(Relacion)
 
