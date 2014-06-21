@@ -8,7 +8,6 @@ do
     case $opt in
         "${options[0]}")
             tag="1.0"
-            datos="fixtures/Usuarios.json"
             break
             ;;
         "${options[1]}")
@@ -58,12 +57,41 @@ sudo mv /var/www/SGP/conf/*.conf /etc/apache2/sites-available/
 sudo mv /var/www/SGP/conf/*.wsgi /var/www/
 sudo rm -r /var/www/SGP/conf
 sudo cp -r /usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/ /var/www/SGP/
-
 echo -e "\nHacemos checkout del Tag"
 cd /var/www/SGP/
 sudo git checkout -f $tag
-cd /var/www/SGP/scripts/
-sudo ./baseDeDatos.sh
+sudo chmod -R 777 /var/www/SGP/
+
+echo -e "\nCargamos los datos iniciales"
+case $opt in
+    "${options[0]}")
+        sudo sed -i '65s/sgparj/postgres/g' /var/www/SGP/SGP/settings.py
+        sudo sed -i '64s/sgp/postgres/g' /var/www/SGP/SGP/settings.py
+        python manage.py syncdb
+        python manage.py loaddata fixtures/Usuarios.json
+        ;;
+    "${options[1]}")
+        sudo ./Creacion\ de\ Base\ de\ Datos.sh
+        ;;
+    "${options[2]}")
+        sudo ./Creacion\ de\ Base\ de\ Datos.sh
+        ;;
+    "${options[3]}")
+        sudo ./Creacion\ de\ Base\ de\ Datos.sh
+        sudo ./poblacion.sh
+        ;;
+    "${options[4]}")
+        cd scripts/
+        sudo ./baseDeDatos.sh
+        sudo ./poblacion.sh
+        ;;
+    "${options[5]}")
+        cd scripts/
+        sudo ./baseDeDatos.sh
+        sudo ./poblacion.sh
+        ;;
+esac
+
 echo -e "\nActivando los sitios [SGP] en Apache"
 sudo a2ensite SGP.conf
 
