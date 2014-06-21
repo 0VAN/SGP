@@ -102,7 +102,6 @@ case $opt in
     "${options[6]}")
         cd scripts/
         sudo ./baseDeDatos.sh
-        sudo ./poblacion.sh
         sudo ./autoDocumentacion.sh
         sudo ./abrirDocumentacion.sh
         ;;
