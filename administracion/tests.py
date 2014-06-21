@@ -1,5 +1,5 @@
 from django.test import TestCase
-import unittest, time
+
 from datetime import datetime
 from django.contrib.auth.models import User, Group, Permission
 from administracion.models import Proyecto, Fase
@@ -62,11 +62,11 @@ class TestLogin(TestCase):
         print("Prueba fallida, el usuario inicio sesion correctamente")
 
 class TestAccesoPaginas(TestCase):
-    fixtures = ['datosIniciales.json','poblacion.json']
+    fixtures = ['scripts/datosIniciales.json']
     prueba ='hola'
     passprueba ='hola'
-    usuario='sgp'
-    password='123456'
+    usuario='admin'
+    password='admin'
     lider='lider'
     passwordLider='123456'
     resp = 0
@@ -135,44 +135,6 @@ class TestAccesoPaginas(TestCase):
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
             resp = self.client.get('/administracion/usuarios/nuevo/')
-            self.assertEqual(resp.status_code, 200)
-        except:
-            if resp.status_code == 302:
-                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
-            else:
-                if resp.status_code == 404:
-                    print("Prueba fallida, la url no existe")
-                else:
-                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
-            return
-        print("Prueba fallida, el usuario inicio sesion correctamente")
-
-
-    def test_administracion_proyectos_usuario(self):
-        print("\nTEST: Ingresar a Administrar proyectos con usuario registrado")
-        try:
-            resp = self.client.get('/')
-            self.client.login(username=self.usuario, password=self.password)
-            resp = self.client.get('/administracion/proyectos/')
-            self.assertEqual(resp.status_code, 200)
-        except:
-            if resp.status_code == 302:
-                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
-            else:
-                if resp.status_code == 404:
-                    print("Prueba fallida, la url no existe")
-                else:
-                    print("Prueba fallida, el usuario registrado no pudo acceder")
-            return
-        print("Prueba exitosa, el usuario pudo acceder a la pagina")
-
-
-    def test_administracion_proyectos_usuario_no_registrado(self):
-        print("\nTEST: Ingresar a Administrar proyectos con usuario no registrado")
-        try:
-            resp = self.client.get('/')
-            self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/proyectos/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -267,11 +229,11 @@ class TestAccesoPaginas(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.usuario, password=self.password)
-            resp = self.client.get('/administracion/roles/')
+            resp = self.client.get('/administracion/proyectos/1/roles/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
-                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
+                print("Prueba exitosa, el usuario pudo acceder a la pagina")
             else:
                 if resp.status_code == 404:
                     print("Prueba fallida, la url no existe")
@@ -286,7 +248,7 @@ class TestAccesoPaginas(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/')
+            resp = self.client.get('/administracion/proyectos/1/roles/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -305,7 +267,7 @@ class TestAccesoPaginas(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/nuevo/')
+            resp = self.client.get('/administracion/proyectos/1/roles/nuevo/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -324,7 +286,7 @@ class TestAccesoPaginas(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/nuevo/')
+            resp = self.client.get('/administracion/proyectos/1/roles/nuevo/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -376,67 +338,552 @@ class TestAccesoPaginas(TestCase):
         print("Prueba fallida, el usuario inicio sesion correctamente")
 
 
-    def test_administracion_fases_usuario(self):
-        print("\nTEST: Ingresar a Administrar fases con usuario registrado")
+class TestCrearModelo(TestCase):
+    fixtures = ['fixtures/Usuarios.json']
+    def test_crear_usuario(self):
+        print("\nTEST: Crear usuario")
+        nombre_usuario ='prueba'
+        password_usuario ='prueba'
+        try:
+            user = User(username=nombre_usuario, password=password_usuario)
+            user.save()
+        except:
+            print("Prueba fallida, no se pudo crear el usuario")
+            return
+        if len(User.objects.all()) > 1:
+            print("Prueba exitosa, el usuario fue creado correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear el usuario")
+
+    def test_crear_rol(self):
+        print("\nTEST: Crear rol")
+        nombre_rol ='prueba'
+        try:
+            rol = Group(name=nombre_rol)
+            rol.save()
+        except:
+            print("Prueba fallida, no se pudo crear el rol")
+            return
+        if len(Group.objects.all()) == 1:
+            print("Prueba exitosa, el rol fue creado correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear el rol")
+
+    def test_crear_proyecto(self):
+        print("\nTEST: Crear proyecto")
         nombre_proyecto ='prueba'
         userPk = '1'
         usuario = User.objects.get(pk=userPk)
         Descripcion = "proyecto prueba"
         Fecha_inicio = datetime.now()
         Fecha_finalizacion = datetime.now()
+
         try:
             proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
                                 Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
             proyecto.save()
-            resp = self.client.get('/')
-            self.client.login(username=self.usuario, password=self.password)
-            resp = self.client.get('/administracion/proyectos/1/fases/')
-            self.assertEqual(resp.status_code, 200)
         except:
-            if resp.status_code == 302:
-                print("Prueba fallida, el usuario no posee permiso para acceder a la url")
-            else:
-                if resp.status_code == 404:
-                    print("Prueba fallida, la url no existe")
-                else:
-                    print("Prueba fallida, el usuario registrado no pudo acceder")
+            print("Prueba fallida, no se pudo crear el proyecto")
             return
-        print("Prueba exitosa, el usuario pudo acceder a la pagina")
+        if len(Proyecto.objects.all()) == 1:
+            print("Prueba exitosa, el proyecto fue creado correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear el proyecto")
 
-
-    def test_administracion_fases_usuario_no_registrado(self):
-        print("\nTEST: Ingresar a Administrar fases con usuario no registrado")
-        nombre_proyecto ='prueba'
+    def test_crear_fase(self):
+        print("\nTEST: Crear fase")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
         userPk = '1'
-        usuario = User.objects.get(pk=userPk)
-        Descripcion = "proyecto prueba"
-        Fecha_inicio = datetime.now()
-        Fecha_finalizacion = datetime.now()
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
         try:
-            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
-                                Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
-            proyecto.save()
-            resp = self.client.get('/')
-            self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/proyectos/1/fases/')
-            self.assertEqual(resp.status_code, 200)
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
         except:
-            if resp.status_code == 302:
-                print("Prueba exitosa, el usuario no posee permiso para acceder a la url")
-            else:
-                if resp.status_code == 404:
-                    print("Prueba fallida, la url no existe")
-                else:
-                    print("Prueba exitosa, el usuario no registrado no pudo acceder")
+            print("Prueba exitosa, la fase fue creada correctamente")
             return
-        print("Prueba fallida, el usuario inicio sesion correctamente")
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la fase fue creada correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear la fase")
+
+
+    def test_crear_item(self):
+        print("\nTEST: Crear item")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item fue creado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item fue creado correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear el item")
+
+    def test_crear_relacion(self):
+        print("\nTEST: Crear relacion")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la relacion fue creada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la relacion fue creada correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear la relacion")
+
+    def test_crear_lineabase(self):
+        print("\nTEST: Crear linea base")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la linea base fue creada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la linea base fue creada correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear la linea")
+
+    def test_crear_solicitud(self):
+        print("\nTEST: Crear solicitud de cambio")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la solicitud de cambio fue creada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la solicitud de cambio fue creada correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear la solicitud de cambio")
+
+    def test_crear_credencial(self):
+        print("\nTEST: Crear credencial")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la credencial fue creada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la credencial fue creada correctamente")
+        else:
+            print("Prueba fallida, no se pudo crear la credencial")
+
+    def test_eliminar_item(self):
+        print("\nTEST: Eliminar item")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item fue eliminado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item fue eliminado correctamente")
+        else:
+            print("Prueba fallida, no se pudo eliminar el item")
+
+    def test_eliminar_relacion(self):
+        print("\nTEST: Eliminar relacion")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la relacion fue eliminada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la relacion fue eliminada correctamente")
+        else:
+            print("Prueba fallida, no se pudo eliminar la relacion")
+
+    def test_eliminar_solicitud(self):
+        print("\nTEST: Eliminar solicitud de cambio")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la solicitud de cambio fue eliminada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la solicitud de cambio fue eliminada correctamente")
+        else:
+            print("Prueba fallida, no se pudo eliminar la solicitud de cambio")
+
+    def test_eliminar_lineabase(self):
+        print("\nTEST: Eliminar linea base")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la linea base fue eliminada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la linea base fue eliminada correctamente")
+        else:
+            print("Prueba fallida, no se pudo eliminar la linea base")
+
+    def test_eliminar_credencial(self):
+        print("\nTEST: Eliminar credencial")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la credencial fue eliminada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la credencial fue eliminada correctamente")
+        else:
+            print("Prueba fallida, no se pudo eliminar la credencial")
+
+
+    def test_modificar_item(self):
+        print("\nTEST: Modificar item")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item fue modificado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item fue modificado correctamente")
+        else:
+            print("Prueba fallida, no se pudo modificar el item")
+
+    def test_modificar_relacion(self):
+        print("\nTEST: Modificar relacion")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la relacion fue modificada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la relacion fue modificada correctamente")
+        else:
+            print("Prueba fallida, no se pudo modificada la relacion")
+
+    def test_modificar_solicitud(self):
+        print("\nTEST: Modificar solicitud de cambio")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la solicitud de cambio fue modificada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la solicitud de cambio fue modificada correctamente")
+        else:
+            print("Prueba fallida, no se pudo modificar la solicitud de cambio")
+
+    def test_modificar_lineabase(self):
+        print("\nTEST: Modificar linea base")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la linea base fue modificada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la linea base fue modificada correctamente")
+        else:
+            print("Prueba fallida, no se pudo modificar la linea base")
+
+    def test_modificar_credencial(self):
+        print("\nTEST: Modificar credencial")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la credencial fue modificada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la credencial fue modificada correctamente")
+        else:
+            print("Prueba fallida, no se pudo modificar la credencial")
+
+
+    def test_asignar_padre(self):
+        print("\nTEST: Asignar item padre")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item padre fue asignado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item padre fue asignado correctamente")
+        else:
+            print("Prueba fallida, no se pudo asignar el item padre")
+
+    def test_asignar_antecesor(self):
+        print("\nTEST: Asignar item antecesor")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item antecesor fue asignado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item antecesor fue asignado correctamente")
+        else:
+            print("Prueba fallida, no se pudo asignar el item antecesor")
+
+    def test_aprobar_item(self):
+        print("\nTEST: Aprobar item")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item fue aprobado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item fue aprobado correctamente")
+        else:
+            print("Prueba fallida, no se pudo aprobar el item")
+
+    def test_desaprobar_item(self):
+        print("\nTEST: Desaprobar item")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, el item fue desaprobado correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, el item fue desaprobado correctamente")
+        else:
+            print("Prueba fallida, no se pudo desaprobar el item")
+
+    def test_aprobar_solicitud(self):
+        print("\nTEST: Aprobar solicitud de cambio")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la solicitud de cambio fue aprobada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la solicitud de cambio fue aprobada correctamente")
+        else:
+            print("Prueba fallida, no se pudo aprobar la solicitud de cambio")
+
+    def test_rechazar_solicitud(self):
+        print("\nTEST: Rechazar solicitud de cambio")
+        Nombre = "prueba"
+        Descripcion = "descripcion prueba"
+        userPk = '1'
+        Usuario = User.objects.get(pk=userPk)
+
+        # creamos un proyecto provisional
+        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
+                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
+        proyecto.save()
+        try:
+            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
+            fase.save()
+        except:
+            print("Prueba exitosa, la solicitud de cambio fue rechazada correctamente")
+            return
+        if len(Fase.objects.all()) == 1:
+            print("Prueba exitosa, la solicitud de cambio fue rechazada correctamente")
+        else:
+            print("Prueba fallida, no se pudo rechazar la solicitud de cambio")
+
 
 class TestPoblacionAutomatica(TestCase):
-    fixtures = ['datosIniciales.json','poblacion.json']
+    fixtures = ['scripts/datosIniciales.json']
     rueba ='hola'
     passprueba ='hola'
-    usuario='sgp'
-    password='123456'
+    usuario='admin'
+    password='admin'
     lider='lider'
     passwordLider='123456'
     resp = 0
@@ -949,7 +1396,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/asignar/1/')
+            resp = self.client.get('/administracion/proyectos/1/roles/asignar/1/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -967,7 +1414,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/asignar/1/')
+            resp = self.client.get('/administracion/proyectos/1/roles/asignar/1/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -985,7 +1432,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/listar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1003,7 +1450,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/listar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1021,7 +1468,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/listar/1/detalle/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/detalle/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1039,7 +1486,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/listar/1/detalle/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/detalle/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1057,7 +1504,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/listar/1/modificar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/modificar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1075,7 +1522,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/listar/1/modificar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/modificar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1093,7 +1540,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.lider, password=self.passwordLider)
-            resp = self.client.get('/administracion/roles/listar/1/eliminar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/eliminar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1111,7 +1558,7 @@ class TestPoblacionAutomatica(TestCase):
         try:
             resp = self.client.get('/')
             self.client.login(username=self.prueba, password=self.passprueba)
-            resp = self.client.get('/administracion/roles/listar/1/eliminar/')
+            resp = self.client.get('/administracion/proyectos/1/roles/listar/1/eliminar/')
             self.assertEqual(resp.status_code, 200)
         except:
             if resp.status_code == 302:
@@ -1123,77 +1570,3 @@ class TestPoblacionAutomatica(TestCase):
                     print("Prueba exitosa, el usuario no registrado no pudo acceder")
             return
         print("Prueba fallida, el usuario inicio sesion correctamente")
-
-class TestCrearModelo(TestCase):
-    fixtures = ['fixtures/Usuarios.json']
-    def test_crear_usuario(self):
-        print("\nTEST: Crear usuario")
-        nombre_usuario ='prueba'
-        password_usuario ='prueba'
-        try:
-            user = User(username=nombre_usuario, password=password_usuario)
-            user.save()
-        except:
-            print("Prueba fallida, no se pudo crear el usuario")
-            return
-        if len(User.objects.all()) > 1:
-            print("Prueba exitosa, el usuario fue creado correctamente")
-        else:
-            print("Prueba fallida, no se pudo crear el usuario")
-
-    def test_crear_rol(self):
-        print("\nTEST: Crear rol")
-        nombre_rol ='prueba'
-        try:
-            rol = Group(name=nombre_rol)
-            rol.save()
-        except:
-            print("Prueba fallida, no se pudo crear el rol")
-            return
-        if len(Group.objects.all()) == 1:
-            print("Prueba exitosa, el rol fue creado correctamente")
-        else:
-            print("Prueba fallida, no se pudo crear el rol")
-
-    def test_crear_proyecto(self):
-        print("\nTEST: Crear proyecto")
-        nombre_proyecto ='prueba'
-        userPk = '1'
-        usuario = User.objects.get(pk=userPk)
-        Descripcion = "proyecto prueba"
-        Fecha_inicio = datetime.now()
-        Fecha_finalizacion = datetime.now()
-
-        try:
-            proyecto = Proyecto(Nombre=nombre_proyecto,Lider=usuario,Usuario=usuario,Descripcion=Descripcion,
-                                Fecha_inicio=Fecha_inicio,Fecha_finalizacion=Fecha_finalizacion)
-            proyecto.save()
-        except:
-            print("Prueba fallida, no se pudo crear el proyecto")
-            return
-        if len(Proyecto.objects.all()) == 1:
-            print("Prueba exitosa, el proyecto fue creado correctamente")
-        else:
-            print("Prueba fallida, no se pudo crear el proyecto")
-
-    def test_crear_fase(self):
-        print("\nTEST: Crear fase")
-        Nombre = "prueba"
-        Descripcion = "descripcion prueba"
-        userPk = '1'
-        Usuario = User.objects.get(pk=userPk)
-
-        # creamos un proyecto provisional
-        proyecto = Proyecto(Nombre="proyectoPrueba",Lider=Usuario,Usuario=Usuario,Descripcion="descripcionProyecto",
-                                Fecha_inicio=datetime.now(),Fecha_finalizacion=datetime.now())
-        proyecto.save()
-        try:
-            fase = Fase(Nombre=Nombre,Descripcion=Descripcion,Usuario=Usuario,Proyecto=proyecto)
-            fase.save()
-        except:
-            print("Prueba exitosa, la fase fue creada correctamente")
-            return
-        if len(Fase.objects.all()) == 1:
-            print("Prueba exitosa, la fase fue creada correctamente")
-        else:
-            print("Prueba fallida, no se pudo crear la fase")

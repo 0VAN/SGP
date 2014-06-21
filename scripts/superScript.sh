@@ -2,7 +2,7 @@
 
 echo "Tags SGP"
 PS3='Seleccione el tag a descargar: '
-options=("1.0" "1.1" "1.2" "1.3" "1.4" "1.5" "Salir")
+options=("1.0" "1.1" "1.2" "1.3" "1.4" "1.5" "1.6" "Salir")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -31,6 +31,10 @@ do
             break
             ;;
         "${options[6]}")
+            tag="1.6"
+            break
+            ;;
+        "${options[7]}")
             exit
             ;;
         *) echo Opcion no valida;;
@@ -77,6 +81,10 @@ case $opt in
         sudo ./Creacion\ de\ Base\ de\ Datos.sh
         ;;
     "${options[3]}")
+        sudo sed -i "230s/('/(BASE_DIR+'\//g" /var/www/SGP/desarrollo/views.py
+        sudo sed -i "248s/('/(BASE_DIR+'\//g" /var/www/SGP/desarrollo/views.py
+        sudo sed -i "8i BASE_DIR = os.path.dirname(os.path.dirname(__file__))" /var/www/SGP/desarrollo/views.py
+        sudo sed -i "8i import os" /var/www/SGP/desarrollo/views.py
         sudo ./Creacion\ de\ Base\ de\ Datos.sh
         sudo ./poblacion.sh
         ;;
@@ -86,9 +94,17 @@ case $opt in
         sudo ./poblacion.sh
         ;;
     "${options[5]}")
+        sudo sed -i "473s/('/(BASE_DIR+'\//g" /var/www/SGP/desarrollo/views.py
+        sudo sed -i "498s/('/(BASE_DIR+'\//g" /var/www/SGP/desarrollo/views.py
+        cd scripts/
+        sudo ./baseDeDatos.sh
+        ;;
+    "${options[6]}")
         cd scripts/
         sudo ./baseDeDatos.sh
         sudo ./poblacion.sh
+        sudo ./autoDocumentacion.sh
+        sudo ./abrirDocumentacion.sh
         ;;
 esac
 

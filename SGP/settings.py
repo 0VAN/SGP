@@ -68,7 +68,7 @@ WSGI_APPLICATION = 'SGP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sgpdbP',
+        'NAME': 'sgpdb',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
