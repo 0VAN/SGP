@@ -6,6 +6,13 @@ from desarrollo.models import *
 from gestion.forms import *
 from desarrollo.models import *
 from django.contrib.auth.models import Group
+import cStringIO as StringIO
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+from cgi import escape
+
 # Create your views here.
 @login_required(login_url='/iniciar_sesion')
 def gestion(request):
@@ -373,7 +380,7 @@ def detalle_fase(request, id_proyecto, id_fase):
     usuario_actor = request.user
     fase = Fase.objects.get(pk=id_fase)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
-    lista_item = Item.objects.filter(Fase=fase)
+    lista_item = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     return render_to_response('detalle_fase_gc.html',
                               {'usuario_actor': usuario_actor, 'fase': fase, 'proyecto':proyecto, 'lista_item':lista_item},
                               context_instance=RequestContext(request))
@@ -385,8 +392,81 @@ def detalle_item(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     campos = Campo.objects.filter(item=item)
     relacion = Relacion.objects.get(item=item)
+    lista_hijos = hijos(item).exclude(estado=Relacion.ELIMINADO)
+    lista_sucesores = sucesores(item).exclude(estado=Relacion.ELIMINADO)
 
     return render_to_response(
         'detalle_item.html',
-        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion},   context_instance=RequestContext(request)
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
+         'hijos': lista_hijos, 'sucesores': lista_sucesores},
+        context_instance=RequestContext(request)
     )
+
+def solicitud_item(request, id_proyecto, id_solicitud, id_item):
+    usuario = request.user
+    solicitud = SolicitudCambio.objects.get(pk=id_solicitud)
+    proyecto = solicitud.proyecto
+    fase = solicitud.fase
+    item = Item.objects.get(pk=id_item)
+    campos = Campo.objects.filter(item=item)
+    relacion = Relacion.objects.get(item=item)
+    lista_hijos = hijos(item).exclude(estado=Relacion.ELIMINADO)
+    lista_sucesores = sucesores(item).exclude(estado=Relacion.ELIMINADO)
+
+    return render_to_response(
+        'solicitud/item_solicitud.html',
+        {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
+         'hijos': lista_hijos, 'sucesores': lista_sucesores, 'solicitud': solicitud},
+        context_instance=RequestContext(request)
+    )
+
+
+def sucesores(item):
+    sucesores = Relacion.objects.filter(antecesor=item)
+    return sucesores
+
+def hijos(item):
+    hijos = Relacion.objects.filter(padre=item)
+    return hijos
+
+def reporte_proyecto(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    fases = Fase.objects.filter(Proyecto=proyecto)
+    items = Item.objects.all().exclude(condicion=Item.ELIMINADO)
+    relaciones = Relacion.objects.all()
+    return render_to_pdf(
+        'reporte_proyecto.html',
+        {
+            'fases': fases,
+            'proyecto': proyecto,
+            'items': items,
+            'relaciones': relaciones,
+        }
+    )
+
+def reporte_solicitud(request, id_proyecto):
+    usuario = request.user
+    proyecto = Proyecto.objects.get(pk=id_proyecto)
+    solicitudes = SolicitudCambio.objects.all().filter(proyecto=proyecto)
+    lineasBase = LineaBase.objects.all()
+    votos = Voto.objects.all().filter(usuario=proyecto.Lider)
+    return render_to_pdf(
+        'reporte_solicitud.html',
+        {
+            'proyecto': proyecto,
+            'solicitudes': solicitudes,
+            'lineasBase': lineasBase,
+            'votos': votos,
+        }
+    )
+
+def render_to_pdf(template_src, context_dic):
+    template = get_template(template_src)
+    context = Context(context_dic)
+    html = template.render(context)
+    result = StringIO.StringIO()
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))

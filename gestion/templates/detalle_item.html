@@ -85,9 +85,11 @@
             </thead>
             <tbody>
                 {% for a in hijos %}
+                    {% if a.item.condicion == item.ACTIVO %}
                     <tr>
                         <td>{{ a.item }}</td>
                     </tr>
+                    {% endif %}
                 {% empty %}
                     <tr>
                         <td>No posee hijos</td>
@@ -107,9 +109,11 @@
             </thead>
             <tbody>
                 {% for a in sucesores %}
+                    {% if a.item.condicion == item.ACTIVO %}
                     <tr>
                         <td>{{ a.item }}</td>
                     </tr>
+                    {% endif %}
                 {% empty %}
                     <tr>
                         <td>No posee sucesores</td>

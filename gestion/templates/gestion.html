@@ -60,6 +60,19 @@
                                 </td>
                             {% endif %}
                         {% endif %}
+                        <td>
+                            {% if proyecto.Lider == usuario_actor and proyecto.get_Estado_display == 'Finalizado' %}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                    Reporte <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'gestion.views.reporte_proyecto' proyecto.id %}">Proyecto</a></li>
+                                    <li><a href="{% url 'gestion.views.reporte_solicitud' proyecto.id %}">Solicitudes</a></li>
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </td>
                     </tr>
                {% endif %}
             {% empty %}

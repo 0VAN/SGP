@@ -1,7 +1,7 @@
-{% extends 'des_fase.html' %}
+{% extends 'gestion_fase.html' %}
 {% block titulo %}{{ item.Nombre }}{% endblock %}
 {% block botones %}
-    <li><a href="{% url 'desarrollo.views.des_fase' fase.Proyecto.id fase.id %}" class="btn btn-default">Volver</a></li>
+           <li><a href="{% url 'gestion.views.detalle_solicitud_view' fase.Proyecto.id solicitud.id %}" type="button" class="btn btn-default" >Volver</a></li>
 {% endblock %}
 {% block encabezado %}Detalle del item: {{ item.Nombre }}{% endblock %}
 {% block contenido %}
@@ -12,6 +12,8 @@
         {% else %}
             <dd>{{ item.Descripcion }}</dd>
         {% endif %}
+        <dt>Solicitud de cambio:</dt>
+        <dd>{{ solicitud }}</dd>
         <dt>Prioridad:</dt>
         <dd>{{ item.Prioridad }}</dd>
         <dt>Costo Temporal:</dt>
@@ -29,7 +31,7 @@
         <dt>Tipo de Item:</dt>
         <dd>{{ item.Tipo }}</dd>
 
-        {% if relacion.padre == relacion.antecesor %}
+        {% if relacion.padre == None and relacion.antecesor == None %}
             <dt>Relacion: </dt>
             <dd>El item no posee padre ni antecesor</dd>
         {% else %}

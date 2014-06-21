@@ -729,7 +729,7 @@ def confirmar_finalizar_fase(request, id_proyecto, id_fase):
     fase = Fase.objects.get(pk=id_fase)
     lista_fases = Fase.objects.filter(Proyecto=id_proyecto).order_by('Numero')
     proyecto = fase.Proyecto
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
 
     if fase.Proyecto.Estado == 'C':
         return render_to_response('proyecto/fase/fases_error.html', {'usuario_actor':request.user, 'fase': fase, 'proyecto':proyecto,

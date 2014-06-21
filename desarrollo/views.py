@@ -154,6 +154,7 @@ def crear_item(request, id_proyecto, id_fase):
 
 @reversion.create_revision()
 def mod_item(request, id_proyecto, id_fase, id_item):
+    boolean_solicitud = False
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -181,6 +182,7 @@ def mod_item(request, id_proyecto, id_fase, id_item):
             )
 
     if item.Estado == Item.CREDENCIAL:
+        boolean_solicitud = True
         item.Estado = Item.VALIDADO
     formulario1 = ModItemForm(request.POST, instance=item)
     if formulario1.is_valid():
@@ -216,6 +218,15 @@ def mod_item(request, id_proyecto, id_fase, id_item):
 
         formulario1.save()
         lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
+        if boolean_solicitud == True:
+            solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
+            for solicitud in solicitudes:
+                if solicitud.items.all().filter(pk=id_item):
+                    print solicitud.items.all().count()
+                    print solicitud.items.filter(Estado=Item.VALIDADO).count()
+                    if solicitud.items.all().count() == solicitud.items.filter(Estado=Item.VALIDADO).count():
+                        solicitud.estado = SolicitudCambio.EJECUTADA
+                        solicitud.save()
         suceso = True
         relacion.save()
         mensaje = "El item se ha modificado exitosamente"
@@ -313,12 +324,12 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
     item = Item.objects.get(pk=idItem)
     campos = Campo.objects.filter(item=item)
     relacion = Relacion.objects.get(item=item)
-    lista_hijos = hijos(item)
-    lista_sucesores =sucesores(item)
+    lista_hijos = hijos(item).exclude(estado=Relacion.ELIMINADO)
+    lista_sucesores =sucesores(item).exclude(estado=Relacion.ELIMINADO)
     return render_to_response(
         'item/detalle.html',
         {'usuario_actor': usuario, 'item': item, 'campos': campos, 'fase':fase, 'relacion': relacion,
-         'hijs': lista_hijos, 'sucesores': lista_sucesores},
+         'hijos': lista_hijos, 'sucesores': lista_sucesores},
         context_instance=RequestContext(request)
     )
 
@@ -550,7 +561,8 @@ def generar_grafo_proyecto(id_proyecto):
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.padre.CostoUnitario,color="blue"))
         if relacion.antecesor:
             grafo.add_edge(pydot.Edge(src=relacion.antecesor.Nombre,dst=relacion.item.Nombre,label="%d"%relacion.antecesor.CostoUnitario,color="green"))
-    grafo.write_png(BASE_DIR+'/static/media/grafoProyectoActual.png')
+
+    grafo.write_png(BASE_DIR + '/static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
     fase = Fase.objects.get(pk=id_fase)
@@ -581,7 +593,8 @@ def generar_grafo_fase(id_fase):
     for relacion in relaciones_fase:
         if relacion.padre:
             grafo.add_edge(pydot.Edge(src=relacion.padre.Nombre,dst=relacion.item.Nombre,color="blue"))
-    grafo.write_png(BASE_DIR+'/static/media/grafoFaseActual.png')
+
+    grafo.write_png(BASE_DIR + '/static/media/grafoFaseActual.png')
 
 def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
     id = int(id_item)
@@ -766,8 +779,8 @@ def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
         relacion = Relacion.objects.get(item=item)
     except ObjectDoesNotExist:
         relacion = False
-    lista_hijos = hijos(item)
-    lista_sucesores = sucesores(item)
+    lista_hijos = hijos(item).exclude(estado=Relacion.ELIMINADO)
+    lista_sucesores = sucesores(item).exclude(estado=Relacion.ELIMINADO)
     return render_to_response(
         'relacion/gestion_relaciones.html',
         {'usuario_actor': usuario, 'relacion': relacion, 'item': item, 'fase': fase,
@@ -979,12 +992,13 @@ def costo_monetario_atras(item):
     cont = 0
     try:
         relacion = Relacion.objects.get(item=item)
-        if relacion.padre != None:
-            cont += relacion.padre.CostoUnitario
-            cont += costo_monetario_atras(relacion.padre)
-        elif relacion.antecesor != None:
-            cont += relacion.antecesor.CostoUnitario
-            cont += costo_monetario_atras(relacion.antecesor)
+        if relacion.estado == Relacion.ACTIVO:
+            if relacion.padre != None:
+                cont += relacion.padre.CostoUnitario
+                cont += costo_monetario_atras(relacion.padre)
+            elif relacion.antecesor != None:
+                cont += relacion.antecesor.CostoUnitario
+                cont += costo_monetario_atras(relacion.antecesor)
     except ObjectDoesNotExist:
         return 0
     return cont
@@ -994,23 +1008,26 @@ def costo_monetario_adelante(item):
     lista_hijos = hijos(item)
     lista_sucesores = sucesores(item)
     for a in lista_hijos:
-        cont += a.item.CostoUnitario
-        cont += costo_monetario_adelante(a.item)
+        if a.item.condicion == Item.ACTIVO:
+            cont += a.item.CostoUnitario
+            cont += costo_monetario_adelante(a.item)
     for b in lista_sucesores:
-        cont += b.item.CostoUnitario
-        cont += costo_monetario_adelante(b.item)
+        if b.item.condicion == Item.ACTIVO:
+            cont += b.item.CostoUnitario
+            cont += costo_monetario_adelante(b.item)
     return cont
 
 def costo_temporal_atras(item):
     cont = 0
     try:
         relacion = Relacion.objects.get(item=item)
-        if relacion.padre != None:
-            cont += relacion.padre.CostoTemporal
-            cont += costo_temporal_atras(relacion.padre)
-        elif relacion.antecesor != None:
-            cont += relacion.antecesor.CostoTemporal
-            cont += costo_temporal_atras(relacion.antecesor)
+        if relacion.estado == Relacion.ACTIVO:
+            if relacion.padre != None:
+                cont += relacion.padre.CostoTemporal
+                cont += costo_temporal_atras(relacion.padre)
+            elif relacion.antecesor != None:
+                cont += relacion.antecesor.CostoTemporal
+                cont += costo_temporal_atras(relacion.antecesor)
     except ObjectDoesNotExist:
         return 0
     return cont
@@ -1020,11 +1037,13 @@ def costo_temporal_adelante(item):
     lista_hijos = hijos(item)
     lista_sucesores = sucesores(item)
     for a in lista_hijos:
-        cont += a.item.CostoTemporal
-        cont += costo_temporal_adelante(a.item)
+        if a.item.condicion == Item.ACTIVO:
+            cont += a.item.CostoTemporal
+            cont += costo_temporal_adelante(a.item)
     for b in lista_sucesores:
-        cont += b.item.CostoTemporal
-        cont += costo_temporal_adelante(b.item)
+        if b.item.condicion == Item.ACTIVO:
+            cont += b.item.CostoTemporal
+            cont += costo_temporal_adelante(b.item)
     return cont
 
 def eliminar_relacion_view(request, id_proyecto, id_fase, id_item):
@@ -1061,7 +1080,7 @@ def aprobar_item_view(request, id_proyecto, id_fase, id_item):
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
     relacion = Relacion.objects.get(item=item)
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     if relacion.padre != None:
         if relacion.padre.Estado != Item.VALIDADO and relacion.padre.Estado != Item.FINALIZADO:
             suceso = False
@@ -1129,7 +1148,7 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
     item.save()
     suceso = True
     mensaje = 'Item aprobado exitosamente'
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     generar_grafo_fase(id_fase)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
     p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
@@ -1173,7 +1192,7 @@ def solicitud_crear_view(request, id_proyecto, id_fase):
             for item in solicitud.items.all():
                 item.Estado = Item.SOLICITUD
                 item.save()
-            lista_items = Item.objects.filter(Fase=fase)
+            lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
             suceso = True
             mensaje = "Solicitud de cambio creada exitosamente"
             comite = ComiteDeCambio.objects.get(Proyecto=proyecto)
@@ -1234,7 +1253,7 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
     item.save()
     suceso = True
     mensaje = 'Item desaprobado exitosamente'
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     generar_grafo_fase(id_fase)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
     p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
@@ -1297,12 +1316,12 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
     item = Item.objects.get(pk=id_item)
     campos = Campo.objects.filter(item=item)
     relacion = Relacion.objects.get(item=item)
-    lista_hijos = hijos(item)
-    lista_sucesores = sucesores(item)
+    lista_hijos = hijos(item).exclude(estado=Relacion.ELIMINADO)
+    lista_sucesores = sucesores(item).exclude(estado=Relacion.ELIMINADO)
     if relacion.padre.Estado != Item.VALIDADO:
         suceso = False
         mensaje = 'No se puede revisar el item porque el padre aun no se ha modificado'
-        lista_items = Item.objects.filter(Fase=fase)
+        lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
         p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
         p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
         p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
@@ -1330,14 +1349,30 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
         if solicitud.items.all().filter(pk=relacion.padre.id):
             boolean = True
 
+    solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.EJECUTADA, fase=fase)
+    for solicitud in solicitudes:
+        if solicitud.items.all().filter(pk=relacion.padre.id):
+            boolean = True
+
     if boolean == False:
         suceso = False
         mensaje = 'Usted no posee permiso para modificar este item'
-        lista_items = Item.objects.filter(Fase=fase)
+        lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
+        p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
+        p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
+        p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)
+        p_desaprobar = usuario.tienePermisoProyecto("desaprueba_item", id_proyecto)
+        p_eliminar_item = usuario.tienePermisoProyecto("delete_item", id_proyecto)
+        p_gestionar_item = usuario.tienePermisoProyecto("change_item", id_proyecto)
+        p_crear_item = usuario.tienePermisoProyecto("add_item", id_proyecto)
+        p_solicitar_cambio = usuario.tienePermisoProyecto("solicita_item", id_proyecto)
         return render_to_response(
             'des_fase.html',
             {'usuario_actor': usuario, 'fase': fase, 'lista_items': lista_items,
-             'mensaje': mensaje, 'suceso': suceso},
+             'mensaje': mensaje, 'suceso': suceso, 'p_consultar':p_consultar, 'p_revivir':p_revivir,
+             'p_aprobar':p_aprobar, 'p_desaprobar': p_desaprobar, 'p_eliminar_item': p_eliminar_item,
+             'p_gestionar_item':p_gestionar_item,'p_crear_item':p_crear_item,
+             'p_solicitar_cambio':p_solicitar_cambio},
             context_instance=RequestContext(request)
         )
 
@@ -1361,7 +1396,7 @@ def item_revisado_vista(request, id_proyecto, id_fase, id_item):
 
     suceso = True
     mensaje = 'El item ha sido revisado'
-    lista_items = Item.objects.filter(Fase=fase)
+    lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ELIMINADO)
     p_consultar = usuario.tienePermisoProyecto("consulta_item", id_proyecto)
     p_revivir = usuario.tienePermisoProyecto("revive_item", id_proyecto)
     p_aprobar = usuario.tienePermisoProyecto("aprueba_item", id_proyecto)

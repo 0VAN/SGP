@@ -1,0 +1,50 @@
+{% extends 'basereporte.html' %}
+{% block titulo %}Reporte de Proyecto{% endblock %}
+
+{% block encabezado %}Reporte del proyecto: {{ proyecto.Nombre }} {% endblock %}
+
+{% block contenido %}
+
+    <p>{{ proyecto.Descripcion }}</p>
+    {% for fase in fases %}
+        <h4>Fase: {{ fase }}</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id del item</th>
+                    <th>Nombre del item</th>
+                    <th>Tipo de item</th>
+                    <th>Padre/Antecesor</th>
+                    <th>Version</th>
+                    <th>C. Temporal</th>
+                    <th>C. Unitario</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                {% if item.Fase == fase %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item }}</td>
+                        <td>{{ item.Tipo.Nombre }}</td>
+                        {% for relacion in relaciones %}
+                            {% if relacion.item == item %}
+                                {% if relacion.padre != None %}
+                                    <td>P: {{ relacion.padre }}</td>
+                                {% elif relacion.antecesor != None %}
+                                    <td>A: {{ relacion.antecesor }}</td>
+                                {% else %}
+                                    <td>--</td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <td>{{ item.Version }}</td>
+                        <td>{{ item.CostoTemporal }}</td>
+                        <td>{{ item.CostoUnitario }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
