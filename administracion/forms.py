@@ -38,7 +38,7 @@ class AsignarRol(MyForm):
 ############################
 #Arreglar dateimput()
 ############################
-class ProyectoForm(ModelForm):
+class ProyectoForm(MyForm):
     """
     Formulario para la creacion de proyectos en el sistema
     Hereda de ModelForm y utiliza la clase Proyecto

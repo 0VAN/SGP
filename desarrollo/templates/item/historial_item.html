@@ -36,7 +36,7 @@
                             </div>
                          </td>
                         <td>
-                            {% if item.Estado != 'VAL' and item.Estado != 'FIN' and p_reversionar_item%}
+                            {% if item.Estado == item.CONSTRUCCION and item.condicion == item.ACTIVO and p_reversionar_item %}
 
                                 <div class="btn-group pull-right">
                                     <a href="{% url "desarrollo.views.reversion_item" proyecto.id fase.id item.id version.id %}" type="button" class="btn btn-success">Revertir a esta version</a>

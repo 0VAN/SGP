@@ -27,8 +27,6 @@
                 <dd>{{ relacion.padre.Fase }}</dd>
                 <dt>Proyecto:</dt>
                 <dd>{{ relacion.padre.Fase.Proyecto }}</dd>
-                <dt>Estado:</dt>
-                <dd>{{ relacion.get_estado_display }}</dd>
             {% elif relacion.antecesor.condicion == item.ACTIVO %}
                 <dd>Sucesor</dd>
                 <dt>Item Antecesor:</dt>
@@ -37,13 +35,14 @@
                 <dd>{{ relacion.antecesor.Fase }}</dd>
                 <dt>Proyecto:</dt>
                 <dd>{{ relacion.antecesor.Fase.Proyecto }}</dd>
-                <dt>Estado:</dt>
-                <dd>{{ relacion.get_estado_display }}</dd>
             {% else %}
                 <dd>El item no posee padre ni antecesor</dd>
-                <dt>Estado:</dt>
-                <dd>{{ relacion.get_estado_display }}</dd>
+
             {% endif %}
+            {% comment %}
+            <dt>Estado:</dt>
+            <dd>{{ relacion.get_estado_display }}</dd>
+            {% endcomment %}
 
     </dl>
 

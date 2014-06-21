@@ -104,6 +104,8 @@
                         <span class="k">return</span> <span class="n">gestion</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">esAdministrador</span><span class="p">():</span>
                         <span class="k">return</span> <span class="n">administracion</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">desarrollo</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;no_activo.html&#39;</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>

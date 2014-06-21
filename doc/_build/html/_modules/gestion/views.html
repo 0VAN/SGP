@@ -51,8 +51,18 @@
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span><span class="p">,</span> <span class="n">RequestContext</span><span class="p">,</span> <span class="n">get_object_or_404</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
 <span class="kn">from</span> <span class="nn">gestion.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">desarrollo.models</span> <span class="kn">import</span> <span class="o">*</span>
+
 <span class="kn">from</span> <span class="nn">gestion.forms</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">desarrollo.models</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">import</span> <span class="nn">cStringIO</span> <span class="kn">as</span> <span class="nn">StringIO</span>
+<span class="kn">from</span> <span class="nn">xhtml2pdf</span> <span class="kn">import</span> <span class="n">pisa</span>
+<span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">get_template</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Context</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">cgi</span> <span class="kn">import</span> <span class="n">escape</span>
+
 <span class="c"># Create your views here.</span>
 <span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">&#39;/iniciar_sesion&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="gestion"><a class="viewcode-back" href="../../gestion.html#gestion.views.gestion">[documentos]</a><span class="k">def</span> <span class="nf">gestion</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -72,8 +82,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lista_proyectos</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;gestion.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;lista_proyectos&#39;</span><span class="p">:</span> <span class="n">lista_proyectos</span><span class="p">,</span> <span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">},</span>
-                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="s">&#39;gestion.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">&#39;lista_proyectos&#39;</span><span class="p">:</span> <span class="n">lista_proyectos</span><span class="p">,</span> <span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">},</span>
+        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="p">)</span></div>
 <div class="viewcode-block" id="gestion_proyecto"><a class="viewcode-back" href="../../gestion.html#gestion.views.gestion_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">gestion_proyecto</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
@@ -85,7 +98,7 @@
 <div class="viewcode-block" id="gestion_fase"><a class="viewcode-back" href="../../gestion.html#gestion.views.gestion_fase">[documentos]</a><span class="k">def</span> <span class="nf">gestion_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_fase</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
-    <span class="n">lista_lineaBase</span> <span class="o">=</span> <span class="n">LineBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
+    <span class="n">lista_lineaBase</span> <span class="o">=</span> <span class="n">LineaBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;gestion_fase.html&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span> <span class="n">fase</span><span class="p">,</span> <span class="s">&#39;lista_lineabase&#39;</span><span class="p">:</span> <span class="n">lista_lineaBase</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
@@ -94,10 +107,13 @@
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
     <span class="n">comite</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">miembros</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="k">if</span> <span class="n">tiene_comite</span><span class="p">(</span><span class="n">id_proyecto</span><span class="p">):</span>
         <span class="n">comite</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+        <span class="n">miembros</span> <span class="o">=</span> <span class="n">comite</span><span class="o">.</span><span class="n">Miembros</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">miembros</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;comite/gestion_comite.html&#39;</span><span class="p">,</span>
-        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;comite&#39;</span><span class="p">:</span><span class="n">comite</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;comite&#39;</span><span class="p">:</span><span class="n">comite</span><span class="p">,</span> <span class="s">&#39;miembros&#39;</span><span class="p">:</span> <span class="n">miembros</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="tiene_comite"><a class="viewcode-back" href="../../gestion.html#gestion.views.tiene_comite">[documentos]</a><span class="k">def</span> <span class="nf">tiene_comite</span><span class="p">(</span><span class="n">id_proyecto</span><span class="p">):</span>
@@ -113,53 +129,74 @@
 <div class="viewcode-block" id="crear_comite"><a class="viewcode-back" href="../../gestion.html#gestion.views.crear_comite">[documentos]</a><span class="k">def</span> <span class="nf">crear_comite</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
-    <span class="n">comite</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="p">(</span><span class="n">Usuario1</span><span class="o">=</span><span class="n">usuario</span><span class="p">,</span> <span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="n">comite_instancia</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ComiteForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">comite</span><span class="p">)</span>
-        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Usuario2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Usuario3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ComiteForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">comite_instancia</span><span class="p">)</span>
+        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Miembros&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">print</span> <span class="s">&#39;paso&#39;</span>
             <span class="n">rolComite</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Integrante de Comite&quot;</span><span class="p">)</span>
-            <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">usuario</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rolComite</span><span class="p">)</span>
-            <span class="n">usuario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">usuario2</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&quot;Usuario2&quot;</span><span class="p">])</span>
-            <span class="n">usuario2</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rolComite</span><span class="p">)</span>
-            <span class="n">usuario2</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">usuario3</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&quot;Usuario3&quot;</span><span class="p">])</span>
-            <span class="n">usuario3</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rolComite</span><span class="p">)</span>
-            <span class="n">usuario3</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;comite/gestion_comite.html&#39;</span><span class="p">,</span>
-        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;comite&#39;</span><span class="p">:</span> <span class="n">comite</span><span class="p">},</span>
-        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+            <span class="n">comite</span> <span class="o">=</span> <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">cantidad</span> <span class="o">=</span> <span class="n">comite</span><span class="o">.</span><span class="n">Miembros</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+            <span class="k">print</span> <span class="n">cantidad</span> <span class="o">%</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cantidad</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;entro&#39;</span>
+                <span class="n">suceso</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">mensaje</span> <span class="o">=</span> <span class="s">&#39;El comite debe tener un numero impar de miembros&#39;</span>
+                <span class="n">comite</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+                <span class="n">formulario</span> <span class="o">=</span> <span class="n">ComiteForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">comite_instancia</span><span class="p">)</span>
+                <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Miembros&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+                    <span class="s">&#39;comite/crear_comite.html&#39;</span><span class="p">,</span>
+                    <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;id_proyecto&#39;</span><span class="p">:</span> <span class="n">id_proyecto</span><span class="p">,</span>
+                     <span class="s">&#39;suceso&#39;</span><span class="p">:</span> <span class="n">suceso</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="n">mensaje</span><span class="p">},</span>
+                    <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">comite</span><span class="o">.</span><span class="n">Miembros</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">comite</span><span class="o">.</span><span class="n">Miembros</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rolComite</span><span class="p">)</span>
+                <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+            <span class="n">comite</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">miembros</span> <span class="o">=</span> <span class="n">comite</span><span class="o">.</span><span class="n">Miembros</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+                <span class="s">&#39;comite/gestion_comite.html&#39;</span><span class="p">,</span>
+                <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;comite&#39;</span><span class="p">:</span> <span class="n">comite</span><span class="p">,</span> <span class="s">&#39;miembros&#39;</span><span class="p">:</span> <span class="n">miembros</span><span class="p">},</span>
+                <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;comite/crear_comite.html&#39;</span><span class="p">,{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span>
-                                                              <span class="s">&#39;id_proyecto&#39;</span><span class="p">:</span><span class="n">id_proyecto</span><span class="p">},</span>
-        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+                <span class="s">&#39;comite/crear_comite.html&#39;</span><span class="p">,</span>
+                <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;id_proyecto&#39;</span><span class="p">:</span> <span class="n">id_proyecto</span><span class="p">},</span>
+                <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ComiteForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">comite</span><span class="p">)</span>
-        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Usuario2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Usuario3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;comite/crear_comite.html&#39;</span><span class="p">,{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span>
-                                                              <span class="s">&#39;id_proyecto&#39;</span><span class="p">:</span><span class="n">id_proyecto</span><span class="p">},</span>
-        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">ComiteForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">comite_instancia</span><span class="p">)</span>
+        <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Miembros&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+            <span class="s">&#39;comite/crear_comite.html&#39;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span><span class="n">formulario</span><span class="p">,</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;id_proyecto&#39;</span><span class="p">:</span><span class="n">id_proyecto</span><span class="p">},</span>
+            <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="crear_lineaBase_view"><a class="viewcode-back" href="../../gestion.html#gestion.views.crear_lineaBase_view">[documentos]</a><span class="k">def</span> <span class="nf">crear_lineaBase_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_fase</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
-    <span class="n">lista_lineaBase</span> <span class="o">=</span> <span class="n">LineBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
+    <span class="n">lista_lineaBase</span> <span class="o">=</span> <span class="n">LineaBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
     <span class="n">lista_items</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span>
     <span class="n">lista_items</span> <span class="o">=</span> <span class="n">lista_items</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Estado</span><span class="o">=</span><span class="n">Item</span><span class="o">.</span><span class="n">FINALIZADO</span><span class="p">)</span>
-    <span class="n">lineabase</span> <span class="o">=</span> <span class="n">LineBase</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">,</span> <span class="n">Usuario</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
+    <span class="n">lineabase</span> <span class="o">=</span> <span class="n">LineaBase</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">,</span> <span class="n">Usuario</span><span class="o">=</span><span class="n">usuario</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">LineBaseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">lineabase</span><span class="p">)</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">LineaBaseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">lineabase</span><span class="p">)</span>
         <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Items&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">lista_items</span>
         <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Items&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">help_text</span> <span class="o">=</span> <span class="s">&quot;Haga doble click en el item que desee agregar&quot;</span>
         <span class="k">if</span> <span class="n">formulario</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
             <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">lineabase</span> <span class="o">=</span> <span class="n">LineBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+            <span class="n">lineabase</span> <span class="o">=</span> <span class="n">LineaBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lineabase</span><span class="o">.</span><span class="n">Items</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
                 <span class="n">item</span><span class="o">.</span><span class="n">Estado</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">VALIDADO</span>
                 <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
@@ -170,7 +207,7 @@
             <span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">formulario</span> <span class="o">=</span> <span class="n">LineBaseForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">lineabase</span><span class="p">)</span>
+        <span class="n">formulario</span> <span class="o">=</span> <span class="n">LineaBaseForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">lineabase</span><span class="p">)</span>
         <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Items&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">lista_items</span>
         <span class="n">formulario</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;Items&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">help_text</span> <span class="o">=</span> <span class="s">&quot;Haga doble click en el item que desee agregar&quot;</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
@@ -197,15 +234,26 @@
     <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
     <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
-    <span class="n">lineaBase</span> <span class="o">=</span><span class="n">LineBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_lineaB</span><span class="p">)</span>
+    <span class="n">lineaBase</span> <span class="o">=</span><span class="n">LineaBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_lineaB</span><span class="p">)</span>
+    <span class="n">lista_items</span> <span class="o">=</span> <span class="n">lineaBase</span><span class="o">.</span><span class="n">Items</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;lineaBase_detalle.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span><span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">,</span>
-                                                         <span class="s">&#39;lineaBase&#39;</span><span class="p">:</span><span class="n">lineaBase</span><span class="p">},</span>
+                                                         <span class="s">&#39;lineaBase&#39;</span><span class="p">:</span><span class="n">lineaBase</span><span class="p">,</span> <span class="s">&#39;lista_item&#39;</span><span class="p">:</span><span class="n">lista_items</span><span class="p">},</span>
                               <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="solicitudes_view"><a class="viewcode-back" href="../../gestion.html#gestion.views.solicitudes_view">[documentos]</a><span class="k">def</span> <span class="nf">solicitudes_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
-    <span class="n">comite</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tiene_comite</span><span class="p">(</span><span class="n">id_proyecto</span><span class="p">):</span>
+        <span class="n">comite</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lista_proyectos</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">suceso</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">mensaje</span> <span class="o">=</span> <span class="s">&#39;Primero debe crear un comite de cambio&#39;</span>
+        <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+            <span class="s">&#39;gestion.html&#39;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s">&#39;lista_proyectos&#39;</span><span class="p">:</span> <span class="n">lista_proyectos</span><span class="p">,</span> <span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;suceso&#39;</span><span class="p">:</span> <span class="n">suceso</span><span class="p">,</span> <span class="s">&#39;mensaje&#39;</span><span class="p">:</span> <span class="n">mensaje</span><span class="p">},</span>
+            <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="p">)</span>
     <span class="n">lista_solicitudes</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
         <span class="s">&#39;solicitud/solicitudes.html&#39;</span><span class="p">,</span>
@@ -218,32 +266,24 @@
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
     <span class="n">solicitud</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_solicitud</span><span class="p">)</span>
     <span class="n">comite</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="n">votos</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
     <span class="n">votos_aceptados</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">votos_rechazados</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="n">voto1</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario1</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">voto2</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario2</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">voto3</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario3</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">votos_restantes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">voto</span> <span class="ow">in</span> <span class="n">votos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
+            <span class="n">votos_aceptados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
+            <span class="n">votos_rechazados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">PROCESO</span><span class="p">:</span>
+            <span class="n">votos_restantes</span><span class="o">+=</span><span class="mi">1</span>
 
     <span class="n">voto</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">usuario</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
         <span class="s">&#39;solicitud/detalle_solicitud.html&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;solicitud&#39;</span><span class="p">:</span><span class="n">solicitud</span><span class="p">,</span>
-         <span class="s">&#39;voto&#39;</span><span class="p">:</span><span class="n">voto</span><span class="p">,</span> <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">},</span>
+         <span class="s">&#39;voto&#39;</span><span class="p">:</span><span class="n">voto</span><span class="p">,</span> <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">,</span>
+         <span class="s">&#39;votos_restantes&#39;</span><span class="p">:</span> <span class="n">votos_restantes</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="p">)</span>
 
@@ -258,29 +298,20 @@
     <span class="n">voto</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="n">suceso</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">mensaje</span> <span class="o">=</span> <span class="s">&#39;Voto aprobado&#39;</span>
+    <span class="n">votos</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
     <span class="n">votos_aceptados</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">votos_rechazados</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">votos_restantes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">voto</span> <span class="ow">in</span> <span class="n">votos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
+            <span class="n">votos_aceptados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
+            <span class="n">votos_rechazados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">PROCESO</span><span class="p">:</span>
+            <span class="n">votos_restantes</span><span class="o">+=</span><span class="mi">1</span>
 
-    <span class="n">voto1</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario1</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="n">voto2</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario2</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">voto3</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario3</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">total_votos</span> <span class="o">=</span> <span class="n">votos_aceptados</span> <span class="o">+</span> <span class="n">votos_rechazados</span>
-    <span class="k">if</span> <span class="n">total_votos</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">votos_restantes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">votos_aceptados</span> <span class="o">&gt;</span> <span class="n">votos_rechazados</span><span class="p">:</span>
             <span class="n">solicitud</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">ACEPTADA</span>
         <span class="k">else</span><span class="p">:</span>
@@ -289,7 +320,7 @@
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
         <span class="s">&#39;solicitud/detalle_solicitud.html&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;solicitud&#39;</span><span class="p">:</span><span class="n">solicitud</span><span class="p">,</span> <span class="s">&#39;voto&#39;</span><span class="p">:</span><span class="n">voto</span><span class="p">,</span>
-         <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">},</span>
+         <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">,</span> <span class="s">&#39;votos_restantes&#39;</span><span class="p">:</span> <span class="n">votos_restantes</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="p">)</span>
 
@@ -304,29 +335,20 @@
     <span class="n">voto</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="n">suceso</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">mensaje</span> <span class="o">=</span> <span class="s">&#39;Voto desaprobado&#39;</span>
+    <span class="n">votos</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
     <span class="n">votos_aceptados</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">votos_rechazados</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">votos_restantes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">voto</span> <span class="ow">in</span> <span class="n">votos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
+            <span class="n">votos_aceptados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
+            <span class="n">votos_rechazados</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">voto</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">voto</span><span class="o">.</span><span class="n">PROCESO</span><span class="p">:</span>
+            <span class="n">votos_restantes</span><span class="o">+=</span><span class="mi">1</span>
 
-    <span class="n">voto1</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario1</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto1</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="n">voto2</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario2</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto2</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">voto3</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">comite</span><span class="o">.</span><span class="n">Usuario3</span><span class="p">,</span> <span class="n">solicitud</span><span class="o">=</span><span class="n">solicitud</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">ACEPTADO</span><span class="p">:</span>
-        <span class="n">votos_aceptados</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">voto3</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="n">Voto</span><span class="o">.</span><span class="n">RECHAZADO</span><span class="p">:</span>
-        <span class="n">votos_rechazados</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">total_votos</span> <span class="o">=</span> <span class="n">votos_aceptados</span> <span class="o">+</span> <span class="n">votos_rechazados</span>
-    <span class="k">if</span> <span class="n">total_votos</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">votos_restantes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">votos_aceptados</span> <span class="o">&gt;</span> <span class="n">votos_rechazados</span><span class="p">:</span>
             <span class="n">solicitud</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">ACEPTADA</span>
         <span class="k">else</span><span class="p">:</span>
@@ -335,10 +357,9 @@
     <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
         <span class="s">&#39;solicitud/detalle_solicitud.html&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;solicitud&#39;</span><span class="p">:</span><span class="n">solicitud</span><span class="p">,</span> <span class="s">&#39;voto&#39;</span><span class="p">:</span><span class="n">voto</span><span class="p">,</span>
-         <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">},</span>
+         <span class="s">&#39;votos_aceptados&#39;</span><span class="p">:</span> <span class="n">votos_aceptados</span><span class="p">,</span> <span class="s">&#39;votos_rechazados&#39;</span><span class="p">:</span> <span class="n">votos_rechazados</span><span class="p">,</span> <span class="s">&#39;votos_restantes&#39;</span><span class="p">:</span> <span class="n">votos_restantes</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="p">)</span>
-
 </div>
 <div class="viewcode-block" id="credencial_view"><a class="viewcode-back" href="../../gestion.html#gestion.views.credencial_view">[documentos]</a><span class="k">def</span> <span class="nf">credencial_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_solicitud</span><span class="p">):</span>
     <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
@@ -352,8 +373,13 @@
             <span class="n">formulario</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
             <span class="n">lista_solicitudes</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">solicitud</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">Estado</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">REVISION</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">Estado</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">CREDENCIAL</span>
                 <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">relaciones</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">padre</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">relacion</span> <span class="ow">in</span> <span class="n">relaciones</span><span class="p">:</span>
+                    <span class="n">relacion</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">Estado</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">REVISION</span>
+                    <span class="n">relacion</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
             <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
                 <span class="s">&#39;solicitud/solicitudes.html&#39;</span><span class="p">,</span>
                 <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span><span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;lista_solicitudes&#39;</span><span class="p">:</span> <span class="n">lista_solicitudes</span><span class="p">},</span>
@@ -366,7 +392,134 @@
         <span class="p">{</span><span class="s">&#39;formulario&#39;</span><span class="p">:</span> <span class="n">formulario</span><span class="p">,</span> <span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;solicitud&#39;</span><span class="p">:</span> <span class="n">solicitud</span><span class="p">,</span>
          <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">},</span>
         <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-    <span class="p">)</span></div>
+    <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="detalle_item_validados"><a class="viewcode-back" href="../../gestion.html#gestion.views.detalle_item_validados">[documentos]</a><span class="k">def</span> <span class="nf">detalle_item_validados</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_fase</span><span class="p">,</span> <span class="n">id_lineaB</span><span class="p">,</span> <span class="n">id_item</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_item</span><span class="p">)</span>
+    <span class="n">campos</span> <span class="o">=</span> <span class="n">Campo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">relacion</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="s">&#39;detalle_item.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;item&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> <span class="s">&#39;campos&#39;</span><span class="p">:</span> <span class="n">campos</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">,</span> <span class="s">&#39;relacion&#39;</span><span class="p">:</span> <span class="n">relacion</span><span class="p">},</span>   <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+</div>
+<div class="viewcode-block" id="detalle_fase"><a class="viewcode-back" href="../../gestion.html#gestion.views.detalle_fase">[documentos]</a><span class="k">def</span> <span class="nf">detalle_fase</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_fase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param request:</span>
+<span class="sd">    :param idFase:</span>
+<span class="sd">    :param id_proyecto:</span>
+<span class="sd">    :return:</span>
+
+<span class="sd">    Vista detalle fase</span>
+
+<span class="sd">    | Recibe como parametros un request, un id de fase y un id de proyecto, y retorna la pagina web</span>
+<span class="sd">    | detallefase.html que muestra en detalle la informacion de dicha fase</span>
+
+<span class="sd">    * Variables</span>
+<span class="sd">        -   usuario_actor: usuario que realiza la accion</span>
+<span class="sd">        -   proyecto: es el proyecto cuyas fases se desea administrar</span>
+<span class="sd">        -   fases: indica que la fase correpondera a un proyecto especifico</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario_actor</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">lista_item</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Fase</span><span class="o">=</span><span class="n">fase</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">condicion</span><span class="o">=</span><span class="n">Item</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;detalle_fase_gc.html&#39;</span><span class="p">,</span>
+                              <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario_actor</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span> <span class="n">fase</span><span class="p">,</span> <span class="s">&#39;proyecto&#39;</span><span class="p">:</span><span class="n">proyecto</span><span class="p">,</span> <span class="s">&#39;lista_item&#39;</span><span class="p">:</span><span class="n">lista_item</span><span class="p">},</span>
+                              <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="detalle_item"><a class="viewcode-back" href="../../gestion.html#gestion.views.detalle_item">[documentos]</a><span class="k">def</span> <span class="nf">detalle_item</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_fase</span><span class="p">,</span> <span class="n">id_item</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_fase</span><span class="p">)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_item</span><span class="p">)</span>
+    <span class="n">campos</span> <span class="o">=</span> <span class="n">Campo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">relacion</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">lista_hijos</span> <span class="o">=</span> <span class="n">hijos</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">estado</span><span class="o">=</span><span class="n">Relacion</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+    <span class="n">lista_sucesores</span> <span class="o">=</span> <span class="n">sucesores</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">estado</span><span class="o">=</span><span class="n">Relacion</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="s">&#39;detalle_item.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;item&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> <span class="s">&#39;campos&#39;</span><span class="p">:</span> <span class="n">campos</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">,</span> <span class="s">&#39;relacion&#39;</span><span class="p">:</span> <span class="n">relacion</span><span class="p">,</span>
+         <span class="s">&#39;hijos&#39;</span><span class="p">:</span> <span class="n">lista_hijos</span><span class="p">,</span> <span class="s">&#39;sucesores&#39;</span><span class="p">:</span> <span class="n">lista_sucesores</span><span class="p">},</span>
+        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="solicitud_item"><a class="viewcode-back" href="../../gestion.html#gestion.views.solicitud_item">[documentos]</a><span class="k">def</span> <span class="nf">solicitud_item</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">,</span> <span class="n">id_solicitud</span><span class="p">,</span> <span class="n">id_item</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">solicitud</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_solicitud</span><span class="p">)</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">solicitud</span><span class="o">.</span><span class="n">proyecto</span>
+    <span class="n">fase</span> <span class="o">=</span> <span class="n">solicitud</span><span class="o">.</span><span class="n">fase</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_item</span><span class="p">)</span>
+    <span class="n">campos</span> <span class="o">=</span> <span class="n">Campo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">relacion</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">lista_hijos</span> <span class="o">=</span> <span class="n">hijos</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">estado</span><span class="o">=</span><span class="n">Relacion</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+    <span class="n">lista_sucesores</span> <span class="o">=</span> <span class="n">sucesores</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">estado</span><span class="o">=</span><span class="n">Relacion</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="s">&#39;solicitud/item_solicitud.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s">&#39;usuario_actor&#39;</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span> <span class="s">&#39;item&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> <span class="s">&#39;campos&#39;</span><span class="p">:</span> <span class="n">campos</span><span class="p">,</span> <span class="s">&#39;fase&#39;</span><span class="p">:</span><span class="n">fase</span><span class="p">,</span> <span class="s">&#39;relacion&#39;</span><span class="p">:</span> <span class="n">relacion</span><span class="p">,</span>
+         <span class="s">&#39;hijos&#39;</span><span class="p">:</span> <span class="n">lista_hijos</span><span class="p">,</span> <span class="s">&#39;sucesores&#39;</span><span class="p">:</span> <span class="n">lista_sucesores</span><span class="p">,</span> <span class="s">&#39;solicitud&#39;</span><span class="p">:</span> <span class="n">solicitud</span><span class="p">},</span>
+        <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="sucesores"><a class="viewcode-back" href="../../gestion.html#gestion.views.sucesores">[documentos]</a><span class="k">def</span> <span class="nf">sucesores</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="n">sucesores</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">antecesor</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sucesores</span>
+</div>
+<div class="viewcode-block" id="hijos"><a class="viewcode-back" href="../../gestion.html#gestion.views.hijos">[documentos]</a><span class="k">def</span> <span class="nf">hijos</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="n">hijos</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">padre</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">hijos</span>
+</div>
+<div class="viewcode-block" id="reporte_proyecto"><a class="viewcode-back" href="../../gestion.html#gestion.views.reporte_proyecto">[documentos]</a><span class="k">def</span> <span class="nf">reporte_proyecto</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">fases</span> <span class="o">=</span> <span class="n">Fase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">condicion</span><span class="o">=</span><span class="n">Item</span><span class="o">.</span><span class="n">ELIMINADO</span><span class="p">)</span>
+    <span class="n">relaciones</span> <span class="o">=</span> <span class="n">Relacion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_to_pdf</span><span class="p">(</span>
+        <span class="s">&#39;reporte_proyecto.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s">&#39;fases&#39;</span><span class="p">:</span> <span class="n">fases</span><span class="p">,</span>
+            <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span>
+            <span class="s">&#39;items&#39;</span><span class="p">:</span> <span class="n">items</span><span class="p">,</span>
+            <span class="s">&#39;relaciones&#39;</span><span class="p">:</span> <span class="n">relaciones</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="reporte_solicitud"><a class="viewcode-back" href="../../gestion.html#gestion.views.reporte_solicitud">[documentos]</a><span class="k">def</span> <span class="nf">reporte_solicitud</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="n">solicitudes</span> <span class="o">=</span> <span class="n">SolicitudCambio</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span>
+    <span class="n">lineasBase</span> <span class="o">=</span> <span class="n">LineaBase</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">votos</span> <span class="o">=</span> <span class="n">Voto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">usuario</span><span class="o">=</span><span class="n">proyecto</span><span class="o">.</span><span class="n">Lider</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_pdf</span><span class="p">(</span>
+        <span class="s">&#39;reporte_solicitud.html&#39;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span>
+            <span class="s">&#39;solicitudes&#39;</span><span class="p">:</span> <span class="n">solicitudes</span><span class="p">,</span>
+            <span class="s">&#39;lineasBase&#39;</span><span class="p">:</span> <span class="n">lineasBase</span><span class="p">,</span>
+            <span class="s">&#39;votos&#39;</span><span class="p">:</span> <span class="n">votos</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="render_to_pdf"><a class="viewcode-back" href="../../gestion.html#gestion.views.render_to_pdf">[documentos]</a><span class="k">def</span> <span class="nf">render_to_pdf</span><span class="p">(</span><span class="n">template_src</span><span class="p">,</span> <span class="n">context_dic</span><span class="p">):</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">get_template</span><span class="p">(</span><span class="n">template_src</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">context_dic</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">pisa</span><span class="o">.</span><span class="n">pisaDocument</span><span class="p">(</span><span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;ISO-8859-1&quot;</span><span class="p">)),</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pdf</span><span class="o">.</span><span class="n">err</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s">&#39;application/pdf&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;We had some errors&lt;pre&gt;</span><span class="si">%s</span><span class="s">&lt;/pre&gt;&#39;</span> <span class="o">%</span> <span class="n">escape</span><span class="p">(</span><span class="n">html</span><span class="p">))</span></div>
 </pre></div>
 
           </div>

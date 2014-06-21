@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>sesion package &mdash; documentación de SGP - 2</title>
+    <title>Sesion &mdash; documentación de SGP - 2</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,7 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="documentación de SGP - 2" href="index.html" /> 
+    <link rel="top" title="documentación de SGP - 2" href="index.html" />
+    <link rel="next" title="Modulo de Administracion" href="administracion.html" />
+    <link rel="prev" title="Documentacion de SGP!" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,6 +38,12 @@
         <li class="right" >
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
+        <li class="right" >
+          <a href="administracion.html" title="Modulo de Administracion"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentacion de SGP!"
+             accesskey="P">anterior</a> |</li>
         <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
       </ul>
     </div>  
@@ -45,80 +53,10 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="sesion-package">
-<h1>sesion package<a class="headerlink" href="#sesion-package" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
-<div class="section" id="module-sesion.admin">
-<span id="sesion-admin-module"></span><h2>sesion.admin module<a class="headerlink" href="#module-sesion.admin" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
-<div class="section" id="module-sesion.forms">
-<span id="sesion-forms-module"></span><h2>sesion.forms module<a class="headerlink" href="#module-sesion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
-<dl class="class">
-<dt id="sesion.forms.UsuarioGestionForm">
-<em class="property">class </em><tt class="descclassname">sesion.forms.</tt><tt class="descname">UsuarioGestionForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></tt></p>
-<p>Formluario para la modificacion de usuarios
-Hereda de forms.ModelForm y utiliza la clase user para
-agregar ciertos campos a la hora de la modificacion</p>
-<dl class="class">
-<dt id="sesion.forms.UsuarioGestionForm.Meta">
-<em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.Meta.fields">
-<tt class="descname">fields</tt><em class="property"> = ('username', 'password', 'email', 'first_name', 'last_name', 'telefono', 'direccion')</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.Meta.fieldsets">
-<tt class="descname">fieldsets</tt><em class="property"> = [(None, {'fields': ['username', 'password']}), ('Informacion personal', {'fields': ['email', 'first_name', 'last_name', 'telefono', 'direccion'], 'classes': ['collapse']})]</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.fieldsets" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.Meta.model">
-<tt class="descname">model</tt><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>alias de <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.base_fields">
-<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5c72fd0&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5c72890&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x5d221d0&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x5c74650&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x5c74350&gt;, 'telefono': &lt;django.forms.fields.IntegerField object at 0x5d22410&gt;, 'direccion': &lt;django.forms.fields.CharField object at 0x5d22110&gt;}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="sesion.forms.UsuarioGestionForm.clean_password">
-<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">clean_password</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/sesion/forms.html#UsuarioGestionForm.clean_password"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.clean_password" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.declared_fields">
-<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x5c72fd0&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x5c72890&gt;}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.media">
-<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">media</tt><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sesion.forms.UsuarioGestionForm.widgets">
-<tt class="descclassname">UsuarioGestionForm.</tt><tt class="descname">widgets</tt><em class="property"> = {}</em><a class="headerlink" href="#sesion.forms.UsuarioGestionForm.widgets" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-sesion.models">
-<span id="sesion-models-module"></span><h2>sesion.models module<a class="headerlink" href="#module-sesion.models" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
-<div class="section" id="module-sesion.tests">
-<span id="sesion-tests-module"></span><h2>sesion.tests module<a class="headerlink" href="#module-sesion.tests" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
+  <div class="section" id="sesion">
+<h1>Sesion<a class="headerlink" href="#sesion" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="section" id="module-sesion.views">
-<span id="sesion-views-module"></span><h2>sesion.views module<a class="headerlink" href="#module-sesion.views" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="vistas"></span><h2>Vistas<a class="headerlink" href="#module-sesion.views" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="function">
 <dt id="sesion.views.cerrar_sesion">
 <tt class="descclassname">sesion.views.</tt><tt class="descname">cerrar_sesion</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/sesion/views.html#cerrar_sesion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#sesion.views.cerrar_sesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -216,9 +154,6 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
 </dd></dl>
 
 </div>
-<div class="section" id="module-sesion">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sesion" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
 </div>
 
 
@@ -229,18 +164,18 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Tabla de Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">sesion package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-sesion.admin">sesion.admin module</a></li>
-<li><a class="reference internal" href="#module-sesion.forms">sesion.forms module</a></li>
-<li><a class="reference internal" href="#module-sesion.models">sesion.models module</a></li>
-<li><a class="reference internal" href="#module-sesion.tests">sesion.tests module</a></li>
-<li><a class="reference internal" href="#module-sesion.views">sesion.views module</a></li>
-<li><a class="reference internal" href="#module-sesion">Module contents</a></li>
+<li><a class="reference internal" href="#">Sesion</a><ul>
+<li><a class="reference internal" href="#module-sesion.views">Vistas</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="index.html"
+                        title="capítulo anterior">Documentacion de SGP!</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="administracion.html"
+                        title="próximo capítulo">Modulo de Administracion</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/sesion.txt"
@@ -272,6 +207,12 @@ el par(usuario, contrasenha) verificando su existencia y estado en el sistema</l
         <li class="right" >
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
+        <li class="right" >
+          <a href="administracion.html" title="Modulo de Administracion"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentacion de SGP!"
+             >anterior</a> |</li>
         <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
       </ul>
     </div>

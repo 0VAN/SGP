@@ -54,6 +54,8 @@
         </thead>
         <tbody>
             {% for proyecto in lista_proyectos %}
+                {% if usuario_actor == proyecto.Lider  %}
+
                 <tr>
                     <td>{{ proyecto.Nombre }}</td>
                     <td>{{ proyecto.Lider }}</td>
@@ -107,6 +109,7 @@
                         <td></td><td></td><td></td>
                     {% endif %}
                 </tr>
+                {% endif %}
             {% empty %}
                 <tr class="warning">
                 <td>No hay proyectos disponibles</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>

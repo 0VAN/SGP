@@ -89,7 +89,7 @@
 <span class="c">############################</span>
 <span class="c">#Arreglar dateimput()</span>
 <span class="c">############################</span></div>
-<div class="viewcode-block" id="ProyectoForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.ProyectoForm">[documentos]</a><span class="k">class</span> <span class="nc">ProyectoForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+<div class="viewcode-block" id="ProyectoForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.ProyectoForm">[documentos]</a><span class="k">class</span> <span class="nc">ProyectoForm</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Formulario para la creacion de proyectos en el sistema</span>
 <span class="sd">    Hereda de ModelForm y utiliza la clase Proyecto</span>
@@ -100,6 +100,8 @@
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Proyecto</span>
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span> <span class="s">&#39;Estado&#39;</span><span class="p">,</span> <span class="s">&#39;Usuarios&#39;</span><span class="p">,</span> <span class="s">&#39;nFases&#39;</span><span class="p">]</span>
+    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/datepicker.css&#39;</span><span class="p">,),}</span>
 
 </div>
 <div class="viewcode-block" id="ProyectoFormLider"><a class="viewcode-back" href="../../administracion.html#administracion.forms.ProyectoFormLider">[documentos]</a><span class="k">class</span> <span class="nc">ProyectoFormLider</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
@@ -132,9 +134,9 @@
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span> <span class="s">&#39;Estado&#39;</span><span class="p">,</span> <span class="s">&#39;Lider&#39;</span><span class="p">,</span> <span class="s">&#39;Nombre&#39;</span><span class="p">,</span> <span class="s">&#39;Fecha_inicio&#39;</span><span class="p">,</span> <span class="s">&#39;Fecha_finalizacion&#39;</span><span class="p">,</span> <span class="s">&#39;Descripcion&#39;</span><span class="p">,</span> <span class="s">&#39;nFases&#39;</span><span class="p">]</span>
 
     <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 
 
 
@@ -192,12 +194,12 @@
                                           <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">((</span><span class="s">&#39;Usuarios&#39;</span><span class="p">),</span><span class="bp">False</span><span class="p">,))</span>
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Fase</span>
-        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span><span class="s">&#39;Proyecto&#39;</span><span class="p">,</span><span class="s">&#39;Numero&#39;</span><span class="p">,</span><span class="s">&#39;Descripcion&#39;</span><span class="p">,</span><span class="s">&#39;Fecha&#39;</span><span class="p">,</span><span class="s">&#39;Nombre&#39;</span><span class="p">]</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span><span class="s">&#39;Proyecto&#39;</span><span class="p">,</span><span class="s">&#39;Numero&#39;</span><span class="p">,</span><span class="s">&#39;Descripcion&#39;</span><span class="p">,</span><span class="s">&#39;Fecha&#39;</span><span class="p">,</span><span class="s">&#39;Nombre&#39;</span><span class="p">,</span><span class="s">&#39;Estado&#39;</span><span class="p">]</span>
 
     <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 
 
 <span class="k">class</span> <span class="nc">RolForm</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
@@ -211,12 +213,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Group</span>
-        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">]</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span><span class="s">&#39;Proyecto&#39;</span><span class="p">]</span>
 
     <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 
 <div class="viewcode-block" id="AtributoForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AtributoForm">[documentos]</a><span class="k">class</span> <span class="nc">AtributoForm</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -242,17 +244,17 @@
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span><span class="s">&#39;Fase&#39;</span><span class="p">]</span>
 
     <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 </div>
 <span class="k">class</span> <span class="nc">tipoItemImportar</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">tipos</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">TipoDeItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span><span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;Seleccionar tipos&#39;</span><span class="p">),</span>
                                           <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">((</span><span class="s">&#39;Tipos&#39;</span><span class="p">),</span><span class="bp">False</span><span class="p">,))</span>
     <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="n">BASE_DIR</span><span class="o">+</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 </pre></div>
 
           </div>

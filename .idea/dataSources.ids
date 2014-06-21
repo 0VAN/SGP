@@ -2615,6 +2615,7 @@
       <column name="Fase_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Tipo_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Version" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="condicion" sqlType="varchar" precision="1" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="desarrollo_item_pkey" columns="id"/>
       <foreign-key name="desarrollo_item_Fase_id_fkey" columns="Fase_id" ref-table="administracion_fase" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="desarrollo_item_Tipo_id_fkey" columns="Tipo_id" ref-table="administracion_tipodeitem" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -2649,6 +2650,7 @@
       <column name="padre_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="antecesor_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="item_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="estado" sqlType="varchar" precision="1" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="desarrollo_relacion_pkey" columns="id"/>
       <foreign-key name="desarrollo_relacion_antecesor_id_fkey" columns="antecesor_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="desarrollo_relacion_item_id_fkey" columns="item_id" ref-table="desarrollo_item" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>

@@ -27,13 +27,19 @@ def desarrollo(request):
         -   lista_proyectos: es la lista de proyectos existentes en el sistema
         -   usuario: es el usuario logueado
     """
-    lista_proyectos = Proyecto.objects.all()
+    lista_proyectos = Proyecto.objects.filter(Usuarios=request.user)
     usuario = request.user
     return render_to_response('desarrollo.html', {'lista_proyectos': lista_proyectos, 'usuario_actor': usuario},
                               context_instance=RequestContext(request))
 
 
 def des_proyecto(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return: La vista donde se visualizan las fases del proyecto del cual el usuario es participe
+    """
     generar_grafo_proyecto(id_proyecto)
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -48,6 +54,13 @@ def des_proyecto(request, id_proyecto):
         context_instance=RequestContext(request))
 
 def des_fase(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return: La vista donde se visualizan los items de la fase de la cual el usuario es participe
+    """
     generar_grafo_fase(id_fase)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     usuario = request.user
@@ -80,6 +93,13 @@ def des_fase(request, id_proyecto, id_fase):
 
 @reversion.create_revision()
 def crear_item(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return: Una nueva instancia de item
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -154,6 +174,14 @@ def crear_item(request, id_proyecto, id_fase):
 
 @reversion.create_revision()
 def mod_item(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return: Una instancia del item seleccionado con los cambios realizados
+    """
     boolean_solicitud = False
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
@@ -222,8 +250,6 @@ def mod_item(request, id_proyecto, id_fase, id_item):
             solicitudes = SolicitudCambio.objects.filter(usuario=usuario, estado=SolicitudCambio.ACEPTADA, fase=fase)
             for solicitud in solicitudes:
                 if solicitud.items.all().filter(pk=id_item):
-                    print solicitud.items.all().count()
-                    print solicitud.items.filter(Estado=Item.VALIDADO).count()
                     if solicitud.items.all().count() == solicitud.items.filter(Estado=Item.VALIDADO).count():
                         solicitud.estado = SolicitudCambio.EJECUTADA
                         solicitud.save()
@@ -263,6 +289,14 @@ def mod_item(request, id_proyecto, id_fase, id_item):
 
 @reversion.create_revision()
 def completar_item(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return: Una vista donce se puede acceder a los diferentes atributos del item y modificarlos
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -318,6 +352,14 @@ def completar_item(request, id_proyecto, id_fase, id_item):
     )
 
 def detalle_item_vista(request, idProyecto, idFase, idItem):
+    """
+
+    :param request:
+    :param idProyecto:
+    :param idFase:
+    :param idItem:
+    :return: Una vista en la que se muestran todas las caracteristicas de un item
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=idProyecto)
     fase = Fase.objects.get(pk=idFase)
@@ -336,6 +378,14 @@ def detalle_item_vista(request, idProyecto, idFase, idItem):
 
 
 def conf_eliminar_item(request, idProyecto, idFase, idItem):
+    """
+
+    :param request:
+    :param idProyecto:
+    :param idFase:
+    :param idItem:
+    :return: Una vista donde se cuestiona al usuario la decision de eliminar o no un item de la fase
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
@@ -376,6 +426,15 @@ def conf_eliminar_item(request, idProyecto, idFase, idItem):
     )
 
 def eliminar_item(request, idProyecto, idFase, idItem):
+    """
+
+    :param request:
+    :param idProyecto:
+    :param idFase:
+    :param idItem:
+    :return: Una vista donde sedel proyecto pueden visualizar los items que no han sido eliminados, en consecuencia no
+            se observara el item previamente eliminado
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
@@ -426,6 +485,13 @@ def eliminar_item(request, idProyecto, idFase, idItem):
         context_instance=RequestContext(request))
 
 def revivir_item(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return: Una vista donde se muestra la lista de items eliminados por los diferentes usuarios que trabajan en la fase
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     lista_items = Item.objects.filter(Fase=fase).exclude(condicion=Item.ACTIVO)
@@ -445,6 +511,15 @@ def revivir_item(request, id_proyecto, id_fase):
         context_instance=RequestContext(request))
 
 def item_revivido(request, id_proyecto,  id_fase, id_version):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_version:
+    :return: Una vista donde se muestra la lista de items que no han sido eliminados, en consecuencia el item previamente
+            seleccionado pasara a ocupar un lugar en esa lista
+    """
 
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -454,26 +529,7 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
     item.condicion = Item.ACTIVO
     if relacion.estado_padre() or relacion.estado_antecesor():
         relacion.estado = Relacion.ACTIVO
-    """
-    lista_eliminados = reversion.get_deleted(Item)
-    item = lista_eliminados.get(id=id_version)
-
-    id_revision = item.revision_id
-    item.revert()
-
-    lista_atributos_eliminados = reversion.get_deleted(Campo)
-    for atributo in lista_atributos_eliminados:
-        if atributo.revision_id == id_revision:
-            atributo.revert()
-
-    lista_relaciones_eliminadas = reversion.get_deleted(Relacion)
-    try:
-            relacion = lista_relaciones_eliminadas.get(revision_id=id_revision)
-            relacion.revert()
-    except IntegrityError:
-            relacion = Relacion.objects.create(item=Item.objects.get(pk=item.object_id))
-    """
-
+    item.Version += 1
     item.save()
     relacion.save()
     #Seteamos las relaciones de los hijos del item a ACTIVO#
@@ -524,6 +580,12 @@ def item_revivido(request, id_proyecto,  id_fase, id_version):
         context_instance=RequestContext(request))
 
 def generar_grafo_proyecto(id_proyecto):
+    """
+
+    :param id_proyecto:
+    :return: Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+            diferentes items con sus respectivos estados
+    """
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
     relaciones_proyecto = []
@@ -565,6 +627,12 @@ def generar_grafo_proyecto(id_proyecto):
     grafo.write_png(BASE_DIR + '/static/media/grafoProyectoActual.png')
 
 def generar_grafo_fase(id_fase):
+    """
+
+    :param id_fase:
+    :return: Una imagen de extension PNG en el cual se muestra una grafica representando la fase y los
+            diferentes items con sus respectivos estados
+    """
     fase = Fase.objects.get(pk=id_fase)
     relaciones_fase = []
     grafo = pydot.Dot(graph_type='digraph', rankdir="LR",labelloc='b', labeljust='r', ranksep=1)
@@ -597,6 +665,13 @@ def generar_grafo_fase(id_fase):
     grafo.write_png(BASE_DIR + '/static/media/grafoFaseActual.png')
 
 def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
+    """
+
+    :param id_proyecto:
+    :param id_item:
+    :return: Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+            diferentes items con sus respectivos estados
+    """
     id = int(id_item)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
@@ -629,6 +704,13 @@ def generar_grafo_calculo_impacto_costo_unitario(id_proyecto, id_item):
     grafo.write_png(BASE_DIR+'/static/media/grafoImpactoUnitario.png')
 
 def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
+    """
+
+    :param id_proyecto:
+    :param id_item:
+    :return: Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+            diferentes items con sus respectivos estados
+    """
     id = int(id_item)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fases_proyecto = Fase.objects.filter(Proyecto=proyecto)
@@ -662,16 +744,59 @@ def generar_grafo_calculo_impacto_costo_temporal(id_proyecto, id_item):
 
 
 def historial_item(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return: Una vista donde se pueden visualizar las diferentes versiones por la que paso  un item
+    """
     item = Item.objects.get(pk=id_item)
     usuario = request.user
-    lista_versiones = reversion.get_for_object(item)
+    lista_versiones = reversion.get_unique_for_object(item)
+
+    for version in lista_versiones:
+        c= version.field_dict['Version']
+        break
+
+
+    lista = []
+    for version in lista_versiones:
+        if version.field_dict['condicion'] == item.ACTIVO:
+            lista.append(version)
+    """
+    for version in lista_versiones:
+        print version.field_dict['Version']
+        print c
+        if version.field_dict['Version'] <= c:
+            print 'entre'
+            c -= 1
+            lista.append(version)
+        else:
+            lista.pop()
+            lista.append(version)
+    """
+
+
+
+
     p_reversionar_item = usuario.tienePermisoProyecto("reversiona_item",id_proyecto)
-    return render_to_response('item/historial_item.html', {'lista_versiones': lista_versiones, 'item':item,
+    return render_to_response('item/historial_item.html', {'lista_versiones': lista, 'item':item,
                                                                             'proyecto':Proyecto.objects.get(pk=id_proyecto),
                                                                             'fase': Fase.objects.get(pk=id_fase), 'p_reversionar_item':p_reversionar_item},
                               context_instance=RequestContext(request))
 
 def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :param id_version:
+    :return: Una instacia de item con sus configuraciones internas de acuerdo al momento en que se genero dicha version
+    """
     item = Item.objects.get(pk=id_item)
     version_antigua = item.Version
     fase = Fase.objects.get(pk=id_fase)
@@ -679,12 +804,12 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
     mensaje = 'Se ha reversionado el item '+str(item.Nombre)
     relacion = Relacion.objects.get(item=item)
     lista_atributos = Campo.objects.filter(item=item)
-    lista_items = Item.objects.filter(Fase=id_fase)
+    lista_items = Item.objects.filter(Fase=id_fase).exclude(condicion=Item.ELIMINADO)
     version = item.Version
     id_version = int('0'+id_version)
     version_item = 0
 
-    lista_version = reversion.get_for_object(item)
+    lista_version = reversion.get_unique_for_object(item)
 
     for version in lista_version:
         if version.id == id_version:
@@ -732,6 +857,15 @@ def reversion_item(request, id_proyecto,  id_fase, id_item, id_version):
 
 
 def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
+    """
+
+    :param request:
+    :param idProyecto:
+    :param idFase:
+    :param idItem:
+    :param idVersion:
+    :return: Una vista donde se pueden visualizar las diferentes versiones por la que paso  un item y sus detalles
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=idFase)
     item = Item.objects.get(pk=idItem)
@@ -772,6 +906,14 @@ def detalle_item_version(request, idProyecto, idFase, idItem, idVersion):
 
 
 def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
@@ -790,6 +932,14 @@ def gestion_relacion_view(request, id_proyecto, id_fase, id_item):
 
 @reversion.create_revision()
 def asignar_padre_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
@@ -832,6 +982,12 @@ def asignar_padre_view(request, id_proyecto, id_fase, id_item):
     )
 
 def generaCiclo(id_item,id_padre):
+    """
+
+    :param id_item:
+    :param id_padre:
+    :return:
+    """
     itemPadre = Item.objects.get(pk=id_padre)
     id_item = int(id_item)
     while(itemPadre):
@@ -847,11 +1003,20 @@ def generaCiclo(id_item,id_padre):
 
 @reversion.create_revision()
 def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     item = Item.objects.get(pk=id_item)
     fase = Fase.objects.get(pk=id_fase)
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     relacion = Relacion.objects.get(item=item)
+    relacion.estado = Relacion.ACTIVO
 
     if fase.Numero != 1:
         faseAnterior = Fase.objects.get(Proyecto=proyecto, Numero=fase.Numero-1)
@@ -887,6 +1052,14 @@ def asignar_antecesor_view(request, id_proyecto, id_fase, id_item):
 
 @reversion.create_revision()
 def gestion_archivos_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -899,6 +1072,14 @@ def gestion_archivos_view(request, id_proyecto, id_fase, id_item):
 
 @reversion.create_revision()
 def agregar_archivo_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -951,20 +1132,44 @@ def detalle_fase(request, id_proyecto, id_fase):
                               context_instance=RequestContext(request))
 
 def detalle_proyecto(request, id_proyecto):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :return:
+    """
     usuario_actor = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     return render_to_response('detalle_proyecto_des.html', {'usuario_actor': usuario_actor, 'proyecto': proyecto},
                               context_instance=RequestContext(request))
 
 def sucesores(item):
+    """
+
+    :param item:
+    :return:
+    """
     sucesores = Relacion.objects.filter(antecesor=item)
     return sucesores
 
 def hijos(item):
+    """
+
+    :param item:
+    :return:
+    """
     hijos = Relacion.objects.filter(padre=item)
     return hijos
 
 def impacto_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -989,6 +1194,11 @@ def impacto_view(request, id_proyecto, id_fase, id_item):
 
 
 def costo_monetario_atras(item):
+    """
+
+    :param item:
+    :return:
+    """
     cont = 0
     try:
         relacion = Relacion.objects.get(item=item)
@@ -1004,6 +1214,11 @@ def costo_monetario_atras(item):
     return cont
 
 def costo_monetario_adelante(item):
+    """
+
+    :param item:
+    :return:
+    """
     cont = 0
     lista_hijos = hijos(item)
     lista_sucesores = sucesores(item)
@@ -1018,6 +1233,11 @@ def costo_monetario_adelante(item):
     return cont
 
 def costo_temporal_atras(item):
+    """
+
+    :param item:
+    :return:
+    """
     cont = 0
     try:
         relacion = Relacion.objects.get(item=item)
@@ -1033,6 +1253,11 @@ def costo_temporal_atras(item):
     return cont
 
 def costo_temporal_adelante(item):
+    """
+
+    :param item:
+    :return:
+    """
     cont = 0
     lista_hijos = hijos(item)
     lista_sucesores = sucesores(item)
@@ -1047,6 +1272,14 @@ def costo_temporal_adelante(item):
     return cont
 
 def eliminar_relacion_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -1058,6 +1291,14 @@ def eliminar_relacion_view(request, id_proyecto, id_fase, id_item):
     )
 
 def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -1076,6 +1317,14 @@ def relacion_eliminada_view(request, id_proyecto, id_fase, id_item):
     )
 
 def aprobar_item_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -1140,6 +1389,14 @@ def aprobar_item_view(request, id_proyecto, id_fase, id_item):
 
 
 def item_finalizado_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)
@@ -1176,6 +1433,13 @@ def item_finalizado_view(request, id_proyecto, id_fase, id_item):
 
 
 def solicitud_crear_view(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -1234,6 +1498,14 @@ def solicitud_crear_view(request, id_proyecto, id_fase):
     )
 
 def desaprobar_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -1245,6 +1517,14 @@ def desaprobar_view(request, id_proyecto, id_fase, id_item):
     )
 
 def desaprobado_view(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase = Fase.objects.get(pk=id_fase)
@@ -1279,6 +1559,13 @@ def desaprobado_view(request, id_proyecto, id_fase, id_item):
 
 
 def solicitudes_de_cambio_view(request, id_proyecto, id_fase):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase  = Fase.objects.get(pk=id_fase)
@@ -1287,6 +1574,14 @@ def solicitudes_de_cambio_view(request, id_proyecto, id_fase):
         context_instance=RequestContext(request))
 
 def detalle_solicitud(request, id_proyecto, id_fase, id_solicitud):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_solicitud:
+    :return:
+    """
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
     fase  = Fase.objects.get(pk=id_fase)
@@ -1296,6 +1591,11 @@ def detalle_solicitud(request, id_proyecto, id_fase, id_solicitud):
                               ,context_instance=RequestContext(request))
 
 def posee_antecesor(item):
+    """
+
+    :param item:
+    :return:
+    """
     relacion = Relacion.objects.get(item=item)
     if relacion.antecesor != None:
         return True
@@ -1309,6 +1609,14 @@ def posee_antecesor(item):
     return False
 
 def revisar_item_vista(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
 
     usuario = request.user
     proyecto = Proyecto.objects.get(pk=id_proyecto)
@@ -1384,6 +1692,14 @@ def revisar_item_vista(request, id_proyecto, id_fase, id_item):
     )
 
 def item_revisado_vista(request, id_proyecto, id_fase, id_item):
+    """
+
+    :param request:
+    :param id_proyecto:
+    :param id_fase:
+    :param id_item:
+    :return:
+    """
     usuario = request.user
     fase = Fase.objects.get(pk=id_fase)
     item = Item.objects.get(pk=id_item)

@@ -34,7 +34,7 @@ def administracion(request):
         -   usuario_actor: es el usuario que realiza la accion
     """
     usuario_actor = request.user
-    lista_proyectos = Proyecto.objects.all().order_by('id')
+    lista_proyectos = Proyecto.objects.all().order_by('id').filter(Lider=usuario_actor)
     ctx = {'usuario_actor':usuario_actor,'lista_proyectos':lista_proyectos}
     return render_to_response('administracion.html', ctx, context_instance=RequestContext(request))
 ########################################################################################################################

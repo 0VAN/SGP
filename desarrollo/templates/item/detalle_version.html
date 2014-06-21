@@ -19,7 +19,13 @@
         <dt>Costo Unitario:</dt>
         <dd>{{ item_version.field_dict.CostoUnitario }}</dd>
         <dt>Estado:</dt>
-        <dd>{{ item_version.field_dict.Estado }}</dd>
+        {% if item_version.field_dict.Estado == item.CONSTRUCCION %}
+            <dd>Construccion</dd>
+        {% elif item_version.field_dict.Estado == item.VALIDADO %}
+            <dd>Validado</dd>
+        {% elif item_version.field_dict.Estado == item.FINALIZADO %}
+            <dd>Aprobado</dd>
+        {% endif %}
         <dt>Creado por:</dt>
         <dd>{{ item.Usuario }}</dd>
         <dt>Creado el:</dt>

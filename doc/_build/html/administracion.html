@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="documentación de SGP - 2" href="index.html" />
-    <link rel="prev" title="Documentacion de SGP!" href="index.html" /> 
+    <link rel="next" title="Modulo de Gestion de Cambio" href="gestion.html" />
+    <link rel="prev" title="sesion package" href="sesion.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +39,10 @@
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Documentacion de SGP!"
+          <a href="gestion.html" title="Modulo de Gestion de Cambio"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="sesion.html" title="sesion package"
              accesskey="P">anterior</a> |</li>
         <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
       </ul>
@@ -87,7 +91,7 @@ para agregar ciertos campos de la clase a la hora de la creacion</p>
 
 <dl class="class">
 <dt id="administracion.forms.ProyectoForm">
-<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">ProyectoForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#ProyectoForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">administracion.forms.</tt><tt class="descname">ProyectoForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/forms.html#ProyectoForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.ProyectoForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Formulario para la creacion de proyectos en el sistema
 Hereda de ModelForm y utiliza la clase Proyecto
 para agregar ciertos campos de la clase a la hora de la creacion</p>
@@ -278,34 +282,6 @@ agregar ciertos campos a la hora de la modificacion</p>
 <li>usuario_actor: usuario que realiza la accion</li>
 <li>proyecto: es el proyecto cuyas fases se desea administrar</li>
 <li>fases: indica que la fase correpondera a un proyecto especifico</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="administracion.views.administrar_proyecto">
-<tt class="descclassname">administracion.views.</tt><tt class="descname">administrar_proyecto</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#administrar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.administrar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>request</strong> &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<p>Vista administrar proyecto</p>
-<p>Recibe como parametro un request y retorna la pagina web administrar_proyecto.html</p>
-<ul>
-<li><dl class="first docutils">
-<dt>Varaibles</dt>
-<dd><ul class="first last simple">
-<li>lista_proyectos: es la lista de proyectos existentes en el sistema</li>
-<li>usuario_actor: es el usuario que realiza la accion</li>
 </ul>
 </dd>
 </dl>
@@ -543,6 +519,26 @@ agregar ciertos campos a la hora de la modificacion</p>
 <dl class="function">
 <dt id="administracion.views.confirmar_finalizar_fase">
 <tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_finalizar_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_finalizar_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_finalizar_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="administracion.views.confirmar_finalizar_proyecto">
+<tt class="descclassname">administracion.views.</tt><tt class="descname">confirmar_finalizar_proyecto</tt><big>(</big><em>request</em>, <em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/administracion/views.html#confirmar_finalizar_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.confirmar_finalizar_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1302,8 +1298,11 @@ agregar ciertos campos a la hora de la modificacion</p>
 </ul>
 
   <h4>Tema anterior</h4>
-  <p class="topless"><a href="index.html"
-                        title="capítulo anterior">Documentacion de SGP!</a></p>
+  <p class="topless"><a href="sesion.html"
+                        title="capítulo anterior">sesion package</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="gestion.html"
+                        title="próximo capítulo">Modulo de Gestion de Cambio</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/administracion.txt"
@@ -1336,7 +1335,10 @@ agregar ciertos campos a la hora de la modificacion</p>
           <a href="py-modindex.html" title="Índice de Módulos Python"
              >módulos</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Documentacion de SGP!"
+          <a href="gestion.html" title="Modulo de Gestion de Cambio"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="sesion.html" title="sesion package"
              >anterior</a> |</li>
         <li><a href="index.html">documentación de SGP - 2</a> &raquo;</li> 
       </ul>

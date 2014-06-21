@@ -60,23 +60,25 @@
 
 
 <div class="viewcode-block" id="ComiteForm"><a class="viewcode-back" href="../../gestion.html#gestion.forms.ComiteForm">[documentos]</a><span class="k">class</span> <span class="nc">ComiteForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="n">Miembros</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span><span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;Seleccionar Items&#39;</span><span class="p">),</span>
+                                          <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">((</span><span class="s">&#39;Items&#39;</span><span class="p">),</span><span class="bp">False</span><span class="p">,))</span>
 <div class="viewcode-block" id="ComiteForm.Meta"><a class="viewcode-back" href="../../gestion.html#gestion.forms.ComiteForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">ComiteDeCambio</span>
-        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario1&#39;</span><span class="p">,</span> <span class="s">&#39;Proyecto&#39;</span><span class="p">]</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario2&#39;</span><span class="p">,</span> <span class="s">&#39;Usuario3&#39;</span><span class="p">]</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">&#39;Usuario2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;Integrante 2&#39;</span><span class="p">),</span>
-            <span class="s">&#39;Usuario3&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;Integrante 3&#39;</span><span class="p">),</span>
-        <span class="p">}</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Proyecto&#39;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ComiteForm.Media"><a class="viewcode-back" href="../../gestion.html#gestion.forms.ComiteForm.Media">[documentos]</a>    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
+        <span class="c"># jsi18n is required by the widget</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
 </div></div>
-<div class="viewcode-block" id="LineBaseForm"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineBaseForm">[documentos]</a><span class="k">class</span> <span class="nc">LineBaseForm</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
+<div class="viewcode-block" id="LineaBaseForm"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineaBaseForm">[documentos]</a><span class="k">class</span> <span class="nc">LineaBaseForm</span><span class="p">(</span><span class="n">MyForm</span><span class="p">):</span>
     <span class="n">Items</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Item</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span><span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;Seleccionar Items&#39;</span><span class="p">),</span>
                                           <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">((</span><span class="s">&#39;Items&#39;</span><span class="p">),</span><span class="bp">False</span><span class="p">,))</span>
-<div class="viewcode-block" id="LineBaseForm.Meta"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineBaseForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">LineBase</span>
+<div class="viewcode-block" id="LineaBaseForm.Meta"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineaBaseForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LineaBase</span>
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span><span class="s">&#39;Fecha&#39;</span><span class="p">,</span><span class="s">&#39;Fase&#39;</span><span class="p">]</span>
 </div>
-<div class="viewcode-block" id="LineBaseForm.Media"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineBaseForm.Media">[documentos]</a>    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+<div class="viewcode-block" id="LineaBaseForm.Media"><a class="viewcode-back" href="../../gestion.html#gestion.forms.LineaBaseForm.Media">[documentos]</a>    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
         <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/filteredselectwidget.css&#39;</span><span class="p">,),}</span>
         <span class="c"># jsi18n is required by the widget</span>
         <span class="n">js</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;/static/js/jsi18n.js&#39;</span><span class="p">,)</span>
@@ -101,7 +103,9 @@
 
 <div class="viewcode-block" id="CredencialForm.Meta"><a class="viewcode-back" href="../../gestion.html#gestion.forms.CredencialForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Credencial</span>
-        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;solicitud&#39;</span><span class="p">,</span> <span class="s">&#39;fechaCreacion&#39;</span><span class="p">]</span></div></div>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;solicitud&#39;</span><span class="p">,</span> <span class="s">&#39;fechaCreacion&#39;</span><span class="p">]</span></div>
+<div class="viewcode-block" id="CredencialForm.Media"><a class="viewcode-back" href="../../gestion.html#gestion.forms.CredencialForm.Media">[documentos]</a>    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;all&#39;</span><span class="p">:(</span><span class="s">&#39;/static/css/datepicker.css&#39;</span><span class="p">,),}</span></div></div>
 </pre></div>
 
           </div>

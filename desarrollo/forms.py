@@ -23,7 +23,7 @@ class ItemForm(MyForm):
 
     class Meta:
         model = Item
-        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']
+        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'condicion']
 
 
 class ModItemForm(MyForm):
@@ -35,7 +35,7 @@ class ModItemForm(MyForm):
 
     class Meta:
         model = Item
-        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo']
+        exclude = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo', 'condicion']
 
 class PadreForm(MyForm):
 

@@ -1,54 +1,30 @@
 Modulo de desarrollo
 ====================
 
-Submodules
-----------
 
-desarrollo.admin module
------------------------
 
-.. automodule:: desarrollo.admin
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-desarrollo.forms module
------------------------
+Formularios
+-----------
 
 .. automodule:: desarrollo.forms
     :members:
     :undoc-members:
     :show-inheritance:
 
-desarrollo.models module
-------------------------
+Modelos
+-------
 
 .. automodule:: desarrollo.models
     :members:
     :undoc-members:
     :show-inheritance:
 
-desarrollo.tests module
------------------------
 
-.. automodule:: desarrollo.tests
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
-desarrollo.views module
------------------------
+Vistas
+------
 
 .. automodule:: desarrollo.views
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: desarrollo
     :members:
     :undoc-members:
     :show-inheritance:

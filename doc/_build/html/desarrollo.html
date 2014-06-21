@@ -51,14 +51,8 @@
             
   <div class="section" id="modulo-de-desarrollo">
 <h1>Modulo de desarrollo<a class="headerlink" href="#modulo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
-<div class="section" id="module-desarrollo.admin">
-<span id="desarrollo-admin-module"></span><h2>desarrollo.admin module<a class="headerlink" href="#module-desarrollo.admin" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
 <div class="section" id="module-desarrollo.forms">
-<span id="desarrollo-forms-module"></span><h2>desarrollo.forms module<a class="headerlink" href="#module-desarrollo.forms" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="formularios"></span><h2>Formularios<a class="headerlink" href="#module-desarrollo.forms" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="class">
 <dt id="desarrollo.forms.AntecesorForm">
 <em class="property">class </em><tt class="descclassname">desarrollo.forms.</tt><tt class="descname">AntecesorForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/forms.html#AntecesorForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.AntecesorForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -81,7 +75,7 @@
 
 <dl class="attribute">
 <dt id="desarrollo.forms.AntecesorForm.base_fields">
-<tt class="descclassname">AntecesorForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'antecesor': &lt;django.forms.models.ModelChoiceField object at 0x44fcad0&gt;}</em><a class="headerlink" href="#desarrollo.forms.AntecesorForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">AntecesorForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'antecesor': &lt;django.forms.models.ModelChoiceField object at 0x4986b50&gt;}</em><a class="headerlink" href="#desarrollo.forms.AntecesorForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -118,7 +112,7 @@
 
 <dl class="attribute">
 <dt id="desarrollo.forms.ArchivoForm.base_fields">
-<tt class="descclassname">ArchivoForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'archivo': &lt;django.forms.fields.FileField object at 0x44fcb50&gt;}</em><a class="headerlink" href="#desarrollo.forms.ArchivoForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">ArchivoForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'archivo': &lt;django.forms.fields.FileField object at 0x4986c10&gt;}</em><a class="headerlink" href="#desarrollo.forms.ArchivoForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -145,7 +139,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#ItemForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><dl class="attribute">
 <dt id="desarrollo.forms.ItemForm.Meta.exclude">
-<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos']</em><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'condicion']</em><a class="headerlink" href="#desarrollo.forms.ItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -158,7 +152,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.forms.ItemForm.base_fields">
-<tt class="descclassname">ItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x44ec450&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x44ec350&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x44ec490&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x44ec390&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x44ec410&gt;, 'Tipo': &lt;django.forms.models.ModelChoiceField object at 0x44fc210&gt;}</em><a class="headerlink" href="#desarrollo.forms.ItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">ItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x4981e10&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x4981ed0&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x4981f50&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x4981fd0&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x4986090&gt;, 'Tipo': &lt;django.forms.models.ModelChoiceField object at 0x49862d0&gt;}</em><a class="headerlink" href="#desarrollo.forms.ItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -185,7 +179,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <em class="property">class </em><tt class="descname">Meta</tt><a class="reference internal" href="_modules/desarrollo/forms.html#ModItemForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><dl class="attribute">
 <dt id="desarrollo.forms.ModItemForm.Meta.exclude">
-<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo']</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descname">exclude</tt><em class="property"> = ['Usuario', 'Fase', 'Fecha', 'Estado', 'Version', 'Campos', 'Tipo', 'condicion']</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.Meta.exclude" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -198,7 +192,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.forms.ModItemForm.base_fields">
-<tt class="descclassname">ModItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x44fc090&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x44fc050&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x44fc310&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x44fc590&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x44fc610&gt;}</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">ModItemForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'Nombre': &lt;django.forms.fields.CharField object at 0x4986390&gt;, 'Descripcion': &lt;django.forms.fields.CharField object at 0x4986450&gt;, 'Prioridad': &lt;django.forms.fields.IntegerField object at 0x49864d0&gt;, 'CostoTemporal': &lt;django.forms.fields.IntegerField object at 0x4986550&gt;, 'CostoUnitario': &lt;django.forms.fields.IntegerField object at 0x49865d0&gt;}</em><a class="headerlink" href="#desarrollo.forms.ModItemForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -261,7 +255,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.forms.PadreForm.base_fields">
-<tt class="descclassname">PadreForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'padre': &lt;django.forms.models.ModelChoiceField object at 0x44fc8d0&gt;}</em><a class="headerlink" href="#desarrollo.forms.PadreForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">PadreForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'padre': &lt;django.forms.models.ModelChoiceField object at 0x49868d0&gt;}</em><a class="headerlink" href="#desarrollo.forms.PadreForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -277,8 +271,8 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 </dd></dl>
 
 </div>
-<div class="section" id="desarrollo-models-module">
-<h2>desarrollo.models module<a class="headerlink" href="#desarrollo-models-module" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="modelos">
+<h2>Modelos<a class="headerlink" href="#modelos" title="Enlazar permanentemente con este título">¶</a></h2>
 <span class="target" id="module-desarrollo.models"></span><dl class="class">
 <dt id="desarrollo.models.Archivo">
 <em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Archivo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Archivo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Archivo" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -303,7 +297,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.models.Archivo.objects">
-<tt class="descclassname">Archivo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44ec210&gt;</em><a class="headerlink" href="#desarrollo.models.Archivo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">Archivo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x4981d10&gt;</em><a class="headerlink" href="#desarrollo.models.Archivo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -337,7 +331,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.models.Campo.objects">
-<tt class="descclassname">Campo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e98d0&gt;</em><a class="headerlink" href="#desarrollo.models.Campo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">Campo.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x4981390&gt;</em><a class="headerlink" href="#desarrollo.models.Campo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -351,10 +345,25 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <dt id="desarrollo.models.Item">
 <em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Item" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
-<p>Item(id, Nombre, Descripcion, Prioridad, CostoTemporal, CostoUnitario, Estado, Usuario_id, Fecha, Fase_id, Tipo_id, Version)</p>
+<p>Item(id, Nombre, Descripcion, Prioridad, CostoTemporal, CostoUnitario, Estado, Usuario_id, Fecha, Fase_id, Tipo_id, Version, condicion)</p>
+<dl class="attribute">
+<dt id="desarrollo.models.Item.ACTIVO">
+<tt class="descname">ACTIVO</tt><em class="property"> = 'A'</em><a class="headerlink" href="#desarrollo.models.Item.ACTIVO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.CONDICION_CHOICES">
+<tt class="descname">CONDICION_CHOICES</tt><em class="property"> = (('A', 'Activo'), ('E', 'Eliminado'))</em><a class="headerlink" href="#desarrollo.models.Item.CONDICION_CHOICES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="desarrollo.models.Item.CONSTRUCCION">
 <tt class="descname">CONSTRUCCION</tt><em class="property"> = 'CON'</em><a class="headerlink" href="#desarrollo.models.Item.CONSTRUCCION" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.CREDENCIAL">
+<tt class="descname">CREDENCIAL</tt><em class="property"> = 'CRE'</em><a class="headerlink" href="#desarrollo.models.Item.CREDENCIAL" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="exception">
@@ -364,8 +373,13 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="desarrollo.models.Item.ELIMINADO">
+<tt class="descclassname">Item.</tt><tt class="descname">ELIMINADO</tt><em class="property"> = 'E'</em><a class="headerlink" href="#desarrollo.models.Item.ELIMINADO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="desarrollo.models.Item.ESTADO_CHOICES">
-<tt class="descclassname">Item.</tt><tt class="descname">ESTADO_CHOICES</tt><em class="property"> = (('CON', 'Construccion'), ('VAL', 'Validado'), ('FIN', 'Finalizado'), ('REV', 'Revision'))</em><a class="headerlink" href="#desarrollo.models.Item.ESTADO_CHOICES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">Item.</tt><tt class="descname">ESTADO_CHOICES</tt><em class="property"> = (('CON', 'Construccion'), ('VAL', 'Validado'), ('FIN', 'Aprobado'), ('REV', 'Revision'), ('SOL', 'En solicitud de cambio'), ('CRE', 'En credencial'))</em><a class="headerlink" href="#desarrollo.models.Item.ESTADO_CHOICES" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -387,6 +401,11 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <dl class="attribute">
 <dt id="desarrollo.models.Item.REVISION">
 <tt class="descclassname">Item.</tt><tt class="descname">REVISION</tt><em class="property"> = 'REV'</em><a class="headerlink" href="#desarrollo.models.Item.REVISION" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Item.SOLICITUD">
+<tt class="descclassname">Item.</tt><tt class="descname">SOLICITUD</tt><em class="property"> = 'SOL'</em><a class="headerlink" href="#desarrollo.models.Item.SOLICITUD" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -425,6 +444,11 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="desarrollo.models.Item.get_condicion_display">
+<tt class="descclassname">Item.</tt><tt class="descname">get_condicion_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Item.get_condicion_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="desarrollo.models.Item.get_next_by_Fecha">
 <tt class="descclassname">Item.</tt><tt class="descname">get_next_by_Fecha</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Item.get_next_by_Fecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
@@ -441,7 +465,7 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 
 <dl class="attribute">
 <dt id="desarrollo.models.Item.objects">
-<tt class="descclassname">Item.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e9090&gt;</em><a class="headerlink" href="#desarrollo.models.Item.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">Item.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x497cb10&gt;</em><a class="headerlink" href="#desarrollo.models.Item.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -455,12 +479,27 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <dt id="desarrollo.models.Relacion">
 <em class="property">class </em><tt class="descclassname">desarrollo.models.</tt><tt class="descname">Relacion</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Relacion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Relacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
-<p>Relacion(id, padre_id, antecesor_id, item_id)</p>
+<p>Relacion(id, padre_id, antecesor_id, item_id, estado)</p>
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.ACTIVO">
+<tt class="descname">ACTIVO</tt><em class="property"> = 'A'</em><a class="headerlink" href="#desarrollo.models.Relacion.ACTIVO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="exception">
 <dt id="desarrollo.models.Relacion.DoesNotExist">
 <em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#desarrollo.models.Relacion.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.ELIMINADO">
+<tt class="descclassname">Relacion.</tt><tt class="descname">ELIMINADO</tt><em class="property"> = 'E'</em><a class="headerlink" href="#desarrollo.models.Relacion.ELIMINADO" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="desarrollo.models.Relacion.ESTADO_CHOICES">
+<tt class="descclassname">Relacion.</tt><tt class="descname">ESTADO_CHOICES</tt><em class="property"> = (('A', 'Activa'), ('E', 'Inactiva'))</em><a class="headerlink" href="#desarrollo.models.Relacion.ESTADO_CHOICES" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="exception">
 <dt id="desarrollo.models.Relacion.MultipleObjectsReturned">
@@ -473,23 +512,29 @@ agregar ciertos campos a la hora de la creacion/modificacion/eliminacion</p>
 <tt class="descclassname">Relacion.</tt><tt class="descname">antecesor</tt><a class="headerlink" href="#desarrollo.models.Relacion.antecesor" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="method">
+<dt id="desarrollo.models.Relacion.estado_antecesor">
+<tt class="descclassname">Relacion.</tt><tt class="descname">estado_antecesor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Relacion.estado_antecesor"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Relacion.estado_antecesor" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="desarrollo.models.Relacion.estado_padre">
+<tt class="descclassname">Relacion.</tt><tt class="descname">estado_padre</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/desarrollo/models.html#Relacion.estado_padre"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.models.Relacion.estado_padre" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="desarrollo.models.Relacion.get_estado_display">
+<tt class="descclassname">Relacion.</tt><tt class="descname">get_estado_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#desarrollo.models.Relacion.get_estado_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="desarrollo.models.Relacion.item">
 <tt class="descclassname">Relacion.</tt><tt class="descname">item</tt><a class="headerlink" href="#desarrollo.models.Relacion.item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>ACTIVO = &#8216;A&#8217;
-ELIMINADO = &#8216;E&#8217;</p>
-<dl class="docutils">
-<dt>ESTADO_CHOICES = (</dt>
-<dd>(ACTIVO, &#8216;Activo&#8217;),
-(ELIMINADO, &#8216;Eliminado&#8217;),</dd>
-</dl>
-<p>)
-estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="desarrollo.models.Relacion.objects">
-<tt class="descclassname">Relacion.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x44e9e50&gt;</em><a class="headerlink" href="#desarrollo.models.Relacion.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<tt class="descclassname">Relacion.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x4981990&gt;</em><a class="headerlink" href="#desarrollo.models.Relacion.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -500,80 +545,305 @@ estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)<
 </dd></dl>
 
 </div>
-<div class="section" id="module-desarrollo.tests">
-<span id="desarrollo-tests-module"></span><h2>desarrollo.tests module<a class="headerlink" href="#module-desarrollo.tests" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
 <div class="section" id="module-desarrollo.views">
-<span id="desarrollo-views-module"></span><h2>desarrollo.views module<a class="headerlink" href="#module-desarrollo.views" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="vistas"></span><h2>Vistas<a class="headerlink" href="#module-desarrollo.views" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="function">
 <dt id="desarrollo.views.agregar_archivo_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">agregar_archivo_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#agregar_archivo_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.agregar_archivo_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.aprobar_item_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">aprobar_item_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#aprobar_item_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.aprobar_item_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.asignar_antecesor_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">asignar_antecesor_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#asignar_antecesor_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.asignar_antecesor_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.asignar_padre_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">asignar_padre_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#asignar_padre_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.asignar_padre_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.completar_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">completar_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#completar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.completar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donce se puede acceder a los diferentes atributos del item y modificarlos</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.conf_eliminar_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">conf_eliminar_item</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#conf_eliminar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.conf_eliminar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idProyecto</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>idItem</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde se cuestiona al usuario la decision de eliminar o no un item de la fase</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.costo_monetario_adelante">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_monetario_adelante</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_monetario_adelante"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_monetario_adelante" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.costo_monetario_atras">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_monetario_atras</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_monetario_atras"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_monetario_atras" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.costo_temporal_adelante">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_temporal_adelante</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_temporal_adelante"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_temporal_adelante" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.costo_temporal_atras">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">costo_temporal_atras</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#costo_temporal_atras"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.costo_temporal_atras" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.crear_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">crear_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#crear_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.crear_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una nueva instancia de item</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.des_fase">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">des_fase</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#des_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.des_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">La vista donde se visualizan los items de la fase de la cual el usuario es participe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.des_proyecto">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">des_proyecto</tt><big>(</big><em>request</em>, <em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#des_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.des_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">La vista donde se visualizan las fases del proyecto del cual el usuario es participe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.desaprobado_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">desaprobado_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#desaprobado_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.desaprobado_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.desaprobar_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">desaprobar_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#desaprobar_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.desaprobar_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.desarrollo">
@@ -647,116 +917,581 @@ estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)<
 <dl class="function">
 <dt id="desarrollo.views.detalle_item_version">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_item_version</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em>, <em>idVersion</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_item_version"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_item_version" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idProyecto</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>idItem</strong> &#8211; </li>
+<li><strong>idVersion</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde se pueden visualizar las diferentes versiones por la que paso  un item y sus detalles</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.detalle_item_vista">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_item_vista</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_item_vista"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_item_vista" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idProyecto</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>idItem</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista en la que se muestran todas las caracteristicas de un item</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.detalle_proyecto">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_proyecto</tt><big>(</big><em>request</em>, <em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.detalle_solicitud">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">detalle_solicitud</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_solicitud</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#detalle_solicitud"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.detalle_solicitud" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_solicitud</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.eliminar_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">eliminar_item</tt><big>(</big><em>request</em>, <em>idProyecto</em>, <em>idFase</em>, <em>idItem</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#eliminar_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.eliminar_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>idProyecto</strong> &#8211; </li>
+<li><strong>idFase</strong> &#8211; </li>
+<li><strong>idItem</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde sedel proyecto pueden visualizar los items que no han sido eliminados, en consecuencia no
+se observara el item previamente eliminado</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.eliminar_relacion_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">eliminar_relacion_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#eliminar_relacion_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.eliminar_relacion_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="desarrollo.views.finalizar_item_view">
-<tt class="descclassname">desarrollo.views.</tt><tt class="descname">finalizar_item_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#finalizar_item_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.finalizar_item_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.generaCiclo">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">generaCiclo</tt><big>(</big><em>id_item</em>, <em>id_padre</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generaCiclo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generaCiclo" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>id_item</strong> &#8211; </li>
+<li><strong>id_padre</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.generar_grafo_calculo_impacto_costo_temporal">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_calculo_impacto_costo_temporal</tt><big>(</big><em>id_proyecto</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_calculo_impacto_costo_temporal"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_calculo_impacto_costo_temporal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+diferentes items con sus respectivos estados</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.generar_grafo_calculo_impacto_costo_unitario">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_calculo_impacto_costo_unitario</tt><big>(</big><em>id_proyecto</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_calculo_impacto_costo_unitario"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_calculo_impacto_costo_unitario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+diferentes items con sus respectivos estados</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.generar_grafo_fase">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_fase</tt><big>(</big><em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_fase"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_fase" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_fase</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body">Una imagen de extension PNG en el cual se muestra una grafica representando la fase y los
+diferentes items con sus respectivos estados</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.generar_grafo_proyecto">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">generar_grafo_proyecto</tt><big>(</big><em>id_proyecto</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#generar_grafo_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.generar_grafo_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_proyecto</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body">Una imagen de extension PNG en el cual se muestra una grafica representando al proyecto, sus fases y los
+diferentes items con sus respectivos estados</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.gestion_archivos_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">gestion_archivos_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#gestion_archivos_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.gestion_archivos_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.gestion_relacion_view">
-<tt class="descclassname">desarrollo.views.</tt><tt class="descname">gestion_relacion_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#gestion_relacion_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.gestion_relacion_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">gestion_relacion_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#gestion_relacion_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.gestion_relacion_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.hijos">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">hijos</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#hijos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.hijos" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.historial_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">historial_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#historial_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.historial_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde se pueden visualizar las diferentes versiones por la que paso  un item</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.impacto_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">impacto_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#impacto_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.impacto_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.item_finalizado_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">item_finalizado_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#item_finalizado_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.item_finalizado_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.item_revisado_vista">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">item_revisado_vista</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#item_revisado_vista"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.item_revisado_vista" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.item_revivido">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">item_revivido</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_version</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#item_revivido"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.item_revivido" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_version</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde se muestra la lista de items que no han sido eliminados, en consecuencia el item previamente
+seleccionado pasara a ocupar un lugar en esa lista</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.mod_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">mod_item</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#mod_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.mod_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una instancia del item seleccionado con los cambios realizados</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.posee_antecesor">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">posee_antecesor</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#posee_antecesor"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.posee_antecesor" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.relacion_eliminada_view">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">relacion_eliminada_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#relacion_eliminada_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.relacion_eliminada_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.reversion_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">reversion_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em>, <em>id_version</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#reversion_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.reversion_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+<li><strong>id_version</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una instacia de item con sus configuraciones internas de acuerdo al momento en que se genero dicha version</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.revisar_item_vista">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">revisar_item_vista</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em>, <em>id_item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#revisar_item_vista"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.revisar_item_vista" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+<li><strong>id_item</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.revivir_item">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">revivir_item</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#revivir_item"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.revivir_item" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last">Una vista donde se muestra la lista de items eliminados por los diferentes usuarios que trabajan en la fase</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
-<dt id="desarrollo.views.solicitud_cambio_view">
-<tt class="descclassname">desarrollo.views.</tt><tt class="descname">solicitud_cambio_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#solicitud_cambio_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.solicitud_cambio_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dt id="desarrollo.views.solicitud_crear_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">solicitud_crear_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#solicitud_crear_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.solicitud_crear_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="desarrollo.views.solicitudes_de_cambio_view">
+<tt class="descclassname">desarrollo.views.</tt><tt class="descname">solicitudes_de_cambio_view</tt><big>(</big><em>request</em>, <em>id_proyecto</em>, <em>id_fase</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#solicitudes_de_cambio_view"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.solicitudes_de_cambio_view" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; </li>
+<li><strong>id_proyecto</strong> &#8211; </li>
+<li><strong>id_fase</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="desarrollo.views.sucesores">
 <tt class="descclassname">desarrollo.views.</tt><tt class="descname">sucesores</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/desarrollo/views.html#sucesores"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#desarrollo.views.sucesores" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>item</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
-</div>
-<div class="section" id="module-desarrollo">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
 </div>
 </div>
 
@@ -769,13 +1504,9 @@ estado = models.CharField(max_length=1, choices=ESTADO_CHOICES, default=ACTIVO)<
   <h3><a href="index.html">Tabla de Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Modulo de desarrollo</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-desarrollo.admin">desarrollo.admin module</a></li>
-<li><a class="reference internal" href="#module-desarrollo.forms">desarrollo.forms module</a></li>
-<li><a class="reference internal" href="#desarrollo-models-module">desarrollo.models module</a></li>
-<li><a class="reference internal" href="#module-desarrollo.tests">desarrollo.tests module</a></li>
-<li><a class="reference internal" href="#module-desarrollo.views">desarrollo.views module</a></li>
-<li><a class="reference internal" href="#module-desarrollo">Module contents</a></li>
+<li><a class="reference internal" href="#module-desarrollo.forms">Formularios</a></li>
+<li><a class="reference internal" href="#modelos">Modelos</a></li>
+<li><a class="reference internal" href="#module-desarrollo.views">Vistas</a></li>
 </ul>
 </li>
 </ul>

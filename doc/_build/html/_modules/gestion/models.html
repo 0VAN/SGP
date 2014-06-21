@@ -53,7 +53,7 @@
 <span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Fase</span>
 <span class="c"># Create your models here.</span>
 
-<div class="viewcode-block" id="LineBase"><a class="viewcode-back" href="../../gestion.html#gestion.models.LineBase">[documentos]</a><span class="k">class</span> <span class="nc">LineBase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="LineaBase"><a class="viewcode-back" href="../../gestion.html#gestion.models.LineaBase">[documentos]</a><span class="k">class</span> <span class="nc">LineaBase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">Nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
     <span class="n">Fecha</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">Usuario</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
@@ -61,13 +61,8 @@
     <span class="n">Fase</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Fase</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="ComiteDeCambio"><a class="viewcode-back" href="../../gestion.html#gestion.models.ComiteDeCambio">[documentos]</a><span class="k">class</span> <span class="nc">ComiteDeCambio</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">Usuario1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;Usuario1&quot;</span><span class="p">)</span>
-    <span class="n">Usuario2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;Usuario2&quot;</span><span class="p">)</span>
-    <span class="n">Usuario3</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;Usuario3&quot;</span><span class="p">)</span>
+    <span class="n">Miembros</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
     <span class="n">Proyecto</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;Comite de Cambio del proyecto &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Proyecto</span>
 
 </div>
 <div class="viewcode-block" id="SolicitudCambio"><a class="viewcode-back" href="../../gestion.html#gestion.models.SolicitudCambio">[documentos]</a><span class="k">class</span> <span class="nc">SolicitudCambio</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -81,10 +76,12 @@
     <span class="n">PROCESO</span> <span class="o">=</span> <span class="s">&#39;P&#39;</span>
     <span class="n">ACEPTADA</span> <span class="o">=</span> <span class="s">&#39;A&#39;</span>
     <span class="n">RECHAZADA</span> <span class="o">=</span> <span class="s">&#39;R&#39;</span>
+    <span class="n">EJECUTADA</span> <span class="o">=</span> <span class="s">&#39;E&#39;</span>
     <span class="n">ESTADO_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span><span class="n">PROCESO</span><span class="p">,</span> <span class="s">&#39;En proceso&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="n">ACEPTADA</span><span class="p">,</span> <span class="s">&#39;Aceptada&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="n">RECHAZADA</span><span class="p">,</span> <span class="s">&#39;Rechazada&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">EJECUTADA</span><span class="p">,</span> <span class="s">&#39;Ejecutada&#39;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">estado</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">ESTADO_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">PROCESO</span><span class="p">)</span>
 

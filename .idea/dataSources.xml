@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2060771301">
+  <component name="DataSourceManagerImpl" format="xml" hash="1374917638">
     <data-source source="LOCAL" name="Django default" uuid="ca77776c-070c-48a5-92a6-103f41ce19b6">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sgpdb</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sgpdbP</jdbc-url>
       <user-name>postgres</user-name>
       <user-password>dfdadfc5dfd9dfdedfcddfd8dfcfdfd9</user-password>
       <libraries />

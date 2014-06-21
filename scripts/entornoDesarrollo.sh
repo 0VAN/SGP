@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 cd ../
 
 # Borrar los archivos anteriores
@@ -23,6 +24,9 @@ rm -r /var/www/SGP/conf
 cp -r /usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/ /var/www/SGP/
 echo -e "Activando los sitios [SGP] en Apache"
 a2ensite SGP.conf
+
+echo -e "Correr Apache"
+/etc/init.d/apache2 restart
 
 echo -e "Recargando Apache"
 service apache2 reload

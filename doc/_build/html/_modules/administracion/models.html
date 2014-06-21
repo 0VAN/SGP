@@ -56,6 +56,7 @@
 <span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;direccion&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 <span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;telefono&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 <span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;observacion&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
 <span class="n">Group</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;Usuario&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 <span class="n">Group</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;Fecha&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 
@@ -67,6 +68,15 @@
                 <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 <span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;tienePermiso&#39;</span><span class="p">,</span> <span class="n">tienePermiso</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tienePermisoProyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">permisoCodename</span><span class="p">,</span> <span class="n">id_proyecto</span><span class="p">):</span>
+    <span class="n">proyecto</span> <span class="o">=</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_proyecto</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">grupo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">permisoUsuario</span> <span class="ow">in</span> <span class="n">grupo</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">permisoUsuario</span><span class="o">.</span><span class="n">codename</span> <span class="o">==</span> <span class="n">permisoCodename</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;tienePermisoProyecto&#39;</span><span class="p">,</span> <span class="n">tienePermisoProyecto</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">esDesarrollador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">rol</span><span class="o">=</span><span class="s">&#39;Desarrollador&#39;</span>
@@ -92,6 +102,12 @@
                 <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 <span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;esAdministrador&#39;</span><span class="p">,</span> <span class="n">esAdministrador</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">esVisitante</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_atributos</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_fases</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_proyectos</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_roles</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_tipodeitem</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">puede_consultar_usuarios</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+<span class="n">User</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;esVisitante&#39;</span><span class="p">,</span> <span class="n">esVisitante</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">integraComite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">rol</span><span class="o">=</span><span class="s">&#39;Integrante de Comite&#39;</span>
@@ -249,7 +265,9 @@
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nombre</span>
 
-<span class="k">class</span> <span class="nc">Fase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span></div>
+<span class="n">Group</span><span class="o">.</span><span class="n">add_to_class</span><span class="p">(</span><span class="s">&#39;Proyecto&#39;</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span></div>
+
+<span class="k">class</span> <span class="nc">Fase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <div class="viewcode-block" id="Fase"><a class="viewcode-back" href="../../administracion.html#administracion.models.Fase">[documentos]</a>    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Clase Fase:</span>
 <span class="sd">        * Contiene los campos de la tabla fase en la base de datos</span>
@@ -349,7 +367,12 @@
             <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nombre</span><span class="p">),</span>
             <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Fase</span><span class="o">.</span><span class="n">Nombre</span><span class="p">),</span>
             <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Fase</span><span class="o">.</span><span class="n">Proyecto</span><span class="o">.</span><span class="n">Nombre</span><span class="p">))</span>
-</pre></div></div>
+
+<span class="k">def</span> <span class="nf">permission_unicode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+    <span class="k">return</span>  <span class="s">u&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">Permission</span><span class="o">.</span><span class="n">__unicode__</span> <span class="o">=</span> <span class="n">permission_unicode</span>
+</pre></div>
 
           </div>
         </div>
