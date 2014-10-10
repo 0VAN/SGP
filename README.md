@@ -52,12 +52,21 @@ sudo /opt/PyCharm/bin/pycharm.sh
 sudo easy_install -U Sphinx
 
 reversiones
+pip install django-reversion
+
+Pagina oficial de las reversiones
 http://github.com/etianen/django-reversion
 
-pydot- para los grafos
-sudo apt-get install graphviz libgraphviz-dev pkg-config
-easy_install pyparsing
 
-descargar pydot-1.0.28.tar.gz, descomprimir e ir a la carpeta pydot-1.0.28 y ejecutar
+
+pydot- para los grafos
+
+sudo apt-get install graphviz libgraphviz-dev pkg-config
+
+sudo easy_install pyparsing
+
+descargar pydot-1.0.28.tar.gz del enlace  https://pypi.python.org/pypi/pydot
+
+descomprimir e ir a la carpeta pydot-1.0.28 y ejecutar
 
 sudo python setup.py install
