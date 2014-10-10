@@ -70,3 +70,29 @@ descargar pydot-1.0.28.tar.gz del enlace  https://pypi.python.org/pypi/pydot
 descomprimir e ir a la carpeta pydot-1.0.28 y ejecutar
 
 sudo python setup.py install
+
+
+
+
+Para facilitar las cosas con la base de datos puedes hacer que tu usaurio sea un superUsuario de la BD
+
+Iniciar sesion como usuario postgres
+$ sudo -u postgres psql postgres
+
+El pass de postgres = postgres
+# \password postgres
+
+crear el usuario
+CREATE USER miUsuario PASSWORD 'miPassword';
+
+darle permisos de super usuario
+ALTER ROLE miUsuario WITH SUPERUSER;
+
+
+
+
+
+
+
+
+
